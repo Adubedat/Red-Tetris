@@ -10,7 +10,6 @@ const useStyles = makeStyles(theme => ({
 
 const MyButton = props => {
   const classes = useStyles();
-  console.log(props);
 
   return (
     <Button

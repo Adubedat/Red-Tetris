@@ -13,19 +13,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Input = props => {
+const Input = React.forwardRef((props, ref) => {
   const classes = useStyles();
-
   return (
     <div className={classes.container}>
       <TextField
         {...props}
+        inputRef={ref}
         className={classes.textField}
         margin="normal"
         variant="outlined"
       />
     </div>
   );
-};
+});
 
 export default Input;

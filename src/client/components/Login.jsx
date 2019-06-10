@@ -1,14 +1,64 @@
 import React from "react";
 import Input from "./common/Input";
 import Button from "./common/Button";
+import { login } from "../services/authServices";
+import { connect } from "react-redux";
+import { connectUser } from "../actions/actions";
 
-const Login = () => {
+let Login = props => {
+  let input;
+  console.log("props :" + props);
+
+  const handleSubmit = e => {
+    const username = input.value;
+    e.preventDefault();
+    console.log(input);
+    if (!username.trim()) {
+      return;
+    }
+    login(username);
+    props.dispatch(connectUser(username)); // Useless ??
+    props.refresh();
+  };
+
   return (
-    <form style={{ display: "flex" }}>
-      <Input id="player-name" label="Name" />
-      <Button type="submit">Connect</Button>
-    </form>
+    <div
+      style={{
+        flex: 1,
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "crimson"
+      }}
+    >
+      <form onSubmit={e => handleSubmit(e)}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center"
+          }}
+        >
+          <Button onClick={() => {}}>42 Connect</Button>
+          <p>Or</p>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <Input
+              label="Name"
+              ref={node => {
+                input = node;
+              }}
+            />
+            <Button type="submit">Connect</Button>
+          </div>
+        </div>
+      </form>
+    </div>
   );
 };
+
+Login = connect()(Login);
 
 export default Login;
