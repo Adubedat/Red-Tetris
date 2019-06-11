@@ -30,7 +30,7 @@ let Login = props => {
         <div style={loginFormStyle}>
           <Button onClick={() => {}}>42 Connect</Button>
           <p>Or</p>
-          <div style={{ display: "flex", flexDirection: "row" }}>
+          <div style={{ display: "flex", alignItems: "center" }}>
             <Input
               label="Name"
               ref={node => {

@@ -3,12 +3,14 @@ import { connect } from "react-redux";
 import { connectUser } from "../actions/actions";
 import Button from "./common/Button";
 import Login from "./Login";
+import CreateRoom from "./CreateRoom";
 import Popup from "./common/Popup";
 import Header from "./Header";
 
 let Home = props => {
   const { username } = props;
   const isLogged = username ? true : false;
+  console.log(props);
 
   return (
     <div>
@@ -16,6 +18,7 @@ let Home = props => {
       <Popup open={!isLogged}>
         <Login />
       </Popup>
+      <CreateRoom {...props} />
     </div>
   );
 };
