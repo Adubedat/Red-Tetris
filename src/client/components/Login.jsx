@@ -1,7 +1,6 @@
 import React from "react";
 import Input from "./common/Input";
 import Button from "./common/Button";
-import { login } from "../services/authServices";
 import { connect } from "react-redux";
 import { connectUser } from "../actions/actions";
 
@@ -16,24 +15,11 @@ let Login = props => {
     if (!username.trim()) {
       return;
     }
-    login(username);
-    props.dispatch(connectUser(username)); // Useless ??
-    props.refresh();
+    props.dispatch(connectUser(username));
   };
 
   return (
-    <div
-      style={{
-        flex: 1,
-        position: "absolute",
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "crimson"
-      }}
-    >
+    <div>
       <form onSubmit={e => handleSubmit(e)}>
         <div
           style={{
