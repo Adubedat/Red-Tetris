@@ -4,22 +4,18 @@ import { connectUser } from "../actions/actions";
 import Button from "./common/Button";
 import Login from "./Login";
 import Popup from "./common/Popup";
+import Header from "./Header";
 
 let Home = props => {
   const { username } = props;
   const isLogged = username ? true : false;
 
-  const handleLogout = () => {
-    props.dispatch(connectUser(null));
-  };
-
   return (
     <div>
+      <Header />
       <Popup open={!isLogged}>
         <Login />
       </Popup>
-      <Button onClick={() => handleLogout()}>Logout</Button>
-      <div>WELCOME HOME {username}</div>
     </div>
   );
 };

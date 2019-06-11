@@ -8,6 +8,12 @@ let Login = props => {
   let input;
   console.log("props :" + props);
 
+  const loginFormStyle = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  };
+
   const handleSubmit = e => {
     const username = input.value;
     e.preventDefault();
@@ -21,13 +27,7 @@ let Login = props => {
   return (
     <div>
       <form onSubmit={e => handleSubmit(e)}>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center"
-          }}
-        >
+        <div style={loginFormStyle}>
           <Button onClick={() => {}}>42 Connect</Button>
           <p>Or</p>
           <div style={{ display: "flex", flexDirection: "row" }}>
