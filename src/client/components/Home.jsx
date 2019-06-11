@@ -5,7 +5,6 @@ import Button from "./common/Button";
 import Login from "./Login";
 import CreateRoom from "./CreateRoom";
 import Popup from "./common/Popup";
-import Header from "./Header";
 
 let Home = props => {
   const { username } = props;
@@ -14,7 +13,6 @@ let Home = props => {
 
   return (
     <div>
-      <Header />
       <Popup open={!isLogged}>
         <Login />
       </Popup>
