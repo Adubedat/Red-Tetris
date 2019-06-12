@@ -14,7 +14,7 @@
     "socket.io": "^2.2.0"
   },
   "scripts": {
-    "start": "webpack-dev-server --mode development",
+    "start": "webpack-dev-server --open --mode development",
     "eslint": "eslint src"
   },
   "eslintConfig": {
