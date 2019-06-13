@@ -13,9 +13,9 @@ const io = socketIO(server);
 io.on("connection", socket => {
   console.log("User connected");
 
-  socket.on("change color", color => {
-    console.log("Color Changed to: ", color);
-    io.sockets.emit("change color", color);
+  socket.on("add room", room => {
+    console.log("Rooms list changed: ", room);
+    io.sockets.emit("add room", room);
   });
 
   socket.on("disconnect", () => {

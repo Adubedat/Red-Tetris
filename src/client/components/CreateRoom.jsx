@@ -1,6 +1,8 @@
 import React from "react";
 import Input from "./common/Input";
 import Button from "./common/Button";
+import { connect } from "react-redux";
+import { addRoom } from "../actions/actions";
 
 const createRoomContainer = {
   display: "flex",
@@ -8,17 +10,19 @@ const createRoomContainer = {
   alignItems: "center"
 };
 
-const CreateRoom = props => {
+let CreateRoom = props => {
+  const { rooms, addRoom } = props;
   let input;
 
   const handleSubmit = e => {
-    const roomName = input.value;
     e.preventDefault();
-    console.log(input);
-    if (!roomName.trim()) {
-      return;
-    }
-    props.history.push(roomName + "[" + props.username + "]");
+    const room = {
+      name: input.value,
+      id: Math.random()
+    };
+    if (!room.name.trim()) return;
+    addRoom(room);
+    // props.history.push(roomName + "[" + props.username + "]");
   };
 
   return (
@@ -28,7 +32,7 @@ const CreateRoom = props => {
         onSubmit={e => handleSubmit(e)}
         style={{ display: "flex", alignItems: "center" }}
       >
-        <p>#</p>
+        <h1>#</h1>
         <Input
           label="Room name"
           ref={node => {
@@ -37,8 +41,24 @@ const CreateRoom = props => {
         />
         <Button type="submit">Create</Button>
       </form>
+      <ul id="rooms">
+        {rooms.map(room => {
+          return <li key={room.id}>{room.name}</li>;
+        })}
+      </ul>
     </div>
   );
 };
+
+const mapStateToProps = state => {
+  return { rooms: state.rooms };
+};
+
+const actionCreators = { addRoom };
+
+CreateRoom = connect(
+  mapStateToProps,
+  actionCreators
+)(CreateRoom);
 
 export default CreateRoom;

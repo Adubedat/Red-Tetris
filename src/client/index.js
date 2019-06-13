@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./reducers/reducers";
 import "./index.css";
 import App from "./components/App";
+import socketMiddleware from "../middlewares/socketMiddleware";
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(socketMiddleware()));
 
 store.subscribe(() => console.log(store.getState()));
 
