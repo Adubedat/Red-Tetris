@@ -74,9 +74,12 @@ let App = ({ hashError, setHashError }) => {
   const handleHashChange = () => {
     const regexp = /\w{1,12}\[\w{1,12}\]/;
     const hash = window.location.hash.substr(1);
-    console.log(hash);
+    if (!hash.trim()) {
+      //no error if no hash
+      setHashError(false);
+      return;
+    }
     const found = hash.match(regexp);
-    console.log(found);
     if (!found || found.length !== 1 || found[0] !== hash) {
       setHashError(true);
       return;
