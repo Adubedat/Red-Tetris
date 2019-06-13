@@ -8,11 +8,6 @@ let Login = ({ connectUser }) => {
   const [error, setError] = useState(false);
   let input;
 
-  const inputProps = {
-    error,
-    helperText: error ? "max 12 alphanumeric characters" : ""
-  };
-
   const loginFormStyle = {
     display: "flex",
     flexDirection: "column",
@@ -27,6 +22,7 @@ let Login = ({ connectUser }) => {
       setError(true);
       return true;
     }
+    setError(false);
     return false;
   };
 
@@ -45,7 +41,8 @@ let Login = ({ connectUser }) => {
           <p>Or</p>
           <div style={{ display: "flex", alignItems: "center" }}>
             <Input
-              {...inputProps}
+              error={error}
+              helperText={error ? "max 12 alphanumeric characters" : ""}
               label="Name"
               ref={node => {
                 input = node;

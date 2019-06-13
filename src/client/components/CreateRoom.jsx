@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "./common/Input";
 import Button from "./common/Button";
 
@@ -10,14 +10,24 @@ const createRoomContainer = {
 
 const CreateRoom = props => {
   let input;
+  const [error, setError] = useState(false);
 
+  const roomNameError = roomName => {
+    const regexp = /\w{1,12}/;
+    const found = roomName.match(regexp);
+    console.log(found);
+    if (!found || found.length !== 1 || found[0] !== roomName) {
+      setError(true);
+      return true;
+    }
+    setError(false);
+    return false;
+  };
   const handleSubmit = e => {
     const roomName = input.value;
     e.preventDefault();
     console.log(input);
-    if (!roomName.trim()) {
-      return;
-    }
+    if (roomNameError(roomName)) return;
     props.history.push(roomName + "[" + props.username + "]");
   };
 
@@ -30,6 +40,8 @@ const CreateRoom = props => {
       >
         <p>#</p>
         <Input
+          error={error}
+          helperText={error ? "max 12 alphanumeric characters" : ""}
           label="Room name"
           ref={node => {
             input = node;
