@@ -1,7 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { connectUser } from "../actions/actions";
-import Button from "./common/Button";
 import Login from "./Login";
 import CreateRoom from "./CreateRoom";
 import Popup from "./common/Popup";
