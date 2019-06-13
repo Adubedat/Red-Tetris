@@ -1,7 +1,8 @@
-import { CONNECT_USER } from "../actions/actions";
+import { CONNECT_USER, HASH_ERROR } from "../actions/actions";
 
 const initialState = {
-  username: ""
+  username: "",
+  hashError: false
 };
 
 function reducer(state = initialState, action) {
@@ -9,6 +10,10 @@ function reducer(state = initialState, action) {
     case CONNECT_USER:
       return Object.assign({}, state, {
         username: action.username
+      });
+    case HASH_ERROR:
+      return Object.assign({}, state, {
+        hashError: action.hashError
       });
     default:
       return state;

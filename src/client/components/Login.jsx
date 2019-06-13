@@ -17,7 +17,6 @@ let Login = ({ connectUser }) => {
   const usernameError = username => {
     const regexp = /\w{1,12}/;
     const found = username.match(regexp);
-    console.log(found);
     if (!found || found.length !== 1 || found[0] !== username) {
       setError(true);
       return true;
