@@ -4,9 +4,8 @@ import Button from "./common/Button";
 import { connect } from "react-redux";
 import { connectUser } from "../actions/actions";
 
-let Login = props => {
+let Login = ({ connectUser }) => {
   let input;
-  console.log("props :" + props);
 
   const loginFormStyle = {
     display: "flex",
@@ -15,13 +14,10 @@ let Login = props => {
   };
 
   const handleSubmit = e => {
-    const username = input.value;
     e.preventDefault();
-    console.log(input);
-    if (!username.trim()) {
-      return;
-    }
-    props.dispatch(connectUser(username));
+    const username = input.value;
+    if (!username.trim()) return;
+    connectUser(username);
   };
 
   return (
@@ -45,6 +41,11 @@ let Login = props => {
   );
 };
 
-Login = connect()(Login);
+const actionCreators = { connectUser };
+
+Login = connect(
+  null,
+  actionCreators
+)(Login);
 
 export default Login;
