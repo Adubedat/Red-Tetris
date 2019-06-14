@@ -72,19 +72,15 @@ let App = ({ hashError, setHashError }) => {
   //const socket = socketIOClient("localhost:4001");
 
   const handleHashChange = () => {
-    const regexp = /\w{1,12}\[\w{1,12}\]/;
+    const regexp = /^\w{1,12}\[\w{1,12}\]$/;
     const hash = window.location.hash.substr(1);
-    if (!hash.trim()) {
-      //no error if no hash
+    const found = hash.match(regexp);
+    if (!hash.trim() || found) {
+      //no error if no hash or regex match
       setHashError(false);
       return;
     }
-    const found = hash.match(regexp);
-    if (!found || found.length !== 1 || found[0] !== hash) {
-      setHashError(true);
-      return;
-    }
-    setHashError(false);
+    setHashError(true);
   };
 
   const render = () => {
