@@ -7,7 +7,6 @@ import Popup from "./common/Popup";
 let Home = props => {
   const { username } = props;
   const isLogged = username ? true : false;
-  console.log(props);
 
   return (
     <div>
