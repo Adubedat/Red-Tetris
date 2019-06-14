@@ -1,8 +1,9 @@
 const express = require("express");
 const http = require("http");
 const socketIO = require("socket.io");
+const params = require("../../params");
 
-const port = 4001;
+const { port } = params.server;
 
 const app = express();
 
@@ -10,15 +11,18 @@ const server = http.createServer(app);
 
 const io = socketIO(server);
 
-io.on("connection", socket => {
-  console.log("User connected");
+let roomList = [];
 
-  socket.on("add room", room => {
-    console.log("Rooms list changed: ", room);
-    io.sockets.emit("add room", room);
+io.on("connection", client => {
+  console.log(client);
+
+  client.on("createRoom", room => {
+    roomList.push(room);
+    console.log("Rooms list changed: ", roomList);
+    client.emit("newRoomList", roomList);
   });
 
-  socket.on("disconnect", () => {
+  client.on("disconnect", () => {
     console.log("User disconnected");
   });
 });

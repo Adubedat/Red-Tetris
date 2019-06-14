@@ -1,8 +1,12 @@
+import socket from "../services/socket-api";
+
 export const CONNECT_USER = "CONNECT_USER";
 
-export const ADD_ROOM = "ADD_ROOM";
+export const CREATE_ROOM = "CREATE_ROOM";
 
 export const HASH_ERROR = "HASH_ERROR";
+
+export const NEW_ROOM_LIST = "NEW_ROOM_LIST";
 
 export const setHashError = value => ({ type: "HASH_ERROR", hashError: value });
 
@@ -11,12 +15,25 @@ export const connectUser = username => ({
   username
 });
 
-export const addRoom = room => {
-  console.log("in add room");
+export const subscribeNewRoomList = () => {
+  console.log("action : subscribeNewRoomList");
+  return dispatch => {
+    console.log("newRoomList dispatched");
+    socket.on("newRoomList", newRoomList => {
+      dispatch({
+        type: NEW_ROOM_LIST,
+        payload: newRoomList
+      });
+    });
+  };
+};
 
-  return {
-    event: "add room",
-    handle: ADD_ROOM,
-    room
+export const createRoom = roomName => {
+  console.log("action : createRoom");
+  socket.emit("createRoom", roomName);
+  return dispatch => {
+    dispatch({
+      type: CREATE_ROOM
+    });
   };
 };

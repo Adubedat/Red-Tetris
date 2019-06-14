@@ -1,4 +1,9 @@
-import { CONNECT_USER, HASH_ERROR, ADD_ROOM } from "../actions/actions";
+import {
+  CONNECT_USER,
+  HASH_ERROR,
+  NEW_ROOM_LIST,
+  CREATE_ROOM
+} from "../actions/actions";
 
 const initialState = {
   username: "",
@@ -17,9 +22,11 @@ function reducer(state = initialState, action) {
       return Object.assign({}, state, {
         hashError: action.hashError
       });
-    case ADD_ROOM:
+    case CREATE_ROOM:
+      return { ...state };
+    case NEW_ROOM_LIST:
       return Object.assign({}, state, {
-        rooms: [...state.rooms, action.room]
+        rooms: action.payload
       });
     default:
       return state;

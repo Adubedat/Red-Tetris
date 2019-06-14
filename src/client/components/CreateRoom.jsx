@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Input from "./common/Input";
 import Button from "./common/Button";
 import { connect } from "react-redux";
-import { addRoom } from "../actions/actions";
+import { createRoom, subscribeNewRoomList } from "../actions/actions";
 
 const createRoomContainer = {
   display: "flex",
@@ -28,14 +28,11 @@ let CreateRoom = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(input);
-    const room = {
-      name: input.value,
-      id: Math.random()
-    };
-    if (roomNameError(room.name)) return;
-    addRoom(room);
-    props.history.push(room.name + "[" + props.username + "]");
+    const roomName = input.value;
+    if (roomNameError(roomName)) return;
+    props.subscribeNewRoomList();
+    props.createRoom(roomName);
+    props.history.push(roomName + "[" + props.username + "]");
   };
 
   return (
@@ -57,8 +54,8 @@ let CreateRoom = props => {
         <Button type="submit">Create</Button>
       </form>
       <ul id="rooms">
-        {rooms.map(room => {
-          return <li key={room.id}>{room.name}</li>;
+        {rooms.map(roomName => {
+          return <li key={roomName}>{roomName}</li>;
         })}
       </ul>
     </div>
@@ -69,7 +66,7 @@ const mapStateToProps = state => {
   return { rooms: state.rooms };
 };
 
-const actionCreators = { addRoom };
+const actionCreators = { createRoom, subscribeNewRoomList };
 
 CreateRoom = connect(
   mapStateToProps,

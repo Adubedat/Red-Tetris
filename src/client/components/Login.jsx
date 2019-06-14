@@ -3,6 +3,7 @@ import Input from "./common/Input";
 import Button from "./common/Button";
 import { connect } from "react-redux";
 import { connectUser } from "../actions/actions";
+import { isAlphaNumeric } from "../../Utils/Utils";
 
 let Login = ({ connectUser }) => {
   const [error, setError] = useState(false);
@@ -14,22 +15,15 @@ let Login = ({ connectUser }) => {
     alignItems: "center"
   };
 
-  const usernameError = username => {
-    const regexp = /\w{1,12}/;
-    const found = username.match(regexp);
-    if (!found || found.length !== 1 || found[0] !== username) {
-      setError(true);
-      return true;
-    }
-    setError(false);
-    return false;
-  };
-
   const handleSubmit = e => {
     e.preventDefault();
     const username = input.value;
-    if (usernameError(username)) return;
+    if (!isAlphaNumeric(username)) {
+      setError(true);
+      return;
+    }
     connectUser(username);
+    setError(false);
   };
 
   return (
