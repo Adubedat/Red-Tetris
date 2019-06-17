@@ -1,24 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import Input from "../common/Input";
 import Button from "../common/Button";
 import { connect } from "react-redux";
-import { connectUser } from "../../actions/actions";
-import { isAlphaNumeric } from "../../../Utils/Utils";
+import { newPlayer } from "../../actions/actions";
 import styles from "./styles";
 
-let Login = ({ connectUser }) => {
-  const [error, setError] = useState(false);
+let Login = props => {
   let input;
+  const { newPlayer, playerNameError } = props;
 
   const handleSubmit = e => {
     e.preventDefault();
     const username = input.value;
-    if (!isAlphaNumeric(username)) {
-      setError(true);
-      return;
-    }
-    connectUser(username);
-    setError(false);
+    newPlayer(username);
   };
 
   return (
@@ -29,8 +23,10 @@ let Login = ({ connectUser }) => {
           <p>Or</p>
           <div style={{ display: "flex", alignItems: "center" }}>
             <Input
-              error={error}
-              helperText={error ? "max 12 alphanumeric characters" : ""}
+              error={playerNameError}
+              helperText={
+                playerNameError ? "max 12 alphanumeric characters" : ""
+              }
               label="Name"
               ref={node => {
                 input = node;
@@ -44,10 +40,16 @@ let Login = ({ connectUser }) => {
   );
 };
 
-const actionCreators = { connectUser };
+const mapStateToProps = state => {
+  return {
+    playerNameError: state.playerNameError
+  };
+};
+
+const actionCreators = { newPlayer };
 
 Login = connect(
-  null,
+  mapStateToProps,
   actionCreators
 )(Login);
 

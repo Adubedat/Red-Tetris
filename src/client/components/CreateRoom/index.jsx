@@ -6,25 +6,12 @@ import { createRoom, subscribeNewRoomList } from "../../actions/actions";
 import styles from "./styles";
 
 let CreateRoom = props => {
-  const { rooms, createRoom, subscribeNewRoomList } = props;
+  const { rooms, roomNameError, createRoom, subscribeNewRoomList } = props;
   let input;
-  const [error, setError] = useState(false);
-
-  const roomNameError = roomName => {
-    const regexp = /\w{1,12}/;
-    const found = roomName.match(regexp);
-    if (!found || found.length !== 1 || found[0] !== roomName) {
-      setError(true);
-      return true;
-    }
-    setError(false);
-    return false;
-  };
 
   const handleSubmit = e => {
     e.preventDefault();
     const roomName = input.value;
-    if (roomNameError(roomName)) return;
     createRoom(roomName);
     props.history.push(roomName + "[" + props.username + "]");
   };
@@ -39,8 +26,8 @@ let CreateRoom = props => {
       >
         <h1>#</h1>
         <Input
-          error={error}
-          helperText={error ? "max 12 alphanumeric characters" : ""}
+          error={roomNameError}
+          helperText={roomNameError ? "max 12 alphanumeric characters" : ""}
           label="Room name"
           ref={node => {
             input = node;
@@ -58,7 +45,10 @@ let CreateRoom = props => {
 };
 
 const mapStateToProps = state => {
-  return { rooms: state.rooms };
+  return {
+    rooms: state.rooms,
+    roomNameError: state.roomNameError
+  };
 };
 
 const actionCreators = { createRoom, subscribeNewRoomList };
