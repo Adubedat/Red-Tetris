@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from "redux";
 import thunkMiddleware from "redux-thunk";
 import rootReducer from "./reducers/reducers";
 import "./index.css";
-import App from "./components/App";
+import App from "./containers/App";
 
 const initialState = {
   username: "",

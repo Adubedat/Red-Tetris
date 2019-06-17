@@ -3,11 +3,11 @@ import { hot } from "react-hot-loader";
 import { HashRouter as Router, Route } from "react-router-dom";
 import EventListener from "react-event-listener";
 import { connect } from "react-redux";
-import Home from "./Home";
-import Header from "./Header";
-import ErrorPage from "./ErrorPage";
+import Home from "../components/Home";
+import ErrorPage from "../components/ErrorPage";
 import { setHashError } from "../actions/actions";
 import { setConfig } from "react-hot-loader"; //to remove
+import Header from "../components/Header";
 
 setConfig({
   reloadHooks: false
