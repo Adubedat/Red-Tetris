@@ -6,8 +6,6 @@ import thunkMiddleware from "redux-thunk";
 import rootReducer from "./reducers/reducers";
 import "./index.css";
 import App from "./components/App";
-import socketMiddleware from "../middlewares/socketMiddleware";
-import socket from "./services/socket-api";
 
 const initialState = {
   username: "",

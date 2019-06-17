@@ -19,7 +19,7 @@ io.on("connection", client => {
   client.on("createRoom", room => {
     roomList.push(room);
     console.log("Rooms list changed: ", roomList);
-    client.emit("newRoomList", roomList);
+    io.sockets.emit("newRoomList", roomList);
   });
 
   client.on("disconnect", () => {

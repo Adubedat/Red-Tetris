@@ -1,17 +1,12 @@
 import React, { useState } from "react";
-import Input from "./common/Input";
-import Button from "./common/Button";
+import Input from "../common/Input";
+import Button from "../common/Button";
 import { connect } from "react-redux";
-import { createRoom, subscribeNewRoomList } from "../actions/actions";
-
-const createRoomContainer = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center"
-};
+import { createRoom, subscribeNewRoomList } from "../../actions/actions";
+import styles from "./styles";
 
 let CreateRoom = props => {
-  const { rooms, addRoom } = props;
+  const { rooms, createRoom, subscribeNewRoomList } = props;
   let input;
   const [error, setError] = useState(false);
 
@@ -30,13 +25,13 @@ let CreateRoom = props => {
     e.preventDefault();
     const roomName = input.value;
     if (roomNameError(roomName)) return;
-    props.subscribeNewRoomList();
-    props.createRoom(roomName);
+    createRoom(roomName);
     props.history.push(roomName + "[" + props.username + "]");
   };
 
+  subscribeNewRoomList();
   return (
-    <div style={createRoomContainer}>
+    <div style={styles.createRoomContainer}>
       <p>Create a new room</p>
       <form
         onSubmit={e => handleSubmit(e)}

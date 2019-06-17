@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import Login from "./Login";
-import CreateRoom from "./CreateRoom";
-import Popup from "./common/Popup";
+import Login from "../Login";
+import CreateRoom from "../CreateRoom";
+import Popup from "../common/Popup";
 
 let Home = props => {
   const { username } = props;

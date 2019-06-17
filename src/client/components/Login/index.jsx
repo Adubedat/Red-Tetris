@@ -1,19 +1,14 @@
 import React, { useState } from "react";
-import Input from "./common/Input";
-import Button from "./common/Button";
+import Input from "../common/Input";
+import Button from "../common/Button";
 import { connect } from "react-redux";
-import { connectUser } from "../actions/actions";
-import { isAlphaNumeric } from "../../Utils/Utils";
+import { connectUser } from "../../actions/actions";
+import { isAlphaNumeric } from "../../../Utils/Utils";
+import styles from "./styles";
 
 let Login = ({ connectUser }) => {
   const [error, setError] = useState(false);
   let input;
-
-  const loginFormStyle = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
-  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -29,7 +24,7 @@ let Login = ({ connectUser }) => {
   return (
     <div>
       <form onSubmit={e => handleSubmit(e)}>
-        <div style={loginFormStyle}>
+        <div style={styles.loginFormStyle}>
           <Button onClick={() => {}}>42 Connect</Button>
           <p>Or</p>
           <div style={{ display: "flex", alignItems: "center" }}>
