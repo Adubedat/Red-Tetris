@@ -1,5 +1,5 @@
 import Lobby from "../../components/Lobby";
-import { isAlphaNumeric } from "../../Utils";
+import { isAlphaNumeric } from "../../../utils/utils";
 import {
   CREATE_ROOM,
   NEW_PLAYER,

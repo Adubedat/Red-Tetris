@@ -1,16 +1,15 @@
-const styles = {
-  headerContainer: {
-    display: "flex",
-    flex: 1,
-    justifyContent: "space-between",
-    padding: 5,
-    paddingLeft: 10,
-    paddingRight: 10,
-    backgroundColor: "crimson"
-  },
-  rightContainer: {
-    display: "flex"
-  }
-};
+import styled from "styled-components";
 
-export default styles;
+export const StyledContainer = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: crimson;
+`;
+
+export const StyledUserGroup = styled.div`
+  display: flex;
+`;

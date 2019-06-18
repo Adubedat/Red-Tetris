@@ -1,55 +1,38 @@
-import React from "react";
-import Input from "../common/Input";
-import Button from "../common/Button";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { newPlayer } from "../../actions/player";
-import styles from "./styles";
+import LoginSub from "./subcomponent";
+import loginError from "../../errors/loginError";
 
-let Login = props => {
-  let input;
-  const { newPlayer, playerNameError } = props;
+let Login = ({ newPlayer }) => {
+  const [error, setError] = useState("");
+  const [playerName, setplayerName] = useState("");
 
   const handleSubmit = e => {
     e.preventDefault();
-    const playerName = input.value;
-    newPlayer(playerName);
+    if (!error) newPlayer(playerName);
+  };
+
+  const handleChange = e => {
+    const value = e.target.value;
+    setError(loginError(value));
+    setplayerName(value);
   };
 
   return (
-    <div>
-      <form onSubmit={e => handleSubmit(e)}>
-        <div style={styles.loginFormStyle}>
-          <Button onClick={() => {}}>42 Connect</Button>
-          <p>Or</p>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <Input
-              error={playerNameError}
-              helperText={
-                playerNameError ? "max 12 alphanumeric characters" : ""
-              }
-              label="Name"
-              ref={node => {
-                input = node;
-              }}
-            />
-            <Button type="submit">Connect</Button>
-          </div>
-        </div>
-      </form>
-    </div>
+    <LoginSub
+      onSubmit={handleSubmit}
+      error={error}
+      playerName={playerName}
+      onChange={handleChange}
+    />
   );
-};
-
-const mapStateToProps = state => {
-  return {
-    playerNameError: state.error.playerNameError
-  };
 };
 
 const actionCreators = { newPlayer };
 
 Login = connect(
-  mapStateToProps,
+  null,
   actionCreators
 )(Login);
 

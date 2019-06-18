@@ -1,22 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
 import { connectPlayer } from "../../actions/player";
-import Button from "../common/Button";
-import styles from "./styles";
+import HeaderSub from "./subcomponent";
 
-let Header = props => {
-  const handleLogout = () => {
-    props.dispatch(connectPlayer(null));
-  };
-
+let Header = ({ playerName, connectPlayer }) => {
+  const handleLogout = () => connectPlayer("");
   return (
-    <div style={styles.headerContainer}>
-      <p>Red Tetris</p>
-      <div style={styles.rightContainer}>
-        <p>{props.playerName}</p>
-        <Button onClick={() => handleLogout()}>Logout</Button>
-      </div>
-    </div>
+    <HeaderSub
+      appName="Tetris Rouge"
+      playerName={playerName}
+      onClick={handleLogout}
+    ></HeaderSub>
   );
 };
 
@@ -26,6 +20,11 @@ const mapStateToProps = state => {
   };
 };
 
-Header = connect(mapStateToProps)(Header);
+const actionCreators = { connectPlayer };
+
+Header = connect(
+  mapStateToProps,
+  actionCreators
+)(Header);
 
 export default Header;
