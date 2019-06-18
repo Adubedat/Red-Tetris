@@ -40,7 +40,7 @@ export const StyledHorizontalText = styled.div`
   }
 `;
 
-export const StyledInputGroup = styled.div`
+export const StyledRegisterGroup = styled.div`
   display: flex;
   align-items: center;
 `;

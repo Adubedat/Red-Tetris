@@ -2,7 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import Input from "../common/Input";
 import Button from "../common/Button";
-import { StyledForm, StyledInputGroup, StyledHorizontalText } from "./styles";
+import {
+  StyledForm,
+  StyledRegisterGroup,
+  StyledHorizontalText
+} from "./styles";
 
 const LoginSub = ({ onSubmit, error, playerName, onChange }) => {
   return (
@@ -11,7 +15,7 @@ const LoginSub = ({ onSubmit, error, playerName, onChange }) => {
         42 Connect
       </Button>
       <StyledHorizontalText>OR</StyledHorizontalText>
-      <StyledInputGroup>
+      <StyledRegisterGroup>
         <Input
           error={error ? true : false}
           helperText={error}
@@ -23,7 +27,7 @@ const LoginSub = ({ onSubmit, error, playerName, onChange }) => {
         <Button disabled={!playerName || error ? true : false} type="submit">
           Connect
         </Button>
-      </StyledInputGroup>
+      </StyledRegisterGroup>
     </StyledForm>
   );
 };

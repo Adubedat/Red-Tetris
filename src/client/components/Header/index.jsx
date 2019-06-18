@@ -1,16 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
 import { connectPlayer } from "../../actions/actions";
-import Header from "./subcomponent";
+import HeaderSub from "./subcomponent";
 
-let HeaderContainer = ({ playerName, connectPlayer }) => {
-  const handleLogout = () => connectPlayer(null);
+let Header = ({ playerName, connectPlayer }) => {
+  const handleLogout = () => connectPlayer("");
   return (
-    <Header
+    <HeaderSub
       appName="Tetris Rouge"
       playerName={playerName}
       onClick={handleLogout}
-    ></Header>
+    ></HeaderSub>
   );
 };
 
@@ -22,9 +22,9 @@ const mapStateToProps = state => {
 
 const actionCreators = { connectPlayer };
 
-HeaderContainer = connect(
+Header = connect(
   mapStateToProps,
   actionCreators
-)(HeaderContainer);
+)(Header);
 
-export default HeaderContainer;
+export default Header;

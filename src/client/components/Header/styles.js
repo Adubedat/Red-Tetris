@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const StyledContainer = styled.div`
   display: flex;
   flex: 1;
   justify-content: space-between;
@@ -10,6 +10,6 @@ export const Container = styled.div`
   background-color: crimson;
 `;
 
-export const User = styled.div`
+export const StyledUserGroup = styled.div`
   display: flex;
 `;

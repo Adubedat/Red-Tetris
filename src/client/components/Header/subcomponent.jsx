@@ -1,24 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Button from "../common/Button";
-import { Container, User } from "./styles";
+import { StyledContainer, StyledUserGroup } from "./styles";
 
-let Header = ({ appName, playerName, onClick }) => {
+let HeaderSub = ({ appName, playerName, onClick }) => {
   return (
-    <Container>
+    <StyledContainer>
       <p>{appName}</p>
-      <User>
+      <StyledUserGroup>
         <p>{playerName}</p>
         {playerName && <Button onClick={onClick}>Logout</Button>}
-      </User>
-    </Container>
+      </StyledUserGroup>
+    </StyledContainer>
   );
 };
 
-Header.propTypes = {
+HeaderSub.propTypes = {
   appName: PropTypes.string.isRequired,
   playerName: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired
 };
 
-export default Header;
+export default HeaderSub;
