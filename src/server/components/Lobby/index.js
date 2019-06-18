@@ -15,9 +15,6 @@ class Lobby {
   addPlayer(playerName) {
     this._players.push(playerName);
   }
-  //   get(id) {
-  //     return this._data.find(d => d.id === id);
-  //   }
 }
 
 const instance = new Lobby();

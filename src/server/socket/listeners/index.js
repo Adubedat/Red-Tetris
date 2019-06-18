@@ -17,7 +17,7 @@ const initListeners = socket => {
 
   socket.on(FETCH_ROOMS, () => fetchRooms(socket));
 
-  socket.on(HASH_CHANGED, data => handleHashChange(data, socket));
+  socket.on(HASH_CHANGED, (data, callback) => handleHashChange(data, callback));
 };
 
 const createRoom = (data, callback, socket) => {
@@ -45,8 +45,15 @@ const fetchRooms = socket => {
   socket.emit(NEW_ROOM_LIST, Lobby.rooms);
 };
 
-const handleHashChange = (data, socket) => {
-  const { hash } = data;
+const handleHashChange = (data, callback) => {
+  console.log("event received");
+  const { hash, playerName } = data;
+  const regexp = /^\w{1,12}\[\w{1,12}\]$/;
+  const found = hash.match(regexp);
+  if (!found) {
+    callback("playerNameError");
+  }
+  const [hashRoomName, hashPlayerName] = hash.match(/\w{1,12}/g);
 };
 
 export default initListeners;

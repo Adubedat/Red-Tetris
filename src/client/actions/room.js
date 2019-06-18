@@ -27,7 +27,7 @@ export const requestJoinRoom = roomName => {
   return dispatch => {
     socket.emit(JOIN_ROOM, { roomName }, status => {
       if (status === "success") {
-        dispatch(joinRoomError(true));
+        dispatch(joinRoomError(false));
         dispatch(joinRoom(roomName));
       } else if (status === "error") {
         dispatch(joinRoomError(true));
