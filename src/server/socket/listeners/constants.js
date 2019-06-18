@@ -7,3 +7,5 @@ export const FETCH_ROOMS = "FETCH_ROOMS";
 export const HASH_CHANGED = "HASH_CHANGED";
 
 export const NEW_ROOM_LIST = "NEW_ROOM_LIST";
+
+export const DELETE_PLAYER = "DELETE_PLAYER";

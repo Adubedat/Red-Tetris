@@ -9,15 +9,13 @@ import {
 } from "./constants";
 
 const initListeners = socket => {
-  socket.on(CREATE_ROOM, (data, callback) =>
-    createRoom(data, callback, socket)
-  );
+  socket.on(CREATE_ROOM, (data, callback) => createRoom(data, callback, socket)); //eslint-disable-line
 
   socket.on(NEW_PLAYER, (data, callback) => addPlayer(data, callback));
 
   socket.on(FETCH_ROOMS, () => fetchRooms(socket));
 
-  socket.on(HASH_CHANGED, (data, callback) => handleHashChange(data, callback));
+  socket.on(HASH_CHANGED, (data, callback) => handleHashChange(data, callback, socket)); //eslint-disable-line
 };
 
 const createRoom = (data, callback, socket) => {
@@ -41,11 +39,15 @@ const addPlayer = (data, callback) => {
   }
 };
 
+const deletePlayer = (data, socket) => {
+  console.log("delete player");
+};
+
 const fetchRooms = socket => {
   socket.emit(NEW_ROOM_LIST, Lobby.rooms);
 };
 
-const handleHashChange = (data, callback) => {
+const handleHashChange = (data, callback, socket) => {
   console.log("event received");
   const { hash, playerName } = data;
   const regexp = /^\w{1,12}\[\w{1,12}\]$/;
