@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import Input from "../common/Input";
 import Button from "../common/Button";
 import { connect } from "react-redux";
-import { createRoom, subscribeNewRoomList } from "../../actions/actions";
+import { createRoom } from "../../actions/room";
+import { subscribeNewRoomList } from "../../listeners";
 import styles from "./styles";
 
 let CreateRoom = props => {
-  const { rooms, roomNameError, createRoom, subscribeNewRoomList } = props;
+  const { rooms, createRoom, subscribeNewRoomList, roomNameError } = props;
   let input;
 
   const handleSubmit = e => {
     e.preventDefault();
     const roomName = input.value;
     createRoom(roomName);
-    props.history.push(roomName + "[" + props.username + "]");
+    // if (!roomNameError) {
+    //   props.history.push(roomName + "[" + props.playerName + "]");
+    // }
   };
 
   subscribeNewRoomList();
@@ -47,7 +50,7 @@ let CreateRoom = props => {
 const mapStateToProps = state => {
   return {
     rooms: state.rooms,
-    roomNameError: state.roomNameError
+    roomNameError: state.error.roomNameError
   };
 };
 

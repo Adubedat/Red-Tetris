@@ -2,7 +2,7 @@ import React from "react";
 import Input from "../common/Input";
 import Button from "../common/Button";
 import { connect } from "react-redux";
-import { newPlayer } from "../../actions/actions";
+import { newPlayer } from "../../actions/player";
 import styles from "./styles";
 
 let Login = props => {
@@ -11,8 +11,8 @@ let Login = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const username = input.value;
-    newPlayer(username);
+    const playerName = input.value;
+    newPlayer(playerName);
   };
 
   return (
@@ -42,7 +42,7 @@ let Login = props => {
 
 const mapStateToProps = state => {
   return {
-    playerNameError: state.playerNameError
+    playerNameError: state.error.playerNameError
   };
 };
 

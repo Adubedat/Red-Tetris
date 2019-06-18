@@ -32,11 +32,11 @@ const createRoom = (data, callback, socket) => {
 };
 
 const addPlayer = (data, callback) => {
-  const { username } = data;
-  if (!isAlphaNumeric(username) || !username.trim()) {
+  const { playerName } = data;
+  if (!isAlphaNumeric(playerName) || !playerName.trim()) {
     callback("error");
   } else {
-    Lobby.addPlayer(username);
+    Lobby.addPlayer(playerName);
     callback("success");
   }
 };

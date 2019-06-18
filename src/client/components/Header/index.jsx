@@ -1,19 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
-import { connectUser } from "../../actions/actions";
+import { connectPlayer } from "../../actions/player";
 import Button from "../common/Button";
 import styles from "./styles";
 
 let Header = props => {
   const handleLogout = () => {
-    props.dispatch(connectUser(null));
+    props.dispatch(connectPlayer(null));
   };
 
   return (
     <div style={styles.headerContainer}>
       <p>Red Tetris</p>
       <div style={styles.rightContainer}>
-        <p>{props.username}</p>
+        <p>{props.playerName}</p>
         <Button onClick={() => handleLogout()}>Logout</Button>
       </div>
     </div>
@@ -22,7 +22,7 @@ let Header = props => {
 
 const mapStateToProps = state => {
   return {
-    username: state.username
+    playerName: state.playerName
   };
 };
 

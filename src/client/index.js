@@ -3,13 +3,18 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import thunkMiddleware from "redux-thunk";
-import rootReducer from "./reducers/reducers";
+import rootReducer from "./reducers";
 import "./index.css";
 import App from "./components/App";
 
 const initialState = {
-  username: "",
-  hashError: false,
+  playerName: "",
+  currentRoom: "",
+  error: {
+    roomNameError: false,
+    playerNameError: false,
+    joinRoomError: false
+  },
   rooms: []
 };
 
