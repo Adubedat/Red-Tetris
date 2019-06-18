@@ -1,6 +1,6 @@
 import socket from "../services/socket-api";
 
-export const CONNECT_USER = "CONNECT_USER";
+export const CONNECT_PLAYER = "CONNECT_PLAYER";
 
 export const CREATE_ROOM = "CREATE_ROOM";
 
@@ -10,9 +10,9 @@ export const NEW_ROOM_LIST = "NEW_ROOM_LIST";
 
 export const setHashError = value => ({ type: "HASH_ERROR", hashError: value });
 
-export const connectUser = username => ({
-  type: CONNECT_USER,
-  username
+export const connectPlayer = playerName => ({
+  type: CONNECT_PLAYER,
+  playerName
 });
 
 export const subscribeNewRoomList = () => {

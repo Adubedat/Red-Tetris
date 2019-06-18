@@ -5,8 +5,8 @@ import CreateRoom from "../CreateRoom";
 import Popup from "../common/Popup";
 
 let Home = props => {
-  const { username } = props;
-  const isLogged = username ? true : false;
+  const { playerName } = props;
+  const isLogged = playerName ? true : false;
 
   return (
     <div>
@@ -20,7 +20,7 @@ let Home = props => {
 
 const mapStateToProps = state => {
   return {
-    username: state.username
+    playerName: state.playerName
   };
 };
 

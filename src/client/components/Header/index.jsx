@@ -1,14 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import { connectUser } from "../../actions/actions";
+import { connectPlayer } from "../../actions/actions";
 import Header from "./subcomponent";
 
-let HeaderContainer = ({ username, connectUser }) => {
-  const handleLogout = () => connectUser(null);
+let HeaderContainer = ({ playerName, connectPlayer }) => {
+  const handleLogout = () => connectPlayer(null);
   return (
     <Header
       appName="Tetris Rouge"
-      username={username}
+      playerName={playerName}
       onClick={handleLogout}
     ></Header>
   );
@@ -16,11 +16,11 @@ let HeaderContainer = ({ username, connectUser }) => {
 
 const mapStateToProps = state => {
   return {
-    username: state.username
+    playerName: state.playerName
   };
 };
 
-const actionCreators = { connectUser };
+const actionCreators = { connectPlayer };
 
 HeaderContainer = connect(
   mapStateToProps,

@@ -26,7 +26,7 @@ let CreateRoom = props => {
     const roomName = input.value;
     if (roomNameError(roomName)) return;
     createRoom(roomName);
-    props.history.push(roomName + "[" + props.username + "]");
+    props.history.push(roomName + "[" + props.playerName + "]");
   };
 
   subscribeNewRoomList();

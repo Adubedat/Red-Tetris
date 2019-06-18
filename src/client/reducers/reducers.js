@@ -1,12 +1,12 @@
 import {
-  CONNECT_USER,
+  CONNECT_PLAYER,
   HASH_ERROR,
   NEW_ROOM_LIST,
   CREATE_ROOM
 } from "../actions/actions";
 
 const initialState = {
-  username: "",
+  playerName: "",
   hashError: false,
   rooms: []
 };
@@ -14,9 +14,9 @@ const initialState = {
 function reducer(state = initialState, action) {
   console.log(action);
   switch (action.type) {
-    case CONNECT_USER:
+    case CONNECT_PLAYER:
       return Object.assign({}, state, {
-        username: action.username
+        playerName: action.playerName
       });
     case HASH_ERROR:
       return Object.assign({}, state, {

@@ -8,7 +8,7 @@ import "./index.css";
 import App from "./components/App";
 
 const initialState = {
-  username: "",
+  playerName: "",
   hashError: false,
   rooms: []
 };
