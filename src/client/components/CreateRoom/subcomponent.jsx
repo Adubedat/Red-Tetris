@@ -2,20 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import Input from "../common/Input";
 import Button from "../common/Button";
-import {
-  StyledForm,
-  StyledRegisterGroup,
-  StyledHorizontalText
-} from "./styles";
+import styles from "./styles";
 
-const LoginSub = ({ onSubmit, error, value, onChange, label }) => {
+const CreateRoomSub = ({ onSubmit, onChange, error, value, label }) => {
   return (
-    <StyledForm onSubmit={e => onSubmit(e)}>
-      <Button disabled={true} onClick={() => {}}>
-        42 Connect
-      </Button>
-      <StyledHorizontalText>OR</StyledHorizontalText>
-      <StyledRegisterGroup>
+    <div style={styles.createRoomContainer}>
+      <p>Create a new room to play with your friends (if you have any ...)</p>
+      <form
+        onSubmit={e => onSubmit(e)}
+        style={{ display: "flex", alignItems: "center" }}
+      >
         <Input
           error={error.boolean}
           helperText={error.message}
@@ -25,14 +21,19 @@ const LoginSub = ({ onSubmit, error, value, onChange, label }) => {
           onChange={e => onChange(e)}
         />
         <Button disabled={!value || error.boolean} type="submit">
-          Connect
+          Create
         </Button>
-      </StyledRegisterGroup>
-    </StyledForm>
+      </form>
+      {/* <ul id="rooms">
+        {rooms.map(roomName => {
+          return <li key={roomName}>{roomName}</li>;
+        })}
+      </ul> */}
+    </div>
   );
 };
 
-LoginSub.propTypes = {
+CreateRoomSub.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   error: PropTypes.object.isRequired,
@@ -40,4 +41,4 @@ LoginSub.propTypes = {
   label: PropTypes.string.isRequired
 };
 
-export default LoginSub;
+export default CreateRoomSub;

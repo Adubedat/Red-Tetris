@@ -2,20 +2,20 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { newPlayer } from "../../actions/player";
 import LoginSub from "./subcomponent";
-import loginError from "../../errors/loginError";
+import inputError from "../../errors/inputError";
 
 let Login = ({ newPlayer }) => {
-  const [error, setError] = useState("");
+  const [error, setError] = useState({ boolean: null, message: "" });
   const [playerName, setplayerName] = useState("");
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (!error) newPlayer(playerName);
+    if (!error.boolean) newPlayer(playerName);
   };
 
   const handleChange = e => {
     const value = e.target.value;
-    setError(loginError(value));
+    setError(inputError(value));
     setplayerName(value);
   };
 
@@ -23,7 +23,8 @@ let Login = ({ newPlayer }) => {
     <LoginSub
       onSubmit={handleSubmit}
       error={error}
-      playerName={playerName}
+      value={playerName}
+      label="Name"
       onChange={handleChange}
     />
   );

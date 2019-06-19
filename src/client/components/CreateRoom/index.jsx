@@ -1,41 +1,36 @@
-import React from "react";
-import Input from "../common/Input";
-import Button from "../common/Button";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { createRoom } from "../../actions/room";
+import inputError from "../../errors/inputError";
 import { subscribeNewRoomList } from "../../listeners";
-import styles from "./styles";
+import CreateRoomSub from "./subcomponent";
 
-let CreateRoom = props => {
-  const { rooms, createRoom, subscribeNewRoomList, roomNameError } = props;
-  let input;
+let CreateRoom = ({ rooms, createRoom, subscribeNewRoomList }) => {
+  const [error, setError] = useState({ boolean: null, message: "" });
+  const [roomName, setRoomName] = useState("");
 
   const handleSubmit = e => {
     e.preventDefault();
-    const roomName = input.value;
-    // createRoom(roomName, props.history);
-    props.history.push(roomName + "[" + props.playerName + "]");
+    //createRoom(roomName, props.history);
+    // props.history.push(roomName + "[" + props.playerName + "]");
+  };
+
+  const handleChange = e => {
+    const value = e.target.value;
+    setError(inputError(value));
+    setRoomName(value);
   };
 
   subscribeNewRoomList();
   return (
-    <div style={styles.createRoomContainer}>
-      <p>Create a new room</p>
-      <form
-        onSubmit={e => handleSubmit(e)}
-        style={{ display: "flex", alignItems: "center" }}
-      >
-        <h1>#</h1>
-        <Input
-          error={roomNameError}
-          helperText={roomNameError ? "max 12 alphanumeric characters" : ""}
-          label="Room name"
-          ref={node => {
-            input = node;
-          }}
-        />
-        <Button type="submit">Create</Button>
-      </form>
+    <div>
+      <CreateRoomSub
+        onSubmit={handleSubmit}
+        label="Insert room name"
+        error={error}
+        value={roomName}
+        onChange={handleChange}
+      />
       <ul id="rooms">
         {rooms.map(roomName => {
           return <li key={roomName}>{roomName}</li>;
