@@ -24,6 +24,9 @@ const mapStateToProps = state => {
   };
 };
 
-Home = connect(mapStateToProps)(Home);
+Home = connect(
+  mapStateToProps,
+  null
+)(Home);
 
 export default Home;

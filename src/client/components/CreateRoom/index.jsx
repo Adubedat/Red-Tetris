@@ -3,21 +3,18 @@ import Input from "../common/Input";
 import Button from "../common/Button";
 import { connect } from "react-redux";
 import { createRoom } from "../../actions/room";
-import { subscribeNewRoomList } from "../../listeners";
 import styles from "./styles";
 
 let CreateRoom = props => {
-  const { rooms, createRoom, subscribeNewRoomList, roomNameError } = props;
+  const { rooms, createRoom } = props;
   let input;
 
   const handleSubmit = e => {
     e.preventDefault();
     const roomName = input.value;
-    // createRoom(roomName, props.history);
-    props.history.push(roomName + "[" + props.playerName + "]");
+    createRoom(roomName, props.playerName, props.history);
   };
 
-  subscribeNewRoomList();
   return (
     <div style={styles.createRoomContainer}>
       <p>Create a new room</p>
@@ -27,8 +24,6 @@ let CreateRoom = props => {
       >
         <h1>#</h1>
         <Input
-          error={roomNameError}
-          helperText={roomNameError ? "max 12 alphanumeric characters" : ""}
           label="Room name"
           ref={node => {
             input = node;
@@ -47,12 +42,11 @@ let CreateRoom = props => {
 
 const mapStateToProps = state => {
   return {
-    rooms: state.rooms,
-    roomNameError: state.error.roomNameError
+    rooms: state.rooms
   };
 };
 
-const actionCreators = { createRoom, subscribeNewRoomList };
+const actionCreators = { createRoom };
 
 CreateRoom = connect(
   mapStateToProps,

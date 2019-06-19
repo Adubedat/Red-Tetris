@@ -1,60 +1,110 @@
 import Lobby from "../../components/Lobby";
 import Player from "../../components/Player";
+import Game from "../../components/Game";
 import { isAlphaNumeric } from "../../../utils/utils";
 import {
   CREATE_ROOM,
+  JOIN_ROOM,
   NEW_PLAYER,
   FETCH_ROOMS,
   HASH_CHANGED,
-  NEW_ROOM_LIST
+  NEW_ROOM_LIST,
+  SHOW_TOAST
 } from "./constants";
-import { joinRoom } from "../../../client/actions/room";
 
 const initListeners = socket => {
   socket.on(CREATE_ROOM, (data, callback) => createRoom(data, callback, socket)); //eslint-disable-line
+
+  socket.on(JOIN_ROOM, (data, callback) => joinRoom(data, callback, socket));
 
   socket.on(NEW_PLAYER, (data, callback) => newPlayer(data, callback, socket));
 
   socket.on(FETCH_ROOMS, () => fetchRooms(socket));
 
   socket.on(HASH_CHANGED, (data, callback) => handleHashChange(data, callback, socket)); //eslint-disable-line
+
+  socket.on("disconnect", () => deletePlayer(socket));
 };
 
 const createRoom = (data, callback, socket) => {
   const { roomName } = data;
+  console.log("createRoom called");
   if (!isAlphaNumeric(roomName) || roomName.length > 12) {
-    callback({
-      status: "error",
+    socket.emit(SHOW_TOAST, {
+      type: "error",
       message: "Room name must have 1 to 12 alphanumeric characters"
     });
+    console.log(Lobby);
   } else if (Lobby.findRoom(roomName)) {
     joinRoom({ roomName }, callback, socket);
+    socket.emit(SHOW_TOAST, {
+      type: "success",
+      message: "found room"
+    });
+    console.log(Lobby);
   } else {
-    Lobby.addRoom(roomName);
-    socket.emit(NEW_ROOM_LIST, Lobby.rooms); //TODO emit to Lobby
+    Lobby.addRoom(new Game(roomName, socket.id));
+    socket.emit(NEW_ROOM_LIST, { roomList: Lobby.getRoomsName() }); //TODO emit to Lobby
+    joinRoom({ roomName }, callback, socket);
     callback({ status: "success" });
+    console.log(Lobby);
+    Lobby.rooms.forEach(room => console.log(room));
+  }
+};
+
+const joinRoom = (data, callback, socket) => {
+  console.log("joinRoom called");
+  const { roomName } = data;
+  const room = Lobby.findRoom(roomName);
+  const player = Lobby.findPlayer(socket.id);
+  const currentRoom = player.currentRoom === "Lobby" ? Lobby : Lobby.findRoom(player.currentRoom); //eslint-disable-line
+  if (room === currentRoom) return;
+  if (!room) {
+    socket.emit(SHOW_TOAST, {
+      type: "error",
+      message: "This room does not exists"
+    });
+  } else if (room.isFull()) {
+    socket.emit(SHOW_TOAST, {
+      type: "error",
+      message: "This room is full"
+    });
+  } else {
+    player.currentRoom = room.name;
+    room.addPlayer(player);
+    currentRoom.removePlayer(player.id);
+    callback({ status: "success" });
+    socket.emit(NEW_ROOM_LIST, { roomList: Lobby.getRoomsName() }); //TODO emit to Lobby
   }
 };
 
 const newPlayer = (data, callback, socket) => {
   const { playerName } = data;
+  console.log("newPlayer called");
   if (!isAlphaNumeric(playerName) || playerName.length > 12) {
-    callback({
-      status: "error",
+    socket.emit(SHOW_TOAST, {
+      type: "error",
       message: "Player name must have 1 to 12 alphanumeric characters"
     });
   } else {
-    Lobby.addPlayer(new Player(playerName, socket.id));
+    Lobby.addPlayer(new Player(playerName, socket.id, "Lobby"));
+    console.log(Lobby);
     callback({ status: "success" });
   }
 };
 
-const deletePlayer = (data, socket) => {
-  console.log("delete player");
+const deletePlayer = socket => {
+  console.log("deletePlayer called");
+  const player = Lobby.findPlayer(socket.id);
+  if (player) {
+    const currentRoom = player.currentRoom === "Lobby" ? Lobby : Lobby.findRoom(player.currentRoom); //eslint-disable-line
+    currentRoom.removePlayer(player.id);
+  }
+  console.log(Lobby);
 };
 
 const fetchRooms = socket => {
-  socket.emit(NEW_ROOM_LIST, Lobby.rooms);
+  socket.emit(NEW_ROOM_LIST, { roomList: Lobby.getRoomsName() });
 };
 
 const handleHashChange = (data, callback, socket) => {
@@ -77,7 +127,7 @@ const handleHashChange = (data, callback, socket) => {
     callback({
       status: "success",
       playerName: hashPlayerName,
-      roomName: hashPlayerName
+      roomName: hashRoomName
     });
   }
 };

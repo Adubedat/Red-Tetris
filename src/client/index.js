@@ -10,13 +10,6 @@ import App from "./components/App";
 const initialState = {
   playerName: "",
   currentRoom: "",
-  error: {
-    joinRoomError: false
-  },
-  toast: {
-    show: false,
-    message: ""
-  },
   rooms: []
 };
 

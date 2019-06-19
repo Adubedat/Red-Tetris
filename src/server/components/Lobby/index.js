@@ -12,16 +12,37 @@ class Lobby {
     this._rooms.push(roomName);
   }
 
-  addPlayer(playerName) {
-    this._players.push(playerName);
+  removeRoom(roomName) {
+    this._rooms = this._rooms.filter(room => room.name !== roomName);
+  }
+
+  addPlayer(player) {
+    this._players.push(player);
+  }
+
+  removePlayer(playerId) {
+    this._players = this._players.filter(player => player.id !== playerId);
   }
 
   findRoom(roomName) {
-    return false;
+    return this._rooms.find(room => room.name === roomName);
+  }
+
+  findPlayer(playerId) {
+    let found = this._players.find(player => player.id === playerId);
+    if (found) return found;
+    for (let i = 0; i < this._rooms.length; i++) {
+      let player = this.rooms[i].findPlayer(playerId);
+      if (player) return player;
+    }
+  }
+
+  getRoomsName() {
+    return this._rooms.map(room => room.name);
   }
 }
 
 const instance = new Lobby();
-Object.freeze(instance);
+// Object.freeze(instance);
 
 export default instance;
