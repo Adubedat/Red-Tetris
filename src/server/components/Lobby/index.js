@@ -15,6 +15,10 @@ class Lobby {
   addPlayer(playerName) {
     this._players.push(playerName);
   }
+
+  findRoom(roomName) {
+    return false;
+  }
 }
 
 const instance = new Lobby();

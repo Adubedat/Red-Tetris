@@ -11,9 +11,11 @@ const initialState = {
   playerName: "",
   currentRoom: "",
   error: {
-    roomNameError: false,
-    playerNameError: false,
     joinRoomError: false
+  },
+  toast: {
+    show: false,
+    message: ""
   },
   rooms: []
 };
