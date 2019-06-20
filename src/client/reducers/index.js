@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 import { CONNECT_PLAYER } from "../actions/player";
 import { NEW_ROOM_LIST, JOIN_ROOM } from "../actions/room";
-import { error } from "./error";
 
 const playerName = (state = "", action) => {
+  console.log("state updated with action : ", action.type);
   switch (action.type) {
     case CONNECT_PLAYER:
       return action.playerName;
@@ -32,9 +32,8 @@ const currentRoom = (state = "", action) => {
 
 const rootReducer = combineReducers({
   playerName,
-  currentRoom,
   rooms,
-  error
+  currentRoom
 });
 
 export default rootReducer;

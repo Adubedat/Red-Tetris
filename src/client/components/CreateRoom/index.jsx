@@ -2,17 +2,15 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { createRoom } from "../../actions/room";
 import inputError from "../../errors/inputError";
-import { subscribeNewRoomList } from "../../listeners";
 import CreateRoomSub from "./subcomponent";
 
-let CreateRoom = ({ rooms, createRoom, subscribeNewRoomList }) => {
+let CreateRoom = ({ rooms, playerName, createRoom, history }) => {
   const [error, setError] = useState({ boolean: null, message: "" });
   const [roomName, setRoomName] = useState("");
 
   const handleSubmit = e => {
     e.preventDefault();
-    //createRoom(roomName, props.history);
-    // props.history.push(roomName + "[" + props.playerName + "]");
+    createRoom(roomName, playerName, history);
   };
 
   const handleChange = e => {
@@ -21,7 +19,6 @@ let CreateRoom = ({ rooms, createRoom, subscribeNewRoomList }) => {
     setRoomName(value);
   };
 
-  subscribeNewRoomList();
   return (
     <div>
       <CreateRoomSub
@@ -43,11 +40,11 @@ let CreateRoom = ({ rooms, createRoom, subscribeNewRoomList }) => {
 const mapStateToProps = state => {
   return {
     rooms: state.rooms,
-    roomNameError: state.error.roomNameError
+    playerName: state.playerName
   };
 };
 
-const actionCreators = { createRoom, subscribeNewRoomList };
+const actionCreators = { createRoom };
 
 CreateRoom = connect(
   mapStateToProps,

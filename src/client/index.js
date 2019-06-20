@@ -10,11 +10,6 @@ import App from "./components/App";
 const initialState = {
   playerName: "",
   currentRoom: "",
-  error: {
-    roomNameError: false,
-    playerNameError: false,
-    joinRoomError: false
-  },
   rooms: []
 };
 

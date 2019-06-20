@@ -24,11 +24,6 @@ const CreateRoomSub = ({ onSubmit, onChange, error, value, label }) => {
           Create
         </Button>
       </form>
-      {/* <ul id="rooms">
-        {rooms.map(roomName => {
-          return <li key={roomName}>{roomName}</li>;
-        })}
-      </ul> */}
     </div>
   );
 };
