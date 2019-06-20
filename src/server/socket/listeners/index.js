@@ -6,28 +6,28 @@ import {
   CREATE_ROOM,
   JOIN_ROOM,
   NEW_PLAYER,
-  FETCH_ROOMS,
   HASH_CHANGED,
   NEW_ROOM_LIST,
   SHOW_TOAST
 } from "./constants";
 
-const initListeners = socket => {
-  socket.on(CREATE_ROOM, (data, callback) =>
-    createRoom(data, callback, socket)
-  ); //eslint-disable-line
+export const initListeners = socket => {
+  // socket.on("connect", () => initClientState(socket));
+
+  socket.on(CREATE_ROOM, (data, callback) => createRoom(data, callback, socket)); //eslint-disable-line
 
   socket.on(JOIN_ROOM, (data, callback) => joinRoom(data, callback, socket));
 
   socket.on(NEW_PLAYER, (data, callback) => newPlayer(data, callback, socket));
 
-  socket.on(FETCH_ROOMS, () => fetchRooms(socket));
-
-  socket.on(HASH_CHANGED, (data, callback) =>
-    handleHashChange(data, callback, socket)
-  ); //eslint-disable-line
+  socket.on(HASH_CHANGED, (data, callback) => handleHashChange(data, callback, socket)); //eslint-disable-line
 
   socket.on("disconnect", () => deletePlayer(socket));
+};
+
+export const initClientState = socket => {
+  console.log("on connection received");
+  socket.emit(NEW_ROOM_LIST, { roomList: Lobby.getRoomsName() }); //TODO emit to Lobby
 };
 
 const createRoom = (data, callback, socket) => {
@@ -41,10 +41,6 @@ const createRoom = (data, callback, socket) => {
     console.log(Lobby);
   } else if (Lobby.findRoom(roomName)) {
     joinRoom({ roomName }, callback, socket);
-    socket.emit(SHOW_TOAST, {
-      type: "success",
-      message: "found room"
-    });
     console.log(Lobby);
   } else {
     Lobby.addRoom(new Game(roomName, socket.id));
@@ -65,6 +61,7 @@ const joinRoom = (data, callback, socket) => {
     player.currentRoom === "Lobby" ? Lobby : Lobby.findRoom(player.currentRoom); //eslint-disable-line
   if (room === currentRoom) return;
   if (!room) {
+    // USELESS ????
     socket.emit(SHOW_TOAST, {
       type: "error",
       message: "This room does not exists"
@@ -93,7 +90,6 @@ const newPlayer = (data, callback, socket) => {
     });
   } else {
     Lobby.addPlayer(new Player(playerName, socket.id, "Lobby"));
-    socket.emit(NEW_ROOM_LIST, { roomList: Lobby.getRoomsName() }); //TODO emit to Lobby
     console.log(Lobby);
     callback({ status: "success" });
   }
@@ -110,10 +106,6 @@ const deletePlayer = socket => {
     currentRoom.removePlayer(player.id);
   }
   console.log(Lobby);
-};
-
-const fetchRooms = socket => {
-  socket.emit(NEW_ROOM_LIST, { roomList: Lobby.getRoomsName() });
 };
 
 const handleHashChange = (data, callback, socket) => {
@@ -140,5 +132,3 @@ const handleHashChange = (data, callback, socket) => {
     });
   }
 };
-
-export default initListeners;

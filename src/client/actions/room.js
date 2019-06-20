@@ -6,8 +6,6 @@ export const JOIN_ROOM = "JOIN_ROOM";
 
 export const NEW_ROOM_LIST = "NEW_ROOM_LIST";
 
-export const FETCH_ROOMS = "FETCH_ROOMS";
-
 export const createRoom = (roomName, playerName, history) => {
   return dispatch => {
     socket.emit(CREATE_ROOM, { roomName }, response => {
@@ -39,5 +37,3 @@ export const newRoomList = roomList => ({
   type: NEW_ROOM_LIST,
   roomList
 });
-
-// export const fetchRooms =

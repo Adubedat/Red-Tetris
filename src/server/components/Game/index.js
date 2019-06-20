@@ -27,6 +27,7 @@ class Game {
 
   removePlayer(playerId) {
     if (playerId === this._hostId) {
+      //Must think about this
       Lobby.removeRoom(this._name);
       return;
     }
