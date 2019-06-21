@@ -28,11 +28,6 @@ let CreateRoom = ({ rooms, playerName, createRoom, history }) => {
         value={roomName}
         onChange={handleChange}
       />
-      <ul id="rooms">
-        {rooms.map(roomName => {
-          return <li key={roomName}>{roomName}</li>;
-        })}
-      </ul>
     </div>
   );
 };

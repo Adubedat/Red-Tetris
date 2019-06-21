@@ -99,10 +99,7 @@ const deletePlayer = socket => {
   console.log("deletePlayer called");
   const player = Lobby.findPlayer(socket.id);
   if (player) {
-    const currentRoom =
-      player.currentRoom === "Lobby"
-        ? Lobby
-        : Lobby.findRoom(player.currentRoom); //eslint-disable-line
+    const currentRoom = player.currentRoom === "Lobby" ? Lobby : Lobby.findRoom(player.currentRoom); //eslint-disable-line
     currentRoom.removePlayer(player.id);
   }
   console.log(Lobby);

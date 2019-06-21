@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { hot } from "react-hot-loader";
 import { HashRouter as Router, Route } from "react-router-dom";
-import Home from "./Home";
+import Lobby from "./Lobby";
 import Header from "./Header";
 import { setConfig } from "react-hot-loader"; //to remove
 import { hashChanged } from "../actions/actions";
@@ -30,7 +30,7 @@ let App = ({ hashChanged, initListeners }) => {
     <div>
       <Header />
       <Router hashType="noslash">
-        <Route path="/" component={Home} />
+        <Route path="/" component={Lobby} />
       </Router>
     </div>
   );

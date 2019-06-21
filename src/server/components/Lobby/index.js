@@ -31,14 +31,11 @@ class Lobby {
   findPlayer(playerId) {
     let found = this._players.find(player => player.id === playerId);
     if (found) return found;
-    this._rooms.map(room => {
-      let player = room.findPlayer(playerId);
+    for (let i = 0; i < this._rooms.length; i++) {
+      let player = this._rooms[i].findPlayer(playerId);
       if (player) return player;
-      return undefined;
-    });
-    // let player = this.rooms[i].findPlayer(playerId);
-    // if (player) return player;
-    // rooms.map(room => )
+    }
+    return undefined;
   }
 
   getRoomsName() {
