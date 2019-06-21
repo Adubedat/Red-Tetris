@@ -1,18 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { StyledMainContainer } from "./styles";
 
 const LadderSub = () => {
   return (
-    <div
-      style={{
-        display: "flex",
-        flex: 1,
-        justifyContent: "center",
-        margin: "10px"
-      }}
-    >
+    <StyledMainContainer>
       <h1>Top scores</h1>
-    </div>
+    </StyledMainContainer>
   );
 };
 

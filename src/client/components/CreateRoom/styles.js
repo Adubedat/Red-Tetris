@@ -1,10 +1,13 @@
-const styles = {
-  createRoomContainer: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    margin: "20px"
-  }
-};
+import styled from "styled-components";
 
-export default styles;
+export const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+`;
+
+export const StyledRegisterGroup = styled.div`
+  display: flex;
+  align-items: center;
+`;

@@ -1,9 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import RoomListSub from "./subcomponent";
+import { requestJoinRoom } from "../../actions/room";
 
-let RoomList = ({ rooms }) => {
-  return <RoomListSub rooms={rooms} />;
+let RoomList = ({ rooms, requestJoinRoom }) => {
+  const handleClick = roomName => {
+    requestJoinRoom(roomName);
+  };
+
+  return <RoomListSub rooms={rooms} handleClick={handleClick} />;
 };
 
 const mapStateToProps = state => {
@@ -12,9 +17,11 @@ const mapStateToProps = state => {
   };
 };
 
+const actionCreators = { requestJoinRoom };
+
 RoomList = connect(
   mapStateToProps,
-  null
+  actionCreators
 )(RoomList);
 
 export default RoomList;

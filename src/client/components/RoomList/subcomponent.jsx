@@ -3,28 +3,14 @@ import PropTypes from "prop-types";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListSubheader from "@material-ui/core/ListSubheader";
+import { StyledMainContainer } from "./styles";
 
-const RoomListSub = ({ rooms }) => {
-  const handleClick = roomName => {
-    console.log(roomName);
-  };
-
+const RoomListSub = ({ rooms, handleClick }) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        flex: 1,
-        margin: "10px"
-      }}
-    >
+    <StyledMainContainer>
       <List
         component="nav"
-        style={{
-          // display: "flex",
-          flex: 1,
-          // flexDirection: "column",
-          height: 20
-        }}
+        style={{ flex: 1 }}
         subheader={
           <ListSubheader component="div" id="nested-list-subheader">
             Rooms available
@@ -48,7 +34,7 @@ const RoomListSub = ({ rooms }) => {
           </ListItem>
         ))}
       </List>
-    </div>
+    </StyledMainContainer>
   );
 };
 

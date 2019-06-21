@@ -12,8 +12,6 @@ import {
 } from "./constants";
 
 export const initListeners = socket => {
-  // socket.on("connect", () => initClientState(socket));
-
   socket.on(CREATE_ROOM, (data, callback) => createRoom(data, callback, socket)); //eslint-disable-line
 
   socket.on(JOIN_ROOM, (data, callback) => joinRoom(data, callback, socket));

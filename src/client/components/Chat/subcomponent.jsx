@@ -1,18 +1,12 @@
 import React from "react";
+import { StyledMainContainer } from "./styles";
 import PropTypes from "prop-types";
 
 const ChatSub = () => {
   return (
-    <div
-      style={{
-        display: "flex",
-        flex: 1,
-        justifyContent: "center",
-        margin: "10px"
-      }}
-    >
+    <StyledMainContainer>
       <h1>Chat</h1>
-    </div>
+    </StyledMainContainer>
   );
 };
 

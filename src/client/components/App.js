@@ -8,7 +8,6 @@ import { setConfig } from "react-hot-loader"; //to remove
 import { hashChanged } from "../actions/actions";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { initListeners } from "../listeners";
 
 setConfig({
   reloadHooks: false
@@ -16,9 +15,7 @@ setConfig({
 
 toast.configure();
 
-let App = ({ hashChanged, initListeners }) => {
-  initListeners();
-
+let App = ({ hashChanged }) => {
   const checkHash = () => {
     const hash = window.location.hash.substr(1);
     if (!hash.trim()) return;
@@ -36,7 +33,7 @@ let App = ({ hashChanged, initListeners }) => {
   );
 };
 
-const actionCreators = { hashChanged, initListeners };
+const actionCreators = { hashChanged };
 
 App = connect(
   null,
