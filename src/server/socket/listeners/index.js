@@ -65,37 +65,25 @@ const createRoom = (data, callback, socket) => {
   console.log(Game);
 };
 
-const joinRoom = (data, callback, socket) => {
+const joinRoom = (player, roomName, callback, socket) => {
   console.log("[CALL] joinRoom");
-  const { roomName } = data;
-  const room = Game.findRoom(roomName);
-  const player = Game.findPlayer(socket.id);
-  if (!player) return;
-  const currentRoom =
-    player.currentRoom === "Game" ? Game : Game.findRoom(player.currentRoom); //eslint-disable-line
-  if (room === currentRoom) return;
+  let room = Game.findRoom(roomName);
   if (!room) {
-    // USELESS ????
-    socket.emit(SHOW_TOAST, {
-      type: "error",
-      message: "This room does not exists"
-    });
+    room = Game.addRoom(new Room(roomName, socket.id));
   } else if (room.isFull()) {
     socket.emit(SHOW_TOAST, {
       type: "error",
       message: "This room is full"
     });
-  } else {
-    player.currentRoom = room.name;
-    room.addPlayer(player);
-    currentRoom.removePlayer(player.id);
-    callback({ status: "success" });
-    socket.emit(NEW_ROOM_LIST, { roomList: Game.getRoomsName() }); //TODO emit to Game
   }
+  player.currentRoom = roomName;
+  room.addPlayer(player);
+  currentRoom.removePlayer(player.id);
+  callback({ status: "success" });
+  socket.emit(NEW_ROOM_LIST, { roomList: Game.getRoomsName() }); //TODO emit to Game
 };
 
-const newPlayer = (data, callback, socket) => {
-  const { playerName } = data;
+const newPlayer = (playerName, callback, socket) => {
   console.log("[CALL] newPlayer");
   if (!isAlphaNumeric(playerName) || playerName.length > 12) {
     socket.emit(SHOW_TOAST, {
@@ -103,29 +91,32 @@ const newPlayer = (data, callback, socket) => {
       message: "Player name must have 1 to 12 alphanumeric characters"
     });
   } else {
-    Game.addPlayer(new Player(playerName, socket.id, "Game"));
+    Game.addPlayer(new Player(playerName, socket.id));
     console.log(Game);
     callback({ status: "success" });
   }
 };
 
-const deletePlayer = socket => {
-  const player = Game.findPlayer(socket.id);
+const deletePlayer = clientId => {
+  const player = Game.findPlayer(clientId);
   if (player) {
-    const currentRoom =
-      player.currentRoom === "Game" ? Game : Game.findRoom(player.currentRoom); //eslint-disable-line
-    currentRoom.removePlayer(player.id);
+    if (player.inGame) {
+      //leave room
+    }
+    Game.removePlayer(clientId);
   }
   console.log(Game);
 };
 
 const handleHash = (data, callback, socket) => {
-  const { playerName, roomName } = data.gameInfo;
-  newPlayer({ playerName }, () => {}, socket);
-  createRoom({ roomName }, () => {}, socket);
-  callback({
-    status: "success",
-    playerName,
-    roomName
-  });
+  try {
+    const { playerName, roomName } = data;
+    const player = Game.findPlayer(socket.id);
+    if (!player) newPlayer(playerName, callback, socket);
+    if (!player.inGame) joinRoom(player, roomName, callback, socket);
+    callback({ status: "success" });
+  } catch (error) {
+    console.log("[ERROR] : ", error);
+    callback({ status: "error" });
+  }
 };

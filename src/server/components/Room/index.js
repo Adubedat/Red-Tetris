@@ -7,6 +7,7 @@ class Room {
     this._name = name;
     this._hostId = hostId;
     this._players = [];
+    this._playersCount = 0;
   }
 
   get name() {
@@ -22,14 +23,19 @@ class Room {
   }
 
   addPlayer(player) {
+    this._playersCount++;
     this._players.push(player);
   }
 
   removePlayer(playerId) {
+    this._playersCount--;
     if (playerId === this._hostId) {
-      //Must think about this
-      Game.removeRoom(this._name);
-      return;
+      if (this._playersCount > 1) {
+        this._hostId = this._players[1].id;
+      } else {
+        Game.removeRoom(this._name);
+        return;
+      }
     }
     this._players = this._players.filter(player => player.id !== playerId);
   }
@@ -39,7 +45,7 @@ class Room {
   }
 
   isFull() {
-    return this._players.length >= MAX_PLAYER;
+    return this._playersCount >= MAX_PLAYER;
   }
 }
 

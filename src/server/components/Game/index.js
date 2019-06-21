@@ -29,13 +29,7 @@ class Game {
   }
 
   findPlayer(playerId) {
-    let found = this._players.find(player => player.id === playerId);
-    if (found) return found;
-    for (let i = 0; i < this._rooms.length; i++) {
-      let player = this._rooms[i].findPlayer(playerId);
-      if (player) return player;
-    }
-    return undefined;
+    return this._players.find(player => player.id === playerId);
   }
 
   getRoomsName() {

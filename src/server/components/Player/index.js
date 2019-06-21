@@ -1,7 +1,8 @@
 class Player {
-  constructor(playerName, id, currentRoom) {
+  constructor(playerName = "", id = "", currentRoom = "", inGame = false) {
     this._name = playerName;
     this._id = id;
+    this._inGame = inGame;
     this._currentRoom = currentRoom;
   }
 
