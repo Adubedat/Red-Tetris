@@ -1,6 +1,6 @@
-import Lobby from "../../components/Lobby";
-import Player from "../../components/Player";
 import Game from "../../components/Game";
+import Player from "../../components/Player";
+import Room from "../../components/Room";
 import { isAlphaNumeric } from "../../../utils/utils";
 import {
   CREATE_ROOM,
@@ -42,7 +42,7 @@ export const initListeners = socket => {
 
 export const initClientState = socket => {
   console.log("[EVENT] CONNECTION : send data to client (updating the state)");
-  socket.emit(NEW_ROOM_LIST, { roomList: Lobby.getRoomsName() }); //TODO emit to Lobby
+  socket.emit(NEW_ROOM_LIST, { roomList: Game.getRoomsName() }); //TODO emit to Game
 };
 
 const createRoom = (data, callback, socket) => {
@@ -53,26 +53,26 @@ const createRoom = (data, callback, socket) => {
       type: "error",
       message: "Room name must have 1 to 12 alphanumeric characters"
     });
-  } else if (Lobby.findRoom(roomName)) {
+  } else if (Game.findRoom(roomName)) {
     joinRoom({ roomName }, callback, socket);
   } else {
-    Lobby.addRoom(new Game(roomName, socket.id));
-    socket.emit(NEW_ROOM_LIST, { roomList: Lobby.getRoomsName() }); //TODO emit to Lobby
+    Game.addRoom(new Room(roomName, socket.id));
+    socket.emit(NEW_ROOM_LIST, { roomList: Game.getRoomsName() }); //TODO emit to Game
     joinRoom({ roomName }, callback, socket);
     callback({ status: "success" });
-    Lobby.rooms.forEach(room => console.log(room));
+    Game.rooms.forEach(room => console.log(room));
   }
-  console.log(Lobby);
+  console.log(Game);
 };
 
 const joinRoom = (data, callback, socket) => {
   console.log("[CALL] joinRoom");
   const { roomName } = data;
-  const room = Lobby.findRoom(roomName);
-  const player = Lobby.findPlayer(socket.id);
+  const room = Game.findRoom(roomName);
+  const player = Game.findPlayer(socket.id);
   if (!player) return;
   const currentRoom =
-    player.currentRoom === "Lobby" ? Lobby : Lobby.findRoom(player.currentRoom); //eslint-disable-line
+    player.currentRoom === "Game" ? Game : Game.findRoom(player.currentRoom); //eslint-disable-line
   if (room === currentRoom) return;
   if (!room) {
     // USELESS ????
@@ -90,7 +90,7 @@ const joinRoom = (data, callback, socket) => {
     room.addPlayer(player);
     currentRoom.removePlayer(player.id);
     callback({ status: "success" });
-    socket.emit(NEW_ROOM_LIST, { roomList: Lobby.getRoomsName() }); //TODO emit to Lobby
+    socket.emit(NEW_ROOM_LIST, { roomList: Game.getRoomsName() }); //TODO emit to Game
   }
 };
 
@@ -103,22 +103,20 @@ const newPlayer = (data, callback, socket) => {
       message: "Player name must have 1 to 12 alphanumeric characters"
     });
   } else {
-    Lobby.addPlayer(new Player(playerName, socket.id, "Lobby"));
-    console.log(Lobby);
+    Game.addPlayer(new Player(playerName, socket.id, "Game"));
+    console.log(Game);
     callback({ status: "success" });
   }
 };
 
 const deletePlayer = socket => {
-  const player = Lobby.findPlayer(socket.id);
+  const player = Game.findPlayer(socket.id);
   if (player) {
     const currentRoom =
-      player.currentRoom === "Lobby"
-        ? Lobby
-        : Lobby.findRoom(player.currentRoom); //eslint-disable-line
+      player.currentRoom === "Game" ? Game : Game.findRoom(player.currentRoom); //eslint-disable-line
     currentRoom.removePlayer(player.id);
   }
-  console.log(Lobby);
+  console.log(Game);
 };
 
 const handleHash = (data, callback, socket) => {

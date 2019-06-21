@@ -1,24 +1,19 @@
-import Lobby from "../Lobby";
-
-const MAX_PLAYER = 10;
-
 class Game {
-  constructor(name, hostId) {
-    this._name = name;
-    this._hostId = hostId;
+  constructor() {
+    this._rooms = [];
     this._players = [];
   }
 
-  get name() {
-    return this._name;
+  get rooms() {
+    return this._rooms;
   }
 
-  get hostId() {
-    return this._hostId;
+  addRoom(roomName) {
+    this._rooms.push(roomName);
   }
 
-  get players() {
-    return this._players;
+  removeRoom(roomName) {
+    this._rooms = this._rooms.filter(room => room.name !== roomName);
   }
 
   addPlayer(player) {
@@ -26,21 +21,28 @@ class Game {
   }
 
   removePlayer(playerId) {
-    if (playerId === this._hostId) {
-      //Must think about this
-      Lobby.removeRoom(this._name);
-      return;
-    }
     this._players = this._players.filter(player => player.id !== playerId);
   }
 
-  findPlayer(playerId) {
-    return this._players.find(player => player.id === playerId);
+  findRoom(roomName) {
+    return this._rooms.find(room => room.name === roomName);
   }
 
-  isFull() {
-    return this._players.length >= MAX_PLAYER;
+  findPlayer(playerId) {
+    let found = this._players.find(player => player.id === playerId);
+    if (found) return found;
+    for (let i = 0; i < this._rooms.length; i++) {
+      let player = this._rooms[i].findPlayer(playerId);
+      if (player) return player;
+    }
+    return undefined;
+  }
+
+  getRoomsName() {
+    return this._rooms.map(room => room.name);
   }
 }
 
-export default Game;
+const instance = new Game();
+
+export default instance;
