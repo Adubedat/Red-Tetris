@@ -13,10 +13,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleBackHome: () => {
+    onBackHome: () => {
       dispatch(requestJoinRoom("Lobby"));
     },
-    handleLogout: () => {
+    onLogout: () => {
       dispatch(connectPlayer(""));
     }
   };

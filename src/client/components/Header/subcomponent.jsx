@@ -6,21 +6,21 @@ import { StyledContainer, StyledUserGroup } from "./styles";
 let HeaderSub = ({
   playerName,
   roomName,
-  handleLogout,
-  handleBackHome,
+  onLogout,
+  onBackHome,
   showBackHome
 }) => {
   return (
     <StyledContainer>
       {showBackHome ? (
-        <Button onClick={handleBackHome}>Back Home</Button>
+        <Button onClick={onBackHome}>Back Home</Button>
       ) : (
         <p>Tetris Rouge</p>
       )}
       <p>{roomName}</p>
       <StyledUserGroup>
         <p>{playerName}</p>
-        {playerName && <Button onClick={handleLogout}>Logout</Button>}
+        {playerName && <Button onClick={onLogout}>Logout</Button>}
       </StyledUserGroup>
     </StyledContainer>
   );
