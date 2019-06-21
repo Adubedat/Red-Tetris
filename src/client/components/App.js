@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { hot } from "react-hot-loader";
-import { HashRouter as Router, Route } from "react-router-dom";
 import EventListener from "react-event-listener";
 import Lobby from "./Lobby";
 import Header from "./Header";
+import Game from "./Game";
 import { setConfig } from "react-hot-loader"; //to remove
 import { toast } from "react-toastify";
 import { handleHash } from "../actions/actions";
@@ -16,23 +16,30 @@ setConfig({
 
 toast.configure();
 
-let App = ({ handleHash }) => {
+let App = ({ handleHash, currentRoom }) => {
   handleHash();
+
+  // const component =
+  //   currentRoom === "Lobby" || currentRoom === "" ? Lobby : Game;
   return (
     <div>
       <EventListener target="window" onHashChange={handleHash} />
       <Header />
-      <Router hashType="noslash">
-        <Route path="/" component={Lobby} />
-      </Router>
+      <Lobby />
     </div>
   );
+};
+
+const mapStateToProps = state => {
+  return {
+    currentRoom: state.currentRoom
+  };
 };
 
 const actionCreators = { handleHash };
 
 App = connect(
-  null,
+  mapStateToProps,
   actionCreators
 )(App);
 

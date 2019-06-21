@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { createRoom } from "../../actions/room";
 import inputError from "../../errors/inputError";
 import CreateRoomSub from "./subcomponent";
 
-let CreateRoom = ({ rooms, playerName, createRoom }) => {
+let CreateRoom = ({ playerName }) => {
   const [error, setError] = useState({ boolean: null, message: "" });
   const [roomName, setRoomName] = useState("");
 
   const handleSubmit = e => {
     e.preventDefault();
-    // createRoom(roomName, playerName, history);
     window.location.hash = roomName + "[" + playerName + "]";
   };
 
@@ -40,11 +38,9 @@ const mapStateToProps = state => {
   };
 };
 
-const actionCreators = { createRoom };
-
 CreateRoom = connect(
   mapStateToProps,
-  actionCreators
+  null
 )(CreateRoom);
 
 export default CreateRoom;

@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
 `;
 
@@ -16,6 +17,8 @@ export const StyledHorizontalText = styled.div`
     font-size: 14px;
     z-index: 1;
     overflow: hidden;
+    margin-top: 40px;
+    margin-bottom: 40px;
   }
   &:after {
     margin-left: 2%;
@@ -38,9 +41,4 @@ export const StyledHorizontalText = styled.div`
     content: "\a0";
     position: absolute;
   }
-`;
-
-export const StyledRegisterGroup = styled.div`
-  display: flex;
-  align-items: center;
 `;

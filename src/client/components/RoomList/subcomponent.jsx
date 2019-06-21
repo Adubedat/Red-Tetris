@@ -21,7 +21,7 @@ const RoomListSub = ({ rooms, handleClick }) => {
           <ListItem
             button
             key={room}
-            onClick={() => handleClick(room)}
+            onClick={handleClick(room)}
             style={{
               justifyContent: "space-between",
               height: 50,

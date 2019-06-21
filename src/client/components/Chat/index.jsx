@@ -1,18 +1,13 @@
-import React from "react";
 import { connect } from "react-redux";
 import ChatSub from "./subcomponent";
-
-let Chat = () => {
-  return <ChatSub />;
-};
 
 const mapStateToProps = state => {
   return {};
 };
 
-Chat = connect(
+const Chat = connect(
   mapStateToProps,
   null
-)(Chat);
+)(ChatSub);
 
 export default Chat;

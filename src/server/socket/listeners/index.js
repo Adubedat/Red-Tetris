@@ -45,24 +45,24 @@ export const initClientState = socket => {
   socket.emit(NEW_ROOM_LIST, { roomList: Game.getRoomsName() }); //TODO emit to Game
 };
 
-// const createRoom = (data, callback, socket) => {
-//   const { roomName } = data;
-//   console.log("[CALL] createRoom");
-//   if (!isAlphaNumeric(roomName) || roomName.length > 12) {
-//     socket.emit(SHOW_TOAST, {
-//       type: "error",
-//       message: "Room name must have 1 to 12 alphanumeric characters"
-//     });
-//   } else if (Game.findRoom(roomName)) {
-//     joinRoom({ roomName }, callback, socket);
-//   } else {
-//     Game.addRoom(new Room(roomName, socket.id));
-//     socket.emit(NEW_ROOM_LIST, { roomList: Game.getRoomsName() }); //TODO emit to Game
-//     joinRoom({ roomName }, callback, socket);
-//     callback({ status: "success" });
-//     Game.rooms.forEach(room => console.log(room));
-//   }
-// };
+const createRoom = (data, callback, socket) => {
+  const { roomName } = data;
+  console.log("[CALL] createRoom");
+  if (!isAlphaNumeric(roomName) || roomName.length > 12) {
+    socket.emit(SHOW_TOAST, {
+      type: "error",
+      message: "Room name must have 1 to 12 alphanumeric characters"
+    });
+  } else if (Game.findRoom(roomName)) {
+    joinRoom({ roomName }, callback, socket);
+  } else {
+    Game.addRoom(new Room(roomName, socket.id));
+    socket.emit(NEW_ROOM_LIST, { roomList: Game.getRoomsName() }); //TODO emit to Game
+    joinRoom({ roomName }, callback, socket);
+    callback({ status: "success" });
+    Game.rooms.forEach(room => console.log(room));
+  }
+};
 
 const joinRoom = (player, roomName, callback, socket) => {
   console.log("[CALL] joinRoom");
