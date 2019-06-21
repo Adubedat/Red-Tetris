@@ -8,8 +8,9 @@ class Game {
     return this._rooms;
   }
 
-  addRoom(roomName) {
-    this._rooms.push(roomName);
+  addRoom(room) {
+    this._rooms.push(room);
+    return room;
   }
 
   removeRoom(roomName) {

@@ -9,6 +9,9 @@ class Player {
   get name() {
     return this._name;
   }
+  get inGame() {
+    return this._inGame;
+  }
 
   get id() {
     return this._id;

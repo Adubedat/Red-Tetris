@@ -35,8 +35,8 @@ export const handleHash = () => {
     socket.emit(HANDLE_HASH, { gameInfo }, response => {
       if (response.status === "success") {
         console.log("[SUCCESS] callback HANDLE_HASH");
-        dispatch(connectPlayer(response.playerName));
-        dispatch(joinRoom(response.roomName));
+        dispatch(connectPlayer(gameInfo.playerName));
+        dispatch(joinRoom(gameInfo.roomName));
       }
     });
   };
