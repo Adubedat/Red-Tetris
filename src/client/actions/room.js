@@ -1,18 +1,16 @@
 import socket from "../services/socket-api";
-
-export const CREATE_ROOM = "CREATE_ROOM";
-
-export const JOIN_ROOM = "JOIN_ROOM";
-
-export const NEW_ROOM_LIST = "NEW_ROOM_LIST";
+import {
+  CREATE_ROOM,
+  JOIN_ROOM,
+  NEW_ROOM_LIST
+} from "../../constants/constants";
 
 export const createRoom = (roomName, playerName, history) => {
   return dispatch => {
     socket.emit(CREATE_ROOM, { roomName }, response => {
       if (response.status === "success") {
-        console.log("createRoom success callback");
         dispatch(joinRoom(roomName));
-        history.push(roomName + "[" + playerName + "]");
+        // history.push(roomName + "[" + playerName + "]");
       }
     });
   };

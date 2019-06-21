@@ -6,57 +6,71 @@ import {
   CREATE_ROOM,
   JOIN_ROOM,
   NEW_PLAYER,
-  HASH_CHANGED,
+  HANDLE_HASH,
   NEW_ROOM_LIST,
-  SHOW_TOAST
-} from "./constants";
+  SHOW_TOAST,
+  DISCONNECT
+} from "../../../constants/constants";
 
 export const initListeners = socket => {
-  // socket.on("connect", () => initClientState(socket));
+  socket.on(CREATE_ROOM, (data, callback) => {
+    console.log("[EVENT] ", JOIN_ROOM);
+    createRoom(data, callback, socket);
+  });
 
-  socket.on(CREATE_ROOM, (data, callback) => createRoom(data, callback, socket)); //eslint-disable-line
+  socket.on(JOIN_ROOM, (data, callback) => {
+    console.log("[EVENT] ", JOIN_ROOM);
+    joinRoom(data, callback, socket);
+  });
 
-  socket.on(JOIN_ROOM, (data, callback) => joinRoom(data, callback, socket));
+  socket.on(NEW_PLAYER, (data, callback) => {
+    console.log("[EVENT] ", NEW_PLAYER);
+    newPlayer(data, callback, socket);
+  });
 
-  socket.on(NEW_PLAYER, (data, callback) => newPlayer(data, callback, socket));
+  socket.on(HANDLE_HASH, (data, callback) => {
+    console.log("[EVENT] ", HANDLE_HASH);
+    handleHash(data, callback, socket);
+  });
 
-  socket.on(HASH_CHANGED, (data, callback) => handleHashChange(data, callback, socket)); //eslint-disable-line
-
-  socket.on("disconnect", () => deletePlayer(socket));
+  socket.on(DISCONNECT, reason => {
+    console.log("[EVENT] ", DISCONNECT);
+    console.log(reason);
+    deletePlayer(socket);
+  });
 };
 
 export const initClientState = socket => {
-  console.log("on connection received");
+  console.log("[CONNEXION] send data to client (updating the state)");
   socket.emit(NEW_ROOM_LIST, { roomList: Lobby.getRoomsName() }); //TODO emit to Lobby
 };
 
 const createRoom = (data, callback, socket) => {
   const { roomName } = data;
-  console.log("createRoom called");
+  console.log("[CALL] createRoom");
   if (!isAlphaNumeric(roomName) || roomName.length > 12) {
     socket.emit(SHOW_TOAST, {
       type: "error",
       message: "Room name must have 1 to 12 alphanumeric characters"
     });
-    console.log(Lobby);
   } else if (Lobby.findRoom(roomName)) {
     joinRoom({ roomName }, callback, socket);
-    console.log(Lobby);
   } else {
     Lobby.addRoom(new Game(roomName, socket.id));
     socket.emit(NEW_ROOM_LIST, { roomList: Lobby.getRoomsName() }); //TODO emit to Lobby
     joinRoom({ roomName }, callback, socket);
     callback({ status: "success" });
-    console.log(Lobby);
     Lobby.rooms.forEach(room => console.log(room));
   }
+  console.log(Lobby);
 };
 
 const joinRoom = (data, callback, socket) => {
-  console.log("joinRoom called");
+  console.log("[CALL] joinRoom");
   const { roomName } = data;
   const room = Lobby.findRoom(roomName);
   const player = Lobby.findPlayer(socket.id);
+  if (!player) return;
   const currentRoom =
     player.currentRoom === "Lobby" ? Lobby : Lobby.findRoom(player.currentRoom); //eslint-disable-line
   if (room === currentRoom) return;
@@ -82,7 +96,7 @@ const joinRoom = (data, callback, socket) => {
 
 const newPlayer = (data, callback, socket) => {
   const { playerName } = data;
-  console.log("newPlayer called");
+  console.log("[CALL] newPlayer");
   if (!isAlphaNumeric(playerName) || playerName.length > 12) {
     socket.emit(SHOW_TOAST, {
       type: "error",
@@ -96,39 +110,26 @@ const newPlayer = (data, callback, socket) => {
 };
 
 const deletePlayer = socket => {
-  console.log("deletePlayer called");
   const player = Lobby.findPlayer(socket.id);
-  if (player) {
+  if (player.currentRoom) {
+    console.log(player);
     const currentRoom =
-      player.currentRoom === "Lobby"
+      player._currentRoom === "Lobby"
         ? Lobby
         : Lobby.findRoom(player.currentRoom); //eslint-disable-line
+    console.log(player._currentRoom);
     currentRoom.removePlayer(player.id);
   }
   console.log(Lobby);
 };
 
-const handleHashChange = (data, callback, socket) => {
-  console.log("event received");
-  const { hash } = data;
-  const regexp = /^[a-z0-9]{1,12}\[[a-z0-9]{1,12}\]$/;
-  const found = hash.match(regexp);
-  if (!found) {
-    console.log("hash error");
-    callback({
-      status: "error",
-      message:
-        "Hash parameters are invalid. #room[playerName] format expected with max 12 alphanumeric characters for each field"
-    });
-  } else {
-    console.log("hash success");
-    const [hashRoomName, hashPlayerName] = hash.match(/\w{1,12}/g);
-    newPlayer({ playerName: hashPlayerName }, () => {}, socket);
-    createRoom({ roomName: hashRoomName }, () => {}, socket);
-    callback({
-      status: "success",
-      playerName: hashPlayerName,
-      roomName: hashRoomName
-    });
-  }
+const handleHash = (data, callback, socket) => {
+  const { playerName, roomName } = data.gameInfo;
+  newPlayer({ playerName }, () => {}, socket);
+  createRoom({ roomName }, () => {}, socket);
+  callback({
+    status: "success",
+    playerName,
+    roomName
+  });
 };

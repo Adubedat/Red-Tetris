@@ -10,7 +10,7 @@ const app = express();
 
 const server = http.createServer(app);
 
-const io = socketIO(server);
+const io = socketIO(server, { pingInterval: 60000 });
 
 io.on("connection", socket => {
   initClientState(socket);

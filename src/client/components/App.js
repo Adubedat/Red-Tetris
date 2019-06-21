@@ -2,13 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 import { hot } from "react-hot-loader";
 import { HashRouter as Router, Route } from "react-router-dom";
+import EventListener from "react-event-listener";
+import { setConfig } from "react-hot-loader"; //to remove
+import { toast } from "react-toastify";
 import Home from "./Home";
 import Header from "./Header";
-import { setConfig } from "react-hot-loader"; //to remove
-import { hashChanged } from "../actions/actions";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { handleHash } from "../actions/actions";
 import { initListeners } from "../listeners";
+import "react-toastify/dist/ReactToastify.css";
 
 setConfig({
   reloadHooks: false
@@ -16,18 +17,13 @@ setConfig({
 
 toast.configure();
 
-let App = ({ hashChanged, initListeners }) => {
+let App = ({ handleHash, initListeners }) => {
   initListeners();
-
-  const checkHash = () => {
-    const hash = window.location.hash.substr(1);
-    if (!hash.trim()) return;
-    hashChanged(hash);
-  };
-
-  checkHash();
+  handleHash();
+  // window.onhashchange = handleHash();
   return (
     <div>
+      <EventListener target="window" onHashChange={handleHash} />
       <Header />
       <Router hashType="noslash">
         <Route path="/" component={Home} />
@@ -36,7 +32,7 @@ let App = ({ hashChanged, initListeners }) => {
   );
 };
 
-const actionCreators = { hashChanged, initListeners };
+const actionCreators = { handleHash, initListeners };
 
 App = connect(
   null,

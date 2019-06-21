@@ -1,9 +1,6 @@
 import socket from "../services/socket-api";
 import { joinRoom } from "./room";
-
-export const NEW_PLAYER = "NEW_PLAYER";
-
-export const CONNECT_PLAYER = "CONNECT_PLAYER";
+import { NEW_PLAYER, CONNECT_PLAYER } from "../../constants/constants";
 
 export const newPlayer = playerName => {
   return dispatch => {

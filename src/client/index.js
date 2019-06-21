@@ -19,7 +19,7 @@ const store = createStore(
   applyMiddleware(thunkMiddleware)
 );
 
-store.subscribe(() => console.log(store.getState()));
+store.subscribe(() => console.log("[CURRENT STATE] : ", store.getState()));
 
 ReactDOM.render(
   <Provider store={store}>

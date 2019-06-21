@@ -4,13 +4,14 @@ import { createRoom } from "../../actions/room";
 import inputError from "../../errors/inputError";
 import CreateRoomSub from "./subcomponent";
 
-let CreateRoom = ({ rooms, playerName, createRoom, history }) => {
+let CreateRoom = ({ rooms, playerName, createRoom }) => {
   const [error, setError] = useState({ boolean: null, message: "" });
   const [roomName, setRoomName] = useState("");
 
   const handleSubmit = e => {
     e.preventDefault();
-    createRoom(roomName, playerName, history);
+    // createRoom(roomName, playerName, history);
+    window.location.hash = roomName + "[" + playerName + "]";
   };
 
   const handleChange = e => {
