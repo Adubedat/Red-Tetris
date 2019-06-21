@@ -4,33 +4,34 @@ import Button from "../common/Button";
 import { StyledContainer, StyledUserGroup } from "./styles";
 
 let HeaderSub = ({
-  appName,
   playerName,
   roomName,
-  onClickLogout,
-  onClickBackHome,
+  handleLogout,
+  handleBackHome,
   showBackHome
 }) => {
   return (
     <StyledContainer>
       {showBackHome ? (
-        <Button onClick={onClickBackHome}>Back Home</Button>
+        <Button onClick={handleBackHome}>Back Home</Button>
       ) : (
-        <p>{appName}</p>
+        <p>Tetris Rouge</p>
       )}
       <p>{roomName}</p>
       <StyledUserGroup>
         <p>{playerName}</p>
-        {playerName && <Button onClick={onClickLogout}>Logout</Button>}
+        {playerName && <Button onClick={handleLogout}>Logout</Button>}
       </StyledUserGroup>
     </StyledContainer>
   );
 };
 
 HeaderSub.propTypes = {
-  appName: PropTypes.string.isRequired,
   playerName: PropTypes.string.isRequired,
-  onClickLogout: PropTypes.func.isRequired
+  roomName: PropTypes.string.isRequired,
+  handleLogout: PropTypes.func.isRequired,
+  handleBackHome: PropTypes.func.isRequired,
+  showBackHome: PropTypes.bool.isRequired
 };
 
 export default HeaderSub;

@@ -70,7 +70,7 @@ const joinRoom = (data, callback, socket) => {
   const { roomName } = data;
   const room = Lobby.findRoom(roomName);
   const player = Lobby.findPlayer(socket.id);
-  if (!player) return;
+  // if (!player) return;
   const currentRoom =
     player.currentRoom === "Lobby" ? Lobby : Lobby.findRoom(player.currentRoom); //eslint-disable-line
   if (room === currentRoom) return;
