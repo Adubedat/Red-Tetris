@@ -3,13 +3,25 @@ import PropTypes from "prop-types";
 import Button from "../common/Button";
 import { StyledContainer, StyledUserGroup } from "./styles";
 
-let HeaderSub = ({ appName, playerName, onClick }) => {
+let HeaderSub = ({
+  appName,
+  playerName,
+  roomName,
+  onClickLogout,
+  onClickBackHome,
+  showBackHome
+}) => {
   return (
     <StyledContainer>
-      <p>{appName}</p>
+      {showBackHome ? (
+        <Button onClick={onClickBackHome}>Back Home</Button>
+      ) : (
+        <p>{appName}</p>
+      )}
+      <p>{roomName}</p>
       <StyledUserGroup>
         <p>{playerName}</p>
-        {playerName && <Button onClick={onClick}>Logout</Button>}
+        {playerName && <Button onClick={onClickLogout}>Logout</Button>}
       </StyledUserGroup>
     </StyledContainer>
   );
@@ -18,7 +30,7 @@ let HeaderSub = ({ appName, playerName, onClick }) => {
 HeaderSub.propTypes = {
   appName: PropTypes.string.isRequired,
   playerName: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClickLogout: PropTypes.func.isRequired
 };
 
 export default HeaderSub;

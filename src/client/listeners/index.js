@@ -5,11 +5,10 @@ import { toast } from "react-toastify";
 
 const SHOW_TOAST = "SHOW_TOAST";
 
-export const initListeners = () => {
-  return dispatch => {
-    socket.on(NEW_ROOM_LIST, data => subscribeNewRoomList(data, dispatch));
-    socket.on(SHOW_TOAST, data => showToast(data));
-  };
+export const initListeners = dispatch => {
+  socket.on(NEW_ROOM_LIST, data => subscribeNewRoomList(data, dispatch));
+
+  socket.on(SHOW_TOAST, data => showToast(data));
 };
 
 const showToast = data => {

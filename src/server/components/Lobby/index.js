@@ -31,14 +31,11 @@ class Lobby {
   findPlayer(playerId) {
     let found = this._players.find(player => player.id === playerId);
     if (found) return found;
-    const player = this._rooms.map(room => {
-      let found = room.findPlayer(playerId);
-      if (found) return found;
-    });
-    return player;
-    // let player = this.rooms[i].findPlayer(playerId);
-    // if (player) return player;
-    // rooms.map(room => )
+    for (let i = 0; i < this._rooms.length; i++) {
+      let player = this._rooms[i].findPlayer(playerId);
+      if (player) return player;
+    }
+    return undefined;
   }
 
   getRoomsName() {
@@ -47,6 +44,5 @@ class Lobby {
 }
 
 const instance = new Lobby();
-// Object.freeze(instance);
 
 export default instance;

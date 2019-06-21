@@ -2,16 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import Input from "../common/Input";
 import Button from "../common/Button";
-import styles from "./styles";
+import { StyledForm, StyledRegisterGroup } from "./styles";
 
 const CreateRoomSub = ({ onSubmit, onChange, error, value, label }) => {
   return (
-    <div style={styles.createRoomContainer}>
+    <StyledForm onSubmit={e => onSubmit(e)}>
       <p>Create a new room to play with your friends (if you have any ...)</p>
-      <form
-        onSubmit={e => onSubmit(e)}
-        style={{ display: "flex", alignItems: "center" }}
-      >
+      <StyledRegisterGroup>
         <Input
           error={error.boolean}
           helperText={error.message}
@@ -23,8 +20,8 @@ const CreateRoomSub = ({ onSubmit, onChange, error, value, label }) => {
         <Button disabled={!value || error.boolean} type="submit">
           Create
         </Button>
-      </form>
-    </div>
+      </StyledRegisterGroup>
+    </StyledForm>
   );
 };
 

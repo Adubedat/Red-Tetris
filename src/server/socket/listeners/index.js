@@ -34,14 +34,14 @@ export const initListeners = socket => {
   });
 
   socket.on(DISCONNECT, reason => {
-    console.log("[EVENT] ", DISCONNECT);
+    console.log("[EVENT] DISCONNECT :", reason);
     console.log(reason);
     deletePlayer(socket);
   });
 };
 
 export const initClientState = socket => {
-  console.log("[CONNEXION] send data to client (updating the state)");
+  console.log("[EVENT] CONNECTION : send data to client (updating the state)");
   socket.emit(NEW_ROOM_LIST, { roomList: Lobby.getRoomsName() }); //TODO emit to Lobby
 };
 
@@ -111,13 +111,11 @@ const newPlayer = (data, callback, socket) => {
 
 const deletePlayer = socket => {
   const player = Lobby.findPlayer(socket.id);
-  if (player.currentRoom) {
-    console.log(player);
+  if (player) {
     const currentRoom =
-      player._currentRoom === "Lobby"
+      player.currentRoom === "Lobby"
         ? Lobby
         : Lobby.findRoom(player.currentRoom); //eslint-disable-line
-    console.log(player._currentRoom);
     currentRoom.removePlayer(player.id);
   }
   console.log(Lobby);
