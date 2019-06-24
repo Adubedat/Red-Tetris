@@ -28,7 +28,6 @@ class Room {
   }
 
   removePlayer(playerId) {
-    this._playersCount--;
     if (playerId === this._hostId) {
       if (this._playersCount > 1) {
         this._hostId = this._players[1].id;
@@ -37,6 +36,7 @@ class Room {
         return;
       }
     }
+    this._playersCount--;
     this._players = this._players.filter(player => player.id !== playerId);
   }
 

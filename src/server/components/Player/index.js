@@ -1,16 +1,12 @@
 class Player {
-  constructor(playerName = "", id = "", currentRoom = "", inGame = false) {
+  constructor(playerName = "", id = "", currentRoom = null) {
     this._name = playerName;
     this._id = id;
-    this._inGame = inGame;
     this._currentRoom = currentRoom;
   }
 
   get name() {
     return this._name;
-  }
-  get inGame() {
-    return this._inGame;
   }
 
   get id() {

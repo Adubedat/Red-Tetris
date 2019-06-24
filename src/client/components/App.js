@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { hot } from "react-hot-loader";
 import EventListener from "react-event-listener";
 import Lobby from "./Lobby";
 import Header from "./Header";
 import Game from "./Game";
+import Login from "./Login";
+import Popup from "./common/Popup";
 import { setConfig } from "react-hot-loader"; //to remove
 import { toast } from "react-toastify";
 import { handleHash } from "../actions/actions";
@@ -16,31 +18,33 @@ setConfig({
 
 toast.configure();
 
-let App = ({ handleHash, currentRoom }) => {
-  handleHash();
-
-  // const component =
-  //   currentRoom === "Lobby" || currentRoom === "" ? Lobby : Game;
+let App = ({ playerName, currentRoom }) => {
   return (
     <div>
-      <EventListener target="window" onHashChange={handleHash} />
       <Header />
-      <Lobby />
+      {!playerName ? (
+        <Popup open={true}>
+          <Login />
+        </Popup>
+      ) : !currentRoom ? (
+        <Lobby />
+      ) : (
+        <Game room={currentRoom} />
+      )}
     </div>
   );
 };
 
 const mapStateToProps = state => {
   return {
+    playerName: state.playerName,
     currentRoom: state.currentRoom
   };
 };
 
-const actionCreators = { handleHash };
-
 App = connect(
   mapStateToProps,
-  actionCreators
+  null
 )(App);
 
 export default hot(module)(App);

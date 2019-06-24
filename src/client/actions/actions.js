@@ -2,6 +2,7 @@ import socket from "../services/socket-api";
 import { connectPlayer } from "./player";
 import { joinRoom } from "./room";
 import { HANDLE_HASH } from "../../constants/constants";
+import { toast } from "react-toastify";
 
 const checkHash = () => {
   const hash = window.location.hash.substr(1);
@@ -27,17 +28,17 @@ const checkHash = () => {
   };
 };
 
-export const handleHash = () => {
-  return dispatch => {
-    console.log("[TEST] callback HANDLE_HASH");
-    const gameInfo = checkHash();
-    if (!gameInfo) return;
-    socket.emit(HANDLE_HASH, { gameInfo }, response => {
-      if (response.status === "success") {
-        console.log("[SUCCESS] callback HANDLE_HASH");
-        dispatch(connectPlayer(gameInfo.playerName));
-        dispatch(joinRoom(gameInfo.roomName));
-      }
-    });
-  };
+export const handleHash = dispatch => {
+  console.log("[TEST] callback HANDLE_HASH");
+  const gameInfo = checkHash();
+  if (!gameInfo) return;
+  socket.emit(HANDLE_HASH, { gameInfo }, response => {
+    if (response.status === "success") {
+      console.log("[SUCCESS] callback HANDLE_HASH");
+      if (response.newPlayer) dispatch(connectPlayer(gameInfo.playerName));
+      if (response.joinRoom) dispatch(joinRoom(gameInfo.roomName));
+    } else {
+      toast.error(response.message);
+    }
+  });
 };

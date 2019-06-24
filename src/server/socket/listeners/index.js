@@ -3,8 +3,6 @@ import Player from "../../components/Player";
 import Room from "../../components/Room";
 import { isAlphaNumeric } from "../../../utils/utils";
 import {
-  CREATE_ROOM,
-  JOIN_ROOM,
   NEW_PLAYER,
   HANDLE_HASH,
   NEW_ROOM_LIST,
@@ -13,16 +11,6 @@ import {
 } from "../../../constants/constants";
 
 export const initListeners = socket => {
-  socket.on(CREATE_ROOM, (data, callback) => {
-    console.log("[EVENT] ", JOIN_ROOM);
-    createRoom(data, callback, socket);
-  });
-
-  socket.on(JOIN_ROOM, (data, callback) => {
-    console.log("[EVENT] ", JOIN_ROOM);
-    joinRoom(data, callback, socket);
-  });
-
   socket.on(NEW_PLAYER, (data, callback) => {
     console.log("[EVENT] ", NEW_PLAYER);
     newPlayer(data, callback, socket);
@@ -35,8 +23,7 @@ export const initListeners = socket => {
 
   socket.on(DISCONNECT, reason => {
     console.log("[EVENT] DISCONNECT :", reason);
-    console.log(reason);
-    deletePlayer(socket);
+    deletePlayer(socket.id);
   });
 };
 
@@ -45,42 +32,21 @@ export const initClientState = socket => {
   socket.emit(NEW_ROOM_LIST, { roomList: Game.getRoomsName() }); //TODO emit to Game
 };
 
-const createRoom = (data, callback, socket) => {
-  const { roomName } = data;
-  console.log("[CALL] createRoom");
-  if (!isAlphaNumeric(roomName) || roomName.length > 12) {
-    socket.emit(SHOW_TOAST, {
-      type: "error",
-      message: "Room name must have 1 to 12 alphanumeric characters"
-    });
-  } else if (Game.findRoom(roomName)) {
-    joinRoom({ roomName }, callback, socket);
-  } else {
-    Game.addRoom(new Room(roomName, socket.id));
-    socket.emit(NEW_ROOM_LIST, { roomList: Game.getRoomsName() }); //TODO emit to Game
-    joinRoom({ roomName }, callback, socket);
-    callback({ status: "success" });
-    Game.rooms.forEach(room => console.log(room));
-  }
-};
-
 const joinRoom = (player, roomName, callback, socket) => {
   console.log("[CALL] joinRoom");
-  console.log("[TEST] : ", socket.id);
   let room = Game.findRoom(roomName);
   if (!room) {
     room = Game.addRoom(new Room(roomName, socket.id));
-    socket.emit(NEW_ROOM_LIST, { roomList: Game.getRoomsName() }); //TODO emit to Game
   } else if (room.isFull()) {
-    socket.emit(SHOW_TOAST, {
-      type: "error",
-      message: "This room is full"
-    });
+    callback({ status: "error", message: "Room is full" });
+    return;
   }
-  player.currentRoom = roomName;
+  socket.emit(NEW_ROOM_LIST, { roomList: Game.getRoomsName() }); //TODO emit to Game
   room.addPlayer(player);
-  console.log(Game);
-  callback({ status: "success" });
+  player.currentRoom = room;
+  console.log("THIS : ", player);
+  console.log("JOINED :", room);
+  callback({ status: "success", joinRoom: true });
 };
 
 const newPlayer = (playerName, callback, socket) => {
@@ -91,17 +57,26 @@ const newPlayer = (playerName, callback, socket) => {
       message: "Player name must have 1 to 12 alphanumeric characters"
     });
   } else {
-    Game.addPlayer(new Player(playerName, socket.id));
-    console.log(Game);
-    callback({ status: "success" });
+    callback({ status: "success", newPlayer: true });
+    const player = Game.addPlayer(new Player(playerName, socket.id));
+    console.log(player);
+    return player;
   }
+};
+
+const leaveRoom = player => {
+  const room = player.currentRoom;
+  console.log("[CALL] leaveRoom on : ", room);
+  room.removePlayer(player.id);
+  player.currentRoom = null;
 };
 
 const deletePlayer = clientId => {
   const player = Game.findPlayer(clientId);
+  console.log("[CALL] deletePlayer on : ", player);
   if (player) {
-    if (player.inGame) {
-      //leave room
+    if (player.currentRoom) {
+      leaveRoom(player);
     }
     Game.removePlayer(clientId);
   }
@@ -109,14 +84,10 @@ const deletePlayer = clientId => {
 };
 
 const handleHash = (data, callback, socket) => {
-  try {
-    const { playerName, roomName } = data.gameInfo;
-    console.log("[TEST] : ", data);
-    const player = Game.findPlayer(socket.id);
-    if (!player) newPlayer(playerName, callback, socket);
-    if (!player.inGame) joinRoom(player, roomName, callback, socket);
-    callback({ status: "success" });
-  } catch (error) {
-    console.log("[ERROR] : ", error);
-  }
+  const { playerName, roomName } = data.gameInfo;
+  console.log("DATA : ", data.gameInfo);
+  let player = Game.findPlayer(socket.id);
+  if (!player) player = newPlayer(playerName, callback, socket);
+  if (!player.currentRoom) joinRoom(player, roomName, callback, socket);
+  console.log(Game);
 };

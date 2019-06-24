@@ -5,7 +5,10 @@ import ListItem from "@material-ui/core/ListItem";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import { StyledMainContainer } from "./styles";
 
-const RoomListSub = ({ rooms, handleClick }) => {
+const RoomListSub = ({ rooms, playerName }) => {
+  const handleClick = roomName => {
+    window.location.hash = roomName + "[" + playerName + "]";
+  };
   return (
     <StyledMainContainer>
       <List
@@ -21,7 +24,7 @@ const RoomListSub = ({ rooms, handleClick }) => {
           <ListItem
             button
             key={room}
-            onClick={handleClick(room)}
+            onClick={() => handleClick(room)}
             style={{
               justifyContent: "space-between",
               height: 50,

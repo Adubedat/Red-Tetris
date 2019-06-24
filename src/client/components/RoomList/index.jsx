@@ -4,7 +4,8 @@ import { requestJoinRoom } from "../../actions/room";
 
 const mapStateToProps = state => {
   return {
-    rooms: state.rooms
+    rooms: state.rooms,
+    playerName: state.playerName
   };
 };
 

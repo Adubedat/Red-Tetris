@@ -19,6 +19,7 @@ class Game {
 
   addPlayer(player) {
     this._players.push(player);
+    return player;
   }
 
   removePlayer(playerId) {

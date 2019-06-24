@@ -18,6 +18,7 @@ export const createRoom = (roomName, playerName, history) => {
 
 export const requestJoinRoom = roomName => {
   return dispatch => {
+    console.log("[TEST] in request");
     socket.emit(JOIN_ROOM, { roomName }, response => {
       if (response.status === "success") {
         dispatch(joinRoom(roomName));
