@@ -7,7 +7,7 @@ import { StyledForm, StyledHorizontalText } from "./styles";
 const LoginSub = ({ onSubmit, error, value, onChange, label }) => {
   return (
     <StyledForm onSubmit={e => onSubmit(e)}>
-      <h1>Tetris Rouge</h1>
+      <h1>Tetris Orange</h1>
       <Button disabled={true} onClick={() => {}} fullWidth>
         42 Connect
       </Button>

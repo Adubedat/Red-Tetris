@@ -12,7 +12,14 @@ const RoomListSub = ({ rooms, handleClick }) => {
         component="nav"
         style={{ flex: 1 }}
         subheader={
-          <ListSubheader component="div" id="nested-list-subheader">
+          <ListSubheader
+            component="div"
+            id="nested-list-subheader"
+            style={{
+              fontFamily: "ArcadeClassic",
+              color: "white"
+            }}
+          >
             Rooms available
           </ListSubheader>
         }
@@ -21,7 +28,7 @@ const RoomListSub = ({ rooms, handleClick }) => {
           <ListItem
             button
             key={room}
-            onClick={handleClick(room)}
+            onClick={() => handleClick(room)}
             style={{
               justifyContent: "space-between",
               height: 50,
