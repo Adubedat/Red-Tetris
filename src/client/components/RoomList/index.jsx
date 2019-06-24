@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import RoomListSub from "./subcomponent";
-import { requestJoinRoom } from "../../actions/room";
 
 const mapStateToProps = state => {
   return {
@@ -9,17 +8,9 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    handleClick: roomName => {
-      dispatch(requestJoinRoom(roomName));
-    }
-  };
-};
-
 const RoomList = connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(RoomListSub);
 
 export default RoomList;

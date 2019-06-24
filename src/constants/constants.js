@@ -2,7 +2,11 @@ export const CREATE_ROOM = "CREATE_ROOM";
 
 export const JOIN_ROOM = "JOIN_ROOM";
 
+export const LEAVE_ROOM = "LEAVE_ROOM";
+
 export const NEW_PLAYER = "NEW_PLAYER";
+
+export const REMOVE_PLAYER = "REMOVE_PLAYER";
 
 export const CONNECT_PLAYER = "CONNECT_PLAYER";
 

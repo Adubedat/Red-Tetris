@@ -3,6 +3,8 @@ import Player from "../../components/Player";
 import Room from "../../components/Room";
 import { isAlphaNumeric } from "../../../utils/utils";
 import {
+  LEAVE_ROOM,
+  REMOVE_PLAYER,
   NEW_PLAYER,
   HANDLE_HASH,
   NEW_ROOM_LIST,
@@ -21,9 +23,19 @@ export const initListeners = socket => {
     handleHash(data, callback, socket);
   });
 
+  socket.on(REMOVE_PLAYER, () => {
+    console.log("[EVENT] ", REMOVE_PLAYER);
+    removePlayer(socket.id);
+  });
+  socket.on(LEAVE_ROOM, () => {
+    console.log("[EVENT] ", LEAVE_ROOM);
+    leaveRoom(Game.findPlayer(socket.id));
+    socket.emit(NEW_ROOM_LIST, { roomList: Game.getRoomsName() }); //TODO emit to Game
+  });
+
   socket.on(DISCONNECT, reason => {
     console.log("[EVENT] DISCONNECT :", reason);
-    deletePlayer(socket.id);
+    removePlayer(socket.id);
   });
 };
 
@@ -71,9 +83,9 @@ const leaveRoom = player => {
   player.currentRoom = null;
 };
 
-const deletePlayer = clientId => {
+const removePlayer = clientId => {
   const player = Game.findPlayer(clientId);
-  console.log("[CALL] deletePlayer on : ", player);
+  console.log("[CALL] removePlayer on : ", player);
   if (player) {
     if (player.currentRoom) {
       leaveRoom(player);

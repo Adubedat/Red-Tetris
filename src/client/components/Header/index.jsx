@@ -1,7 +1,8 @@
 import { connect } from "react-redux";
 import { connectPlayer } from "../../actions/player";
 import HeaderSub from "./subcomponent";
-import { requestJoinRoom } from "../../actions/room";
+import { leaveRoom } from "../../actions/room";
+import { disconnectPlayer } from "../../actions/player";
 
 const mapStateToProps = state => {
   return {
@@ -14,10 +15,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onBackHome: () => {
-      dispatch(requestJoinRoom("Lobby"));
+      dispatch(leaveRoom());
     },
     onLogout: () => {
-      dispatch(connectPlayer(""));
+      dispatch(disconnectPlayer());
     }
   };
 };
