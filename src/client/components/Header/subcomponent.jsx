@@ -17,7 +17,7 @@ let HeaderSub = ({
       ) : (
         <StyledTitle>Tetris Orange</StyledTitle>
       )}
-      <p>{roomName}</p>
+      <StyledTitle>{roomName}</StyledTitle>
       <StyledUserGroup>
         <p>{playerName}</p>
         {playerName && (
