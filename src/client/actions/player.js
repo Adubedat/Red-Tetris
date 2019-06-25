@@ -1,15 +1,16 @@
 import socket from "../services/socket-api";
 import {
-  REMOVE_PLAYER,
+  DISCONNECT_PLAYER,
   NEW_PLAYER,
-  CONNECT_PLAYER
+  UPDATE_PLAYER
 } from "../../constants/constants";
-import { joinRoom } from "./room";
-export const newPlayer = playerName => {
+import { updateRoom } from "./room";
+
+export const connectPlayer = playerName => {
   return dispatch => {
     socket.emit(NEW_PLAYER, playerName, response => {
       if (response.status === "success") {
-        dispatch(connectPlayer(playerName));
+        dispatch(updatePlayer(playerName));
       }
     });
   };
@@ -17,14 +18,14 @@ export const newPlayer = playerName => {
 
 export const disconnectPlayer = () => {
   return dispatch => {
-    socket.emit(REMOVE_PLAYER);
-    dispatch(joinRoom(""));
+    socket.emit(DISCONNECT_PLAYER);
+    dispatch(updateRoom(""));
     window.location.hash = "";
     dispatch(connectPlayer(""));
   };
 };
 
-export const connectPlayer = playerName => ({
-  type: CONNECT_PLAYER,
+export const updatePlayer = playerName => ({
+  type: UPDATE_PLAYER,
   playerName
 });

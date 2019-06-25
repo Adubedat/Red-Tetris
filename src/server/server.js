@@ -1,5 +1,5 @@
 import express from "express";
-import { initListeners, initClientState } from "./socket/listeners/index.js";
+import { initListeners } from "./socket/listeners/index.js";
 import http from "http";
 import socketIO from "socket.io";
 import params from "../../params";
@@ -12,10 +12,7 @@ const server = http.createServer(app);
 
 const io = socketIO(server, { pingInterval: 60000 });
 
-io.on("connection", socket => {
-  initClientState(socket);
-  initListeners(socket);
-});
+initListeners(io);
 
 server.listen(port, () => {
   console.log(`Listening on port ${port}`);

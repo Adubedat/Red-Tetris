@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { newPlayer } from "../../actions/player";
+import { connectPlayer } from "../../actions/player";
 import LoginSub from "./subcomponent";
 import inputError from "../../errors/inputError";
 
-let Login = ({ newPlayer }) => {
+let Login = ({ connectPlayer }) => {
   const [error, setError] = useState({ boolean: null, message: "" });
   const [playerName, setplayerName] = useState("");
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (!error.boolean) newPlayer(playerName);
+    if (!error.boolean) connectPlayer(playerName);
   };
 
   const handleChange = e => {
@@ -30,7 +30,7 @@ let Login = ({ newPlayer }) => {
   );
 };
 
-const actionCreators = { newPlayer };
+const actionCreators = { connectPlayer };
 
 Login = connect(
   null,

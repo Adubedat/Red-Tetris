@@ -17,8 +17,8 @@ class Player {
     return this._currentRoom;
   }
 
-  set currentRoom(newRoomName) {
-    this._currentRoom = newRoomName;
+  set currentRoom(room) {
+    this._currentRoom = room;
   }
 }
 

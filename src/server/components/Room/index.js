@@ -31,13 +31,12 @@ class Room {
     if (playerId === this._hostId) {
       if (this._playersCount > 1) {
         this._hostId = this._players[1].id;
+        this._playersCount--;
+        this._players = this._players.filter(player => player.id !== playerId);
       } else {
         Game.removeRoom(this._name);
-        return;
       }
     }
-    this._playersCount--;
-    this._players = this._players.filter(player => player.id !== playerId);
   }
 
   findPlayer(playerId) {
