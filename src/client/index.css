@@ -1,13 +1,29 @@
-body {
+@font-face {
+  font-family: 'ArcadeClassic';
+  font-style: normal;
+  font-weight: normal;
+  src: local('ArcadeClassic'), url('../../fonts/ArcadeClassic.woff') format('woff');
+}
+
+html, body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  height: 100%;
+  color: white;
+  font-family: "ArcadeClassic";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: radial-gradient(#375F64, #143039);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+h1 {
+  font-size: 54px;
+  background: linear-gradient( #ff8a00 0%, #dc141b 100%);
+  background-clip: "text";
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

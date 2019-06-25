@@ -23,7 +23,7 @@ let App = ({ playerName, currentRoom }) => {
     <div>
       <Header />
       {!playerName ? (
-        <Popup open={true}>
+        <Popup open={true} hideBackdrop>
           <Login />
         </Popup>
       ) : !currentRoom ? (

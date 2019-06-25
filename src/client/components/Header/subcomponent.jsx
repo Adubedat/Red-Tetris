@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Button from "../common/Button";
-import { StyledContainer, StyledUserGroup } from "./styles";
+import { StyledContainer, StyledUserGroup, StyledTitle } from "./styles";
 
 let HeaderSub = ({
   playerName,
@@ -15,12 +15,16 @@ let HeaderSub = ({
       {showBackHome ? (
         <Button onClick={onBackHome}>Back Home</Button>
       ) : (
-        <p>Tetris Rouge</p>
+        <StyledTitle>Tetris Orange</StyledTitle>
       )}
-      <p>{roomName}</p>
+      <StyledTitle>{roomName}</StyledTitle>
       <StyledUserGroup>
         <p>{playerName}</p>
-        {playerName && <Button onClick={onLogout}>Logout</Button>}
+        {playerName && (
+          <Button style={{ marginLeft: 20 }} onClick={onLogout}>
+            Logout
+          </Button>
+        )}
       </StyledUserGroup>
     </StyledContainer>
   );

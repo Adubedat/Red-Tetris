@@ -24,6 +24,7 @@ const Popup = props => {
 
   return (
     <Modal
+      {...props}
       open={props.open}
       disableBackdropClick
       className={classes.popupStyle}

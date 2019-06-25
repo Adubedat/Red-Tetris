@@ -15,13 +15,22 @@ module.exports = {
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
+      },
+      {
+        test: /\.woff$/,
+        use: {
+          loader: "url-loader",
+          options: {
+            limit: 50000
+          }
+        }
       }
     ]
   },
   resolve: {
     extensions: ["*", ".js", ".jsx"],
     alias: {
-      'react-dom': '@hot-loader/react-dom'
+      "react-dom": "@hot-loader/react-dom"
     }
   },
   output: {
