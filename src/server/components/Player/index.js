@@ -1,6 +1,6 @@
 class Player {
-  constructor(playerName = "", id = "", currentRoom = null) {
-    this._name = playerName;
+  constructor(name = "", id = "", currentRoom = null) {
+    this._name = name;
     this._id = id;
     this._currentRoom = currentRoom;
   }

@@ -22,21 +22,21 @@ class Room {
     return this._players;
   }
 
+  get playersCount() {
+    return this._playersCount;
+  }
+
   addPlayer(player) {
     this._playersCount++;
     this._players.push(player);
   }
 
+  updateHostId() {
+    this._hostId = this._players[0].id;
+  }
   removePlayer(playerId) {
-    if (playerId === this._hostId) {
-      if (this._playersCount > 1) {
-        this._hostId = this._players[1].id;
-        this._playersCount--;
-        this._players = this._players.filter(player => player.id !== playerId);
-      } else {
-        Game.removeRoom(this._name);
-      }
-    }
+    this._playersCount--;
+    this._players = this._players.filter(player => player.id !== playerId);
   }
 
   findPlayer(playerId) {

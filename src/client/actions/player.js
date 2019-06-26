@@ -21,7 +21,7 @@ export const disconnectPlayer = () => {
     socket.emit(DISCONNECT_PLAYER);
     dispatch(updateRoom(""));
     window.location.hash = "";
-    dispatch(connectPlayer(""));
+    dispatch(updatePlayer(""));
   };
 };
 

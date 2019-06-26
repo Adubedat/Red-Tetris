@@ -21,3 +21,5 @@ export const SHOW_TOAST = "SHOW_TOAST";
 export const DISCONNECT = "disconnect";
 
 export const MAX_PLAYER = 10;
+
+export const LOBBY_ROOM = "LOBBY_ROOM";

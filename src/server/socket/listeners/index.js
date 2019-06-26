@@ -9,15 +9,14 @@ import {
   JOIN_ROOM,
   NEW_ROOM_LIST,
   SHOW_TOAST,
-  DISCONNECT
+  DISCONNECT,
+  LOBBY_ROOM
 } from "../../../constants/constants";
 
 export const initListeners = io => {
   io.on("connection", socket => {
     initClientState(socket);
-    socket.join("lobby");
-    console.log("[JOIN] socket room : ", io.sockets.adapter.rooms);
-    socket.leave("lobby");
+    socket.join(LOBBY_ROOM);
     console.log("[JOIN] socket room : ", io.sockets.adapter.rooms);
     socket.on(NEW_PLAYER, (data, callback) => {
       console.log("[EVENT] ", NEW_PLAYER);
@@ -25,19 +24,21 @@ export const initListeners = io => {
     });
     socket.on(JOIN_ROOM, (data, callback) => {
       console.log("[EVENT] ", JOIN_ROOM);
-      joinRoom(data, callback, socket);
+      joinRoom(data, callback, socket, io);
+      console.log("[JOIN] socket room : ", io.sockets.adapter.rooms);
     });
     socket.on(DISCONNECT_PLAYER, () => {
       console.log("[EVENT] ", DISCONNECT_PLAYER);
-      disconnectPlayer(socket.id);
+      disconnectPlayer(socket);
     });
     socket.on(LEAVE_ROOM, () => {
       console.log("[EVENT] ", LEAVE_ROOM);
-      leaveRoom(socket);
+      leaveRoom(socket, io);
+      console.log("[JOIN] socket room : ", io.sockets.adapter.rooms);
     });
     socket.on(DISCONNECT, reason => {
       console.log("[EVENT] DISCONNECT :", reason);
-      disconnectPlayer(socket.id);
+      disconnectPlayer(socket);
     });
   });
 };
@@ -47,39 +48,49 @@ export const initClientState = socket => {
   socket.emit(NEW_ROOM_LIST, { roomList: Game.getRoomsName() });
 };
 
-const joinRoom = (roomName, callback, socket) => {
+const joinRoom = (roomName, callback, socket, io) => {
   console.log("[CALL] joinRoom");
   const player = Game.findPlayer(socket.id);
   if (player && !player.currentRoom) {
     const room = Game.findRoom(roomName);
     if (!room) {
       Game.addRoom(new Room(roomName, player.id), player);
+      io.emit(NEW_ROOM_LIST, { roomList: Game.getRoomsName() });
     } else if (!room.isFull()) {
       room.addPlayer(player);
       player.currentRoom = room;
-      socket.join(room.hostId);
     } else {
       callback({ status: "error", message: "Room is full" });
+      return;
     }
+    socket.leave(LOBBY_ROOM);
+    socket.join(player.currentRoom.name);
     callback({ status: "success" });
+    console.log(player.currentRoom);
   }
   callback({ status: "error", message: "Server problem" });
 };
 
-const leaveRoom = socket => {
+const leaveRoom = (socket, io) => {
   const player = Game.findPlayer(socket.id);
   if (!player) return;
   const room = player.currentRoom;
-  console.log("[CALL] leaveRoom on : ", room);
-  if (socket.id === room.hostId) {
-    if (room.playerCount > 1) {
-      room.removePlayer(player.id);
-    } else {
-      Game.removeRoom(room.hostId);
+  console.log("[CALL] leaveRoom on : ", room.name);
+  if (!room) return;
+  console.log(room);
+  if (room.playersCount > 1) {
+    room.removePlayer(player.id);
+    if (player.id === room.hostId) {
+      room.updateHostId();
     }
+  } else {
+    Game.removeRoom(room.name);
+    io.emit(NEW_ROOM_LIST, { roomList: Game.getRoomsName() });
   }
   player.currentRoom = null;
-  socket.join("lobby");
+  socket.leave(room.name);
+  socket.join(LOBBY_ROOM);
+  console.log(Game);
 };
 
 const connectPlayer = (playerName, callback, socket) => {
@@ -101,12 +112,13 @@ const connectPlayer = (playerName, callback, socket) => {
   callback({ status: "error" });
 };
 
-const disconnectPlayer = clientId => {
+const disconnectPlayer = socket => {
+  const clientId = socket.id;
   const player = Game.findPlayer(clientId);
-  console.log("[CALL] disconnectPlayer on : ", player);
   if (player) {
+    console.log("[CALL] disconnectPlayer on : ", player.name);
     if (player.currentRoom) {
-      leaveRoom(player);
+      leaveRoom(socket);
     }
     Game.removePlayer(clientId);
   }
