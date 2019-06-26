@@ -4,13 +4,13 @@ import { newPlayer } from "../../actions/player";
 import LoginSub from "./subcomponent";
 import inputError from "../../errors/inputError";
 
-let Login = ({ newPlayer }) => {
+export let Login = ({ newPlayer }) => {
   const [error, setError] = useState({ boolean: null, message: "" });
   const [playerName, setplayerName] = useState("");
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (!error.boolean) newPlayer(playerName);
+    if (!error.boolean && playerName) newPlayer(playerName);
   };
 
   const handleChange = e => {
@@ -32,9 +32,12 @@ let Login = ({ newPlayer }) => {
 
 const actionCreators = { newPlayer };
 
-Login = connect(
+// Login = connect(
+//   null,
+//   actionCreators
+// )(Login);
+
+export default connect(
   null,
   actionCreators
 )(Login);
-
-export default Login;

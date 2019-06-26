@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Login /> test Login rendering without crashing 1`] = `
+<LoginSub
+  error={
+    Object {
+      "boolean": null,
+      "message": "",
+    }
+  }
+  label="Name"
+  onChange={[Function]}
+  onSubmit={[Function]}
+  value=""
+/>
+`;

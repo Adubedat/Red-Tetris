@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { hot } from "react-hot-loader";
-import EventListener from "react-event-listener";
 import Lobby from "./Lobby";
 import Header from "./Header";
 import Game from "./Game";
@@ -9,7 +8,6 @@ import Login from "./Login";
 import Popup from "./common/Popup";
 import { setConfig } from "react-hot-loader"; //to remove
 import { toast } from "react-toastify";
-import { handleHash } from "../actions/actions";
 import "react-toastify/dist/ReactToastify.css";
 
 setConfig({
@@ -18,7 +16,7 @@ setConfig({
 
 toast.configure();
 
-let App = ({ playerName, currentRoom }) => {
+export const App = ({ playerName, currentRoom }) => {
   return (
     <div>
       <Header />
@@ -42,9 +40,4 @@ const mapStateToProps = state => {
   };
 };
 
-App = connect(
-  mapStateToProps,
-  null
-)(App);
-
-export default hot(module)(App);
+export default connect(mapStateToProps)(hot(module)(App));
