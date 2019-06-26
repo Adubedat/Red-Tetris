@@ -8,10 +8,11 @@ const checkHash = () => {
   const regexp = /^[a-z0-9]{1,12}\[[a-z0-9]{1,12}\]$/;
   const found = hash.match(regexp);
   if (!found) {
-    toast.error("[ERROR] hash parameters are invalid");
+    toast.error(
+      "[ERROR] Player and Room names must be 1 to 12 alphanumeric characters in length"
+    );
     return null;
   }
-  toast("[SUCCESS] hash parameters are valid");
   const [roomName, playerName] = hash.match(/\w{1,12}/g);
   return {
     playerName,

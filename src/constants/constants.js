@@ -18,8 +18,13 @@ export const DELETE_PLAYER = "DELETE_PLAYER";
 
 export const SHOW_TOAST = "SHOW_TOAST";
 
+export const CONNECTION = "connection";
+
 export const DISCONNECT = "disconnect";
 
 export const MAX_PLAYER = 10;
 
 export const LOBBY_ROOM = "LOBBY_ROOM";
+
+export const LOG_LINE =
+  "\n_________________________________________________________________________________________________________\n\n";
