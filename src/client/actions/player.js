@@ -1,3 +1,4 @@
+import Promise from "bluebird";
 import socket from "../services/socket-api";
 import {
   DISCONNECT_PLAYER,
