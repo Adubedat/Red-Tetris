@@ -1,8 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Board from "../Board";
 
-const GameSub = ({ currentRoom }) => {
-  return <p>Welcome to the room {currentRoom}</p>;
+const GameSub = ({ roomName }) => {
+  console.log(roomName);
+  return (
+    <div>
+      Welcome to the room
+      <h2> {roomName}</h2>
+      <Board />
+    </div>
+  );
 };
 
 GameSub.propTypes = {

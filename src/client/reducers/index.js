@@ -1,14 +1,14 @@
 import { combineReducers } from "redux";
 import {
-  CONNECT_PLAYER,
+  UPDATE_PLAYER,
   NEW_ROOM_LIST,
-  JOIN_ROOM
+  UPDATE_ROOM
 } from "../../constants/constants";
 
 const playerName = (state = "", action) => {
   console.log("[STATE UPDATE] with action : ", action.type);
   switch (action.type) {
-    case CONNECT_PLAYER:
+    case UPDATE_PLAYER:
       return action.playerName;
     default:
       return state;
@@ -26,7 +26,7 @@ const rooms = (state = [], action) => {
 
 const currentRoom = (state = "", action) => {
   switch (action.type) {
-    case JOIN_ROOM:
+    case UPDATE_ROOM:
       return action.roomName;
     default:
       return state;
