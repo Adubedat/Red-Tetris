@@ -23,7 +23,7 @@ exports[`<App /> App rendering with an unconnected user 1`] = `
     hideBackdrop={true}
     open={true}
   >
-    <Connect(Login) />
+    <Connect(LoginSub) />
   </Popup>
 </div>
 `;
