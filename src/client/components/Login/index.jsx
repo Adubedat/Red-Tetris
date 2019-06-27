@@ -4,7 +4,7 @@ import { newPlayer } from "../../actions/player";
 import LoginSub from "./subcomponent";
 import inputError from "../../errors/inputError";
 
-export let Login = ({ newPlayer }) => {
+export const Login = ({ newPlayer }) => {
   const [error, setError] = useState({ boolean: null, message: "" });
   const [playerName, setplayerName] = useState("");
 
@@ -31,11 +31,6 @@ export let Login = ({ newPlayer }) => {
 };
 
 const actionCreators = { newPlayer };
-
-// Login = connect(
-//   null,
-//   actionCreators
-// )(Login);
 
 export default connect(
   null,
