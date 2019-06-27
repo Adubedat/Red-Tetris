@@ -11,7 +11,7 @@ const LoginSub = ({ connectPlayer }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (!error.boolean && playerName) connectPlayer(playerName);
+    if (!error.boolean) connectPlayer(playerName);
   };
 
   const handleChange = e => {
@@ -22,7 +22,7 @@ const LoginSub = ({ connectPlayer }) => {
   return (
     <StyledForm onSubmit={e => handleSubmit(e)}>
       <h1>Tetris Orange</h1>
-      <Button disabled={true} onClick={() => {}} fullWidth>
+      <Button disabled={true} fullWidth>
         42 Connect
       </Button>
       <StyledHorizontalText>OR</StyledHorizontalText>

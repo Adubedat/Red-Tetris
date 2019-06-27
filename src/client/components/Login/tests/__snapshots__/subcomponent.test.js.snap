@@ -10,7 +10,6 @@ exports[`<LoginSub /> should render without crashing 1`] = `
   <MyButton
     disabled={true}
     fullWidth={true}
-    onClick={[Function]}
   >
     42 Connect
   </MyButton>

@@ -45,7 +45,9 @@
   "jest": {
     "verbose": true,
     "collectCoverage": true,
-    "setupFilesAfterEnv": ["<rootDir>/tests/setup/setupEnzyme.js"],
+    "setupFilesAfterEnv": [
+      "<rootDir>/tests/setup/setupEnzyme.js"
+    ],
     "testPathIgnorePatterns": [
       "<rootDir>/tests/setup/"
     ],
