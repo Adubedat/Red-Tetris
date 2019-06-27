@@ -7,5 +7,5 @@ export const StyledContainer = styled.div`
   flex-wrap: wrap;
   padding: 10px;
   margin: 10px;
-  background-color: blue;
+  // background-color: blue;
 `;
