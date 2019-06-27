@@ -11,6 +11,12 @@ import {
   NEW_ROOM_LIST,
   DISCONNECT,
   LOG_LINE,
+  KEY_PRESSED,
+  ARROW_LEFT,
+  ARROW_RIGHT,
+  ARROW_DOWN,
+  ARROW_UP,
+  SPACE,
   LOBBY_ROOM
 } from "../../../constants/constants";
 
@@ -37,6 +43,12 @@ export const initListeners = io => {
       leaveRoom(socket, io);
       console.log("[JOIN] socket room : ", io.sockets.adapter.rooms);
     });
+    socket.on(KEY_PRESSED, (data, callback) => {
+      console.log("[EVENT] ", KEY_PRESSED, data);
+      // callback({ status: "success" });
+      onKeyPressed(data, callback, socket);
+      // console.log("[JOIN] socket room : ", io.sockets.adapter.rooms);
+    });
     socket.on(DISCONNECT, reason => {
       console.log(LOG_LINE, "[EVENT] DISCONNECT :", reason);
       disconnectPlayer(socket, io);
@@ -47,6 +59,37 @@ export const initListeners = io => {
 export const initClientState = socket => {
   console.log("[EVENT] CONNECTION : send data to client (updating the state)");
   socket.emit(NEW_ROOM_LIST, { roomList: Game.getRoomsName() });
+};
+
+const onKeyPressed = (code, callback, socket) => {
+  const player = Game.findPlayer(socket.id);
+  console.log(player);
+  switch (code) {
+    case ARROW_LEFT:
+      console.log(ARROW_LEFT);
+      break;
+    case ARROW_RIGHT:
+      console.log(ARROW_RIGHT);
+      break;
+    case ARROW_DOWN:
+      movePieceDown(player);
+      callback({ status: "success", data: player.board });
+      console.log(ARROW_DOWN);
+      break;
+    case ARROW_UP:
+      console.log(ARROW_UP);
+      break;
+    case SPACE:
+      console.log(SPACE);
+      break;
+
+    default:
+      break;
+  }
+};
+
+const movePieceDown = player => {
+  player.setBoardAtIndex(4, 1);
 };
 
 const joinRoom = (roomName, callback, socket, io) => {
@@ -111,7 +154,9 @@ const connectPlayer = (playerName, callback, socket) => {
   } else {
     const player = Game.findPlayer(socket.id);
     if (!player) {
-      const player = Game.addPlayer(new Player(playerName, socket.id));
+      const player = Game.addPlayer(
+        new Player(playerName, socket.id, Array(200).fill(0))
+      );
       console.log(player);
       callback({ status: "success" });
       console.log("[UPDATED] after connectPlayer", Game);

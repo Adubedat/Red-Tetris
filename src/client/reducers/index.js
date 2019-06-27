@@ -2,7 +2,8 @@ import { combineReducers } from "redux";
 import {
   UPDATE_PLAYER,
   NEW_ROOM_LIST,
-  UPDATE_ROOM
+  UPDATE_ROOM,
+  UPDATE_BOARD
 } from "../../constants/constants";
 
 const playerName = (state = "", action) => {
@@ -33,10 +34,20 @@ const currentRoom = (state = "", action) => {
   }
 };
 
+const board = (state = [], action) => {
+  switch (action.type) {
+    case UPDATE_BOARD:
+      return action.board;
+    default:
+      return state;
+  }
+};
+
 const rootReducer = combineReducers({
   playerName,
   rooms,
-  currentRoom
+  currentRoom,
+  board
 });
 
 export default rootReducer;

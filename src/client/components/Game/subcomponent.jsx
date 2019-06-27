@@ -4,7 +4,6 @@ import Board from "../Board";
 import { StyledContainer } from "./styles";
 
 const GameSub = ({ roomName }) => {
-  console.log(roomName);
   return (
     <StyledContainer>
       <div>

@@ -8,6 +8,10 @@ export const StyledContainer = styled.div`
   border: 0.5px dotted black;
   width: 10%;
   height: 5%;
-  background-color: transparent;
-//   background-color: ${props => props.color};
+  //   background-color: white;
+  ${props =>
+    props.color === 0 &&
+    css`
+      background-color: red;
+    `};
 `;
