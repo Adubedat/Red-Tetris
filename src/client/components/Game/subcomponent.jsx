@@ -1,15 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Board from "../Board";
+import { StyledContainer } from "./styles";
 
 const GameSub = ({ roomName }) => {
   console.log(roomName);
   return (
-    <div>
-      Welcome to the room
-      <h2> {roomName}</h2>
+    <StyledContainer>
+      <div>
+        <p>notboard</p>
+      </div>
       <Board />
-    </div>
+      <div>
+        <p>notboard</p>
+      </div>
+    </StyledContainer>
   );
 };
 
