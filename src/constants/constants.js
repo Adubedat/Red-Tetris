@@ -12,7 +12,7 @@ export const UPDATE_PLAYER = "UPDATE_PLAYER";
 
 export const HANDLE_HASH = "HANDLE_HASH";
 
-export const NEW_ROOM_LIST = "NEW_ROOM_LIST";
+export const UPDATE_ROOMS = "UPDATE_ROOMS";
 
 export const DELETE_PLAYER = "DELETE_PLAYER";
 

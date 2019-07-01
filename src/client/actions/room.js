@@ -2,7 +2,7 @@ import socket from "../services/socket-api";
 import {
   LEAVE_ROOM,
   UPDATE_ROOM,
-  NEW_ROOM_LIST,
+  UPDATE_ROOMS,
   JOIN_ROOM
 } from "../../constants/constants";
 
@@ -29,7 +29,7 @@ export const leaveRoom = () => {
   };
 };
 
-export const newRoomList = roomList => ({
-  type: NEW_ROOM_LIST,
-  roomList
+export const updateRooms = rooms => ({
+  type: UPDATE_ROOMS,
+  rooms
 });

@@ -1,16 +1,16 @@
 class Player {
-  constructor(name = "", id = "", board = []) {
+  constructor(name = "", id = "") {
     this._name = name;
     this._id = id;
-    this._currentRoom = null;
-    this._board = board;
+    this._room = null;
+    this._board = Array(200).fill(0);
   }
 
   // info() {
   //   return {
   //     name: this._name,
   //     id: this._id,
-  //     room: this._currentRoom,
+  //     room: this._room,
   //     board: this._board
   //   };
   // }
@@ -33,18 +33,18 @@ class Player {
     this._board[index] = value;
   }
 
-  get currentRoom() {
-    return this._currentRoom;
+  get room() {
+    return this._room;
   }
 
-  set currentRoom(room) {
-    this._currentRoom = room;
+  set room(room) {
+    this._room = room;
   }
-  createPublicObject() {
+
+  createPublicPlayerObject() {
     const player = {};
     player.name = this._name;
     player.id = this._id;
-    player.board = this._board;
     return player;
   }
 }

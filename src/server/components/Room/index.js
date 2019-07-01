@@ -46,11 +46,13 @@ class Room {
   isFull() {
     return this._playersCount >= MAX_PLAYER;
   }
-  createPublicObject() {
+  createPublicRoomObject() {
     const room = {};
     room.name = this._name;
     room.hostId = this._hostId;
-    room.players = this._players.map(player => player.createPublicObject());
+    room.players = this._players.map(player =>
+      player.createPublicPlayerObject()
+    );
     room.playersCount = this._playersCount;
     return room;
   }

@@ -6,14 +6,12 @@ import {
   UPDATE_PLAYER
 } from "../../constants/constants";
 import { updateRoom } from "./room";
-import { updateBoard } from "./actions";
 
 export const connectPlayer = playerName => {
   return dispatch => {
     socket.emit(NEW_PLAYER, playerName, response => {
       if (response.status === "success") {
-        dispatch(updatePlayer(playerName));
-        dispatch(updateBoard(response.playerInfo.board));
+        dispatch(updatePlayer(response.playerInfo));
       }
     });
   };
@@ -24,11 +22,11 @@ export const disconnectPlayer = () => {
     socket.emit(DISCONNECT_PLAYER);
     dispatch(updateRoom({}));
     window.location.hash = "";
-    dispatch(updatePlayer(""));
+    dispatch(updatePlayer({}));
   };
 };
 
-export const updatePlayer = playerName => ({
+export const updatePlayer = player => ({
   type: UPDATE_PLAYER,
-  playerName
+  player
 });

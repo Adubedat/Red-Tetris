@@ -9,7 +9,7 @@ import {
   DISCONNECT_PLAYER,
   NEW_PLAYER,
   JOIN_ROOM,
-  NEW_ROOM_LIST,
+  UPDATE_ROOMS,
   DISCONNECT,
   LOG_LINE,
   KEY_PRESSED,
@@ -59,7 +59,7 @@ export const initListeners = io => {
 
 export const initClientState = socket => {
   console.log("[EVENT] CONNECTION : send data to client (updating the state)");
-  socket.emit(NEW_ROOM_LIST, { roomList: Game.getRoomsName() });
+  socket.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsObject() });
 };
 
 const onKeyPressed = (code, callback, socket) => {
@@ -102,19 +102,21 @@ const joinRoom = (roomName, callback, socket, io) => {
     });
   } else {
     const player = Game.findPlayer(socket.id);
-    if (player && !player.currentRoom) {
+    if (player && !player.room) {
       let room = Game.findRoom(roomName);
       if (!room) {
         room = new Room(roomName, player.id);
         Game.addRoom(room);
-        io.emit(NEW_ROOM_LIST, { roomList: Game.getRoomsName() });
       }
       if (room && !room.isFull()) {
         room.addPlayer(player);
-        player.currentRoom = room;
+        player.room = room;
         socket.leave(LOBBY_ROOM);
         socket.join(room.name);
-        io.in(room.name).emit(UPDATE_ROOM, { room: room.createPublicObject() });
+        io.in(room.name).emit(UPDATE_ROOM, {
+          room: room.createPublicRoomObject()
+        });
+        io.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsObject() });
         callback({ status: "success" });
         // console.log(room);
       } else {
@@ -130,7 +132,7 @@ const leaveRoom = (socket, io) => {
   console.log("[CALL] leaveRoom on : ");
   const player = Game.findPlayer(socket.id);
   if (!player) return;
-  const room = player.currentRoom;
+  const room = player.room;
   if (!room) return;
   // console.log(room);
   if (room.playersCount > 1) {
@@ -140,11 +142,14 @@ const leaveRoom = (socket, io) => {
     }
   } else {
     Game.removeRoom(room.name);
-    io.emit(NEW_ROOM_LIST, { roomList: Game.getRoomsName() });
   }
-  player.currentRoom = null;
+  player.room = null;
   socket.leave(room.name);
   socket.join(LOBBY_ROOM);
+  io.in(room.name).emit(UPDATE_ROOM, {
+    room: room.createPublicRoomObject()
+  });
+  io.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsObject() });
   console.log("[UPDATED] after leaveRoom", Game);
 };
 
@@ -158,11 +163,9 @@ const connectPlayer = (playerName, callback, socket) => {
   } else {
     const player = Game.findPlayer(socket.id);
     if (!player) {
-      const player = Game.addPlayer(
-        new Player(playerName, socket.id, Array(200).fill(0))
-      );
+      const player = Game.addPlayer(new Player(playerName, socket.id));
       // console.log(player);
-      const playerInfo = player.createPublicObject();
+      const playerInfo = player.createPublicPlayerObject();
       callback({ status: "success", playerInfo });
       console.log("[UPDATED] after connectPlayer", Game);
       return player;

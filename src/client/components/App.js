@@ -9,7 +9,6 @@ import Login from "./Login";
 import Popup from "./common/Popup";
 import { setConfig } from "react-hot-loader"; //to remove
 import { toast } from "react-toastify";
-import { handleHash } from "../actions/actions";
 import "react-toastify/dist/ReactToastify.css";
 
 setConfig({
@@ -18,19 +17,18 @@ setConfig({
 
 toast.configure();
 
-let App = ({ playerName, room }) => {
-  const { name: roomName } = room;
+let App = ({ player, room }) => {
   return (
     <div>
       <Header />
-      {!playerName ? (
+      {!player.name ? (
         <Popup open={true} hideBackdrop>
           <Login />
         </Popup>
-      ) : !roomName ? (
+      ) : !room.name ? (
         <Lobby />
       ) : (
-        <Game room={roomName} />
+        <Game />
       )}
     </div>
   );
@@ -38,8 +36,8 @@ let App = ({ playerName, room }) => {
 
 const mapStateToProps = state => {
   return {
-    playerName: state.playerName,
-    room: state.currentRoom
+    player: state.player,
+    room: state.room
   };
 };
 

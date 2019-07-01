@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListSubheader from "@material-ui/core/ListSubheader";
-import { styles, StyledMainContainer } from "./styles";
+import { styles, StyledMainContainer, StyledListItems } from "./styles";
+import { MAX_PLAYER } from "../../../constants/constants";
 
 const RoomListSub = ({ rooms, playerName }) => {
   const handleClick = roomName => {
@@ -24,15 +25,19 @@ const RoomListSub = ({ rooms, playerName }) => {
           </ListSubheader>
         }
       >
-        {rooms.map((room, index) => (
+        {rooms.map(room => (
           <ListItem
             button
-            key={room}
-            onClick={() => handleClick(room)}
-            style={(styles.listItem, { borderTop: index && "1px solid" })}
+            key={room.hostId}
+            onClick={() => handleClick(room.name)}
+            // style={(styles.listItem, { borderTop: index && "1px solid" })}
           >
-            <p>{room}</p>
-            <p>Available</p>
+            <StyledListItems>
+              <p>{room.name}</p>
+              <p>
+                {room.playersCount}/{MAX_PLAYER}
+              </p>
+            </StyledListItems>
           </ListItem>
         ))}
       </List>

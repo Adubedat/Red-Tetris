@@ -10,8 +10,9 @@ import {
   StyledItemRight
 } from "./styles";
 
-let HeaderSub = ({ playerName, room, onLogout, onBackHome, showBackHome }) => {
+let HeaderSub = ({ player, room, onLogout, onBackHome, showBackHome }) => {
   const { name: roomName } = room;
+  const { name: playerName } = player;
   return (
     <StyledContainer>
       <StyledItemLeft>
@@ -22,24 +23,24 @@ let HeaderSub = ({ playerName, room, onLogout, onBackHome, showBackHome }) => {
         )}
       </StyledItemLeft>
       <StyledItemCenter>
-        <StyledTitle>{roomName}</StyledTitle>
+        {roomName ? <StyledTitle>{roomName}</StyledTitle> : ""}
       </StyledItemCenter>
       <StyledItemRight>
-        <StyledUserGroup>
-          <p>{playerName}</p>
-          {playerName && (
+        {playerName && (
+          <StyledUserGroup>
+            <p>{playerName}</p>
             <Button style={{ marginLeft: 20 }} onClick={onLogout}>
               Logout
             </Button>
-          )}
-        </StyledUserGroup>
+          </StyledUserGroup>
+        )}
       </StyledItemRight>
     </StyledContainer>
   );
 };
 
 HeaderSub.propTypes = {
-  playerName: PropTypes.string.isRequired,
+  player: PropTypes.object.isRequired,
   room: PropTypes.object.isRequired,
   onLogout: PropTypes.func.isRequired,
   onBackHome: PropTypes.func.isRequired

@@ -1,31 +1,30 @@
 import { combineReducers } from "redux";
 import {
   UPDATE_PLAYER,
-  NEW_ROOM_LIST,
-  UPDATE_ROOM,
-  UPDATE_BOARD
+  UPDATE_ROOMS,
+  UPDATE_ROOM
 } from "../../constants/constants";
 
-const playerName = (state = "", action) => {
+const player = (state = {}, action) => {
   console.log("[STATE UPDATE] with action : ", action.type);
   switch (action.type) {
     case UPDATE_PLAYER:
-      return action.playerName;
+      return action.player;
     default:
       return state;
   }
 };
 
-const rooms = (state = [], action) => {
+const rooms = (state = {}, action) => {
   switch (action.type) {
-    case NEW_ROOM_LIST:
-      return action.roomList;
+    case UPDATE_ROOMS:
+      return action.rooms;
     default:
       return state;
   }
 };
 
-const currentRoom = (state = {}, action) => {
+const room = (state = {}, action) => {
   switch (action.type) {
     case UPDATE_ROOM:
       return action.room;
@@ -34,20 +33,10 @@ const currentRoom = (state = {}, action) => {
   }
 };
 
-const board = (state = [], action) => {
-  switch (action.type) {
-    case UPDATE_BOARD:
-      return action.board;
-    default:
-      return state;
-  }
-};
-
 const rootReducer = combineReducers({
-  playerName,
+  player,
   rooms,
-  currentRoom,
-  board
+  room
 });
 
 export default rootReducer;
