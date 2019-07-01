@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import BoardSub from "./subcomponent";
 
 const mapStateToProps = state => {
-  return { room: state.room, player: state.player };
+  return { players: state.players, playerId: state.player.id };
 };
 
 const Board = connect(

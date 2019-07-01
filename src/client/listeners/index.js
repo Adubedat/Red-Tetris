@@ -13,7 +13,7 @@ export const initListeners = dispatch => {
   socket.on(UPDATE_ROOMS, data => subscribeUpdateRooms(data, dispatch));
 
   socket.on(UPDATE_ROOM, data => subscribeRoom(data, dispatch));
-  socket.on(UPDATE_PLAYERS, data => subscribePlayers(data, dispatch));
+  socket.on(UPDATE_PLAYERS, data => subscribePlayers(data, dispatch, socket));
   window.onhashchange = () => handleHash(dispatch);
   document.onkeydown = e => handleKeyPress(e, dispatch);
 };
@@ -28,7 +28,7 @@ const subscribeRoom = (data, dispatch) => {
   dispatch(updateRoom(room));
 };
 
-const subscribePlayers = (data, dispatch) => {
+const subscribePlayers = (data, dispatch, socket) => {
   const { players } = data;
   dispatch(updatePlayers(players));
 };
