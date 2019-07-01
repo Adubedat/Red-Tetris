@@ -45,6 +45,7 @@ class Player {
     const player = {};
     player.name = this._name;
     player.id = this._id;
+    player.board = this._board;
     return player;
   }
 }

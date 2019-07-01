@@ -11,8 +11,9 @@ import { initListeners } from "./listeners";
 
 const initialState = {
   player: {},
+  players: [],
   room: {},
-  rooms: {}
+  rooms: []
 };
 
 const store = createStore(

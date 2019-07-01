@@ -10,14 +10,11 @@ import {
   NEW_PLAYER,
   JOIN_ROOM,
   UPDATE_ROOMS,
+  UPDATE_PLAYERS,
   DISCONNECT,
   LOG_LINE,
   KEY_PRESSED,
-  ARROW_LEFT,
-  ARROW_RIGHT,
-  ARROW_DOWN,
-  ARROW_UP,
-  SPACE,
+  enumKeys,
   LOBBY_ROOM
 } from "../../../constants/constants";
 
@@ -47,7 +44,7 @@ export const initListeners = io => {
     socket.on(KEY_PRESSED, (data, callback) => {
       console.log("[EVENT] ", KEY_PRESSED, data);
       // callback({ status: "success" });
-      onKeyPressed(data, callback, socket);
+      onKeyPressed(data, callback, socket, io);
       // console.log("[JOIN] socket room : ", io.sockets.adapter.rooms);
     });
     socket.on(DISCONNECT, reason => {
@@ -59,33 +56,38 @@ export const initListeners = io => {
 
 export const initClientState = socket => {
   console.log("[EVENT] CONNECTION : send data to client (updating the state)");
-  socket.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsObject() });
+  socket.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsArray() });
 };
 
-const onKeyPressed = (code, callback, socket) => {
+const onKeyPressed = (code, callback, socket, io) => {
+  if (!Object.values(enumKeys).includes(code)) return;
   const player = Game.findPlayer(socket.id);
-  // console.log(player);
-  switch (code) {
-    case ARROW_LEFT:
-      // console.log(ARROW_LEFT);
-      break;
-    case ARROW_RIGHT:
-      // console.log(ARROW_RIGHT);
-      break;
-    case ARROW_DOWN:
-      movePieceDown(player);
-      callback({ status: "success", data: player.board });
-      // console.log(ARROW_DOWN);
-      break;
-    case ARROW_UP:
-      // console.log(ARROW_UP);
-      break;
-    case SPACE:
-      // console.log(SPACE);
-      break;
+  if (player && player.room) {
+    switch (code) {
+      case enumKeys.ARROW_LEFT:
+        // console.log(ARROW_LEFT);
+        break;
+      case enumKeys.ARROW_RIGHT:
+        // console.log(ARROW_RIGHT);
+        break;
+      case enumKeys.ARROW_DOWN:
+        movePieceDown(player);
+        callback({ status: "success", data: player.board });
+        // console.log(ARROW_DOWN);
+        break;
+      case enumKeys.ARROW_UP:
+        // console.log(ARROW_UP);
+        break;
+      case enumKeys.SPACE:
+        // console.log(SPACE);
+        break;
 
-    default:
-      break;
+      default:
+        break;
+    }
+    io.in(player.room.name).emit(UPDATE_PLAYERS, {
+      players: player.room.createPublicPlayersArray()
+    });
   }
 };
 
@@ -116,7 +118,7 @@ const joinRoom = (roomName, callback, socket, io) => {
         io.in(room.name).emit(UPDATE_ROOM, {
           room: room.createPublicRoomObject()
         });
-        io.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsObject() });
+        io.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsArray() });
         callback({ status: "success" });
         // console.log(room);
       } else {
@@ -149,7 +151,7 @@ const leaveRoom = (socket, io) => {
   io.in(room.name).emit(UPDATE_ROOM, {
     room: room.createPublicRoomObject()
   });
-  io.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsObject() });
+  io.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsArray() });
   console.log("[UPDATED] after leaveRoom", Game);
 };
 

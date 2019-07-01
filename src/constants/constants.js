@@ -19,11 +19,19 @@ export const DELETE_PLAYER = "DELETE_PLAYER";
 export const SHOW_TOAST = "SHOW_TOAST";
 
 export const CONNECTION = "connection";
+export const UPDATE_PLAYERS = "UPDATE_PLAYERS";
 
 export const DISCONNECT = "disconnect";
 
 export const KEY_PRESSED = "KEY_PRESSED";
 
+export const enumKeys = {
+  ARROW_LEFT: "ArrowLeft",
+  ARROW_RIGHT: "ArrowRight",
+  ARROW_DOWN: "ArrowDown",
+  ARROW_UP: "ArrowUp",
+  SPACE: "Space"
+};
 export const ARROW_LEFT = "ArrowLeft";
 export const ARROW_RIGHT = "ArrowRight";
 export const ARROW_DOWN = "ArrowDown";

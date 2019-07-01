@@ -33,9 +33,8 @@ class Game {
     return this._players.find(player => player.id === playerId);
   }
 
-  createPublicRoomsObject() {
-    const rooms = this._rooms.map(room => room.createPublicRoomObject());
-    return rooms;
+  createPublicRoomsArray() {
+    return this._rooms.map(room => room.createPublicRoomObject());
   }
 }
 

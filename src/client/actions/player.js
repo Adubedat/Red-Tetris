@@ -3,7 +3,8 @@ import socket from "../services/socket-api";
 import {
   DISCONNECT_PLAYER,
   NEW_PLAYER,
-  UPDATE_PLAYER
+  UPDATE_PLAYER,
+  UPDATE_PLAYERS
 } from "../../constants/constants";
 import { updateRoom } from "./room";
 
@@ -29,4 +30,9 @@ export const disconnectPlayer = () => {
 export const updatePlayer = player => ({
   type: UPDATE_PLAYER,
   player
+});
+
+export const updatePlayers = players => ({
+  type: UPDATE_PLAYERS,
+  players
 });
