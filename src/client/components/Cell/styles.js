@@ -10,8 +10,8 @@ export const StyledContainer = styled.div`
   height: 5%;
   //   background-color: white;
   ${props =>
-    props.color === 0 &&
+    props.color !== 0 &&
     css`
-      background-color: red;
+      background-color: orange;
     `};
 `;

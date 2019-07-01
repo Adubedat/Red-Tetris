@@ -3,25 +3,18 @@ import PropTypes from "prop-types";
 import { StyledContainer } from "./styles";
 import Cell from "../Cell";
 
-const board = [];
-
-const BoardSub = ({ roomName }) => {
-  for (let index = 0; index < 200; index++) {
-    if (index % 2) board[index] = "red";
-    else board[index] = "blue";
-  }
-  let i = 0;
+const BoardSub = ({ board }) => {
   return (
     <StyledContainer>
-      {board.map(c => (
-        <Cell key={i++} color={c} />
+      {board.map((cell, i) => (
+        <Cell key={i++} color={cell} />
       ))}
     </StyledContainer>
   );
 };
 
 BoardSub.propTypes = {
-  roomName: PropTypes.string.isRequired
+  board: PropTypes.array.isRequired
 };
 
 export default BoardSub;

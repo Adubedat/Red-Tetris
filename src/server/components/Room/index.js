@@ -46,6 +46,14 @@ class Room {
   isFull() {
     return this._playersCount >= MAX_PLAYER;
   }
+  createPublicObject() {
+    const room = {};
+    room.name = this._name;
+    room.hostId = this._hostId;
+    room.players = this._players.map(player => player.createPublicObject());
+    room.playersCount = this._playersCount;
+    return room;
+  }
 }
 
 export default Room;

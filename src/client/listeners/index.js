@@ -1,17 +1,15 @@
 import socket from "../services/socket-api";
-import { NEW_ROOM_LIST } from "../../constants/constants";
-import { newRoomList } from "../actions/room";
+import { NEW_ROOM_LIST, UPDATE_ROOM } from "../../constants/constants";
+import { newRoomList, updateRoom } from "../actions/room";
 import { toast } from "react-toastify";
 import { handleHash, handleKeyPress } from "../actions/actions";
-
-const SHOW_TOAST = "SHOW_TOAST";
 
 export const initListeners = dispatch => {
   socket.on(NEW_ROOM_LIST, data => subscribeNewRoomList(data, dispatch));
 
-  socket.on(SHOW_TOAST, data => showToast(data));
+  socket.on(UPDATE_ROOM, data => subscribeRoom(data, dispatch));
   window.onhashchange = () => handleHash(dispatch);
-  console.log("init key pressed");
+  // console.log("init key pressed");
   document.onkeydown = e => handleKeyPress(e, dispatch);
 };
 
@@ -27,4 +25,10 @@ const showToast = data => {
 const subscribeNewRoomList = (data, dispatch) => {
   const { roomList } = data;
   dispatch(newRoomList(roomList));
+};
+
+const subscribeRoom = (data, dispatch) => {
+  const { room } = data;
+  console.log(room);
+  dispatch(updateRoom(room));
 };

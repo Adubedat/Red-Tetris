@@ -9,6 +9,7 @@
 html,
 body {
   margin: 0;
+  overflow:hidden;
   height: 100%;
   color: white;
   font-family: "ArcadeClassic";

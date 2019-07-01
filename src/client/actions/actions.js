@@ -30,11 +30,9 @@ export const handleHash = dispatch => {
 };
 
 export const handleKeyPress = (e, dispatch) => {
-  console.log("key pressed", e.code);
+  // console.log("key pressed", e.code);
   socket.emit(KEY_PRESSED, e.code, response => {
     if (response.status === "success") {
-      toast("oh yeah");
-      console.log(response.data);
       dispatch(updateBoard(response.data));
     }
   });

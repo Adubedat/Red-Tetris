@@ -4,6 +4,7 @@ import Room from "../../components/Room";
 import { isAlphaNumeric } from "../../../utils/utils";
 import {
   LEAVE_ROOM,
+  UPDATE_ROOM,
   CONNECTION,
   DISCONNECT_PLAYER,
   NEW_PLAYER,
@@ -63,24 +64,24 @@ export const initClientState = socket => {
 
 const onKeyPressed = (code, callback, socket) => {
   const player = Game.findPlayer(socket.id);
-  console.log(player);
+  // console.log(player);
   switch (code) {
     case ARROW_LEFT:
-      console.log(ARROW_LEFT);
+      // console.log(ARROW_LEFT);
       break;
     case ARROW_RIGHT:
-      console.log(ARROW_RIGHT);
+      // console.log(ARROW_RIGHT);
       break;
     case ARROW_DOWN:
       movePieceDown(player);
       callback({ status: "success", data: player.board });
-      console.log(ARROW_DOWN);
+      // console.log(ARROW_DOWN);
       break;
     case ARROW_UP:
-      console.log(ARROW_UP);
+      // console.log(ARROW_UP);
       break;
     case SPACE:
-      console.log(SPACE);
+      // console.log(SPACE);
       break;
 
     default:
@@ -102,23 +103,26 @@ const joinRoom = (roomName, callback, socket, io) => {
   } else {
     const player = Game.findPlayer(socket.id);
     if (player && !player.currentRoom) {
-      const room = Game.findRoom(roomName);
+      let room = Game.findRoom(roomName);
       if (!room) {
-        Game.addRoom(new Room(roomName, player.id), player);
+        room = new Room(roomName, player.id);
+        Game.addRoom(room);
         io.emit(NEW_ROOM_LIST, { roomList: Game.getRoomsName() });
-      } else if (!room.isFull()) {
+      }
+      if (room && !room.isFull()) {
         room.addPlayer(player);
         player.currentRoom = room;
+        socket.leave(LOBBY_ROOM);
+        socket.join(room.name);
+        io.in(room.name).emit(UPDATE_ROOM, { room: room.createPublicObject() });
+        callback({ status: "success" });
+        // console.log(room);
       } else {
         callback({ status: "error", message: "Room is full" });
-        return;
       }
-      socket.leave(LOBBY_ROOM);
-      socket.join(player.currentRoom.name);
-      callback({ status: "success" });
-      console.log(player.currentRoom);
+      console.log("[UPDATED] after joinRoom", Game);
     }
-    callback({ status: "error", message: "Server problem" });
+    callback({ status: "error", message: "Socket problem" });
   }
 };
 
@@ -128,7 +132,7 @@ const leaveRoom = (socket, io) => {
   if (!player) return;
   const room = player.currentRoom;
   if (!room) return;
-  console.log(room);
+  // console.log(room);
   if (room.playersCount > 1) {
     room.removePlayer(player.id);
     if (player.id === room.hostId) {
@@ -157,8 +161,9 @@ const connectPlayer = (playerName, callback, socket) => {
       const player = Game.addPlayer(
         new Player(playerName, socket.id, Array(200).fill(0))
       );
-      console.log(player);
-      callback({ status: "success" });
+      // console.log(player);
+      const playerInfo = player.createPublicObject();
+      callback({ status: "success", playerInfo });
       console.log("[UPDATED] after connectPlayer", Game);
       return player;
     }

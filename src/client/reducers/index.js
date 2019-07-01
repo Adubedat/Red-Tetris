@@ -25,10 +25,10 @@ const rooms = (state = [], action) => {
   }
 };
 
-const currentRoom = (state = "", action) => {
+const currentRoom = (state = {}, action) => {
   switch (action.type) {
     case UPDATE_ROOM:
-      return action.roomName;
+      return action.room;
     default:
       return state;
   }

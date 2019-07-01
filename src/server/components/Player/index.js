@@ -6,6 +6,14 @@ class Player {
     this._board = board;
   }
 
+  // info() {
+  //   return {
+  //     name: this._name,
+  //     id: this._id,
+  //     room: this._currentRoom,
+  //     board: this._board
+  //   };
+  // }
   get name() {
     return this._name;
   }
@@ -21,7 +29,7 @@ class Player {
     this._board = board;
   }
 
-  changeBoardAtIndex(index, value) {
+  setBoardAtIndex(index, value) {
     this._board[index] = value;
   }
 
@@ -31,6 +39,13 @@ class Player {
 
   set currentRoom(room) {
     this._currentRoom = room;
+  }
+  createPublicObject() {
+    const player = {};
+    player.name = this._name;
+    player.id = this._id;
+    player.board = this._board;
+    return player;
   }
 }
 

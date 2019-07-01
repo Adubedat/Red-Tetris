@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import Board from "../Board";
 import { StyledContainer } from "./styles";
 
-const GameSub = ({ roomName }) => {
+const GameSub = ({ room }) => {
+  const { playersCount } = room;
   return (
     <StyledContainer>
       <div>
-        <p>notboard</p>
+        <p>[{playersCount}/10 Players]</p>
       </div>
       <Board />
       <div>
@@ -18,7 +19,7 @@ const GameSub = ({ roomName }) => {
 };
 
 GameSub.propTypes = {
-  roomName: PropTypes.string.isRequired
+  room: PropTypes.object.isRequired
 };
 
 export default GameSub;

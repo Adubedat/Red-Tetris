@@ -10,8 +10,6 @@ class Game {
 
   addRoom(room, player) {
     this._rooms.push(room);
-    room.addPlayer(player);
-    player.currentRoom = room;
   }
 
   removeRoom(roomName) {
