@@ -3,7 +3,7 @@ import {
   UPDATE_PLAYER,
   UPDATE_ROOMS,
   UPDATE_ROOM,
-  UPDATE_PLAYERS
+  UPDATE_OTHER_PLAYERS
 } from "../../constants/constants";
 
 const player = (state = {}, action) => {
@@ -16,10 +16,10 @@ const player = (state = {}, action) => {
   }
 };
 
-const players = (state = [], action) => {
+const otherPlayers = (state = [], action) => {
   switch (action.type) {
-    case UPDATE_PLAYERS:
-      return action.players;
+    case UPDATE_OTHER_PLAYERS:
+      return action.otherPlayers;
     default:
       return state;
   }
@@ -45,7 +45,7 @@ const rooms = (state = [], action) => {
 
 const rootReducer = combineReducers({
   player,
-  players,
+  otherPlayers,
   rooms,
   room
 });

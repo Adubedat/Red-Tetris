@@ -2,18 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import Board from "../Board";
 import { StyledContainer } from "./styles";
+import Spectre from "../Spectre";
 
-const GameSub = ({ room }) => {
+const GameSub = ({ room, otherPlayers }) => {
   const { playersCount } = room;
+  console.log(otherPlayers);
   return (
     <StyledContainer>
       <div>
         <p>[{playersCount}/10 Players]</p>
       </div>
       <Board />
-      <div>
-        <p>notboard</p>
-      </div>
+      {playersCount > 1 ? <Spectre player={otherPlayers[0]} /> : <div>yo</div>}
     </StyledContainer>
   );
 };

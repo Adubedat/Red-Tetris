@@ -1,7 +1,7 @@
-import Game from "../../components/Game";
-import Player from "../../components/Player";
-import Room from "../../components/Room";
-import { isAlphaNumeric } from "../../../utils/utils";
+import Game from "../classes/Game";
+import Player from "../classes/Player";
+import Room from "../classes/Room";
+import { isAlphaNumeric } from "../../utils/utils";
 import {
   LEAVE_ROOM,
   UPDATE_ROOM,
@@ -16,7 +16,7 @@ import {
   KEY_PRESSED,
   enumKeys,
   LOBBY_ROOM
-} from "../../../constants/constants";
+} from "../../constants/constants";
 
 export const initListeners = io => {
   io.on(CONNECTION, socket => {

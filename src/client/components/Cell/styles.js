@@ -5,13 +5,13 @@ export const StyledContainer = styled.div`
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  border: 0.5px dotted black;
+  border: 1px solid black;
   width: 10%;
   height: 5%;
-  //   background-color: white;
   ${props =>
     props.color !== 0 &&
     css`
+      border: 3px outset orange;
       background-color: orange;
     `};
 `;

@@ -4,7 +4,7 @@ import {
   DISCONNECT_PLAYER,
   NEW_PLAYER,
   UPDATE_PLAYER,
-  UPDATE_PLAYERS
+  UPDATE_OTHER_PLAYERS
 } from "../../constants/constants";
 import { updateRoom } from "./room";
 
@@ -32,7 +32,7 @@ export const updatePlayer = player => ({
   player
 });
 
-export const updatePlayers = players => ({
-  type: UPDATE_PLAYERS,
-  players
+export const updateOtherPlayers = otherPlayers => ({
+  type: UPDATE_OTHER_PLAYERS,
+  otherPlayers
 });

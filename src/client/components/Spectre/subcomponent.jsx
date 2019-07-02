@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { StyledContainer } from "./styles";
 import Cell from "../Cell";
 
-const BoardSub = ({ player }) => {
+const SpectreSub = ({ player }) => {
   if (player && player.board) {
     const board = player.board;
     return (
@@ -16,9 +16,9 @@ const BoardSub = ({ player }) => {
   } else return null;
 };
 
-BoardSub.propTypes = {
+SpectreSub.propTypes = {
   room: PropTypes.object,
   player: PropTypes.object
 };
 
-export default BoardSub;
+export default SpectreSub;

@@ -1,6 +1,4 @@
-import Game from "../Game";
-
-const MAX_PLAYER = 10;
+import { MAX_PLAYER } from "../../../constants/constants";
 
 class Room {
   constructor(name, hostId) {
