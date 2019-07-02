@@ -27,6 +27,6 @@ export const StyledItemRight = styled.div`
   justify-content: flex-end;
 `;
 
-export const StyledTitle = styled.h2`
+export const StyledTitle = styled.h1`
   margin: 0;
 `;

@@ -10,20 +10,16 @@ import {
   StyledItemRight
 } from "./styles";
 
-let HeaderSub = ({ player, room, onLogout, onBackHome, showBackHome }) => {
+let HeaderSub = ({ player, room, onLogout, onBackHome }) => {
   const { name: roomName } = room;
   const { name: playerName } = player;
   return (
     <StyledContainer>
       <StyledItemLeft>
-        {roomName ? (
-          <Button onClick={onBackHome}>Back Home</Button>
-        ) : (
-          <StyledTitle>Tetris Orange</StyledTitle>
-        )}
+        {roomName ? <Button onClick={onBackHome}>Back Home</Button> : ""}
       </StyledItemLeft>
       <StyledItemCenter>
-        {roomName ? <StyledTitle>{roomName}</StyledTitle> : ""}
+        <StyledTitle>Tetris Orange</StyledTitle>
       </StyledItemCenter>
       <StyledItemRight>
         {playerName && (

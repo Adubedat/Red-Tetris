@@ -12,7 +12,7 @@ export const onKeyPressed = (code, callback, socket, io) => {
         break;
       case enumKeys.ARROW_DOWN:
         movePieceDown(player);
-        callback({ status: "success", data: player.board });
+        // callback({ status: "success", data: player.board });
         break;
       case enumKeys.ARROW_UP:
         break;

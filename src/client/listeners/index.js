@@ -11,7 +11,7 @@ import { handleHash, handleKeyPress } from "../actions/actions";
 export const initListeners = dispatch => {
   socket.on(UPDATE_ROOMS, data => subscribeUpdateRooms(data, dispatch));
 
-  socket.on(UPDATE_ROOM, data => subscribeUpdateRoom(data, dispatch));
+  socket.on(UPDATE_ROOM, data => subscribeUpdateRoom(data, dispatch, socket));
   socket.on(UPDATE_PLAYERS, data =>
     subscribeUpdatePlayers(data, dispatch, socket)
   );
@@ -24,10 +24,11 @@ const subscribeUpdateRooms = (data, dispatch) => {
   dispatch(updateRooms(rooms));
 };
 
-const subscribeUpdateRoom = (data, dispatch) => {
+const subscribeUpdateRoom = (data, dispatch, socket) => {
   const { room } = data;
   dispatch(updateRoom(room));
-  dispatch(updateOtherPlayers(room.players));
+  const otherPlayers = room.players.filter(p => p.id !== socket.id);
+  dispatch(updateOtherPlayers(otherPlayers));
 };
 
 const subscribeUpdatePlayers = (data, dispatch, socket) => {
