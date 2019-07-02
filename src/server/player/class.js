@@ -5,15 +5,6 @@ class Player {
     this._room = null;
     this._board = Array(200).fill(0);
   }
-
-  // info() {
-  //   return {
-  //     name: this._name,
-  //     id: this._id,
-  //     room: this._room,
-  //     board: this._board
-  //   };
-  // }
   get name() {
     return this._name;
   }
