@@ -18,7 +18,7 @@ export const initListeners = io => {
   io.on(CONNECTION, socket => {
     initClientState(socket);
     socket.join(LOBBY_ROOM);
-    console.log("[JOIN] socket room : ", io.sockets.adapter.rooms);
+    // console.log("[JOIN] socket room : ", io.sockets.adapter.rooms);
     socket.on(NEW_PLAYER, (data, callback) => {
       console.log("[EVENT] ", NEW_PLAYER);
       connectPlayer(data, callback, socket);
@@ -26,7 +26,7 @@ export const initListeners = io => {
     socket.on(JOIN_ROOM, (data, callback) => {
       console.log("[EVENT] ", JOIN_ROOM);
       joinRoom(data, callback, socket, io);
-      console.log("[JOIN] socket room : ", io.sockets.adapter.rooms);
+      // console.log("[JOIN] socket room : ", io.sockets.adapter.rooms);
     });
     socket.on(DISCONNECT_PLAYER, () => {
       console.log("[EVENT] ", DISCONNECT_PLAYER);
@@ -35,7 +35,7 @@ export const initListeners = io => {
     socket.on(LEAVE_ROOM, () => {
       console.log("[EVENT] ", LEAVE_ROOM);
       leaveRoom(socket, io);
-      console.log("[JOIN] socket room : ", io.sockets.adapter.rooms);
+      // console.log("[JOIN] socket room : ", io.sockets.adapter.rooms);
     });
     socket.on(KEY_PRESSED, (data, callback) => {
       console.log("[EVENT] ", KEY_PRESSED, data);

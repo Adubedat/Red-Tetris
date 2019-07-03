@@ -5,10 +5,21 @@ class Player {
     this._name = name;
     this._id = id;
     this._room = null;
-    this._board = Array(20)
-      .fill(0)
-      .map(() => Array(10).fill(0));
-    this._currentPiece = new Piece();
+    this._boardInfo = {
+      board: Array(20)
+        .fill(0)
+        .map(() => Array(10).fill(0)),
+      heap: Array(20)
+        .fill(0)
+        .map(() => Array(10).fill(0))
+    };
+    // this._board = Array(20)
+    //   .fill(0)
+    //   .map(() => Array(10).fill(0));
+    // this._heap = Array(20)
+    //   .fill(0)
+    //   .map(() => Array(10).fill(0));
+    this._piece = new Piece(this._boardInfo);
   }
 
   get name() {
@@ -34,29 +45,15 @@ class Player {
     this._room = room;
   }
 
-  get currentPiece() {
-    return this._currentPiece;
-  }
-
-  printPieceToBoard() {
-    const [y, x] = this._currentPiece.pos;
-    const shape = this._currentPiece.shape;
-    let newBoard = this._board.map(row => {
-      return [...row];
-    });
-    for (let i = 0; i < shape.length; i++) {
-      for (let j = 0; j < shape[i].length; j++) {
-        if (shape[i][j]) newBoard[i + y][j + x] = 1;
-      }
-    }
-    return newBoard;
+  get piece() {
+    return this._piece;
   }
 
   toObject() {
     const player = {};
     player.name = this._name;
     player.id = this._id;
-    player.board = this.printPieceToBoard();
+    player.board = this._boardInfo.board;
     return player;
   }
 }

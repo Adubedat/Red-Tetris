@@ -7,13 +7,13 @@ export const onKeyPressed = (code, callback, socket, io) => {
   if (player && player.room) {
     switch (code) {
       case enumKeys.ARROW_LEFT:
-        player.currentPiece.moveLeft();
+        player.piece.moveLeft();
         break;
       case enumKeys.ARROW_RIGHT:
-        player.currentPiece.moveRight();
+        player.piece.moveRight();
         break;
       case enumKeys.ARROW_DOWN:
-        player.currentPiece.moveDown();
+        player.piece.moveDown();
         break;
       case enumKeys.ARROW_UP:
         break;
