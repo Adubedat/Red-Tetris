@@ -2,27 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 import Board from "../Board";
 import GameInfo from "../GameInfo";
-import { StyledContainer, StyledSpectreContainer } from "./styles";
-import Spectre from "../Spectre";
+import { StyledContainer } from "./styles";
+import Spectres from "../Spectres";
 
-const GameSub = ({ otherPlayers }) => {
+const GameSub = () => {
   return (
     <StyledContainer>
       <GameInfo />
       <Board />
-      {otherPlayers.length ? (
-        <StyledSpectreContainer>
-          {otherPlayers.map(player => (
-            <Spectre key={player.id} player={player} />
-          ))}
-        </StyledSpectreContainer>
-      ) : null}
+      {/* <Spectres /> */}
     </StyledContainer>
   );
 };
 
-GameSub.propTypes = {
-  otherPlayers: PropTypes.array.isRequired
-};
+GameSub.propTypes = {};
 
 export default GameSub;

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { StyledContainer } from "./styles";
 
-const GameInfoSub = ({ room, player }) => {
+const GameInfoSub = ({ room }) => {
   const { playersCount, name: roomName } = room;
   return (
     <StyledContainer>

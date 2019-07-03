@@ -1,24 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyledContainer } from "./styles";
+import { StyledContainer, StyledRow } from "./styles";
 import Cell from "../Cell";
 
-const BoardSub = ({ player }) => {
-  if (player && player.board) {
-    const board = player.board;
-    return (
-      <StyledContainer>
-        {board.map((cell, i) => (
-          <Cell key={i++} color={cell} />
-        ))}
-      </StyledContainer>
-    );
-  } else return null;
+const BoardSub = ({ board, isSpectre = false }) => {
+  return (
+    <StyledContainer isSpectre={isSpectre}>
+      {board.map((row, i) => (
+        <StyledRow key={i}>
+          {row.map((cell, i) => (
+            <Cell key={i} color={cell} isSpectre={isSpectre} />
+          ))}
+        </StyledRow>
+      ))}
+    </StyledContainer>
+  );
 };
 
 BoardSub.propTypes = {
-  room: PropTypes.object,
-  player: PropTypes.object
+  board: PropTypes.array.isRequired,
+  isSpectre: PropTypes.bool
 };
 
 export default BoardSub;

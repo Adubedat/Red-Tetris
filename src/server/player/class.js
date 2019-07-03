@@ -5,7 +5,9 @@ class Player {
     this._name = name;
     this._id = id;
     this._room = null;
-    this._board = new Array(20).fill(0).map(() => new Array(10).fill(0));
+    this._board = Array(20)
+      .fill(0)
+      .map(() => Array(10).fill(0));
     this._currentPiece = new Piece();
   }
 
@@ -36,27 +38,26 @@ class Player {
     return this._currentPiece;
   }
 
-  setBoardAtIndex(pos, value) {
-    const [y, x] = pos;
-    this._board[y][x] = value;
-  }
-
   printPieceToBoard() {
+    console.log("before: ", this._board);
     const [y, x] = this._currentPiece.pos;
     const shape = this._currentPiece.shape;
+    let fakeBoard = [...this._board];
     for (let i = 0; i < shape.length; i++) {
       for (let j = 0; j < shape[i].length; j++) {
-        if (shape[i][j]) this.setBoardAtIndex([i + y, j + x], 1);
+        if (shape[i][j]) fakeBoard[i + y][j + x] = 1;
       }
     }
+    console.log("after: ", this._board);
+
+    return fakeBoard;
   }
 
   toObject() {
-    this.printPieceToBoard();
     const player = {};
     player.name = this._name;
     player.id = this._id;
-    player.board = this._board;
+    player.board = this.printPieceToBoard();
     return player;
   }
 }

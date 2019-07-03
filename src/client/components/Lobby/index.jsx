@@ -2,13 +2,11 @@ import { connect } from "react-redux";
 import LobbySub from "./subcomponent";
 
 const mapStateToProps = state => {
-  return {
-    showLoginPopup: state.playerName ? false : true
-  };
+  return {};
 };
 
 const Lobby = connect(
-  mapStateToProps,
+  null,
   null
 )(LobbySub);
 

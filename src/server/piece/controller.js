@@ -7,13 +7,13 @@ export const onKeyPressed = (code, callback, socket, io) => {
   if (player && player.room) {
     switch (code) {
       case enumKeys.ARROW_LEFT:
+        player.currentPiece.moveLeft();
         break;
       case enumKeys.ARROW_RIGHT:
+        player.currentPiece.moveRight();
         break;
       case enumKeys.ARROW_DOWN:
         player.currentPiece.moveDown();
-        // movePieceDown(player);
-        // callback({ status: "success", data: player.board });
         break;
       case enumKeys.ARROW_UP:
         break;
@@ -26,11 +26,4 @@ export const onKeyPressed = (code, callback, socket, io) => {
       players: player.room.createPublicPlayersArray()
     });
   }
-};
-
-const movePieceDown = player => {
-  player.setBoardAtIndex(4, 1);
-  player.setBoardAtIndex(5, 1);
-  player.setBoardAtIndex(14, 1);
-  player.setBoardAtIndex(15, 1);
 };

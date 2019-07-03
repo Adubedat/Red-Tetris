@@ -16,15 +16,16 @@ setConfig({
 
 toast.configure();
 
-export const App = ({ player, room }) => {
+export const App = ({ playerName, roomName }) => {
+  console.log("[TEST] IN APP");
   return (
     <div>
       <Header />
-      {!player.name ? (
+      {!playerName ? (
         <Popup open={true} hideBackdrop>
           <Login />
         </Popup>
-      ) : !room.name ? (
+      ) : !roomName ? (
         <Lobby />
       ) : (
         <Game />
@@ -35,8 +36,8 @@ export const App = ({ player, room }) => {
 
 const mapStateToProps = state => {
   return {
-    player: state.player,
-    room: state.room
+    playerName: state.player.name,
+    roomName: state.room.name
   };
 };
 
