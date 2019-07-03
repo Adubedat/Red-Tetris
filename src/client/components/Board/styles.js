@@ -12,3 +12,7 @@ export const StyledContainer = styled.div`
   width: 40vh;
   border: 5px solid black;
 `;
+export const StyledColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+`;

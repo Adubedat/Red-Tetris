@@ -10,6 +10,7 @@ const GameSub = ({ otherPlayers }) => {
     <StyledContainer>
       <GameInfo />
       <Board />
+      {/* <Spectres/> */}
       {otherPlayers.length ? (
         <StyledSpectreContainer>
           {otherPlayers.map(player => (
