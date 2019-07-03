@@ -34,7 +34,7 @@ class Game {
   }
 
   createPublicRoomsArray() {
-    return this._rooms.map(room => room.createPublicRoomObject());
+    return this._rooms.map(room => room.toObject());
   }
 }
 

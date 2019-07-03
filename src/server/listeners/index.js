@@ -1,7 +1,7 @@
-import { initClientState } from "../game";
-import { connectPlayer, disconnectPlayer } from "../player";
-import { joinRoom, leaveRoom } from "../room";
-import { onKeyPressed } from "../piece";
+import { initClientState } from "../game/controller";
+import { connectPlayer, disconnectPlayer } from "../player/controller";
+import { joinRoom, leaveRoom } from "../room/controller";
+import { onKeyPressed } from "../piece/controller";
 import {
   LEAVE_ROOM,
   CONNECTION,

@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginSub /> should render without crashing 1`] = `
+<styled.form
+  onSubmit={[Function]}
+>
+  <h1>
+    Tetris Orange
+  </h1>
+  <MyButton
+    disabled={true}
+    fullWidth={true}
+  >
+    42 Connect
+  </MyButton>
+  <styled.div>
+    OR
+  </styled.div>
+  <ForwardRef
+    error={null}
+    fullWidth={true}
+    helperText=""
+    label="Name"
+    onChange={[Function]}
+    spellCheck="false"
+    value=""
+  />
+  <MyButton
+    disabled={true}
+    fullWidth={true}
+    type="submit"
+  >
+    Connect
+  </MyButton>
+</styled.form>
+`;

@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { hot } from "react-hot-loader";
-import EventListener from "react-event-listener";
 import Lobby from "./Lobby";
 import Header from "./Header";
 import Game from "./Game";
@@ -17,7 +16,7 @@ setConfig({
 
 toast.configure();
 
-let App = ({ player, room }) => {
+export const App = ({ player, room }) => {
   return (
     <div>
       <Header />
@@ -41,9 +40,4 @@ const mapStateToProps = state => {
   };
 };
 
-App = connect(
-  mapStateToProps,
-  null
-)(App);
-
-export default hot(module)(App);
+export default connect(mapStateToProps)(hot(module)(App));

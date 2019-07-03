@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> App rendering with a player in Lobby 1`] = `
+<div>
+  <Connect(HeaderSub) />
+  <Connect(LobbySub) />
+</div>
+`;
+
+exports[`<App /> App rendering with a player in game 1`] = `
+<div>
+  <Connect(HeaderSub) />
+  <Connect(GameSub)
+    room="Room1"
+  />
+</div>
+`;
+
+exports[`<App /> App rendering with an unconnected user 1`] = `
+<div>
+  <Connect(HeaderSub) />
+  <Popup
+    hideBackdrop={true}
+    open={true}
+  >
+    <Connect(LoginSub) />
+  </Popup>
+</div>
+`;
+
+exports[`<App /> App rendering with store without crashing 1`] = `
+<ContextProvider
+  value={null}
+>
+  <App
+    currentRoom=""
+    dispatch={[Function]}
+    playerName=""
+    store={
+      Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      }
+    }
+  />
+</ContextProvider>
+`;

@@ -3,7 +3,7 @@ class Player {
     this._name = name;
     this._id = id;
     this._room = null;
-    this._board = Array(200).fill(0);
+    this._board = new Array(10).fill(0).map(() => new Array(20).fill(0));
   }
   get name() {
     return this._name;
@@ -32,7 +32,7 @@ class Player {
     this._room = room;
   }
 
-  createPublicPlayerObject() {
+  toObject() {
     const player = {};
     player.name = this._name;
     player.id = this._id;

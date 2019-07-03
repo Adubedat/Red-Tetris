@@ -46,10 +46,10 @@ class Room {
   }
 
   createPublicPlayersArray() {
-    return this._players.map(player => player.createPublicPlayerObject());
+    return this._players.map(player => player.toObject());
   }
 
-  createPublicRoomObject() {
+  toObject() {
     const room = {};
     room.name = this._name;
     room.hostId = this._hostId;

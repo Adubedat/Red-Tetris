@@ -14,15 +14,15 @@ export const StyledUserGroup = styled.div`
 `;
 
 export const StyledItemLeft = styled.div`
-  flex-basis: 30%;
+  flex: 1;
 `;
 export const StyledItemCenter = styled.div`
-  flex-grow: 1;
+  flex: 1;
   display: flex;
   justify-content: center;
 `;
 export const StyledItemRight = styled.div`
-  flex-basis: 30%;
+  flex: 1;
   display: flex;
   justify-content: flex-end;
 `;

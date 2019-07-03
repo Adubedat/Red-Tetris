@@ -1,6 +1,6 @@
 import Game from "../game/class";
-import Player from "../player/class";
-import { leaveRoom } from "../room";
+import Player from "./class";
+import { leaveRoom } from "../room/controller";
 import { isAlphaNumeric } from "../../utils/utils";
 import { LOBBY_ROOM } from "../../constants/constants";
 
@@ -15,7 +15,7 @@ export const connectPlayer = (playerName, callback, socket) => {
     const player = Game.findPlayer(socket.id);
     if (!player) {
       const player = Game.addPlayer(new Player(playerName, socket.id));
-      const playerInfo = player.createPublicPlayerObject();
+      const playerInfo = player.toObject();
       callback({ status: "success", playerInfo });
       console.log("[UPDATED] after connectPlayer", Game);
       return player;

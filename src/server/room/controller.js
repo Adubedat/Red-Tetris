@@ -28,7 +28,7 @@ export const joinRoom = (roomName, callback, socket, io) => {
         socket.leave(LOBBY_ROOM);
         socket.join(room.name);
         io.in(room.name).emit(UPDATE_ROOM, {
-          room: room.createPublicRoomObject()
+          room: room.toObject()
         });
         io.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsArray() });
         callback({ status: "success" });
@@ -61,7 +61,7 @@ export const leaveRoom = (socket, io) => {
   socket.leave(room.name);
   socket.join(LOBBY_ROOM);
   io.in(room.name).emit(UPDATE_ROOM, {
-    room: room.createPublicRoomObject()
+    room: room.toObject()
   });
   io.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsArray() });
   console.log("[UPDATED] after leaveRoom", Game);
