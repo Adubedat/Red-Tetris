@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import SpectreSub from "./subcomponent";
 
 const mapStateToProps = state => {
-  return null;
+  return { spectres: state.spectres };
 };
 
 const Spectre = connect(

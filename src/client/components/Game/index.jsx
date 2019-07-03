@@ -6,7 +6,7 @@ const mapStateToProps = state => {
 };
 
 const Game = connect(
-  mapStateToProps,
+  null,
   null
 )(GameSub);
 
