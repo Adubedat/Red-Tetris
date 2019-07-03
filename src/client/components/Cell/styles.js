@@ -11,7 +11,7 @@ export const StyledContainer = styled.div`
   ${props =>
     props.color !== 0 &&
     css`
-      border: 3px outset orange;
+      border: 5px outset orange;
       background-color: orange;
     `};
 `;

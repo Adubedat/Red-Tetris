@@ -29,4 +29,7 @@ export const onKeyPressed = (code, callback, socket, io) => {
 
 const movePieceDown = player => {
   player.setBoardAtIndex(4, 1);
+  player.setBoardAtIndex(5, 1);
+  player.setBoardAtIndex(14, 1);
+  player.setBoardAtIndex(15, 1);
 };
