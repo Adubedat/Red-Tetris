@@ -2,20 +2,20 @@ import socket from "../services/socket-api";
 import {
   LEAVE_ROOM,
   UPDATE_ROOM,
-  NEW_ROOM_LIST,
+  UPDATE_ROOMS,
   JOIN_ROOM
 } from "../../constants/constants";
 
-export const updateRoom = roomName => ({
+export const updateRoom = room => ({
   type: UPDATE_ROOM,
-  roomName
+  room
 });
 
 export const joinRoom = roomName => {
   return dispatch => {
     socket.emit(JOIN_ROOM, roomName, response => {
       if (response.status === "success") {
-        dispatch(updateRoom(roomName));
+        // dispatch(updateRoom(response.room));
       }
     });
   };
@@ -24,12 +24,12 @@ export const joinRoom = roomName => {
 export const leaveRoom = () => {
   return dispatch => {
     socket.emit(LEAVE_ROOM);
-    dispatch(updateRoom(""));
+    dispatch(updateRoom({}));
     window.location.hash = "";
   };
 };
 
-export const newRoomList = roomList => ({
-  type: NEW_ROOM_LIST,
-  roomList
+export const updateRooms = rooms => ({
+  type: UPDATE_ROOMS,
+  rooms
 });

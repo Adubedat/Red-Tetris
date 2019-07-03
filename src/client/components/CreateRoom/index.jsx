@@ -34,7 +34,7 @@ let CreateRoom = ({ playerName }) => {
 const mapStateToProps = state => {
   return {
     rooms: state.rooms,
-    playerName: state.playerName
+    playerName: state.player.name
   };
 };
 

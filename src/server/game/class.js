@@ -8,10 +8,8 @@ class Game {
     return this._rooms;
   }
 
-  addRoom(room, player) {
+  addRoom(room) {
     this._rooms.push(room);
-    room.addPlayer(player);
-    player.currentRoom = room;
   }
 
   removeRoom(roomName) {
@@ -35,8 +33,8 @@ class Game {
     return this._players.find(player => player.id === playerId);
   }
 
-  getRoomsName() {
-    return this._rooms.map(room => room.name);
+  createPublicRoomsArray() {
+    return this._rooms.map(room => room.createPublicRoomObject());
   }
 }
 

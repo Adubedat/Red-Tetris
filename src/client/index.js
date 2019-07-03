@@ -10,8 +10,9 @@ import { handleHash } from "./actions/actions";
 import { initListeners } from "./listeners";
 
 const initialState = {
-  playerName: "",
-  currentRoom: "",
+  player: {},
+  otherPlayers: [],
+  room: {},
   rooms: []
 };
 

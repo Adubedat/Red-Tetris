@@ -1,28 +1,40 @@
 import socket from "../services/socket-api";
-import { NEW_ROOM_LIST } from "../../constants/constants";
-import { newRoomList } from "../actions/room";
-import { toast } from "react-toastify";
-import { handleHash } from "../actions/actions";
-
-const SHOW_TOAST = "SHOW_TOAST";
+import {
+  UPDATE_ROOMS,
+  UPDATE_ROOM,
+  UPDATE_PLAYERS
+} from "../../constants/constants";
+import { updateRooms, updateRoom } from "../actions/room";
+import { updateOtherPlayers, updatePlayer } from "../actions/player";
+import { handleHash, handleKeyPress } from "../actions/actions";
 
 export const initListeners = dispatch => {
-  socket.on(NEW_ROOM_LIST, data => subscribeNewRoomList(data, dispatch));
+  socket.on(UPDATE_ROOMS, data => subscribeUpdateRooms(data, dispatch));
 
-  socket.on(SHOW_TOAST, data => showToast(data));
+  socket.on(UPDATE_ROOM, data => subscribeUpdateRoom(data, dispatch, socket));
+  socket.on(UPDATE_PLAYERS, data =>
+    subscribeUpdatePlayers(data, dispatch, socket)
+  );
   window.onhashchange = () => handleHash(dispatch);
+  document.onkeydown = e => handleKeyPress(e, dispatch);
 };
 
-const showToast = data => {
-  switch (data.type) {
-    case "error":
-      return toast.error(data.message);
-    default:
-      return toast(data.message);
-  }
+const subscribeUpdateRooms = (data, dispatch) => {
+  const { rooms } = data;
+  dispatch(updateRooms(rooms));
 };
 
-const subscribeNewRoomList = (data, dispatch) => {
-  const { roomList } = data;
-  dispatch(newRoomList(roomList));
+const subscribeUpdateRoom = (data, dispatch, socket) => {
+  const { room } = data;
+  dispatch(updateRoom(room));
+  const otherPlayers = room.players.filter(p => p.id !== socket.id);
+  dispatch(updateOtherPlayers(otherPlayers));
+};
+
+const subscribeUpdatePlayers = (data, dispatch, socket) => {
+  const { players } = data;
+  const player = players.find(p => p.id === socket.id);
+  const otherPlayers = players.filter(p => p.id !== socket.id);
+  dispatch(updatePlayer(player));
+  dispatch(updateOtherPlayers(otherPlayers));
 };

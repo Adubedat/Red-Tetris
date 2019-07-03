@@ -21,7 +21,7 @@ const LoginSub = ({ connectPlayer }) => {
 
   return (
     <StyledForm onSubmit={e => handleSubmit(e)}>
-      <h1>Tetris Orange</h1>
+      {/* <h1>Tetris Orange</h1> */}
       <Button disabled={true} fullWidth>
         42 Connect
       </Button>

@@ -1,41 +1,45 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Button from "../common/Button";
-import { StyledContainer, StyledUserGroup, StyledTitle } from "./styles";
+import {
+  StyledContainer,
+  StyledUserGroup,
+  StyledTitle,
+  StyledItemLeft,
+  StyledItemCenter,
+  StyledItemRight
+} from "./styles";
 
-let HeaderSub = ({
-  playerName,
-  roomName,
-  onLogout,
-  onBackHome,
-  showBackHome
-}) => {
+let HeaderSub = ({ player, room, onLogout, onBackHome }) => {
+  const { name: roomName } = room;
+  const { name: playerName } = player;
   return (
     <StyledContainer>
-      {showBackHome ? (
-        <Button onClick={onBackHome}>Back Home</Button>
-      ) : (
+      <StyledItemLeft>
+        {roomName ? <Button onClick={onBackHome}>Back Home</Button> : ""}
+      </StyledItemLeft>
+      <StyledItemCenter>
         <StyledTitle>Tetris Orange</StyledTitle>
-      )}
-      <StyledTitle>{roomName}</StyledTitle>
-      <StyledUserGroup>
-        <p>{playerName}</p>
+      </StyledItemCenter>
+      <StyledItemRight>
         {playerName && (
-          <Button style={{ marginLeft: 20 }} onClick={onLogout}>
-            Logout
-          </Button>
+          <StyledUserGroup>
+            <p>{playerName}</p>
+            <Button style={{ marginLeft: 20 }} onClick={onLogout}>
+              Logout
+            </Button>
+          </StyledUserGroup>
         )}
-      </StyledUserGroup>
+      </StyledItemRight>
     </StyledContainer>
   );
 };
 
 HeaderSub.propTypes = {
-  playerName: PropTypes.string.isRequired,
-  roomName: PropTypes.string.isRequired,
+  player: PropTypes.object.isRequired,
+  room: PropTypes.object.isRequired,
   onLogout: PropTypes.func.isRequired,
-  onBackHome: PropTypes.func.isRequired,
-  showBackHome: PropTypes.bool.isRequired
+  onBackHome: PropTypes.func.isRequired
 };
 
 export default HeaderSub;

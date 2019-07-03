@@ -1,5 +1,5 @@
 import express from "express";
-import { initListeners } from "./socket/listeners/index.js";
+import { initListeners } from "./listeners/index.js";
 import http from "http";
 import socketIO from "socket.io";
 import params from "../../params";
