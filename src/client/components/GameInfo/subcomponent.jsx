@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { StyledContainer, StyledButton } from "./styles";
 
 const GameInfoSub = ({ room, playerId, startGame }) => {
-  const { playersCount, name: roomName, hostId } = room;
+  const { playersCount, name: roomName, hostId, isStarted } = room;
   const handleClick = () => {
     startGame();
   };
@@ -12,11 +12,9 @@ const GameInfoSub = ({ room, playerId, startGame }) => {
     <StyledContainer>
       <h2>{roomName}</h2>
       <p>[{playersCount}/10 Players]</p>
-      {playerId === hostId ? (
+      {playerId === hostId && !isStarted ? (
         <StyledButton onClick={() => handleClick()}>start</StyledButton>
-      ) : (
-        <p>waiting for host to start</p>
-      )}
+      ) : null}
     </StyledContainer>
   );
 };

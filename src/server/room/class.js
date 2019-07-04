@@ -7,6 +7,8 @@ class Room {
     this._players = [];
     this._playersCount = 0;
     this._interval = null;
+    this._isStarted = false;
+    this._pieces = [];
   }
 
   get name() {
@@ -24,7 +26,28 @@ class Room {
   get playersCount() {
     return this._playersCount;
   }
+  get isStarted() {
+    return this._isStarted;
+  }
+  set isStarted(bool) {
+    this._isStarted = bool;
+  }
+  get interval() {
+    return this._interval;
+  }
+  set interval(interval) {
+    this._interval = interval;
+  }
+  get pieces() {
+    return this._interval;
+  }
+  set pieces(pieces) {
+    this._interval = pieces;
+  }
 
+  clean() {
+    if (this._interval) clearInterval(this._interval);
+  }
   addPlayer(player) {
     this._playersCount++;
     this._players.push(player);
@@ -46,6 +69,12 @@ class Room {
     return this._playersCount >= MAX_PLAYER;
   }
 
+  initPieces() {
+    this._pieces = [...Array(3)].map(() => {
+      return Math.floor(Math.random() * 7);
+    });
+  }
+
   createPublicPlayersArray() {
     return this._players.map(player => player.toObject());
   }
@@ -56,6 +85,7 @@ class Room {
     room.hostId = this._hostId;
     room.players = this.createPublicPlayersArray();
     room.playersCount = this._playersCount;
+    room.isStarted = this._isStarted;
     return room;
   }
 }

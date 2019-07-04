@@ -11,7 +11,7 @@ import {
 const checkHash = () => {
   const hash = window.location.hash.substr(1);
   if (!hash.trim()) return;
-  const regexp = /^[a-z0-9]{1,12}\[[a-z0-9]{1,12}\]$/;
+  const regexp = /^[a-zA-Z0-9]{1,12}\[[a-zA-Z0-9]{1,12}\]$/;
   const found = hash.match(regexp);
   if (!found) {
     toast.error(

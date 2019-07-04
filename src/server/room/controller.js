@@ -46,29 +46,29 @@ export const joinRoom = (roomName, callback, socket, io) => {
 export const leaveRoom = (socket, io) => {
   console.log("[CALL] leaveRoom on : ");
   const player = Game.findPlayer(socket.id);
-  if (!player) return;
-  const room = player.room;
-  if (!room) return;
-  if (room.playersCount > 1) {
-    room.removePlayer(player.id);
-    if (player.id === room.hostId) {
-      room.updateHostId();
+  if (player && player.room) {
+    const room = player.room;
+    if (room.playersCount > 1) {
+      room.removePlayer(player.id);
+      if (player.id === room.hostId) {
+        room.updateHostId();
+      }
+    } else {
+      room.clean();
+      Game.removeRoom(room.name);
     }
-  } else {
-    if (room.interval) clearInterval(room.interval);
-    Game.removeRoom(room.name);
+    player.clean();
+    io.in(room.name).emit(UPDATE_PLAYERS, {
+      players: room.createPublicPlayersArray()
+    });
+    socket.leave(room.name);
+    socket.join(LOBBY_ROOM);
+    io.in(room.name).emit(UPDATE_ROOM, {
+      room: room.toObject()
+    });
+    io.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsArray() });
+    console.log("[UPDATED] after leaveRoom", Game);
   }
-  player.clean();
-  io.in(room.name).emit(UPDATE_PLAYERS, {
-    players: room.createPublicPlayersArray()
-  });
-  socket.leave(room.name);
-  socket.join(LOBBY_ROOM);
-  io.in(room.name).emit(UPDATE_ROOM, {
-    room: room.toObject()
-  });
-  io.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsArray() });
-  console.log("[UPDATED] after leaveRoom", Game);
 };
 
 const handleInterval = (player, socket, io) => {
@@ -84,9 +84,19 @@ const handleInterval = (player, socket, io) => {
 
 export const startGame = (socket, io) => {
   const player = Game.findPlayer(socket.id);
-  if (!player) return;
-  player.room.interval = setInterval(
-    () => handleInterval(player, socket, io),
-    1000
-  );
+  if (player && player.room) {
+    const room = player.room;
+    if (!room.isStarted) {
+      room.isStarted = true;
+      room.initPieces();
+      room.interval = setInterval(
+        () => handleInterval(player, socket, io),
+        1000
+      );
+      io.in(room.name).emit(UPDATE_ROOM, {
+        room: room.toObject()
+      });
+      console.log(room.interval);
+    }
+  }
 };

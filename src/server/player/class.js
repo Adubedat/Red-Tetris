@@ -11,7 +11,8 @@ class Player {
     this._heap = Array(20)
       .fill(0)
       .map(() => Array(10).fill(0));
-    this._piece = new Piece(5);
+    this._piece = new Piece();
+    this._indexPieces = 0;
   }
 
   get name() {
@@ -75,8 +76,10 @@ class Player {
     const newHeap = this._board.map(row => {
       return [...row];
     });
+    const { _piece, _indexPieces } = this;
+    const { pieces } = this._room;
     this._heap = newHeap;
-    this._piece = new Piece(2);
+    _piece.update(pieces[_indexPieces]);
   }
 
   toObject() {
