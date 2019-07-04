@@ -39,10 +39,10 @@ class Room {
     this._interval = interval;
   }
   get pieces() {
-    return this._interval;
+    return this._pieces;
   }
   set pieces(pieces) {
-    this._interval = pieces;
+    this._pieces = pieces;
   }
 
   clean() {
@@ -70,7 +70,7 @@ class Room {
   }
 
   initPieces() {
-    this._pieces = [...Array(3)].map(() => {
+    this._pieces = [...Array(1000)].map(() => {
       return Math.floor(Math.random() * 7);
     });
   }

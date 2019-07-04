@@ -89,6 +89,11 @@ export const startGame = (socket, io) => {
     if (!room.isStarted) {
       room.isStarted = true;
       room.initPieces();
+      player.updateHeap();
+      player.updateBoard();
+      io.in(player.room.name).emit(UPDATE_PLAYERS, {
+        players: player.room.createPublicPlayersArray()
+      });
       room.interval = setInterval(
         () => handleInterval(player, socket, io),
         1000

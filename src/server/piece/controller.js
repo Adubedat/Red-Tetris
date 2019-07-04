@@ -24,8 +24,12 @@ export const onKeyPressed = (code, socket, io) => {
         }
         break;
       case enumKeys.ARROW_UP:
+        player.piece.rotate(heap);
         break;
       case enumKeys.SPACE:
+        player.piece.hardDrop();
+        player.updateBoard();
+        player.updateHeap();
         break;
       default:
         break;

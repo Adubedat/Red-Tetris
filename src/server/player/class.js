@@ -6,13 +6,13 @@ class Player {
     this._id = id;
     this._room = null;
     this._board = Array(20)
-      .fill(0)
-      .map(() => Array(10).fill(0));
+      .fill("")
+      .map(() => Array(10).fill(""));
     this._heap = Array(20)
-      .fill(0)
-      .map(() => Array(10).fill(0));
+      .fill("")
+      .map(() => Array(10).fill(""));
     this._piece = new Piece();
-    this._indexPieces = 0;
+    this._indexPieces = 1;
   }
 
   get name() {
@@ -51,24 +51,21 @@ class Player {
   clean() {
     this._room = null;
     this._board = Array(20)
-      .fill(0)
-      .map(() => Array(10).fill(0));
+      .fill("")
+      .map(() => Array(10).fill(""));
     this._heap = Array(20)
-      .fill(0)
-      .map(() => Array(10).fill(0));
-    this._piece = new Piece(5);
+      .fill("")
+      .map(() => Array(10).fill(""));
+    // this._piece = new Piece(5);
   }
   updateBoard() {
-    const { x, y } = this._piece.pos;
-    const shape = this._piece.shape;
-    const newBoard = this._heap.map(row => {
+    const piece = this._piece;
+    const { pos, shadowPos, shape, color } = this._piece;
+    let newBoard = this._heap.map(row => {
       return [...row];
     });
-    for (let i = 0; i < shape.length; i++) {
-      for (let j = 0; j < shape[i].length; j++) {
-        if (shape[i][j]) newBoard[i + y][j + x] = 1;
-      }
-    }
+    newBoard = piece.printToBoard(shadowPos, shape, newBoard, color + "40"); //Add alpha to color for shadow
+    newBoard = piece.printToBoard(pos, shape, newBoard, color);
     this._board = newBoard;
   }
 
@@ -76,10 +73,12 @@ class Player {
     const newHeap = this._board.map(row => {
       return [...row];
     });
-    const { _piece, _indexPieces } = this;
     const { pieces } = this._room;
     this._heap = newHeap;
-    _piece.update(pieces[_indexPieces]);
+    console.log(pieces[this._indexPieces]);
+    this._piece.update(pieces[this._indexPieces]);
+    this._piece.updateShadow(this._heap);
+    this._indexPieces += 1;
   }
 
   toObject() {
