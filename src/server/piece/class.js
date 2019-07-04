@@ -1,44 +1,21 @@
 /* eslint-disable */
 
 const shapes = [
-    [
-        [0, 0, 1, 0],
-        [0, 0, 1, 0],
-        [0, 0, 1, 0],
-        [0, 0, 1, 0]
-    ],
-    [
-        [1, 1, 0],
-        [0, 1, 0],
-        [0, 1, 0]
-    ],
-    [
-        [0, 1, 1],
-        [0, 1, 0],
-        [0, 1, 0]
-    ],
-    [
-        [0, 1, 0],
-        [0, 1, 1],
-        [0, 1, 0]
-    ],
-    [
-        [1, 0, 0],
-        [1, 1, 0],
-        [0, 1, 0]
-    ],
-    [
-        [1, 1],
-        [1, 1],
-    ]
+  [[0, 0, 1, 0], [0, 0, 1, 0], [0, 0, 1, 0], [0, 0, 1, 0]],
+  [[1, 1, 0], [0, 1, 0], [0, 1, 0]],
+  [[0, 1, 1], [0, 1, 0], [0, 1, 0]],
+  [[0, 1, 0], [0, 1, 1], [0, 1, 0]],
+  [[1, 0, 0], [1, 1, 0], [0, 1, 0]],
+  [[1, 1], [1, 1]],
 ];
 
 /* eslint-enable */
 
 class Piece {
-  constructor(boardInfo) {
-    this._shape = shapes[2];
+  constructor(shape, boardInfo, player) {
+    this._shape = shapes[5];
     this._pos = { x: 0, y: 0 };
+    this._player = player;
     this._boardInfo = boardInfo;
   }
 
@@ -64,6 +41,13 @@ class Piece {
     this._boardInfo.board = newBoard;
   }
 
+  updateHeap() {
+    const newHeap = this._boardInfo.board.map(row => {
+      return [...row];
+    });
+    this._boardInfo.heap = newHeap;
+  }
+
   isPosAvailable(newPos) {
     const { x, y } = newPos;
     const shape = this._shape;
@@ -73,9 +57,9 @@ class Piece {
           let heapY = i + y;
           let heapX = j + x;
           if (
-            heapY >= 20 &&
-            heapX < 0 &&
-            heapX >= 10 &&
+            heapY >= 20 ||
+            heapX < 0 ||
+            heapX >= 10 ||
             this._boardInfo.heap[heapY][heapX]
           )
             return false;
@@ -86,14 +70,14 @@ class Piece {
   }
 
   moveDown() {
-    console.log("before:", this._boardInfo.board);
     let newPos = { ...this._pos };
     newPos.y += 1;
     if (this.isPosAvailable(newPos)) {
       this._pos.y += 1;
       this.updateBoard();
+    } else {
+      this.updateHeap();
     }
-    console.log("after", this._board);
   }
 
   moveLeft() {

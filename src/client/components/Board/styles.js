@@ -4,7 +4,7 @@ export const StyledContainer = styled.div`
   align-self: center;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  // flex-wrap: wrap;
   margin: 10px;
   margin-left: 0px;
   min-height: 400px;
