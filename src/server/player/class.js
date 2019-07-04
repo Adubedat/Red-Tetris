@@ -5,14 +5,6 @@ class Player {
     this._name = name;
     this._id = id;
     this._room = null;
-    // this._boardInfo = {
-    //   board: Array(20)
-    //     .fill(0)
-    //     .map(() => Array(10).fill(0)),
-    //   heap: Array(20)
-    //     .fill(0)
-    //     .map(() => Array(10).fill(0))
-    // };
     this._board = Array(20)
       .fill(0)
       .map(() => Array(10).fill(0));
@@ -55,7 +47,16 @@ class Player {
   get piece() {
     return this._piece;
   }
-
+  clean() {
+    this._room = null;
+    this._board = Array(20)
+      .fill(0)
+      .map(() => Array(10).fill(0));
+    this._heap = Array(20)
+      .fill(0)
+      .map(() => Array(10).fill(0));
+    this._piece = new Piece(5);
+  }
   updateBoard() {
     const { x, y } = this._piece.pos;
     const shape = this._piece.shape;
@@ -75,6 +76,7 @@ class Player {
       return [...row];
     });
     this._heap = newHeap;
+    this._piece = new Piece(2);
   }
 
   toObject() {

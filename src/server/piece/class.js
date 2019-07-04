@@ -34,6 +34,7 @@ class Piece {
           let heapX = j + x;
           if (heapY >= 20 || heapX < 0 || heapX >= 10 || heap[heapY][heapX])
             return false;
+            else if (heapY <= 0) 
         }
       }
     }

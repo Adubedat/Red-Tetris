@@ -6,6 +6,7 @@ class Room {
     this._hostId = hostId;
     this._players = [];
     this._playersCount = 0;
+    this._interval = null;
   }
 
   get name() {
