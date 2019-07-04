@@ -7,12 +7,12 @@ export const StyledContainer = styled.div`
   -webkit-box-sizing: border-box;
   border: 1px solid black;
   ${props =>
-    props.color !== 0 &&
+    props.color &&
     css`
       box-sizing: border-box;
       -moz-box-sizing: border-box;
       -webkit-box-sizing: border-box;
-      border: 5px outset orange;
-      background-color: orange;
+      border: 5px outset ${props => props.color};
+      background-color: ${props => props.color};
     `};
 `;

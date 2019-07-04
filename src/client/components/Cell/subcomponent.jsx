@@ -9,7 +9,7 @@ const CellSub = ({ color, isSpectre = false }) => {
 };
 
 CellSub.propTypes = {
-  color: PropTypes.number.isRequired
+  color: PropTypes.string.isRequired
 };
 
 export default CellSub;

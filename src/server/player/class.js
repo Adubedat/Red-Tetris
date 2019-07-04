@@ -57,16 +57,13 @@ class Player {
   }
 
   updateBoard() {
-    const { x, y } = this._piece.pos;
-    const shape = this._piece.shape;
-    const newBoard = this._heap.map(row => {
+    const piece = this._piece;
+    const { pos, shadowPos, shape, color } = this._piece;
+    let newBoard = this._heap.map(row => {
       return [...row];
     });
-    for (let i = 0; i < shape.length; i++) {
-      for (let j = 0; j < shape[i].length; j++) {
-        if (shape[i][j]) newBoard[i + y][j + x] = 1;
-      }
-    }
+    newBoard = piece.printToBoard(shadowPos, shape, newBoard, color + "40"); //Add alpha to color for shadow
+    newBoard = piece.printToBoard(pos, shape, newBoard, color);
     this._board = newBoard;
   }
 
