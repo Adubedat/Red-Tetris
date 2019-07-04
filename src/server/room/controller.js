@@ -58,7 +58,10 @@ export const leaveRoom = (socket, io) => {
     if (room.interval) clearInterval(room.interval);
     Game.removeRoom(room.name);
   }
-  player.room = null;
+  player.clean();
+  io.in(room.name).emit(UPDATE_PLAYERS, {
+    players: room.createPublicPlayersArray()
+  });
   socket.leave(room.name);
   socket.join(LOBBY_ROOM);
   io.in(room.name).emit(UPDATE_ROOM, {
