@@ -25,6 +25,7 @@ export const UPDATE_OTHER_PLAYERS = "UPDATE_OTHER_PLAYERS";
 export const DISCONNECT = "disconnect";
 
 export const KEY_PRESSED = "KEY_PRESSED";
+export const START_GAME = "START_GAME";
 
 export const enumKeys = {
   ARROW_LEFT: "ArrowLeft",

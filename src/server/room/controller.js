@@ -4,7 +4,8 @@ import { isAlphaNumeric } from "../../utils/utils";
 import {
   LOBBY_ROOM,
   UPDATE_ROOM,
-  UPDATE_ROOMS
+  UPDATE_ROOMS,
+  UPDATE_PLAYERS
 } from "../../constants/constants";
 
 export const joinRoom = (roomName, callback, socket, io) => {
@@ -48,13 +49,13 @@ export const leaveRoom = (socket, io) => {
   if (!player) return;
   const room = player.room;
   if (!room) return;
-  // console.log(room);
   if (room.playersCount > 1) {
     room.removePlayer(player.id);
     if (player.id === room.hostId) {
       room.updateHostId();
     }
   } else {
+    if (room.interval) clearInterval(room.interval);
     Game.removeRoom(room.name);
   }
   player.room = null;
@@ -65,4 +66,24 @@ export const leaveRoom = (socket, io) => {
   });
   io.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsArray() });
   console.log("[UPDATED] after leaveRoom", Game);
+};
+
+const handleInterval = (player, socket, io) => {
+  const { piece, heap } = player;
+  if (!piece.moveDown(heap)) {
+    player.updateHeap();
+  }
+  player.updateBoard();
+  io.in(player.room.name).emit(UPDATE_PLAYERS, {
+    players: player.room.createPublicPlayersArray()
+  });
+};
+
+export const startGame = (socket, io) => {
+  const player = Game.findPlayer(socket.id);
+  if (!player) return;
+  player.room.interval = setInterval(
+    () => handleInterval(player, socket, io),
+    1000
+  );
 };

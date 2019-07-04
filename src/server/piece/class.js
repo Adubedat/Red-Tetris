@@ -12,11 +12,9 @@ const shapes = [
 /* eslint-enable */
 
 class Piece {
-  constructor(shape, boardInfo, player) {
-    this._shape = shapes[5];
+  constructor(shape) {
+    this._shape = shapes[shape];
     this._pos = { x: 0, y: 0 };
-    this._player = player;
-    this._boardInfo = boardInfo;
   }
 
   get pos() {
@@ -27,41 +25,14 @@ class Piece {
     return this._shape;
   }
 
-  updateBoard() {
-    const { x, y } = this._pos;
-    const shape = this._shape;
-    const newBoard = this._boardInfo.heap.map(row => {
-      return [...row];
-    });
-    for (let i = 0; i < shape.length; i++) {
-      for (let j = 0; j < shape[i].length; j++) {
-        if (shape[i][j]) newBoard[i + y][j + x] = 1;
-      }
-    }
-    this._boardInfo.board = newBoard;
-  }
-
-  updateHeap() {
-    const newHeap = this._boardInfo.board.map(row => {
-      return [...row];
-    });
-    this._boardInfo.heap = newHeap;
-  }
-
-  isPosAvailable(newPos) {
+  isPosAvailable(newPos, shape, heap) {
     const { x, y } = newPos;
-    const shape = this._shape;
     for (let i = 0; i < shape.length; i++) {
       for (let j = 0; j < shape[i].length; j++) {
         if (shape[i][j]) {
           let heapY = i + y;
           let heapX = j + x;
-          if (
-            heapY >= 20 ||
-            heapX < 0 ||
-            heapX >= 10 ||
-            this._boardInfo.heap[heapY][heapX]
-          )
+          if (heapY >= 20 || heapX < 0 || heapX >= 10 || heap[heapY][heapX])
             return false;
         }
       }
@@ -69,32 +40,30 @@ class Piece {
     return true;
   }
 
-  moveDown() {
+  moveDown(heap) {
     let newPos = { ...this._pos };
     newPos.y += 1;
-    if (this.isPosAvailable(newPos)) {
+    if (this.isPosAvailable(newPos, this._shape, heap)) {
       this._pos.y += 1;
-      this.updateBoard();
+      return true;
     } else {
-      this.updateHeap();
+      return false;
     }
   }
 
-  moveLeft() {
+  moveLeft(heap) {
     let newPos = { ...this._pos };
     newPos.x -= 1;
-    if (this.isPosAvailable(newPos)) {
+    if (this.isPosAvailable(newPos, this._shape, heap)) {
       this._pos.x -= 1;
-      this.updateBoard();
     }
   }
 
-  moveRight() {
+  moveRight(heap) {
     let newPos = { ...this._pos };
     newPos.x += 1;
-    if (this.isPosAvailable(newPos)) {
+    if (this.isPosAvailable(newPos, this._shape, heap)) {
       this._pos.x += 1;
-      this.updateBoard();
     }
   }
 }

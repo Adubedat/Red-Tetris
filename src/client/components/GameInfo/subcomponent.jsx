@@ -1,13 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyledContainer } from "./styles";
+import { StyledContainer, StyledButton } from "./styles";
 
-const GameInfoSub = ({ room }) => {
-  const { playersCount, name: roomName } = room;
+const GameInfoSub = ({ room, playerId, startGame }) => {
+  const { playersCount, name: roomName, hostId } = room;
+  const handleClick = () => {
+    startGame();
+  };
+
   return (
     <StyledContainer>
       <h2>{roomName}</h2>
       <p>[{playersCount}/10 Players]</p>
+      {playerId === hostId ? (
+        <StyledButton onClick={() => handleClick()}>start</StyledButton>
+      ) : (
+        <p>waiting for host to start</p>
+      )}
     </StyledContainer>
   );
 };

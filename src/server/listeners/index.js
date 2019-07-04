@@ -1,6 +1,6 @@
 import { initClientState } from "../game/controller";
 import { connectPlayer, disconnectPlayer } from "../player/controller";
-import { joinRoom, leaveRoom } from "../room/controller";
+import { joinRoom, leaveRoom, startGame } from "../room/controller";
 import { onKeyPressed } from "../piece/controller";
 import {
   LEAVE_ROOM,
@@ -8,6 +8,7 @@ import {
   DISCONNECT_PLAYER,
   NEW_PLAYER,
   JOIN_ROOM,
+  START_GAME,
   DISCONNECT,
   LOG_LINE,
   KEY_PRESSED,
@@ -37,9 +38,10 @@ export const initListeners = io => {
       leaveRoom(socket, io);
       // console.log("[JOIN] socket room : ", io.sockets.adapter.rooms);
     });
-    socket.on(KEY_PRESSED, (data, callback) => {
+    socket.on(START_GAME, () => startGame(socket, io));
+    socket.on(KEY_PRESSED, data => {
       console.log("[EVENT] ", KEY_PRESSED, data);
-      onKeyPressed(data, callback, socket, io);
+      onKeyPressed(data, socket, io);
     });
     socket.on(DISCONNECT, reason => {
       console.log(LOG_LINE, "[EVENT] DISCONNECT :", reason);

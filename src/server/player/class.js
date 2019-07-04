@@ -5,21 +5,21 @@ class Player {
     this._name = name;
     this._id = id;
     this._room = null;
-    this._boardInfo = {
-      board: Array(20)
-        .fill(0)
-        .map(() => Array(10).fill(0)),
-      heap: Array(20)
-        .fill(0)
-        .map(() => Array(10).fill(0))
-    };
-    // this._board = Array(20)
-    //   .fill(0)
-    //   .map(() => Array(10).fill(0));
-    // this._heap = Array(20)
-    //   .fill(0)
-    //   .map(() => Array(10).fill(0));
-    this._piece = new Piece(this._boardInfo);
+    // this._boardInfo = {
+    //   board: Array(20)
+    //     .fill(0)
+    //     .map(() => Array(10).fill(0)),
+    //   heap: Array(20)
+    //     .fill(0)
+    //     .map(() => Array(10).fill(0))
+    // };
+    this._board = Array(20)
+      .fill(0)
+      .map(() => Array(10).fill(0));
+    this._heap = Array(20)
+      .fill(0)
+      .map(() => Array(10).fill(0));
+    this._piece = new Piece(5);
   }
 
   get name() {
@@ -37,6 +37,13 @@ class Player {
     this._board = board;
   }
 
+  get heap() {
+    return this._heap;
+  }
+  set heap(heap) {
+    this.heap = heap;
+  }
+
   get room() {
     return this._room;
   }
@@ -49,11 +56,32 @@ class Player {
     return this._piece;
   }
 
+  updateBoard() {
+    const { x, y } = this._piece.pos;
+    const shape = this._piece.shape;
+    const newBoard = this._heap.map(row => {
+      return [...row];
+    });
+    for (let i = 0; i < shape.length; i++) {
+      for (let j = 0; j < shape[i].length; j++) {
+        if (shape[i][j]) newBoard[i + y][j + x] = 1;
+      }
+    }
+    this._board = newBoard;
+  }
+
+  updateHeap() {
+    const newHeap = this._board.map(row => {
+      return [...row];
+    });
+    this._heap = newHeap;
+  }
+
   toObject() {
     const player = {};
     player.name = this._name;
     player.id = this._id;
-    player.board = this._boardInfo.board;
+    player.board = this.board;
     return player;
   }
 }

@@ -2,7 +2,11 @@ import { connectPlayer } from "./player";
 import { joinRoom } from "./room";
 import { toast } from "react-toastify";
 import socket from "../services/socket-api";
-import { KEY_PRESSED, UPDATE_BOARD } from "../../constants/constants";
+import {
+  KEY_PRESSED,
+  UPDATE_BOARD,
+  START_GAME
+} from "../../constants/constants";
 
 const checkHash = () => {
   const hash = window.location.hash.substr(1);
@@ -30,12 +34,16 @@ export const handleHash = dispatch => {
 };
 
 export const handleKeyPress = (e, dispatch) => {
-  // console.log("key pressed", e.code);
   socket.emit(KEY_PRESSED, e.code, response => {
     if (response.status === "success") {
-      // dispatch(updateBoard(response.data));
     }
   });
+};
+
+export const startGame = () => {
+  return () => {
+    socket.emit(START_GAME);
+  };
 };
 
 export const updateBoard = board => ({
