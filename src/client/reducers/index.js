@@ -7,7 +7,7 @@ import {
 } from "../../constants/constants";
 
 const player = (state = {}, action) => {
-  console.log("[STATE UPDATE] with action : ", action.type);
+  // console.log("[STATE UPDATE] with action : ", action.type);
   switch (action.type) {
     case UPDATE_PLAYER:
       return action.player;

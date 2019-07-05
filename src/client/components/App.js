@@ -17,7 +17,6 @@ setConfig({
 toast.configure();
 
 export const App = ({ playerName, roomName }) => {
-  console.log("[TEST] IN APP");
   return (
     <div>
       <Header />

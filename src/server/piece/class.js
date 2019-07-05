@@ -64,12 +64,17 @@ class Piece {
     return this._color;
   }
 
-  update(index) {
+  update(index, heap) {
     const newTetri = { ...tetriminos[index] };
     this._shape = [...newTetri.shape.map(row => [...row])];
     this._pos = { ...newTetri.pos };
     this._shadowPos = { ...newTetri.pos };
     this._color = newTetri.color;
+    if (this.isPosAvailable(this._pos, this._shape, heap)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   printToBoard(pos, shape, board, color) {
@@ -119,11 +124,12 @@ class Piece {
     if (this.isPosAvailable(this._pos, newShape, heap)) {
       this._shape = newShape;
     }
-    this.updateShadow(heap);
   }
+
   hardDrop() {
     this._pos = { ...this._shadowPos };
   }
+
   moveDown(heap) {
     let newPos = { ...this._pos };
     newPos.y += 1;
@@ -140,7 +146,6 @@ class Piece {
     newPos.x -= 1;
     if (this.isPosAvailable(newPos, this._shape, heap)) {
       this._pos.x -= 1;
-      this.updateShadow(heap);
     }
   }
 
@@ -149,7 +154,6 @@ class Piece {
     newPos.x += 1;
     if (this.isPosAvailable(newPos, this._shape, heap)) {
       this._pos.x += 1;
-      this.updateShadow(heap);
     }
   }
 }

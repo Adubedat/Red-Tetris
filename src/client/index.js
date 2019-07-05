@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import thunkMiddleware from "redux-thunk";
 import rootReducer from "./reducers";
 import "./index.css";
@@ -16,13 +16,15 @@ const initialState = {
   rooms: []
 };
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const store = createStore(
   rootReducer,
   initialState,
-  applyMiddleware(thunkMiddleware)
+  composeEnhancers(applyMiddleware(thunkMiddleware))
 );
 
-store.subscribe(() => console.log("[CURRENT STATE] : ", store.getState()));
+// store.subscribe(() => console.log("[CURRENT STATE] : ", store.getState()));
 
 handleHash(store.dispatch);
 initListeners(store.dispatch);

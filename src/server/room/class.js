@@ -78,7 +78,10 @@ class Room {
   createPublicPlayersArray() {
     return this._players.map(player => player.toObject());
   }
-
+  endGame() {
+    if (this._interval) clearInterval(this._interval);
+    this._isStarted = false;
+  }
   toObject() {
     const room = {};
     room.name = this._name;

@@ -59,6 +59,7 @@ class Player {
     // this._piece = new Piece(5);
   }
   updateBoard() {
+    this._piece.updateShadow(this._heap);
     const piece = this._piece;
     const { pos, shadowPos, shape, color } = this._piece;
     let newBoard = this._heap.map(row => {
@@ -76,9 +77,17 @@ class Player {
     const { pieces } = this._room;
     this._heap = newHeap;
     console.log(pieces[this._indexPieces]);
-    this._piece.update(pieces[this._indexPieces]);
-    this._piece.updateShadow(this._heap);
-    this._indexPieces += 1;
+    const updatePiece = this._piece.update(
+      pieces[this._indexPieces],
+      this._heap
+    );
+    if (!updatePiece) {
+      this.endGame();
+    } else this._indexPieces += 1;
+  }
+
+  endGame() {
+    this._room.endGame();
   }
 
   toObject() {
