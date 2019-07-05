@@ -6,6 +6,7 @@ class Room {
     this._hostId = hostId;
     this._players = [];
     this._playersCount = 0;
+    this._stillInGameCounter = 0;
     this._interval = null;
     this._isStarted = false;
     this._pieces = [];
@@ -15,15 +16,12 @@ class Room {
   get name() {
     return this._name;
   }
-
   get hostId() {
     return this._hostId;
   }
-
   get players() {
     return this._players;
   }
-
   get playersCount() {
     return this._playersCount;
   }
@@ -44,6 +42,12 @@ class Room {
   }
   set pieces(pieces) {
     this._pieces = pieces;
+  }
+  get _stillInGameCounter() {
+    return this.__stillInGameCounter;
+  }
+  set _stillInGameCounter(stillInGameCounter) {
+    this.__stillInGameCounter = stillInGameCounter;
   }
 
   clean() {
@@ -82,6 +86,7 @@ class Room {
   endGame() {
     if (this._interval) clearInterval(this._interval);
     this._isStarted = false;
+    console.log("ENDGAME");
   }
   toObject() {
     const room = {};

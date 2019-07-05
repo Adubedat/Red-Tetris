@@ -7,7 +7,6 @@ import {
   UPDATE_ROOMS,
   UPDATE_PLAYERS
 } from "../../constants/constants";
-import { isTSExpressionWithTypeArguments } from "@babel/types";
 
 export const joinRoom = (roomName, callback, socket, io) => {
   console.log("[CALL] joinRoom");
@@ -58,6 +57,7 @@ export const leaveRoom = (socket, io) => {
       room.clean();
       Game.removeRoom(room.name);
     }
+    player.room = null;
     player.clean();
     io.in(room.name).emit(UPDATE_PLAYERS, {
       players: room.createPublicPlayersArray()
@@ -72,30 +72,30 @@ export const leaveRoom = (socket, io) => {
   }
 };
 
-const updateClient = (room, io) => {
+const handleInterval = (room, io) => {
   room.players.forEach(player => {
-    player.updateBoard();
+    if (player.inGame && !player.piece.moveDown(player.heap)) {
+      player.updateHeap();
+    }
   });
   io.in(room.name).emit(UPDATE_PLAYERS, {
     players: room.createPublicPlayersArray()
   });
 };
 
-const handleInterval = (room, io) => {
-  room.players.forEach(player => {
-    if (!player.piece.moveDown(player.heap)) {
-      player.updateHeap();
-    }
-  });
-  updateClient(room, io);
-};
-
-export const startGame = (socket, io) => {
-  const room = Game.findPlayer(socket.id).room;
+export const startGame = (room, io) => {
   if (room.isStarted) return;
+  console.log("STARTGAME");
   room.isStarted = true;
-  room.players.forEach(player => player.newPiece());
-  updateClient(room, io);
+  room.stillInGameCounter = room.players.length;
+  room.players.forEach(player => {
+    player.clean();
+    player.newPiece();
+    player.inGame = true;
+  });
+  io.in(room.name).emit(UPDATE_PLAYERS, {
+    players: room.createPublicPlayersArray()
+  });
   room.interval = setInterval(() => handleInterval(room, io), 1000);
-  console.log(room.interval);
+  // console.log(room.interval);
 };

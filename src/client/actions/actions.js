@@ -33,7 +33,7 @@ export const handleHash = dispatch => {
   dispatch(joinRoom(gameInfo.roomName));
 };
 
-export const handleKeyPress = (e, dispatch) => {
+export const handleKeyPress = e => {
   socket.emit(KEY_PRESSED, e.code, response => {
     if (response.status === "success") {
     }

@@ -44,15 +44,12 @@ class Piece {
   get shape() {
     return this._shape;
   }
-
   get pos() {
     return this._pos;
   }
-
   get shadowPos() {
     return this._shadowPos;
   }
-
   get color() {
     return this._color;
   }

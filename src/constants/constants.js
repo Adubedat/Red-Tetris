@@ -32,13 +32,15 @@ export const enumKeys = {
   ARROW_RIGHT: "ArrowRight",
   ARROW_DOWN: "ArrowDown",
   ARROW_UP: "ArrowUp",
-  SPACE: "Space"
+  SPACE: "Space",
+  ENTER: "Enter"
 };
 export const ARROW_LEFT = "ArrowLeft";
 export const ARROW_RIGHT = "ArrowRight";
 export const ARROW_DOWN = "ArrowDown";
 export const ARROW_UP = "ArrowUp";
 export const SPACE = "Space";
+export const ENTER = "Enter";
 
 export const UPDATE_BOARD = "UPDATE_BOARD";
 export const MAX_PLAYER = 10;
