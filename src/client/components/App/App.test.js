@@ -2,7 +2,7 @@ import React from "react";
 import configureMockStore from "redux-mock-store";
 import { shallow } from "enzyme";
 import toJson from "enzyme-to-json";
-import ConnectedApp, { App } from "./App";
+import ConnectedApp, { App } from ".";
 
 const mockStore = configureMockStore();
 const initialState = {

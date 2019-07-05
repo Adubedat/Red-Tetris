@@ -19,7 +19,7 @@ let HeaderSub = ({ player, room, onLogout, onBackHome }) => {
         {roomName ? <Button onClick={onBackHome}>Back Home</Button> : ""}
       </StyledItemLeft>
       <StyledItemCenter>
-        <StyledTitle>Tetris Orange</StyledTitle>
+        <StyledTitle data-text="Tetris Orange">Tetris Orange</StyledTitle>
       </StyledItemCenter>
       <StyledItemRight>
         {playerName && (

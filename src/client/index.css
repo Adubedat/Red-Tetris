@@ -6,10 +6,9 @@
     url("../../fonts/ArcadeClassic.woff") format("woff");
 }
 
-html,
-body {
+html {
   margin: 0;
-  overflow:hidden;
+  overflow: hidden;
   height: 100%;
   color: white;
   font-family: "ArcadeClassic";
@@ -26,14 +25,49 @@ code {
 h1 {
   font-size: 54px;
   background: linear-gradient(#ff8a00 0%, #dc141b 100%);
-  background-clip: "text";
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  -webkit-animation-name: dropTitle; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 1s; /* Safari 4.0 - 8.0 */
+  animation-name: dropTitle;
+  animation-duration: 1s;
+  /* animation-iteration-count: infinite; */
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes dropTitle {
+  from {
+    top: -100px;
+  }
+  to {
+    top: 0px;
+  }
+}
+
+/* Standard syntax */
+@keyframes dropTitle {
+  from {
+    top: -100px;
+  }
+  to {
+    top: 0px;
+  }
+}
+h1:after {
+  background: none;
+  content: attr(data-text);
+  left: 0;
+  position: absolute;
+  text-shadow: 6px 6px 10px #000000;
+  top: 0;
+  z-index: -1;
 }
 
 h2 {
   font-size: 24px;
-  background: linear-gradient(#ff8a00 0%, #dc141b 100%);
+  background: linear-gradient(#375f64 0%, #dc141b 100%);
   background-clip: "text";
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

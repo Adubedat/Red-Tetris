@@ -37,12 +37,13 @@ export const onKeyPressed = (code, socket, io) => {
           break;
       }
       // player.piece.updateShadow(player.heap);
-      player.updateBoard();
+      if (player.room.isStarted) player.updateBoard();
       io.in(player.room.name).emit(UPDATE_PLAYERS, {
         players: player.room.createPublicPlayersArray()
       });
-    } else if (code === enumKeys.SPACE) {
-      startGame(socket, io);
     }
+    // } else if (code === enumKeys.SPACE) {
+    //   startGame(socket, io);
+    // }
   }
 };

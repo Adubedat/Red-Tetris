@@ -83,6 +83,7 @@ class Player {
     );
     if (!updatePiece) {
       this.endGame();
+      // this.clean();
     } else this._indexPieces += 1;
   }
 

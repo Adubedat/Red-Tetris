@@ -76,7 +76,7 @@ const handleInterval = (player, socket, io) => {
   if (!piece.moveDown(heap)) {
     player.updateHeap();
   }
-  player.updateBoard();
+  if (player.room.isStarted) player.updateBoard();
   io.in(player.room.name).emit(UPDATE_PLAYERS, {
     players: player.room.createPublicPlayersArray()
   });

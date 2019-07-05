@@ -1,9 +1,7 @@
 import { connect } from "react-redux";
 import CellSub from "./subcomponent";
 
-const mapStateToProps = state => {
-  return { roomName: state.room };
-};
+// const mapStateToProps = state => {};
 
 const Cell = connect(
   null,
