@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import Button from "../common/Button";
 import { StyledForm, StyledRegisterGroup, StyledTextField } from "./styles";
 
 const CreateRoomSub = ({ onSubmit, onChange, error, value, label }) => {
+  useEffect(() => {
+    document.getElementById("name").focus();
+  });
   return (
     <StyledForm onSubmit={e => onSubmit(e)}>
       <p>Create a new room to play with your friends (if you have any ...)</p>
       <StyledRegisterGroup>
         <StyledTextField
+          id="name"
           error={error.boolean}
           helperText={error.message}
           spellCheck="false"

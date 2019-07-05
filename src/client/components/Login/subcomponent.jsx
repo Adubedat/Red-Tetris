@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Input from "../common/Input";
 import Button from "../common/Button";
@@ -18,15 +18,17 @@ const LoginSub = ({ connectPlayer }) => {
     setPlayerName(e.target.value);
     setError(inputError(e.target.value));
   };
-
+  useEffect(() => {
+    document.getElementById("name").focus();
+  });
   return (
     <StyledForm onSubmit={e => handleSubmit(e)}>
-      {/* <h1>Tetris Orange</h1> */}
       <Button disabled={true} fullWidth>
         42 Connect
       </Button>
       <StyledHorizontalText>OR</StyledHorizontalText>
       <Input
+        id="name"
         error={error.boolean}
         helperText={error.message}
         spellCheck="false"
