@@ -85,7 +85,6 @@ const handleInterval = (room, io) => {
 
 export const startGame = (room, io) => {
   if (room.isStarted) return;
-  console.log("STARTGAME");
   room.isStarted = true;
   room.stillInGameCounter = room.players.length;
   room.players.forEach(player => {
