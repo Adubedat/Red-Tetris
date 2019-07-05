@@ -48,6 +48,14 @@ class Player {
   get piece() {
     return this._piece;
   }
+
+  newPiece() {
+    const { pieces } = this._room;
+    if (!this._piece.initNewPiece(pieces[this._indexPieces], this._heap)) {
+      this._room.endGame();
+    } else this._indexPieces += 1;
+  }
+
   clean() {
     this._room = null;
     this._board = Array(20)
@@ -56,8 +64,8 @@ class Player {
     this._heap = Array(20)
       .fill("")
       .map(() => Array(10).fill(""));
-    // this._piece = new Piece(5);
   }
+
   updateBoard() {
     this._piece.updateShadow(this._heap);
     const piece = this._piece;
@@ -71,23 +79,10 @@ class Player {
   }
 
   updateHeap() {
-    const newHeap = this._board.map(row => {
-      return [...row];
-    });
-    const { pieces } = this._room;
-    this._heap = newHeap;
-    console.log(pieces[this._indexPieces]);
-    const updatePiece = this._piece.update(
-      pieces[this._indexPieces],
-      this._heap
-    );
-    if (!updatePiece) {
-      this.endGame();
-    } else this._indexPieces += 1;
-  }
-
-  endGame() {
-    this._room.endGame();
+    const piece = this._piece;
+    const { pos, shape, color } = this._piece;
+    this._heap = piece.printToBoard(pos, shape, this._heap, color);
+    this.newPiece();
   }
 
   toObject() {

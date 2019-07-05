@@ -30,13 +30,11 @@ export const onKeyPressed = (code, socket, io) => {
           break;
         case enumKeys.SPACE:
           player.piece.hardDrop();
-          player.updateBoard();
           player.updateHeap();
           break;
         default:
           break;
       }
-      // player.piece.updateShadow(player.heap);
       player.updateBoard();
       io.in(player.room.name).emit(UPDATE_PLAYERS, {
         players: player.room.createPublicPlayersArray()

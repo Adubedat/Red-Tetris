@@ -9,6 +9,7 @@ class Room {
     this._interval = null;
     this._isStarted = false;
     this._pieces = [];
+    this.initPieces();
   }
 
   get name() {

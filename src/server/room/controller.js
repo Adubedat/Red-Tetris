@@ -7,6 +7,7 @@ import {
   UPDATE_ROOMS,
   UPDATE_PLAYERS
 } from "../../constants/constants";
+import { isTSExpressionWithTypeArguments } from "@babel/types";
 
 export const joinRoom = (roomName, callback, socket, io) => {
   console.log("[CALL] joinRoom");
@@ -71,37 +72,30 @@ export const leaveRoom = (socket, io) => {
   }
 };
 
-const handleInterval = (player, socket, io) => {
-  const { piece, heap } = player;
-  if (!piece.moveDown(heap)) {
-    player.updateHeap();
-  }
-  player.updateBoard();
-  io.in(player.room.name).emit(UPDATE_PLAYERS, {
-    players: player.room.createPublicPlayersArray()
+const updateClient = (room, io) => {
+  room.players.forEach(player => {
+    player.updateBoard();
+  });
+  io.in(room.name).emit(UPDATE_PLAYERS, {
+    players: room.createPublicPlayersArray()
   });
 };
 
-export const startGame = (socket, io) => {
-  const player = Game.findPlayer(socket.id);
-  if (player && player.room) {
-    const room = player.room;
-    if (!room.isStarted) {
-      room.isStarted = true;
-      room.initPieces();
+const handleInterval = (room, io) => {
+  room.players.forEach(player => {
+    if (!player.piece.moveDown(player.heap)) {
       player.updateHeap();
-      player.updateBoard();
-      io.in(player.room.name).emit(UPDATE_PLAYERS, {
-        players: player.room.createPublicPlayersArray()
-      });
-      room.interval = setInterval(
-        () => handleInterval(player, socket, io),
-        1000
-      );
-      io.in(room.name).emit(UPDATE_ROOM, {
-        room: room.toObject()
-      });
-      console.log(room.interval);
     }
-  }
+  });
+  updateClient(room, io);
+};
+
+export const startGame = (socket, io) => {
+  const room = Game.findPlayer(socket.id).room;
+  if (room.isStarted) return;
+  room.isStarted = true;
+  room.players.forEach(player => player.newPiece());
+  updateClient(room, io);
+  room.interval = setInterval(() => handleInterval(room, io), 1000);
+  console.log(room.interval);
 };
