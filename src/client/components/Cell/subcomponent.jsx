@@ -1,10 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyledContainer } from "./styles";
+import { StyledContainer, StyledLetter } from "./styles";
 
-const CellSub = ({ color, isSpectre = false }) => {
+const CellSub = ({ color, isSpectre = false, letter = "" }) => {
   return (
-    <StyledContainer color={color} isSpectre={isSpectre}></StyledContainer>
+    <StyledContainer color={color} isSpectre={isSpectre}>
+      <StyledLetter>{letter}</StyledLetter>
+    </StyledContainer>
   );
 };
 

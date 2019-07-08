@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Input from "../common/Input";
 import Button from "../common/Button";
-import { StyledForm, StyledButton } from "./styles";
+import {
+  StyledTetriminos,
+  StyledContainer,
+  StyledForm,
+  StyledInput,
+  StyledButton
+} from "./styles";
 import inputError from "../../errors/inputError";
 import Cell from "../Cell";
 
@@ -25,24 +31,29 @@ const LoginSub = ({ connectPlayer }) => {
   });
 
   return (
-    <StyledForm onSubmit={e => handleSubmit(e)}>
-      <Input
-        id="name"
-        error={error.boolean}
-        helperText={error.message}
-        spellCheck="false"
-        label="Name"
-        value={playerName}
-        onChange={e => handleChange(e)}
-      />
-      {/* <StyledHorizontalText></StyledHorizontalText> */}
-      <StyledButton disabled={!playerName || error.boolean} type="submit">
-        <Cell color="blue"></Cell>
-        <Cell color="blue"></Cell>
-        <Cell color="blue"></Cell>
-        <Cell color="blue"></Cell>
-      </StyledButton>
-    </StyledForm>
+    <StyledContainer>
+      <StyledForm onSubmit={e => handleSubmit(e)}>
+        <Input
+          id="name"
+          error={error.boolean}
+          helperText={error.message}
+          spellCheck="false"
+          label="Enter your name..."
+          autoComplete="off"
+          value={playerName}
+          onChange={e => handleChange(e)}
+        />
+        {/* <StyledHorizontalText></StyledHorizontalText> */}
+        <StyledButton disabled={!playerName || error.boolean} type="submit">
+          <StyledTetriminos>
+            <Cell color="#14d4dc" letter="P"></Cell>
+            <Cell color="#dc143c" letter="L"></Cell>
+            <Cell color="#ff8b00" letter="A"></Cell>
+            <Cell color="#3cdc14" letter="Y"></Cell>
+          </StyledTetriminos>
+        </StyledButton>
+      </StyledForm>
+    </StyledContainer>
   );
 };
 

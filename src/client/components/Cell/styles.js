@@ -16,3 +16,5 @@ export const StyledContainer = styled.div`
       background-color: ${props => props.color};
     `};
 `;
+
+export const StyledLetter = styled.p``;
