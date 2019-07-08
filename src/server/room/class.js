@@ -10,7 +10,7 @@ class Room {
     this._interval = null;
     this._isStarted = false;
     this._pieces = [];
-    this.initPieces();
+    this.extendPiecesList();
   }
 
   get name() {
@@ -74,10 +74,12 @@ class Room {
     return this._playersCount >= MAX_PLAYER;
   }
 
-  initPieces() {
-    this._pieces = [...Array(1000)].map(() => {
-      return Math.floor(Math.random() * 7);
-    });
+  extendPiecesList() {
+    for (let i = 0; i < 10; i++) {
+      this._pieces.push(Math.floor(Math.random() * 7));
+    }
+    console.log("EXTEND PIECES");
+    console.log(this._pieces);
   }
 
   createPublicPlayersArray() {

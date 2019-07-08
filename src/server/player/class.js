@@ -55,7 +55,13 @@ class Player {
       if (this._room.stillInGameCounter === 0) {
         this._room.endGame();
       }
-    } else this._indexPieces += 1;
+    } else {
+      this._indexPieces += 1;
+      if (this._indexPieces >= pieces.length - 1) this._room.extendPiecesList();
+      console.log("NEW PIECE");
+      console.log("INDEX : ", this._indexPieces);
+      console.log(("PIECES LENGTH : ", pieces.length));
+    }
   }
 
   clean() {
