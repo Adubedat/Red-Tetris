@@ -3,7 +3,10 @@ import GameInfoSub from "./subcomponent";
 import { startGame } from "../../actions/actions";
 
 const mapStateToProps = state => {
-  return { room: state.room, playerId: state.player.id };
+  return {
+    room: state.room,
+    isHost: state.player.isHost
+  };
 };
 const actionCreators = { startGame };
 const GameInfo = connect(

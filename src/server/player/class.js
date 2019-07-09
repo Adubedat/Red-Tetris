@@ -58,9 +58,6 @@ class Player {
     } else {
       this._indexPieces += 1;
       if (this._indexPieces >= pieces.length - 1) this._room.extendPiecesList();
-      console.log("NEW PIECE");
-      console.log("INDEX : ", this._indexPieces);
-      console.log(("PIECES LENGTH : ", pieces.length));
     }
   }
 
@@ -99,14 +96,16 @@ class Player {
     this._heap = piece.printToBoard(pos, shape, this._heap, color);
     this.removeLines();
     this.newPiece();
+    this._room.updateSpectres(this._id, this._heap);
   }
 
   toObject() {
-    const player = {};
-    player.name = this._name;
-    player.id = this._id;
-    player.board = this.renderBoard() || this._heap;
-    return player;
+    return {
+      name: this._name,
+      id: this._id,
+      isHost: this._room && this._room.hostId === this._id,
+      board: this.renderBoard() || this._heap
+    };
   }
 }
 

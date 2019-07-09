@@ -10,7 +10,7 @@ const GameSub = () => {
     <StyledContainer>
       <GameInfo />
       <Board />
-      {/* <Spectres /> */}
+      <Spectres />
     </StyledContainer>
   );
 };

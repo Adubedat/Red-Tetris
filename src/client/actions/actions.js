@@ -5,7 +5,8 @@ import socket from "../services/socket-api";
 import {
   KEY_PRESSED,
   UPDATE_BOARD,
-  START_GAME
+  START_GAME,
+  UPDATE_SPECTRES
 } from "../../constants/constants";
 
 const checkHash = () => {
@@ -27,17 +28,14 @@ const checkHash = () => {
 };
 
 export const handleHash = dispatch => {
-  const gameInfo = checkHash();
-  if (!gameInfo) return;
-  dispatch(connectPlayer(gameInfo.playerName));
-  dispatch(joinRoom(gameInfo.roomName));
+  const data = checkHash();
+  if (!data) return;
+  dispatch(connectPlayer(data.playerName));
+  dispatch(joinRoom(data.roomName));
 };
 
 export const handleKeyPress = e => {
-  socket.emit(KEY_PRESSED, e.code, response => {
-    if (response.status === "success") {
-    }
-  });
+  socket.emit(KEY_PRESSED, { code: e.code });
 };
 
 export const startGame = () => {
@@ -49,4 +47,9 @@ export const startGame = () => {
 export const updateBoard = board => ({
   type: UPDATE_BOARD,
   board
+});
+
+export const updateSpectres = spectres => ({
+  type: UPDATE_SPECTRES,
+  spectres
 });

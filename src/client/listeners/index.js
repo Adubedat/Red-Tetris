@@ -2,21 +2,24 @@ import socket from "../services/socket-api";
 import {
   UPDATE_ROOMS,
   UPDATE_ROOM,
-  UPDATE_PLAYERS
+  UPDATE_PLAYER,
+  UPDATE_SPECTRES
 } from "../../constants/constants";
 import { updateRooms, updateRoom } from "../actions/room";
-import { updateOtherPlayers, updatePlayer } from "../actions/player";
-import { handleHash, handleKeyPress } from "../actions/actions";
+import { updatePlayer } from "../actions/player";
+import { handleHash, handleKeyPress, updateSpectres } from "../actions/actions";
 
 export const initListeners = dispatch => {
   socket.on(UPDATE_ROOMS, data => subscribeUpdateRooms(data, dispatch));
 
-  socket.on(UPDATE_ROOM, data => subscribeUpdateRoom(data, dispatch, socket));
-  socket.on(UPDATE_PLAYERS, data =>
-    subscribeUpdatePlayers(data, dispatch, socket)
-  );
+  socket.on(UPDATE_ROOM, data => subscribeUpdateRoom(data, dispatch));
+
+  socket.on(UPDATE_PLAYER, data => subscribeUpdatePlayers(data, dispatch));
+
+  socket.on(UPDATE_SPECTRES, data => subscribeUpdateSpectres(data, dispatch));
+
   window.onhashchange = () => handleHash(dispatch);
-  document.onkeydown = e => handleKeyPress(e, dispatch);
+  document.onkeydown = e => handleKeyPress(e);
 };
 
 const subscribeUpdateRooms = (data, dispatch) => {
@@ -24,17 +27,17 @@ const subscribeUpdateRooms = (data, dispatch) => {
   dispatch(updateRooms(rooms));
 };
 
-const subscribeUpdateRoom = (data, dispatch, socket) => {
+const subscribeUpdateRoom = (data, dispatch) => {
   const { room } = data;
   dispatch(updateRoom(room));
-  const otherPlayers = room.players.filter(p => p.id !== socket.id);
-  dispatch(updateOtherPlayers(otherPlayers));
 };
 
-const subscribeUpdatePlayers = (data, dispatch, socket) => {
-  const { players } = data;
-  const player = players.find(p => p.id === socket.id);
-  const otherPlayers = players.filter(p => p.id !== socket.id);
+const subscribeUpdatePlayers = (data, dispatch) => {
+  const { player } = data;
   dispatch(updatePlayer(player));
-  dispatch(updateOtherPlayers(otherPlayers));
+};
+
+const subscribeUpdateSpectres = (data, dispatch) => {
+  const { spectres } = data;
+  dispatch(updateSpectres(spectres));
 };

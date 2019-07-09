@@ -28,9 +28,8 @@ const RoomListSub = ({ rooms, playerName }) => {
         {rooms.map(room => (
           <ListItem
             button
-            key={room.hostId}
+            key={room.name}
             onClick={() => handleClick(room.name)}
-            // style={(styles.listItem, { borderTop: index && "1px solid" })}
           >
             <StyledListItems>
               <p>{room.name}</p>

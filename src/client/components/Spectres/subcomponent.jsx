@@ -6,8 +6,8 @@ import { StyledContainer } from "./styles";
 const SpectreSub = ({ spectres }) => {
   return (
     <StyledContainer>
-      {spectres.map((spectre, i) => (
-        <BoardSub key={i} board={spectre.board} isSpectre={true} />
+      {spectres.map((spectre, index) => (
+        <BoardSub key={index} board={spectre.board} isSpectre={true} />
       ))}
     </StyledContainer>
   );

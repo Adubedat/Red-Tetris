@@ -19,8 +19,8 @@ export const DELETE_PLAYER = "DELETE_PLAYER";
 export const SHOW_TOAST = "SHOW_TOAST";
 
 export const CONNECTION = "connection";
-export const UPDATE_PLAYERS = "UPDATE_PLAYERS";
-export const UPDATE_OTHER_PLAYERS = "UPDATE_OTHER_PLAYERS";
+
+export const UPDATE_SPECTRES = "UPDATE_SPECTRES";
 
 export const DISCONNECT = "disconnect";
 
