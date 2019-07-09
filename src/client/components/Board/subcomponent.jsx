@@ -1,19 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyledContainer, StyledRow } from "./styles";
+import {
+  StyledContainer,
+  StyledRow,
+  StyledAspectRatio,
+  StyledAspectRatioContainer
+} from "./styles";
 import Cell from "../Cell";
 
-const BoardSub = ({ board, isSpectre = false }) => {
+const BoardSub = ({ board, playerName = "", isSpectre = false }) => {
   return (
-    <StyledContainer isSpectre={isSpectre}>
-      {board.map((row, i) => (
-        <StyledRow key={i}>
-          {row.map((cell, i) => (
-            <Cell key={i} color={cell} isSpectre={isSpectre} />
+    <StyledAspectRatioContainer isSpectre={isSpectre}>
+      <StyledAspectRatio>
+        <StyledContainer isSpectre={isSpectre}>
+          {board.map((row, i) => (
+            <StyledRow key={i}>
+              {row.map((cell, i) => (
+                <Cell key={i} color={cell} isSpectre={isSpectre} />
+              ))}
+            </StyledRow>
           ))}
-        </StyledRow>
-      ))}
-    </StyledContainer>
+        </StyledContainer>
+      </StyledAspectRatio>
+      {playerName ? <p>{playerName}</p> : null}
+    </StyledAspectRatioContainer>
   );
 };
 

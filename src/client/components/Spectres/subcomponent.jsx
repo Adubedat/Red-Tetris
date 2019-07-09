@@ -7,7 +7,12 @@ const SpectreSub = ({ spectres }) => {
   return (
     <StyledContainer>
       {spectres.map((spectre, index) => (
-        <BoardSub key={index} board={spectre.board} isSpectre={true} />
+        <BoardSub
+          key={index}
+          board={spectre.board}
+          playerName={spectre.playerName}
+          isSpectre={true}
+        />
       ))}
     </StyledContainer>
   );
