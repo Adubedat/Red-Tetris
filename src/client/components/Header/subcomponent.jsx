@@ -10,7 +10,7 @@ import {
   StyledItemRight
 } from "./styles";
 
-let HeaderSub = ({ player, room, onLogout, onBackHome }) => {
+let HeaderSub = ({ player, room, onBackHome }) => {
   const { name: roomName } = room;
   const { name: playerName } = player;
   return (
@@ -22,14 +22,11 @@ let HeaderSub = ({ player, room, onLogout, onBackHome }) => {
         <StyledTitle data-text="Tetris Orange">Tetris Orange</StyledTitle>
       </StyledItemCenter>
       <StyledItemRight>
-        {playerName && (
+        {/* {playerName && (
           <StyledUserGroup>
-            <p>{playerName}</p>
-            <Button style={{ marginLeft: 20 }} onClick={onLogout}>
-              Logout
-            </Button>
+            <p> {playerName}</p>
           </StyledUserGroup>
-        )}
+        )} */}
       </StyledItemRight>
     </StyledContainer>
   );

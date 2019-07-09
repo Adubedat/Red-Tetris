@@ -10,38 +10,31 @@ export const StyledContainer = styled.div`
 `;
 
 export const StyledForm = styled.form`
-  width: 320px;
-  height: 160px;
+  flex-basis: 1 1 auto;
+  width: 160px;
+  height: 10vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  background: black;
 `;
 
 export const StyledButton = styled.button`
+  background: none;
   padding: 0px;
-  margin: 10px;
+  margin: 0px;
   border: 0px;
   position: relative;
-  width: 50%;
-  height: 20%;
-  animation: dropForm 2s;
-
-  @keyframes dropForm {
-    from {
-      transform: rotate(360deg);
-      top: -1020px;
-    }
-    to {
-      top: 0px;
-    }
+  top: -1020px;
+  transition: top 1s, transform 1s;
+  &:enabled {
+    top: 0px;
+    transform: rotate(720deg);
   }
 `;
 
 export const StyledTetriminos = styled.div`
-  position: absolute;
   margin: 0;
   height: 40px;
   width: 160px;
@@ -51,7 +44,10 @@ export const StyledTetriminos = styled.div`
 export const StyledTextField = withStyles({
   root: {
     "&": {
-      width: 240
+      width: 320
+    },
+    "& .mdc-text-field-helper-line": {
+      color: "red"
     },
     "& label.Mui-focused": {
       color: "white"

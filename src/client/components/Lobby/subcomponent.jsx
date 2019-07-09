@@ -1,20 +1,22 @@
 import React from "react";
-import CreateRoom from "../CreateRoom";
 import RoomList from "../RoomList";
-import Ladder from "../Ladder";
 import Chat from "../Chat";
-import { StyledContainer } from "./styles";
+import { StyledContainer, StyledLeftItem, StyledRightItem } from "./styles";
+import Ladder from "../Ladder";
+import CreateRoom from "../CreateRoom";
 
 const LobbySub = () => {
   return (
-    <div>
-      <CreateRoom />
-      <StyledContainer>
+    <StyledContainer>
+      <StyledLeftItem>
+        <CreateRoom />
         <RoomList />
+      </StyledLeftItem>
+      <StyledRightItem>
         <Ladder />
         <Chat />
-      </StyledContainer>
-    </div>
+      </StyledRightItem>
+    </StyledContainer>
   );
 };
 

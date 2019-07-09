@@ -3,10 +3,12 @@ import Input from "../common/Input";
 import { withStyles } from "@material-ui/core/styles";
 
 export const StyledForm = styled.form`
+  height: 100px;
   display: flex;
+  padding: 10px;
+  border: 3px solid white;
+  border-radius: 20px 2px
   flex-direction: column;
-  align-items: center;
-  margin: 20px;
 `;
 
 export const StyledRegisterGroup = styled.div`

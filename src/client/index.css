@@ -27,7 +27,7 @@ code {
 
 h2 {
   font-size: 24px;
-  background: linear-gradient(#375f64 0%, #dc141b 100%);
+  background: linear-gradient(gray 0%, white 100%);
   background-clip: "text";
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

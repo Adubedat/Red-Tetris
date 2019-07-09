@@ -1,33 +1,31 @@
 import styled from "styled-components";
 
 export const StyledContainer = styled.div`
-  // position: fixed;
-  // width: 100%;
-  height: 5vh;
+  margin: 0;
+  padding: 0;
+  margin-top: 10px;
   display: flex;
   align-items: center;
-  padding: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
 `;
 
 export const StyledUserGroup = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-around;
 `;
 
 export const StyledItemLeft = styled.div`
   flex: 1;
 `;
 export const StyledItemCenter = styled.div`
-  flex: 1;
+  flex: 1 375px;
   display: flex;
   justify-content: center;
 `;
 export const StyledItemRight = styled.div`
   flex: 1;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 `;
 
 export const StyledTitle = styled.h1`

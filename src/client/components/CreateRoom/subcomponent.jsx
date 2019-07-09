@@ -9,13 +9,13 @@ const CreateRoomSub = ({ onSubmit, onChange, error, value, label }) => {
   });
   return (
     <StyledForm onSubmit={e => onSubmit(e)}>
-      <p>Create a new room to play with your friends (if you have any ...)</p>
       <StyledRegisterGroup>
         <StyledTextField
           id="name"
           error={error.boolean}
           helperText={error.message}
           spellCheck="false"
+          autoComplete="off"
           label={label}
           value={value}
           onChange={e => onChange(e)}

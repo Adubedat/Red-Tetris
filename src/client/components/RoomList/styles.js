@@ -17,9 +17,4 @@ export const styles = {
     fontFamily: "ArcadeClassic",
     color: "white"
   }
-  // listItem: {
-  //   justifyContent: "space-between",
-  //   height: 50,
-  //   borderTopColor: "lightGray"
-  // }
 };
