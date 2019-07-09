@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import Button from "../common/Button";
-import { StyledForm, StyledRegisterGroup, StyledTextField } from "./styles";
+import {
+  StyledForm,
+  StyledRegisterGroup,
+  StyledTextField,
+  StyledButton
+} from "./styles";
 
 const CreateRoomSub = ({ onSubmit, onChange, error, value, label }) => {
   useEffect(() => {
@@ -20,9 +24,9 @@ const CreateRoomSub = ({ onSubmit, onChange, error, value, label }) => {
           value={value}
           onChange={e => onChange(e)}
         />
-        <Button disabled={!value || error.boolean} type="submit">
-          Create
-        </Button>
+        <StyledButton id="enter" disabled={!value || error.boolean}>
+          <p> Press Enter </p>
+        </StyledButton>
       </StyledRegisterGroup>
     </StyledForm>
   );

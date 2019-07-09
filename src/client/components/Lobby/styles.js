@@ -2,9 +2,7 @@ import styled from "styled-components";
 
 export const StyledContainer = styled.div`
   margin: 5px;
-  margin-top: 20px;
-  padding: 20px;
-  // border: 5px solid white;
+  padding: 10px;
   flex: 1;
   display: flex;
 `;
@@ -13,6 +11,7 @@ export const StyledLeftItem = styled.div`
   flex: 2;
   padding: 10px;
   margin: 5px;
+  background-color: rgba(0, 0, 0, 0.3);
   border: 5px solid white;
   border-radius: 30px 2px 2px 60px;
   display: flex;

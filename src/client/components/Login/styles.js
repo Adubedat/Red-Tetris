@@ -20,27 +20,6 @@ export const StyledForm = styled.form`
   position: relative;
 `;
 
-export const StyledButton = styled.button`
-  background: none;
-  padding: 0px;
-  margin: 0px;
-  border: 0px;
-  position: relative;
-  top: -1020px;
-  transition: top 1s, transform 1s;
-  &:enabled {
-    top: 0px;
-    transform: rotate(720deg);
-  }
-`;
-
-export const StyledTetriminos = styled.div`
-  margin: 0;
-  height: 40px;
-  width: 160px;
-  display: flex;
-`;
-
 export const StyledTextField = withStyles({
   root: {
     "&": {

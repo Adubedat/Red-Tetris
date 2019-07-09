@@ -1,9 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListSubheader from "@material-ui/core/ListSubheader";
-import { styles, StyledMainContainer, StyledListItems } from "./styles";
+import {
+  StyledContainer,
+  StyledList,
+  StyledListItem,
+  StyledListItemContent,
+  StyledListSubHeader,
+  StyledListSubHeaderColumn
+} from "./styles";
 import { MAX_PLAYER } from "../../../constants/constants";
 
 const RoomListSub = ({ rooms, playerName }) => {
@@ -11,37 +15,44 @@ const RoomListSub = ({ rooms, playerName }) => {
     window.location.hash = roomName + "[" + playerName + "]";
   };
   return (
-    <StyledMainContainer>
-      <List
-        component="nav"
-        style={{ flex: 1 }}
-        subheader={
-          <ListSubheader
-            component="div"
-            id="nested-list-subheader"
-            style={styles.subheader}
-          >
-            Rooms available
-          </ListSubheader>
-        }
-      >
-        {rooms.map(room => (
-          <ListItem
-            button
-            key={room.hostId}
-            onClick={() => handleClick(room.name)}
-            // style={(styles.listItem, { borderTop: index && "1px solid" })}
-          >
-            <StyledListItems>
-              <p>{room.name}</p>
-              <p>
+    <StyledContainer>
+      <h2>Rooms :</h2>
+
+      <StyledList>
+        <StyledListSubHeader>
+          <StyledListSubHeaderColumn flex={3}>
+            <p id="header">Name</p>
+          </StyledListSubHeaderColumn>
+          <StyledListSubHeaderColumn flex={1}>
+            <p id="header">Mode</p>
+          </StyledListSubHeaderColumn>
+          <StyledListSubHeaderColumn flex={1}>
+            <p id="header">Players</p>
+          </StyledListSubHeaderColumn>
+          <StyledListSubHeaderColumn flex={1}>
+            <p id="header">Started</p>
+          </StyledListSubHeaderColumn>
+        </StyledListSubHeader>
+        {rooms.map((room, index) => (
+          <StyledListItem key={index} onClick={() => handleClick(room.name)}>
+            <StyledListItemContent flex={3}>
+              <p id="content">{room.name}</p>
+            </StyledListItemContent>
+            <StyledListItemContent flex={1}>
+              <p id="content">BattleRoyal</p>
+            </StyledListItemContent>
+            <StyledListItemContent flex={1}>
+              <p id="content">
                 {room.playersCount}/{MAX_PLAYER}
               </p>
-            </StyledListItems>
-          </ListItem>
+            </StyledListItemContent>
+            <StyledListItemContent flex={1}>
+              <p id="content">{room.isStarted ? "Started" : ""}</p>
+            </StyledListItemContent>
+          </StyledListItem>
         ))}
-      </List>
-    </StyledMainContainer>
+      </StyledList>
+    </StyledContainer>
   );
 };
 

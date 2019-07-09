@@ -5,9 +5,7 @@ import { StyledMainContainer } from "./styles";
 const LadderSub = () => {
   return (
     <StyledMainContainer>
-      <div>
-        <h1>Top scores</h1>
-      </div>
+      <h2>Top scores :</h2>
     </StyledMainContainer>
   );
 };

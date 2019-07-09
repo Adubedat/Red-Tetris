@@ -18,6 +18,7 @@ export const StyledItemLeft = styled.div`
   flex: 1;
 `;
 export const StyledItemCenter = styled.div`
+  padding: 10px;
   flex: 1 375px;
   display: flex;
   justify-content: center;
@@ -31,7 +32,7 @@ export const StyledItemRight = styled.div`
 export const StyledTitle = styled.h1`
   & {
     margin: 0px;
-    font-size: 54px;
+    font-size: 4vh;
     background: linear-gradient(#ff8a00 0%, #dc141b 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

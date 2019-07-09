@@ -19,15 +19,13 @@ let CreateRoom = ({ playerName }) => {
   };
 
   return (
-    <div>
-      <CreateRoomSub
-        onSubmit={handleSubmit}
-        label="Insert room name"
-        error={error}
-        value={roomName}
-        onChange={handleChange}
-      />
-    </div>
+    <CreateRoomSub
+      onSubmit={handleSubmit}
+      label="Insert room name"
+      error={error}
+      value={roomName}
+      onChange={handleChange}
+    />
   );
 };
 
