@@ -3,36 +3,38 @@ import Input from "../common/Input";
 import { withStyles } from "@material-ui/core/styles";
 
 export const StyledForm = styled.form`
-  height: 100px;
+  height: 80px;
   display: flex;
   padding: 10px;
   border: 3px solid white;
-  border-radius: 20px 2px;
+  border-radius: 2px;
 `;
 
 export const StyledRegisterGroup = styled.div`
+  height: 100%;
+  flex: 1;
   display: flex;
-  align-items: center;
-  #enter {
-    transition: all 1s;
-    position: relative;
-    right: 50%;
-    opacity: 0;
-    &:enabled {
-      right: 0%;
-      opacity: 1;
-    }
-  }
+  flex-direction: column;
 `;
-export const StyledButton = styled.div`
-  // background: none;
-  // padding: 0px;
-  // margin: 0px;
-  // border: 0px;
+
+export const StyledButton = styled.button`
+  background: none;
+  padding: 0px;
+  margin: 10px;
+  border: 0px;
+  outline: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  &:enabled {
+    opacity: 1;
+  }
 `;
 
 export const StyledTextField = withStyles({
   root: {
+    "&": {
+      margin: 0
+    },
     "& label.Mui-focused": {
       color: "white"
     },

@@ -12,8 +12,8 @@ const CreateRoomSub = ({ onSubmit, onChange, error, value, label }) => {
     document.getElementById("name").focus();
   });
   return (
-    <StyledForm onSubmit={e => onSubmit(e)}>
-      <StyledRegisterGroup>
+    <StyledForm id="form" onSubmit={e => onSubmit(e)}>
+      <StyledRegisterGroup id="register">
         <StyledTextField
           id="name"
           error={error.boolean}

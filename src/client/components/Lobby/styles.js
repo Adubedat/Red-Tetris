@@ -13,7 +13,7 @@ export const StyledLeftItem = styled.div`
   margin: 5px;
   background-color: rgba(0, 0, 0, 0.3);
   border: 5px solid white;
-  border-radius: 30px 2px 2px 60px;
+  border-radius: 2px 2px 2px 60px;
   display: flex;
   flex-direction: column;
 `;

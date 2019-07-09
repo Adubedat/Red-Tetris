@@ -21,6 +21,7 @@ export const StyledContainer = styled.div`
 `;
 
 export const StyledLetter = styled.p`
+  font-size: 20px;
   transition: font-size 0.2;
   &:hover {
     font-size: 30px;
