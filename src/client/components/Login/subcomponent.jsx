@@ -7,7 +7,8 @@ import {
   StyledContainer,
   StyledForm,
   StyledInput,
-  StyledButton
+  StyledButton,
+  StyledTextField
 } from "./styles";
 import inputError from "../../errors/inputError";
 import Cell from "../Cell";
@@ -33,7 +34,7 @@ const LoginSub = ({ connectPlayer }) => {
   return (
     <StyledContainer>
       <StyledForm onSubmit={e => handleSubmit(e)}>
-        <Input
+        <StyledTextField
           id="name"
           error={error.boolean}
           helperText={error.message}

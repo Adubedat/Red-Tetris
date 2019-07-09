@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Input from "../../components/common/Input";
+import { withStyles } from "@material-ui/core/styles";
 
 export const StyledContainer = styled.div`
   flex: 1;
@@ -9,22 +10,24 @@ export const StyledContainer = styled.div`
 `;
 
 export const StyledForm = styled.form`
-  flex-basis: 1 1 auto;
-  width: 160px;
-  height: 10vh;
+  width: 320px;
+  height: 160px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
+  background: black;
 `;
 
 export const StyledButton = styled.button`
   padding: 0px;
-  margin: 0px;
+  margin: 10px;
   border: 0px;
-  animation: dropForm 2s;
   position: relative;
+  width: 50%;
+  height: 20%;
+  animation: dropForm 2s;
 
   @keyframes dropForm {
     from {
@@ -38,35 +41,40 @@ export const StyledButton = styled.button`
 `;
 
 export const StyledTetriminos = styled.div`
+  position: absolute;
   margin: 0;
   height: 40px;
   width: 160px;
   display: flex;
 `;
 
-export const StyledInput = styled(Input)`
-  .label.Mui-focused {
-    color: white;
-  }
-
-  .label {
-    color: white;
-  }
-  .input {
-    color: white;
-  }
-  ..MuiOutlinedInput-root {
-    .fieldset {
-      bordercolor: white;
+export const StyledTextField = withStyles({
+  root: {
+    "&": {
+      width: 240
+    },
+    "& label.Mui-focused": {
+      color: "white"
+    },
+    "& label": {
+      color: "white"
+    },
+    "& input": {
+      color: "white"
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "white"
+      },
+      "&:hover fieldset": {
+        borderColor: "white"
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "white"
+      }
     }
-    &:hover fieldset {
-      bordercolor: white;
-    }
-    &.Mui-focused fieldset {
-      bordercolor: white;
-    }
   }
-`;
+})(Input);
 
 // export const StyledHorizontalText = styled.div`
 //   & {
