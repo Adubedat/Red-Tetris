@@ -16,6 +16,8 @@ export const StyledList = styled.div`
 
 export const StyledListItem = styled.div`
   height: 5%;
+  margin-bottom: 1px;
+  margin-top: 1px;
   flex-grow: 1;
   display: flex;
   background-color: rgb(255, 255, 255, 0.1);
