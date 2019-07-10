@@ -34,6 +34,7 @@ export const joinRoom = (roomName, callback, socket, io) => {
         });
         io.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsArray() });
         updatePlayer(player, io);
+        emitSpectres(room, io);
       } else {
         callback({ status: "error", message: "Room is full" });
       }
@@ -59,6 +60,7 @@ export const leaveRoom = (socket, io) => {
     }
     player.room = null;
     player.clean();
+    emitSpectres(room, io);
     // updatePlayers(room, io);
     socket.leave(room.name);
     socket.join(LOBBY_ROOM);

@@ -71,6 +71,9 @@ class Room {
   removePlayer(playerId) {
     this._playersCount--;
     this._players = this._players.filter(player => player.id !== playerId);
+    this._spectres = this._spectres.filter(
+      spectre => spectre.playerId !== playerId
+    );
   }
 
   findPlayer(playerId) {

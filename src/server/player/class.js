@@ -65,6 +65,7 @@ class Player {
 
   clean() {
     this._inGame = false;
+    this._piece = new Piece();
     this._heap = Array(20)
       .fill("")
       .map(() => Array(10).fill(""));
