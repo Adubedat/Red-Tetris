@@ -1,7 +1,13 @@
 import styled from "styled-components";
 
-export const StyledContainer = styled.div`
+export const StyledGameContainer = styled.div`
   display: flex;
-  padding: 10px;
-  margin: 10px;
+  margin: 20px;
+`;
+
+export const StyledBoardsContainer = styled.div`
+  // box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  height: 100%;
 `;

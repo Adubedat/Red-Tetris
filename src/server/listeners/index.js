@@ -40,7 +40,8 @@ export const initListeners = io => {
     });
     socket.on(START_GAME, () => startGame(socket, io));
     socket.on(KEY_PRESSED, data => {
-      onKeyPressed(data, socket, io);
+      console.log("[EVENT] ", KEY_PRESSED);
+      onKeyPressed(data.code, socket, io);
     });
     socket.on(DISCONNECT, reason => {
       console.log(LOG_LINE, "[EVENT] DISCONNECT :", reason);

@@ -5,8 +5,9 @@ import {
   LOBBY_ROOM,
   UPDATE_ROOM,
   UPDATE_ROOMS,
-  UPDATE_PLAYERS
+  UPDATE_SPECTRES
 } from "../../constants/constants";
+import { updatePlayer } from "../player/controller";
 
 export const joinRoom = (roomName, callback, socket, io) => {
   console.log("[CALL] joinRoom");
@@ -32,8 +33,8 @@ export const joinRoom = (roomName, callback, socket, io) => {
           room: room.toObject()
         });
         io.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsArray() });
-        callback({ status: "success" });
-        // console.log(room);
+        updatePlayer(player, io);
+        emitSpectres(room, io);
       } else {
         callback({ status: "error", message: "Room is full" });
       }
@@ -57,10 +58,10 @@ export const leaveRoom = (socket, io) => {
       room.clean();
       Game.removeRoom(room.name);
     }
+    player.room = null;
     player.clean();
-    io.in(room.name).emit(UPDATE_PLAYERS, {
-      players: room.createPublicPlayersArray()
-    });
+    emitSpectres(room, io);
+    // updatePlayers(room, io);
     socket.leave(room.name);
     socket.join(LOBBY_ROOM);
     io.in(room.name).emit(UPDATE_ROOM, {
@@ -71,37 +72,37 @@ export const leaveRoom = (socket, io) => {
   }
 };
 
-const handleInterval = (player, socket, io) => {
-  const { piece, heap } = player;
-  if (!piece.moveDown(heap)) {
-    player.updateHeap();
-  }
-  if (player.room.isStarted) player.updateBoard();
-  io.in(player.room.name).emit(UPDATE_PLAYERS, {
-    players: player.room.createPublicPlayersArray()
+const handleInterval = (room, io) => {
+  room.players.forEach(player => {
+    if (player.inGame && !player.piece.moveDown(player.heap)) {
+      player.updateHeap();
+      emitSpectres(player.room, io);
+    }
+    updatePlayer(player, io);
   });
 };
 
-export const startGame = (socket, io) => {
-  const player = Game.findPlayer(socket.id);
-  if (player && player.room) {
-    const room = player.room;
-    if (!room.isStarted) {
-      room.isStarted = true;
-      room.initPieces();
-      player.updateHeap();
-      player.updateBoard();
-      io.in(player.room.name).emit(UPDATE_PLAYERS, {
-        players: player.room.createPublicPlayersArray()
-      });
-      room.interval = setInterval(
-        () => handleInterval(player, socket, io),
-        1000
-      );
-      io.in(room.name).emit(UPDATE_ROOM, {
-        room: room.toObject()
-      });
-      console.log(room.interval);
-    }
-  }
+export const startGame = (room, io) => {
+  if (room.isStarted) return;
+  room.isStarted = true;
+  room.stillInGameCounter = room.players.length;
+  room.initSpectres();
+  emitSpectres(room, io);
+  room.players.forEach(player => {
+    player.clean();
+    player.newPiece();
+    player.inGame = true;
+    updatePlayer(player, io);
+  });
+  room.interval = setInterval(() => handleInterval(room, io), 1000);
+};
+
+export const emitSpectres = (room, io) => {
+  const players = room.players;
+  players.forEach(player => {
+    let spectres = room.spectres.map(s => ({ ...s }));
+    spectres = spectres.filter(spectre => spectre.playerId !== player.id);
+    spectres.forEach(spectre => delete spectre.playerId);
+    io.in(player.id).emit(UPDATE_SPECTRES, { spectres });
+  });
 };

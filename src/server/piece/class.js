@@ -1,39 +1,39 @@
 /* eslint-disable */
 
-const tetriminos = [
+const pieces = [
   {
     shape: [[0, 0, 1, 0], [0, 0, 1, 0], [0, 0, 1, 0], [0, 0, 1, 0]],
-    pos: { x: 3, y: 0 },
+    pos: { x: 3, y: -4 },
     color: "#143cdc",
   },
   {
     shape: [[1, 1, 0], [0, 1, 0], [0, 1, 0]],
-    pos: { x: 4, y: 0 },
+    pos: { x: 4, y: -3 },
     color: "#14d4dc",
   },
   {
     shape: [[0, 1, 1], [0, 1, 0], [0, 1, 0]],
-    pos: { x: 4, y: 0 },
+    pos: { x: 4, y: -3 },
     color: "#dc143c",
   },
   {
     shape: [[0, 1, 0], [0, 1, 1], [0, 1, 0]],
-    pos: { x: 4, y: 0 },
+    pos: { x: 4, y: -3 },
     color: "#ff8b00",
   },
   {
     shape: [[1, 0, 0], [1, 1, 0], [0, 1, 0]],
-    pos: { x: 4, y: 0 },
+    pos: { x: 4, y: -3 },
     color: "#3cdc14",
   },
   {
     shape: [[0, 0, 1], [0, 1, 1], [0, 1, 0]],
-    pos: { x: 4, y: 0 },
+    pos: { x: 4, y: -3 },
     color: "#b600ff",
   },
   {
     shape: [[1, 1], [1, 1]],
-    pos: { x: 4, y: 0 },
+    pos: { x: 4, y: -2 },
     color: "#fff400",
   },
 ];
@@ -41,40 +41,33 @@ const tetriminos = [
 /* eslint-enable */
 
 class Piece {
-  // constructor() {
-  //   this._shape = tetriminos[6].shape;
-  //   this._pos = tetriminos[6].pos;
-  //   this._shadowPos = tetriminos[6].pos;
-  //   this._color = tetriminos[6].color;
-  // }
-
   get shape() {
     return this._shape;
   }
-
   get pos() {
     return this._pos;
   }
-
   get shadowPos() {
     return this._shadowPos;
   }
-
   get color() {
     return this._color;
   }
 
-  update(index, heap) {
-    const newTetri = { ...tetriminos[index] };
-    this._shape = [...newTetri.shape.map(row => [...row])];
-    this._pos = { ...newTetri.pos };
-    this._shadowPos = { ...newTetri.pos };
-    this._color = newTetri.color;
-    if (this.isPosAvailable(this._pos, this._shape, heap)) {
-      return true;
-    } else {
-      return false;
+  initNewPiece(index, heap) {
+    this._shape = [...pieces[index].shape.map(row => [...row])];
+    this._pos = { ...pieces[index].pos };
+    this._shadowPos = { ...pieces[index].pos };
+    this._color = pieces[index].color;
+    while (this._pos.y <= 0) {
+      if (!this.isPosAvailable(this._pos, this._shape, heap)) {
+        this.pos.y -= 1;
+        return false;
+      }
+      this._pos.y += 1;
     }
+    this._pos.y = 0;
+    return true;
   }
 
   printToBoard(pos, shape, board, color) {
@@ -96,9 +89,9 @@ class Piece {
     for (let i = 0; i < shape.length; i++) {
       for (let j = 0; j < shape[i].length; j++) {
         if (shape[i][j]) {
-          let heapY = i + y;
-          let heapX = j + x;
-          if (heapY >= 20 || heapX < 0 || heapX >= 10 || heap[heapY][heapX])
+          let Y = i + y;
+          let X = j + x;
+          if (Y >= 0 && (Y >= 20 || X < 0 || X >= 10 || heap[Y][X]))
             return false;
         }
       }

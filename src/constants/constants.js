@@ -1,3 +1,5 @@
+export const MALUS = "#3d3d3d";
+
 export const JOIN_ROOM = "JOIN_ROOM";
 
 export const UPDATE_ROOM = "UPDATE_ROOM";
@@ -19,8 +21,8 @@ export const DELETE_PLAYER = "DELETE_PLAYER";
 export const SHOW_TOAST = "SHOW_TOAST";
 
 export const CONNECTION = "connection";
-export const UPDATE_PLAYERS = "UPDATE_PLAYERS";
-export const UPDATE_OTHER_PLAYERS = "UPDATE_OTHER_PLAYERS";
+
+export const UPDATE_SPECTRES = "UPDATE_SPECTRES";
 
 export const DISCONNECT = "disconnect";
 
@@ -32,13 +34,15 @@ export const enumKeys = {
   ARROW_RIGHT: "ArrowRight",
   ARROW_DOWN: "ArrowDown",
   ARROW_UP: "ArrowUp",
-  SPACE: "Space"
+  SPACE: "Space",
+  ENTER: "Enter"
 };
 export const ARROW_LEFT = "ArrowLeft";
 export const ARROW_RIGHT = "ArrowRight";
 export const ARROW_DOWN = "ArrowDown";
 export const ARROW_UP = "ArrowUp";
 export const SPACE = "Space";
+export const ENTER = "Enter";
 
 export const UPDATE_BOARD = "UPDATE_BOARD";
 export const MAX_PLAYER = 10;

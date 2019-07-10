@@ -34,7 +34,10 @@ class Game {
   }
 
   createPublicRoomsArray() {
-    return this._rooms.map(room => room.toObject());
+    return this._rooms.map(room => ({
+      name: room.name,
+      playersCount: room.playersCount
+    }));
   }
 }
 
