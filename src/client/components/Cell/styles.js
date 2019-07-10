@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { DARK_CYAN } from "../../../constants/colors";
 
 export const StyledContainer = styled.div`
   flex: 1 10%;
@@ -21,7 +22,7 @@ export const StyledContainer = styled.div`
       ${props =>
         !props.color &&
         css`
-          background: #375f64;
+          background: ${DARK_CYAN};
         `};
     `};
 `;

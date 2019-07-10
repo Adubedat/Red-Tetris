@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { PURE_ORANGE, CRIMSON } from "../../../constants/colors";
 
 export const StyledContainer = styled.div`
   margin: 0;
@@ -33,7 +34,7 @@ export const StyledTitle = styled.h1`
   & {
     margin: 0px;
     font-size: 4vh;
-    background: linear-gradient(#ff8a00 0%, #dc141b 100%);
+    background: linear-gradient(${PURE_ORANGE} 0%, ${CRIMSON} 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

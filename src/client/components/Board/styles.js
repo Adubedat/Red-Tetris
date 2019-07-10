@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { PURE_ORANGE, CRIMSON } from "../../../constants/colors";
 
 export const StyledAspectRatio = styled.div`
   padding-top: 200%;
@@ -39,7 +40,7 @@ export const StyledContainer = styled.div`
     props.isSpectre &&
     css`
       border: 2px solid black;
-      background: linear-gradient(#ff8a00 0%, #dc141b 100%);
+      background: linear-gradient(${PURE_ORANGE} 0%, ${CRIMSON} 100%);
     `};
 `;
 

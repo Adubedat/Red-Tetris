@@ -1,40 +1,50 @@
+import {
+  VIVID_BLUE,
+  CYAN_BLUE,
+  CRIMSON,
+  PURE_ORANGE,
+  LIME_GREEN,
+  PURE_VIOLET,
+  PURE_YELLOW
+} from "../../constants/colors";
+
 /* eslint-disable */
 
 const pieces = [
   {
     shape: [[0, 0, 1, 0], [0, 0, 1, 0], [0, 0, 1, 0], [0, 0, 1, 0]],
     pos: { x: 3, y: -4 },
-    color: "#143cdc",
+    color: VIVID_BLUE,
   },
   {
     shape: [[1, 1, 0], [0, 1, 0], [0, 1, 0]],
     pos: { x: 4, y: -3 },
-    color: "#14d4dc",
+    color: CYAN_BLUE,
   },
   {
     shape: [[0, 1, 1], [0, 1, 0], [0, 1, 0]],
     pos: { x: 4, y: -3 },
-    color: "#dc143c",
+    color: CRIMSON,
   },
   {
     shape: [[0, 1, 0], [0, 1, 1], [0, 1, 0]],
     pos: { x: 4, y: -3 },
-    color: "#ff8b00",
+    color: PURE_ORANGE,
   },
   {
     shape: [[1, 0, 0], [1, 1, 0], [0, 1, 0]],
     pos: { x: 4, y: -3 },
-    color: "#3cdc14",
+    color: LIME_GREEN,
   },
   {
     shape: [[0, 0, 1], [0, 1, 1], [0, 1, 0]],
     pos: { x: 4, y: -3 },
-    color: "#b600ff",
+    color: PURE_VIOLET,
   },
   {
     shape: [[1, 1], [1, 1]],
     pos: { x: 4, y: -2 },
-    color: "#fff400",
+    color: PURE_YELLOW,
   },
 ];
 
