@@ -1,4 +1,5 @@
 import Piece from "../piece/class";
+import { MALUS } from "../../constants/constants";
 
 class Player {
   constructor(name = "", id = "") {
@@ -82,10 +83,23 @@ class Player {
   }
 
   removeLines() {
+    let counter = 0;
     this._heap.forEach((row, index) => {
-      if (row.every(value => value)) {
+      if (row.every(value => value && value !== MALUS)) {
         this._heap.splice(index, 1);
         this._heap.unshift(Array(10).fill(""));
+        counter += 1;
+      }
+    });
+    this.sendMalus(counter - 1);
+  }
+
+  sendMalus(counter) {
+    const players = this._room.players.filter(player => player.id !== this._id);
+    players.forEach(player => {
+      for (let i = 0; i < counter; i++) {
+        player.heap.splice(0, 1);
+        player.heap.push(Array(10).fill(MALUS));
       }
     });
   }

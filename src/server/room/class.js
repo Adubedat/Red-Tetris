@@ -121,8 +121,6 @@ class Room {
         return spectre;
       } else return spectre;
     });
-    console.log("UPDATE SPECTRES");
-    console.log(this._spectres);
   }
 
   toObject() {

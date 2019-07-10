@@ -1,3 +1,5 @@
+export const MALUS = "#3d3d3d";
+
 export const JOIN_ROOM = "JOIN_ROOM";
 
 export const UPDATE_ROOM = "UPDATE_ROOM";
