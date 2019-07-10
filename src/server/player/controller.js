@@ -2,7 +2,7 @@ import Game from "../game/class";
 import Player from "./class";
 import { leaveRoom } from "../room/controller";
 import { isAlphaNumeric } from "../../utils/utils";
-import { LOBBY_ROOM } from "../../constants/constants";
+import { LOBBY_ROOM, UPDATE_PLAYER } from "../../constants/constants";
 
 export const connectPlayer = (playerName, callback, socket) => {
   console.log("[CALL] connectPlayer");
@@ -29,4 +29,10 @@ export const disconnectPlayer = (socket, io) => {
   Game.removePlayer(socket.id);
   socket.leave(LOBBY_ROOM);
   console.log("[UPDATED] after disconnectPlayer", Game);
+};
+
+export const updatePlayer = (player, io) => {
+  io.in(player.id).emit(UPDATE_PLAYER, {
+    player: player.toObject()
+  });
 };

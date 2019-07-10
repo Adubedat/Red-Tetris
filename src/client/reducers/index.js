@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 import {
   UPDATE_PLAYER,
+  UPDATE_SPECTRES,
   UPDATE_ROOMS,
-  UPDATE_ROOM,
-  UPDATE_OTHER_PLAYERS
+  UPDATE_ROOM
 } from "../../constants/constants";
 
 const player = (state = {}, action) => {
@@ -16,10 +16,10 @@ const player = (state = {}, action) => {
   }
 };
 
-const otherPlayers = (state = [], action) => {
+const spectres = (state = {}, action) => {
   switch (action.type) {
-    case UPDATE_OTHER_PLAYERS:
-      return action.otherPlayers;
+    case UPDATE_SPECTRES:
+      return action.spectres;
     default:
       return state;
   }
@@ -45,7 +45,7 @@ const rooms = (state = [], action) => {
 
 const rootReducer = combineReducers({
   player,
-  otherPlayers,
+  spectres,
   rooms,
   room
 });

@@ -14,7 +14,7 @@ toast.configure();
 
 const initialState = {
   player: {},
-  otherPlayers: [],
+  spectres: [],
   room: {},
   rooms: []
 };

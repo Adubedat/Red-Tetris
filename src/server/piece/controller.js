@@ -1,49 +1,49 @@
 import Game from "../game/class";
-import { startGame } from "../room/controller";
-import {
-  UPDATE_PLAYERS,
-  enumKeys,
-  KEY_PRESSED
-} from "../../constants/constants";
+import { startGame, emitSpectres } from "../room/controller";
+import { enumKeys, KEY_PRESSED } from "../../constants/constants";
+import { updatePlayer } from "../player/controller";
 
 export const onKeyPressed = (code, socket, io) => {
-  if (!Object.values(enumKeys).includes(code)) return;
-  console.log("[EVENT] ", KEY_PRESSED, code);
   const player = Game.findPlayer(socket.id);
-  if (player && player.room) {
-    if (player.room.isStarted) {
-      const { heap } = player;
-      switch (code) {
-        case enumKeys.ARROW_LEFT:
-          player.piece.moveLeft(heap);
-          break;
-        case enumKeys.ARROW_RIGHT:
-          player.piece.moveRight(heap);
-          break;
-        case enumKeys.ARROW_DOWN:
-          if (!player.piece.moveDown(heap)) {
-            player.updateHeap();
-          }
-          break;
-        case enumKeys.ARROW_UP:
-          player.piece.rotate(heap);
-          break;
-        case enumKeys.SPACE:
-          player.piece.hardDrop();
-          player.updateBoard();
-          player.updateHeap();
-          break;
-        default:
-          break;
-      }
-      // player.piece.updateShadow(player.heap);
-      if (player.room.isStarted) player.updateBoard();
-      io.in(player.room.name).emit(UPDATE_PLAYERS, {
-        players: player.room.createPublicPlayersArray()
-      });
+  if (!Object.values(enumKeys).includes(code) || !(player && player.room))
+    return;
+  console.log("[EVENT] ", KEY_PRESSED, code);
+  if (player.inGame) {
+    const { heap } = player;
+    switch (code) {
+      case enumKeys.ARROW_LEFT:
+        player.piece.moveLeft(heap);
+        break;
+      case enumKeys.ARROW_RIGHT:
+        player.piece.moveRight(heap);
+        break;
+      case enumKeys.ARROW_DOWN:
+        handleArrowDown(player, heap, io);
+        break;
+      case enumKeys.ARROW_UP:
+        player.piece.rotate(heap);
+        break;
+      case enumKeys.SPACE:
+        handleSpace(player, io);
+        break;
+      default:
+        break;
     }
-    // } else if (code === enumKeys.SPACE) {
-    //   startGame(socket, io);
-    // }
+    updatePlayer(player, io);
+  } else if (player.id === player.room.hostId && code === enumKeys.ENTER) {
+    startGame(player.room, io);
+  }
+};
+
+const handleSpace = (player, io) => {
+  player.piece.hardDrop();
+  player.updateHeap();
+  emitSpectres(player.room, io);
+};
+
+const handleArrowDown = (player, heap, io) => {
+  if (!player.piece.moveDown(heap)) {
+    player.updateHeap();
+    emitSpectres(player.room, io);
   }
 };

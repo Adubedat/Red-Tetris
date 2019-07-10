@@ -6,7 +6,7 @@ const mapStateToProps = state => {
 };
 
 const Spectre = connect(
-  null,
+  mapStateToProps,
   null
 )(SpectreSub);
 
