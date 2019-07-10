@@ -13,7 +13,7 @@ html {
   font-family: "ArcadeClassic";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: radial-gradient(#375f64, #143039);
+  background-color: white;
 }
 body {
   margin: 0px;

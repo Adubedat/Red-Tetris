@@ -3,9 +3,11 @@ import styled from "styled-components";
 export const StyledContainer = styled.div`
   margin: 0;
   padding: 0;
-  margin-top: 10px;
+  // margin-top: 10px;
   display: flex;
   align-items: center;
+  background-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 1px 0px 5px black;
 `;
 
 export const StyledUserGroup = styled.div`
@@ -32,7 +34,7 @@ export const StyledItemRight = styled.div`
 export const StyledTitle = styled.h1`
   & {
     margin: 0px;
-    font-size: 4vh;
+    font-size: 5vh;
     background: linear-gradient(#ff8a00 0%, #dc141b 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

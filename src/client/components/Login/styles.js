@@ -7,12 +7,15 @@ export const StyledContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  // background-color: rgba(0, 0, 0, 0.4);
 `;
 
 export const StyledForm = styled.form`
   flex-basis: 1 1 auto;
-  width: 160px;
-  height: 10vh;
+  width: 400px;
+  height: 160px;
+  background-color: rgba(0, 0, 0, 0.9);
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;

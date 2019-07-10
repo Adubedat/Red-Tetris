@@ -27,10 +27,10 @@ const TetriButton = ({ disabled }) => {
   return (
     <StyledButton disabled={disabled} type="submit">
       <StyledTetriminos>
-        <Cell color="#14d4dc" letter="P"></Cell>
+        <Cell color="#ff8b00" letter="P"></Cell>
         <Cell color="#dc143c" letter="L"></Cell>
         <Cell color="#ff8b00" letter="A"></Cell>
-        <Cell color="#3cdc14" letter="Y"></Cell>
+        <Cell color="#dc143c" letter="Y"></Cell>
       </StyledTetriminos>
     </StyledButton>
   );
