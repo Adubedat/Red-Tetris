@@ -6,8 +6,11 @@
     url("../../fonts/ArcadeClassic.woff") format("woff");
 }
 
-html {
+* {
   box-sizing: border-box;
+}
+
+html {
   height: 100%;
   color: white;
   font-family: "ArcadeClassic";

@@ -13,7 +13,7 @@ export const StyledAspectRatioContainer = styled.div`
   // box-sizing: border-box;
   text-align: center;
   max-width: 500px;
-  min-width: 325px;
+  min-width: 250px;
   ${props =>
     props.isSpectre &&
     css`
