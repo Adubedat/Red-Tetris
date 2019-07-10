@@ -6,7 +6,7 @@ export const StyledGameContainer = styled.div`
 `;
 
 export const StyledBoardsContainer = styled.div`
-  box-sizing: border-box;
+  // box-sizing: border-box;
   display: flex;
   width: 100%;
   height: 100%;

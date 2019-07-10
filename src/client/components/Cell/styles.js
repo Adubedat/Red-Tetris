@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export const StyledContainer = styled.div`
   flex: 1 10%;
-  box-sizing: border-box;
+  // box-sizing: border-box;
   border: 1px solid black;
   ${props =>
     props.color &&
@@ -18,7 +18,7 @@ export const StyledContainer = styled.div`
       ${props =>
         !props.color &&
         css`
-          background: #2b4f56;
+          background: #375f64;
         `};
     `};
 `;

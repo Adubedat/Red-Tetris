@@ -5,18 +5,22 @@ export const StyledAspectRatio = styled.div`
   width: 100%;
   height: 0;
   position: relative;
-  box-sizing: border-box;
+  // box-sizing: border-box;
 `;
 
 export const StyledAspectRatioContainer = styled.div`
   flex-basis: 25%;
-  box-sizing: border-box;
+  // box-sizing: border-box;
   text-align: center;
+  max-width: 500px;
+  min-width: 325px;
   ${props =>
     props.isSpectre &&
     css`
       flex-basis: 30%;
       padding: 1em;
+      min-width: 100px;
+      max-width: 150px;
     `};
 `;
 
@@ -30,7 +34,7 @@ export const StyledContainer = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  box-sizing: border-box;
+  // box-sizing: border-box;
   ${props =>
     props.isSpectre &&
     css`

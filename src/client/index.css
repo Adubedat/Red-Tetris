@@ -6,6 +6,10 @@
     url("../../fonts/ArcadeClassic.woff") format("woff");
 }
 
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   margin: 0;
