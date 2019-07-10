@@ -114,7 +114,7 @@ class Room {
     });
   }
 
-  updateSpectres(playerId, heap) {
+  updateSpectre(playerId, heap) {
     this._spectres = this._spectres.map(spectre => {
       if (spectre.playerId === playerId) {
         spectre.board = this.fillHeap(heap);

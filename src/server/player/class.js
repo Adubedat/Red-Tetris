@@ -100,6 +100,7 @@ class Player {
       for (let i = 0; i < counter; i++) {
         player.heap.splice(0, 1);
         player.heap.push(Array(10).fill(MALUS));
+        player.room.updateSpectre(player.id, player.heap);
       }
     });
   }
@@ -110,7 +111,7 @@ class Player {
     this._heap = piece.printToBoard(pos, shape, this._heap, color);
     this.removeLines();
     this.newPiece();
-    this._room.updateSpectres(this._id, this._heap);
+    this._room.updateSpectre(this._id, this._heap);
   }
 
   toObject() {
