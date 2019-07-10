@@ -8,6 +8,9 @@ import "./index.css";
 import App from "./components/App";
 import { handleHash } from "./actions/actions";
 import { initListeners } from "./listeners";
+import { toast } from "react-toastify";
+
+toast.configure();
 
 const initialState = {
   player: {},

@@ -1,13 +1,6 @@
 import { connect } from "react-redux";
 import LadderSub from "./subcomponent";
 
-const mapStateToProps = state => {
-  return {};
-};
-
-const Ladder = connect(
-  mapStateToProps,
-  null
-)(LadderSub);
+const Ladder = connect()(LadderSub);
 
 export default Ladder;

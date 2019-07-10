@@ -1,9 +1,8 @@
 import React from "react";
 import { shallow } from "enzyme";
 import toJson from "enzyme-to-json";
-import Input from "../../common/Input";
 import LoginSub from "../subcomponent";
-import { StyledForm } from "../styles";
+import { StyledForm, StyledTextField } from "../styles";
 
 const props = {
   connectPlayer: jest.fn()
@@ -20,18 +19,20 @@ describe("<LoginSub />", () => {
     const wrapper = shallow(<LoginSub {...props} />);
     const event = { target: { value: "PlayerNameTooLong" } };
 
-    wrapper.find(Input).simulate("change", event);
-    expect(wrapper.find(Input).props().value).toBe("PlayerNameTooLong");
-    expect(wrapper.find(Input).props().error).toBeTruthy();
+    wrapper.find(StyledTextField).simulate("change", event);
+    expect(wrapper.find(StyledTextField).props().value).toBe(
+      "PlayerNameTooLong"
+    );
+    expect(wrapper.find(StyledTextField).props().error).toBeTruthy();
   });
 
   test("should update playerName, set error to true and not call connectPlayer on submit with an unvalid character", () => {
     const wrapper = shallow(<LoginSub {...props} />);
     const event = { target: { value: "Name$" } };
 
-    wrapper.find(Input).simulate("change", event);
-    expect(wrapper.find(Input).props().value).toBe("Name$");
-    expect(wrapper.find(Input).props().error).toBeTruthy();
+    wrapper.find(StyledTextField).simulate("change", event);
+    expect(wrapper.find(StyledTextField).props().value).toBe("Name$");
+    expect(wrapper.find(StyledTextField).props().error).toBeTruthy();
     wrapper.find(StyledForm).simulate("submit", {
       preventDefault: () => {}
     });
@@ -42,9 +43,9 @@ describe("<LoginSub />", () => {
     const wrapper = shallow(<LoginSub {...props} />);
     const event = { target: { value: "ValidName" } };
 
-    wrapper.find(Input).simulate("change", event);
-    expect(wrapper.find(Input).props().value).toBe("ValidName");
-    expect(wrapper.find(Input).props().error).not.toBeTruthy();
+    wrapper.find(StyledTextField).simulate("change", event);
+    expect(wrapper.find(StyledTextField).props().value).toBe("ValidName");
+    expect(wrapper.find(StyledTextField).props().error).not.toBeTruthy();
     wrapper.find(StyledForm).simulate("submit", {
       preventDefault: () => {}
     });

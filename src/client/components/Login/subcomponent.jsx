@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import Input from "../common/Input";
-import Button from "../common/Button";
-import { StyledForm, StyledHorizontalText } from "./styles";
+import { StyledContainer, StyledForm, StyledTextField } from "./styles";
 import inputError from "../../errors/inputError";
+import TetriButton from "../common/TetriButton";
 
 const LoginSub = ({ connectPlayer }) => {
   const [error, setError] = useState({ boolean: null, message: "" });
@@ -18,29 +17,27 @@ const LoginSub = ({ connectPlayer }) => {
     setPlayerName(e.target.value);
     setError(inputError(e.target.value));
   };
+
   useEffect(() => {
     document.getElementById("name").focus();
   });
+
   return (
-    <StyledForm onSubmit={e => handleSubmit(e)}>
-      <Button disabled={true} fullWidth>
-        42 Connect
-      </Button>
-      <StyledHorizontalText>OR</StyledHorizontalText>
-      <Input
-        id="name"
-        error={error.boolean}
-        helperText={error.message}
-        spellCheck="false"
-        label="Name"
-        value={playerName}
-        onChange={e => handleChange(e)}
-        fullWidth
-      />
-      <Button disabled={!playerName || error.boolean} type="submit" fullWidth>
-        Connect
-      </Button>
-    </StyledForm>
+    <StyledContainer>
+      <StyledForm onSubmit={e => handleSubmit(e)}>
+        <StyledTextField
+          id="name"
+          error={error.boolean}
+          helperText={error.message}
+          spellCheck="false"
+          label="Enter your name..."
+          autoComplete="off"
+          value={playerName}
+          onChange={e => handleChange(e)}
+        />
+        <TetriButton disabled={!playerName || error.boolean} />
+      </StyledForm>
+    </StyledContainer>
   );
 };
 

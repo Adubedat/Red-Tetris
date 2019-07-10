@@ -1,13 +1,6 @@
 import { connect } from "react-redux";
 import LobbySub from "./subcomponent";
 
-const mapStateToProps = state => {
-  return {};
-};
-
-const Lobby = connect(
-  null,
-  null
-)(LobbySub);
+const Lobby = connect()(LobbySub);
 
 export default Lobby;

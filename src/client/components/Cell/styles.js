@@ -11,6 +11,9 @@ export const StyledContainer = styled.div`
       border: 5px outset ${props => props.color};
       background-color: ${props => props.color};
     `};
+  display: flex;
+  justify-content: center;
+  align-items: center;
   ${props =>
     props.isSpectre &&
     css`
@@ -21,4 +24,12 @@ export const StyledContainer = styled.div`
           background: #375f64;
         `};
     `};
+`;
+
+export const StyledLetter = styled.p`
+  font-size: 20px;
+  transition: font-size 0.2;
+  &:hover {
+    font-size: 30px;
+  }
 `;

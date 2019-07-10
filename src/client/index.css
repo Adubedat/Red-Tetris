@@ -10,10 +10,8 @@
   box-sizing: border-box;
 }
 
-html,
-body {
-  margin: 0;
-  overflow:hidden;
+html {
+  /* margin: 0; */
   height: 100%;
   color: white;
   font-family: "ArcadeClassic";
@@ -21,23 +19,26 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: radial-gradient(#375f64, #143039);
 }
+body {
+  margin: 0px;
+  padding: 0px;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-h1 {
-  font-size: 54px;
-  background: linear-gradient(#ff8a00 0%, #dc141b 100%);
-  background-clip: "text";
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+h2 {
+  margin: 0;
+  font-size: 3vh;
 }
 
-h2 {
-  font-size: 24px;
-  background: linear-gradient(#ff8a00 0%, #dc141b 100%);
+p {
+  font-size: 2vh;
+  font-family: "ArcadeClassic";
+  background: white;
+  margin: 0;
   background-clip: "text";
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

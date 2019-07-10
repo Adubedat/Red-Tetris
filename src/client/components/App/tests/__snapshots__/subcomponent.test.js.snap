@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginSub /> App rendering with a player in Lobby 1`] = `
+<styled.div>
+  <Connect(HeaderSub) />
+  <Connect(LobbySub) />
+</styled.div>
+`;
+
+exports[`<LoginSub /> App rendering with a player in game 1`] = `
+<styled.div>
+  <Connect(HeaderSub) />
+  <Connect(GameSub) />
+</styled.div>
+`;
+
+exports[`<LoginSub /> App rendering with an unconnected user 1`] = `
+<styled.div>
+  <Connect(HeaderSub) />
+  <Connect(LoginSub) />
+</styled.div>
+`;

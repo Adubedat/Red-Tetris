@@ -1,39 +1,55 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import Button from "../common/Button";
-import { StyledForm, StyledRegisterGroup, StyledTextField } from "./styles";
+import {
+  StyledForm,
+  StyledRegisterGroup,
+  StyledTextField,
+  StyledButton
+} from "./styles";
+import inputError from "../../errors/inputError";
 
-const CreateRoomSub = ({ onSubmit, onChange, error, value, label }) => {
+const CreateRoomSub = ({ playerName }) => {
+  const [error, setError] = useState({ boolean: null, message: "" });
+  const [roomName, setRoomName] = useState("");
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    window.location.hash = roomName + "[" + playerName + "]";
+  };
+
+  const handleChange = e => {
+    const value = e.target.value;
+    setError(inputError(value));
+    setRoomName(value);
+  };
+
   useEffect(() => {
     document.getElementById("name").focus();
   });
+
   return (
-    <StyledForm onSubmit={e => onSubmit(e)}>
-      <p>Create a new room to play with your friends (if you have any ...)</p>
-      <StyledRegisterGroup>
+    <StyledForm id="form" onSubmit={e => handleSubmit(e)}>
+      <StyledRegisterGroup id="register">
         <StyledTextField
           id="name"
           error={error.boolean}
           helperText={error.message}
           spellCheck="false"
-          label={label}
-          value={value}
-          onChange={e => onChange(e)}
+          autoComplete="off"
+          label="Insert room name"
+          value={roomName}
+          onChange={e => handleChange(e)}
         />
-        <Button disabled={!value || error.boolean} type="submit">
-          Create
-        </Button>
+        <StyledButton id="enter" disabled={!roomName || error.boolean}>
+          <p> Press Enter </p>
+        </StyledButton>
       </StyledRegisterGroup>
     </StyledForm>
   );
 };
 
 CreateRoomSub.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  error: PropTypes.object.isRequired,
-  value: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired
+  playerName: PropTypes.string.isRequired
 };
 
 export default CreateRoomSub;

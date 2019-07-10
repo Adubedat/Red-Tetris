@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ChatSub> should render without crashing 1`] = `
+<styled.div>
+  <h2>
+    Chat :
+  </h2>
+</styled.div>
+`;

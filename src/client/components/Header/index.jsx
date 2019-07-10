@@ -3,12 +3,10 @@ import HeaderSub from "./subcomponent";
 import { leaveRoom } from "../../actions/room";
 import { disconnectPlayer } from "../../actions/player";
 
-const mapStateToProps = state => {
-  return {
-    player: state.player,
-    room: state.room
-  };
-};
+const mapStateToProps = state => ({
+  player: state.player,
+  room: state.room
+});
 
 const mapDispatchToProps = dispatch => {
   return {
