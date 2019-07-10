@@ -4,7 +4,7 @@ import {
   UPDATE_SPECTRES,
   UPDATE_ROOMS,
   UPDATE_ROOM
-} from "../../constants/constants";
+} from "../../constants/actionTypes";
 
 const player = (state = {}, action) => {
   // console.log("[STATE UPDATE] with action : ", action.type);

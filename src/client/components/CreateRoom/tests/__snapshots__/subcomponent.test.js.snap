@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CreateRoomSub /> should render without crashing 1`] = `
+<styled.form
+  id="form"
+  onSubmit={[Function]}
+>
+  <styled.div
+    id="register"
+  >
+    <WithStyles(ForwardRef)
+      autoComplete="off"
+      error={null}
+      helperText=""
+      id="name"
+      label="Insert room name"
+      onChange={[Function]}
+      spellCheck="false"
+      value=""
+    />
+    <styled.button
+      disabled={true}
+      id="enter"
+    >
+      <p>
+         Press Enter 
+      </p>
+    </styled.button>
+  </styled.div>
+</styled.form>
+`;

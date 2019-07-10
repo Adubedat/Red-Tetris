@@ -7,7 +7,7 @@ import {
   UPDATE_BOARD,
   START_GAME,
   UPDATE_SPECTRES
-} from "../../constants/constants";
+} from "../../constants/actionTypes";
 
 const checkHash = () => {
   const hash = window.location.hash.substr(1);

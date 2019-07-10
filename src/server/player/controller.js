@@ -2,7 +2,8 @@ import Game from "../game/class";
 import Player from "./class";
 import { leaveRoom } from "../room/controller";
 import { isAlphaNumeric } from "../../utils/utils";
-import { LOBBY_ROOM, UPDATE_PLAYER } from "../../constants/constants";
+import { UPDATE_PLAYER } from "../../constants/actionTypes";
+import { LOBBY_ROOM } from "../../constants/others";
 
 export const connectPlayer = (playerName, callback, socket) => {
   console.log("[CALL] connectPlayer");

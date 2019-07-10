@@ -1,5 +1,5 @@
 import Game from "./class";
-import { UPDATE_ROOMS } from "../../constants/constants";
+import { UPDATE_ROOMS } from "../../constants/actionTypes";
 
 export const initClientState = socket => {
   console.log("[EVENT] CONNECTION : send data to client (updating the state)");

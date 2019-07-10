@@ -3,7 +3,7 @@ import {
   DISCONNECT_PLAYER,
   NEW_PLAYER,
   UPDATE_PLAYER
-} from "../../constants/constants";
+} from "../../constants/actionTypes";
 import { updateRoom } from "./room";
 
 export const connectPlayer = playerName => {

@@ -4,7 +4,7 @@ import {
   UPDATE_ROOM,
   UPDATE_ROOMS,
   JOIN_ROOM
-} from "../../constants/constants";
+} from "../../constants/actionTypes";
 
 export const updateRoom = room => ({
   type: UPDATE_ROOM,

@@ -4,7 +4,7 @@ import {
   UPDATE_ROOM,
   UPDATE_PLAYER,
   UPDATE_SPECTRES
-} from "../../constants/constants";
+} from "../../constants/actionTypes";
 import { updateRooms, updateRoom } from "../actions/room";
 import { updatePlayer } from "../actions/player";
 import { handleHash, handleKeyPress, updateSpectres } from "../actions/actions";

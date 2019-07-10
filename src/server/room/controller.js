@@ -6,7 +6,7 @@ import {
   UPDATE_ROOM,
   UPDATE_ROOMS,
   UPDATE_SPECTRES
-} from "../../constants/constants";
+} from "../../constants/actionTypes";
 import { updatePlayer } from "../player/controller";
 
 export const joinRoom = (roomName, callback, socket, io) => {

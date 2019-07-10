@@ -1,4 +1,4 @@
-import { MAX_PLAYER } from "../../constants/constants";
+import { MAX_PLAYER } from "../../constants/others";
 
 class Room {
   constructor(name, hostId) {

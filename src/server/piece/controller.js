@@ -1,6 +1,7 @@
 import Game from "../game/class";
 import { startGame, emitSpectres } from "../room/controller";
-import { enumKeys, KEY_PRESSED } from "../../constants/constants";
+import { KEY_PRESSED } from "../../constants/actionTypes";
+import { enumKeys } from "../../constants/keys";
 import { updatePlayer } from "../player/controller";
 
 export const onKeyPressed = (code, socket, io) => {

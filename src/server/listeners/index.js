@@ -10,10 +10,9 @@ import {
   JOIN_ROOM,
   START_GAME,
   DISCONNECT,
-  LOG_LINE,
-  KEY_PRESSED,
-  LOBBY_ROOM
-} from "../../constants/constants";
+  KEY_PRESSED
+} from "../../constants/actionTypes";
+import { LOG_LINE, LOBBY_ROOM } from "../../constants/others";
 
 export const initListeners = io => {
   io.on(CONNECTION, socket => {

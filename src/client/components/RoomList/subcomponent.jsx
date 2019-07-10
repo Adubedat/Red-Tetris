@@ -8,7 +8,7 @@ import {
   StyledListSubHeader,
   StyledListSubHeaderColumn
 } from "./styles";
-import { MAX_PLAYER } from "../../../constants/constants";
+import { MAX_PLAYER } from "../../../constants/others";
 
 const RoomListSub = ({ rooms, playerName }) => {
   const handleClick = roomName => {

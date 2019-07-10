@@ -1,5 +1,5 @@
 import Piece from "../piece/class";
-import { MALUS } from "../../constants/constants";
+import { MALUS } from "../../constants/colors";
 
 class Player {
   constructor(name = "", id = "") {
