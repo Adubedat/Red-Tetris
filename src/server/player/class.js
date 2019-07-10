@@ -53,6 +53,7 @@ class Player {
     if (!this._piece.initNewPiece(pieces[this._indexPieces], this._heap)) {
       this._inGame = false;
       this._room.stillInGameCounter -= 1;
+      this.updateHeap();
       if (this._room.stillInGameCounter === 0) {
         this._room.endGame();
       }
@@ -110,8 +111,8 @@ class Player {
     const { pos, shape, color } = this._piece;
     this._heap = piece.printToBoard(pos, shape, this._heap, color);
     this.removeLines();
-    this.newPiece();
     this._room.updateSpectre(this._id, this._heap);
+    if (this._inGame) this.newPiece();
   }
 
   toObject() {
