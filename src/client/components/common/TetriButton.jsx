@@ -9,10 +9,12 @@ const StyledButton = styled.button`
   border: 0px;
   position: relative;
   top: -1020px;
-  transition: top 1s, transform 1s;
+  opacity: 0;
+  transition: top 1s ease-out, transform 1s ease-out, opacity 1s;
   &:enabled {
     top: 0px;
     transform: rotate(720deg);
+    opacity: 1;
   }
 `;
 

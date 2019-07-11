@@ -4,7 +4,6 @@ export const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  margin: 10px;
 `;
 
 export const StyledList = styled.div`

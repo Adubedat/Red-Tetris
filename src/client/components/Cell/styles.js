@@ -2,7 +2,6 @@ import styled, { css } from "styled-components";
 
 export const StyledContainer = styled.div`
   flex: 1 10%;
-  // box-sizing: border-box;
   border: 1px solid black;
   ${props =>
     props.color &&
@@ -16,12 +15,13 @@ export const StyledContainer = styled.div`
     css`
       border: 0px;
       ${props =>
-        !props.color &&
+        props.color &&
         css`
-          background: #375f64;
+          background: #ff8a00;
         `};
     `};
 `;
+
 export const StyledLetter = styled.p`
   font-size: 20px;
   display: flex;

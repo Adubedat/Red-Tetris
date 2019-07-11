@@ -14,7 +14,7 @@ export const StyledForm = styled.form`
   flex-basis: 1 1 auto;
   width: 400px;
   height: 160px;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 5px;
   display: flex;
   flex-direction: column;

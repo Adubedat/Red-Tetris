@@ -35,7 +35,7 @@ export const StyledTitle = styled.h1`
   & {
     margin: 0px;
     font-size: 5vh;
-    background: linear-gradient(#ff8a00 0%, #dc141b 100%);
+    background: linear-gradient(#ff8a00 60%, white 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

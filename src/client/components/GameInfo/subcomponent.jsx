@@ -9,13 +9,12 @@ const GameInfoSub = ({ room, startGame, isHost }) => {
   };
 
   return (
-    <StyledContainer>
+    <StyledContainer id="game-info">
       <h2>{roomName}</h2>
       <p>[{playersCount}/10 Players]</p>
       {isHost && !isStarted ? (
         <StyledButton onClick={() => handleClick()}>start</StyledButton>
       ) : null}
-      }
     </StyledContainer>
   );
 };

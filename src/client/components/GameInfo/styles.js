@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const StyledContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: 5px solid black;
-  border-right: 0px;
-  padding: 10px;
-  margin-right: 0px;
+  flex: 1;
+  padding: 20px;
+  margin: 5px;
+  background-color: rgba(0, 0, 0, 0.3);
+  // border: 5px solid white;
+  border-radius: 2px 60px 2px 2px;
 `;
 
 export const StyledButton = styled.button`

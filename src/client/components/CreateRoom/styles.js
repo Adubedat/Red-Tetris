@@ -3,7 +3,7 @@ import Input from "../common/Input";
 import { withStyles } from "@material-ui/core/styles";
 
 export const StyledForm = styled.form`
-  height: 80px;
+  height: 10%;
   display: flex;
   padding: 10px;
   border: 3px solid white;

@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 export const StyledContainer = styled.div`
-  padding: 20px;
+  padding: 1vh;
   flex: 1;
   display: flex;
 `;
 
 export const StyledLeftItem = styled.div`
   flex: 2;
-  padding: 10px;
+  padding: 1vh;
   margin: 5px;
   background-color: rgba(0, 0, 0, 0.3);
   // border: 5px solid white;
