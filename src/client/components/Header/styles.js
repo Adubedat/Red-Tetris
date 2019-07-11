@@ -6,7 +6,7 @@ export const StyledContainer = styled.div`
   // margin-top: 10px;
   display: flex;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(0, 0, 0, 0.3);
   box-shadow: 1px 0px 5px black;
 `;
 

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 const ChatSub = () => {
   return (
-    <StyledMainContainer>
+    <StyledMainContainer id="chat">
       <h2>Chat :</h2>
     </StyledMainContainer>
   );

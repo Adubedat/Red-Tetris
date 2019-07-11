@@ -15,11 +15,11 @@ const RoomListSub = ({ rooms, playerName }) => {
     window.location.hash = roomName + "[" + playerName + "]";
   };
   return (
-    <StyledContainer>
+    <StyledContainer id="room-list">
       <h2>Rooms :</h2>
 
-      <StyledList>
-        <StyledListSubHeader>
+      <StyledList id="list">
+        <StyledListSubHeader id="subheader">
           <StyledListSubHeaderColumn flex={3}>
             <p id="header">Name</p>
           </StyledListSubHeaderColumn>
@@ -34,7 +34,11 @@ const RoomListSub = ({ rooms, playerName }) => {
           </StyledListSubHeaderColumn>
         </StyledListSubHeader>
         {rooms.map((room, index) => (
-          <StyledListItem key={index} onClick={() => handleClick(room.name)}>
+          <StyledListItem
+            id="list-item"
+            key={index}
+            onClick={() => handleClick(room.name)}
+          >
             <StyledListItemContent flex={3}>
               <p id="content">{room.name}</p>
             </StyledListItemContent>

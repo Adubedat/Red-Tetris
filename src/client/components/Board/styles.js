@@ -5,12 +5,10 @@ export const StyledAspectRatio = styled.div`
   width: 100%;
   height: 0;
   position: relative;
-  // box-sizing: border-box;
 `;
 
 export const StyledAspectRatioContainer = styled.div`
   flex-basis: 25%;
-  // box-sizing: border-box;
   text-align: center;
   max-width: 500px;
   min-width: 250px;
@@ -29,12 +27,12 @@ export const StyledContainer = styled.div`
   flex-direction: column;
   margin-left: 0px;
   border: 4px solid black;
+  background-color: rgba(0, 0, 0, 0.3);
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  // box-sizing: border-box;
   ${props =>
     props.isSpectre &&
     css`

@@ -7,12 +7,12 @@ import Spectres from "../Spectres";
 
 const GameSub = () => {
   return (
-    <StyledGameContainer>
+    <StyledGameContainer id="game">
       <GameInfo />
-      <StyledBoardsContainer>
-        <Board />
-        <Spectres />
-      </StyledBoardsContainer>
+      {/* <StyledBoardsContainer id= ""> */}
+      <Board />
+      <Spectres />
+      {/* </StyledBoardsContainer> */}
     </StyledGameContainer>
   );
 };
