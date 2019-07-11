@@ -10,7 +10,6 @@ export const DISCONNECT_PLAYER = "DISCONNECT_PLAYER";
 export const CONNECTION = "connection";
 export const DISCONNECT = "disconnect";
 
-export const UPDATE_BOARD = "UPDATE_BOARD";
 export const UPDATE_SPECTRES = "UPDATE_SPECTRES";
 
 export const KEY_PRESSED = "KEY_PRESSED";

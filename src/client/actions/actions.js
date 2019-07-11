@@ -4,12 +4,11 @@ import { toast } from "react-toastify";
 import socket from "../services/socket-api";
 import {
   KEY_PRESSED,
-  UPDATE_BOARD,
   START_GAME,
   UPDATE_SPECTRES
 } from "../../constants/actionTypes";
 
-const checkHash = () => {
+export const checkHash = () => {
   const hash = window.location.hash.substr(1);
   if (!hash.trim()) return;
   const regexp = /^[a-zA-Z0-9]{1,12}\[[a-zA-Z0-9]{1,12}\]$/;
@@ -18,7 +17,7 @@ const checkHash = () => {
     toast.error(
       "[ERROR] Player and Room names must be 1 to 12 alphanumeric characters in length"
     );
-    return null;
+    return;
   }
   const [roomName, playerName] = hash.match(/\w{1,12}/g);
   return {
@@ -43,11 +42,6 @@ export const startGame = () => {
     socket.emit(START_GAME);
   };
 };
-
-export const updateBoard = board => ({
-  type: UPDATE_BOARD,
-  board
-});
 
 export const updateSpectres = spectres => ({
   type: UPDATE_SPECTRES,
