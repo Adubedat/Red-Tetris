@@ -7,7 +7,7 @@ import { StyledContainer } from "./styles";
 
 const AppSub = ({ playerName, roomName }) => {
   return (
-    <StyledContainer>
+    <StyledContainer id="App">
       <Header />
       {!playerName ? <Login /> : !roomName ? <Lobby /> : <Game />}
     </StyledContainer>

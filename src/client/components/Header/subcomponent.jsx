@@ -14,14 +14,16 @@ let HeaderSub = ({ player, room, onBackHome }) => {
   const { name: roomName } = room;
   const { name: playerName } = player;
   return (
-    <StyledContainer>
-      <StyledItemLeft>
+    <StyledContainer id="header">
+      <StyledItemLeft id="left-item">
         {roomName ? <Button onClick={onBackHome}>Back Home</Button> : ""}
       </StyledItemLeft>
-      <StyledItemCenter>
-        <StyledTitle data-text="Tetris Orange">Tetris Orange</StyledTitle>
+      <StyledItemCenter id="center-item">
+        <StyledTitle id="title" data-text="Tetris Orange">
+          Tetris Orange
+        </StyledTitle>
       </StyledItemCenter>
-      <StyledItemRight>
+      <StyledItemRight id="right-item">
         {/* {playerName && (
           <StyledUserGroup>
             <p> {playerName}</p>

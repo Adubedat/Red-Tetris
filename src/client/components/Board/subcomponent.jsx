@@ -10,20 +10,23 @@ import Cell from "../Cell";
 
 const BoardSub = ({ board, playerName = "", isSpectre = false }) => {
   return (
-    <StyledAspectRatioContainer isSpectre={isSpectre}>
-      <StyledAspectRatio>
-        <StyledContainer isSpectre={isSpectre}>
-          {board.map((row, i) => (
-            <StyledRow key={i}>
-              {row.map((cell, i) => (
-                <Cell key={i} color={cell} isSpectre={isSpectre} />
-              ))}
-            </StyledRow>
+    // <StyledAspectRatioContainer
+    //   id="aspect-ratio-container"
+    //   isSpectre={isSpectre}
+    // >
+    //   <StyledAspectRatio id="aspect-ratio">
+    <StyledContainer id="board" isSpectre={isSpectre}>
+      {board.map((row, i) => (
+        <StyledRow id="row" key={i}>
+          {row.map((cell, i) => (
+            <Cell key={i} color={cell} isSpectre={isSpectre} />
           ))}
-        </StyledContainer>
-      </StyledAspectRatio>
-      {playerName ? <p>{playerName}</p> : null}
-    </StyledAspectRatioContainer>
+        </StyledRow>
+      ))}
+    </StyledContainer>
+    //   </StyledAspectRatio>
+    //   {playerName ? <p>{playerName}</p> : null}
+    // </StyledAspectRatioContainer>
   );
 };
 

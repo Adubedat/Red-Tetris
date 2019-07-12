@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import {
   StyledForm,
-  StyledRegisterGroup,
-  StyledTextField,
+  StyledInputContainer,
+  StyledLabel,
+  StyledInput,
   StyledButton
 } from "./styles";
 import inputError from "../../errors/inputError";
@@ -12,7 +13,7 @@ const CreateRoomSub = ({ playerName }) => {
   const [error, setError] = useState({ boolean: null, message: "" });
   const [roomName, setRoomName] = useState("");
 
-  const handleSubmit = e => {
+  const onSubmit = e => {
     e.preventDefault();
     window.location.hash = roomName + "[" + playerName + "]";
   };
@@ -28,9 +29,11 @@ const CreateRoomSub = ({ playerName }) => {
   });
 
   return (
-    <StyledForm id="form" onSubmit={e => handleSubmit(e)}>
-      <StyledRegisterGroup id="register">
-        <StyledTextField
+    <StyledForm id="form" onSubmit={e => onSubmit(e)}>
+      <StyledLabel htmlFor="name">{"Insert room name"}</StyledLabel>
+      <StyledInputContainer id="input-container">
+        <StyledInput
+          type="text"
           id="name"
           error={error.boolean}
           helperText={error.message}
@@ -40,10 +43,20 @@ const CreateRoomSub = ({ playerName }) => {
           value={roomName}
           onChange={e => handleChange(e)}
         />
-        <StyledButton id="enter" disabled={!roomName || error.boolean}>
-          <p> Press Enter </p>
-        </StyledButton>
-      </StyledRegisterGroup>
+      </StyledInputContainer>
+      {/* <StyledTextField
+            id="name"
+            error={error.boolean}
+            helperText={error.message}
+            spellCheck="false"
+            autoComplete="off"
+            label={label}
+            value={value}
+            onChange={e => onChange(e)}
+          /> */}
+      <StyledButton id="enter" disabled={!roomName || error.boolean}>
+        <p> Press Enter </p>
+      </StyledButton>
     </StyledForm>
   );
 };

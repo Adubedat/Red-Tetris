@@ -7,12 +7,12 @@ import CreateRoom from "../CreateRoom";
 
 const LobbySub = () => {
   return (
-    <StyledContainer>
-      <StyledLeftItem>
+    <StyledContainer id="lobby">
+      <StyledLeftItem id="left-item">
         <CreateRoom />
         <RoomList />
       </StyledLeftItem>
-      <StyledRightItem>
+      <StyledRightItem id="right-item">
         <Ladder />
         <Chat />
       </StyledRightItem>

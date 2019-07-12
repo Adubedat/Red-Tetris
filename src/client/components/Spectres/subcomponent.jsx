@@ -4,6 +4,7 @@ import BoardSub from "../Board/subcomponent";
 import { StyledContainer } from "./styles";
 
 const SpectreSub = ({ spectres }) => {
+  // if (!spectres.length) return null;
   return (
     <StyledContainer>
       {spectres.map((spectre, index) => (

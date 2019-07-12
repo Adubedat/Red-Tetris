@@ -4,9 +4,11 @@ import { PURE_ORANGE, CRIMSON } from "../../../constants/colors";
 export const StyledContainer = styled.div`
   margin: 0;
   padding: 0;
-  margin-top: 10px;
+  // margin-top: 10px;
   display: flex;
   align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 0px 5px black;
 `;
 
 export const StyledUserGroup = styled.div`
@@ -33,8 +35,8 @@ export const StyledItemRight = styled.div`
 export const StyledTitle = styled.h1`
   & {
     margin: 0px;
-    font-size: 4vh;
-    background: linear-gradient(${PURE_ORANGE} 0%, ${CRIMSON} 100%);
+    font-size: 5vh;
+    background: linear-gradient(#ff8a00 60%, white 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
