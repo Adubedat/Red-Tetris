@@ -5,10 +5,15 @@ exports[`<CreateRoomSub /> should render without crashing 1`] = `
   id="form"
   onSubmit={[Function]}
 >
-  <styled.div
-    id="register"
+  <styled.label
+    htmlFor="name"
   >
-    <WithStyles(ForwardRef)
+    Insert room name
+  </styled.label>
+  <styled.div
+    id="input-container"
+  >
+    <styled.input
       autoComplete="off"
       error={null}
       helperText=""
@@ -16,16 +21,17 @@ exports[`<CreateRoomSub /> should render without crashing 1`] = `
       label="Insert room name"
       onChange={[Function]}
       spellCheck="false"
+      type="text"
       value=""
     />
-    <styled.button
-      disabled={true}
-      id="enter"
-    >
-      <p>
-         Press Enter 
-      </p>
-    </styled.button>
   </styled.div>
+  <styled.button
+    disabled={true}
+    id="enter"
+  >
+    <p>
+       Press Enter 
+    </p>
+  </styled.button>
 </styled.form>
 `;

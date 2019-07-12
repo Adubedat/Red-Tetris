@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BoardSub /> Board conditional css when isSpectre is true 1`] = `
+<div
+  class="sc-bdVaJa hsnlHO"
+  id="board"
+/>
+`;
+
+exports[`<BoardSub /> Board rendering with a single board 1`] = `
+<styled.div
+  id="board"
+  isSpectre={false}
+>
+  <styled.div
+    id="row"
+    key="0"
+  >
+    <Connect(CellSub)
+      color=""
+      isSpectre={false}
+      key="0"
+    />
+    <Connect(CellSub)
+      color=""
+      isSpectre={false}
+      key="1"
+    />
+    <Connect(CellSub)
+      color=""
+      isSpectre={false}
+      key="2"
+    />
+  </styled.div>
+  <styled.div
+    id="row"
+    key="1"
+  >
+    <Connect(CellSub)
+      color=""
+      isSpectre={false}
+      key="0"
+    />
+    <Connect(CellSub)
+      color=""
+      isSpectre={false}
+      key="1"
+    />
+    <Connect(CellSub)
+      color=""
+      isSpectre={false}
+      key="2"
+    />
+  </styled.div>
+  <styled.div
+    id="row"
+    key="2"
+  >
+    <Connect(CellSub)
+      color=""
+      isSpectre={false}
+      key="0"
+    />
+    <Connect(CellSub)
+      color=""
+      isSpectre={false}
+      key="1"
+    />
+    <Connect(CellSub)
+      color=""
+      isSpectre={false}
+      key="2"
+    />
+  </styled.div>
+</styled.div>
+`;
+
+exports[`<BoardSub /> Board rendering with a spectre 1`] = `
+<styled.div
+  id="board"
+  isSpectre={true}
+>
+  <styled.div
+    id="row"
+    key="0"
+  >
+    <Connect(CellSub)
+      color=""
+      isSpectre={true}
+      key="0"
+    />
+    <Connect(CellSub)
+      color=""
+      isSpectre={true}
+      key="1"
+    />
+    <Connect(CellSub)
+      color=""
+      isSpectre={true}
+      key="2"
+    />
+  </styled.div>
+  <styled.div
+    id="row"
+    key="1"
+  >
+    <Connect(CellSub)
+      color=""
+      isSpectre={true}
+      key="0"
+    />
+    <Connect(CellSub)
+      color=""
+      isSpectre={true}
+      key="1"
+    />
+    <Connect(CellSub)
+      color=""
+      isSpectre={true}
+      key="2"
+    />
+  </styled.div>
+  <styled.div
+    id="row"
+    key="2"
+  >
+    <Connect(CellSub)
+      color=""
+      isSpectre={true}
+      key="0"
+    />
+    <Connect(CellSub)
+      color=""
+      isSpectre={true}
+      key="1"
+    />
+    <Connect(CellSub)
+      color=""
+      isSpectre={true}
+      key="2"
+    />
+  </styled.div>
+</styled.div>
+`;

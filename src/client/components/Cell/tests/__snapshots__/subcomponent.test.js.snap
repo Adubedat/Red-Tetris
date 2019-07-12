@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CellSub /> Cell rendering as spectre, with color and without letter 1`] = `
+<div
+  class="sc-bdVaJa grLvQt"
+  color="#000000"
+>
+  <p
+    class="sc-bwzfXH dfRfSZ"
+  />
+</div>
+`;
+
+exports[`<CellSub /> Cell rendering as spectre, with letter and color 1`] = `
+<div
+  class="sc-bdVaJa grLvQt"
+  color="#000000"
+>
+  <p
+    class="sc-bwzfXH dfRfSZ"
+  >
+    P
+  </p>
+</div>
+`;
+
+exports[`<CellSub /> Cell rendering as spectre, with letter and without color 1`] = `
+<div
+  class="sc-bdVaJa bPijFL"
+  color=""
+>
+  <p
+    class="sc-bwzfXH dfRfSZ"
+  >
+    P
+  </p>
+</div>
+`;
+
+exports[`<CellSub /> Cell rendering as spectre, without color and letter 1`] = `
+<div
+  class="sc-bdVaJa bPijFL"
+  color=""
+>
+  <p
+    class="sc-bwzfXH dfRfSZ"
+  />
+</div>
+`;
+
+exports[`<CellSub /> Cell rendering with color, without letter and is not spectre 1`] = `
+<div
+  class="sc-bdVaJa ejDKVY"
+  color="#000000"
+>
+  <p
+    class="sc-bwzfXH dfRfSZ"
+  />
+</div>
+`;
+
+exports[`<CellSub /> Cell rendering with letter and color, is not spectre 1`] = `
+<div
+  class="sc-bdVaJa ejDKVY"
+  color="#000000"
+>
+  <p
+    class="sc-bwzfXH dfRfSZ"
+  >
+    P
+  </p>
+</div>
+`;
+
+exports[`<CellSub /> Cell rendering with letter, without color and is not spectre 1`] = `
+<div
+  class="sc-bdVaJa idqHKJ"
+  color=""
+>
+  <p
+    class="sc-bwzfXH dfRfSZ"
+  >
+    P
+  </p>
+</div>
+`;
+
+exports[`<CellSub /> Cell rendering without color, letter and is not Spectre 1`] = `
+<div
+  class="sc-bdVaJa idqHKJ"
+  color=""
+>
+  <p
+    class="sc-bwzfXH dfRfSZ"
+  />
+</div>
+`;

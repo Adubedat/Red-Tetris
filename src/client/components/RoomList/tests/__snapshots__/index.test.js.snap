@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RoomList /> RoomList rendering with store without crashing 1`] = `
+<ContextProvider
+  value={null}
+>
+  <RoomListSub
+    dispatch={[Function]}
+    playerName="Player1"
+    rooms={
+      Array [
+        Object {
+          "playersCount": 2,
+          "roomName": "Room1",
+        },
+        Object {
+          "playersCount": 3,
+          "roomName": "Room2",
+        },
+      ]
+    }
+    store={
+      Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      }
+    }
+  />
+</ContextProvider>
+`;
