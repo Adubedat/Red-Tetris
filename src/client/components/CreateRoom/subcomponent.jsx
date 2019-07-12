@@ -4,6 +4,9 @@ import {
   StyledForm,
   StyledRegisterGroup,
   StyledTextField,
+  StyledInputContainer,
+  StyledLabel,
+  StyledInput,
   StyledButton
 } from "./styles";
 
@@ -13,8 +16,10 @@ const CreateRoomSub = ({ onSubmit, onChange, error, value, label }) => {
   });
   return (
     <StyledForm id="form" onSubmit={e => onSubmit(e)}>
-      <StyledRegisterGroup id="register">
-        <StyledTextField
+      <StyledLabel htmlFor="name">{label}</StyledLabel>
+      <StyledInputContainer id="input-container">
+        <StyledInput
+          type="text"
           id="name"
           error={error.boolean}
           helperText={error.message}
@@ -24,10 +29,20 @@ const CreateRoomSub = ({ onSubmit, onChange, error, value, label }) => {
           value={value}
           onChange={e => onChange(e)}
         />
-        <StyledButton id="enter" disabled={!value || error.boolean}>
-          <p> Press Enter </p>
-        </StyledButton>
-      </StyledRegisterGroup>
+      </StyledInputContainer>
+      {/* <StyledTextField
+            id="name"
+            error={error.boolean}
+            helperText={error.message}
+            spellCheck="false"
+            autoComplete="off"
+            label={label}
+            value={value}
+            onChange={e => onChange(e)}
+          /> */}
+      <StyledButton id="enter" disabled={!value || error.boolean}>
+        <p> Press Enter </p>
+      </StyledButton>
     </StyledForm>
   );
 };

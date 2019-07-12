@@ -56,7 +56,7 @@ export const StyledContainer = styled.div`
     props.isSpectre &&
     css`
       border: 2px solid white;
-      border-radius: 1px;
+      border-radius: 2px;
       height: 30vh;
       width: 15vh;
       background-color: rgba(0, 0, 0, 0.3);

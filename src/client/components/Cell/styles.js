@@ -17,7 +17,8 @@ export const StyledContainer = styled.div`
       ${props =>
         props.color &&
         css`
-          background: #ff8a00;
+          border: 2px outset #ff8a00;
+          background: #ff8a0080;
         `};
     `};
 `;

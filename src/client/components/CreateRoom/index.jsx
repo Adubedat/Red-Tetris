@@ -21,7 +21,7 @@ let CreateRoom = ({ playerName }) => {
   return (
     <CreateRoomSub
       onSubmit={handleSubmit}
-      label="Insert room name"
+      label="Create Room"
       error={error}
       value={roomName}
       onChange={handleChange}
