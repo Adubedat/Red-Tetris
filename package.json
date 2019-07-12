@@ -23,6 +23,7 @@
   "scripts": {
     "client-dev": "webpack-dev-server --open --mode development",
     "serv-dev": "nodemon --exec babel-node src/server/server.js",
+    "build": "webpack --mode production",
     "test": "jest",
     "test:watch": "jest --watch",
     "eslint": "eslint src"

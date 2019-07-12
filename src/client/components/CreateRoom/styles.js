@@ -31,7 +31,7 @@ export const StyledInput = styled.input`
   padding-left: 1vh;
   font-family: ArcadeClassic;
   border: 0px;
-  font-size: 1.5vh;
+  font-size: 2vh;
   width: 100%;
   background: none;
   outline: none;
