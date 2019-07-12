@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`room actions leaveRoom clean room and hash 1`] = `
+Object {
+  "room": Object {},
+  "type": "UPDATE_ROOM",
+}
+`;
