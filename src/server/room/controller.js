@@ -64,10 +64,7 @@ export const leaveRoom = (socket, io) => {
     // updatePlayers(room, io);
     socket.leave(room.name);
     socket.join(LOBBY_ROOM);
-    io.in(room.name).emit(UPDATE_ROOM, {
-      room: room.toObject()
-    });
-    io.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsArray() });
+    updateRoom(room, io);
     console.log("[UPDATED] after leaveRoom", Game);
   }
 };
@@ -95,8 +92,8 @@ export const startGame = (room, io) => {
     updatePlayer(player, io);
   });
   room.interval = setInterval(() => handleInterval(room, io), 1000);
+  updateRoom(room, io);
 };
-
 export const emitSpectres = (room, io) => {
   const players = room.players;
   players.forEach(player => {
@@ -105,4 +102,11 @@ export const emitSpectres = (room, io) => {
     spectres.forEach(spectre => delete spectre.playerId);
     io.in(player.id).emit(UPDATE_SPECTRES, { spectres });
   });
+};
+
+export const updateRoom = (room, io) => {
+  io.in(room.name).emit(UPDATE_ROOM, {
+    room: room.toObject()
+  });
+  io.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsArray() });
 };

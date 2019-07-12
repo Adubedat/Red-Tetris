@@ -8,12 +8,12 @@
 
 * {
   box-sizing: border-box;
+  font-family: "ArcadeClassic";
 }
 
 html {
   height: 100%;
   color: white;
-  font-family: "ArcadeClassic";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: white;

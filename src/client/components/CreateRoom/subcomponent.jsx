@@ -30,16 +30,6 @@ const CreateRoomSub = ({ onSubmit, onChange, error, value, label }) => {
           onChange={e => onChange(e)}
         />
       </StyledInputContainer>
-      {/* <StyledTextField
-            id="name"
-            error={error.boolean}
-            helperText={error.message}
-            spellCheck="false"
-            autoComplete="off"
-            label={label}
-            value={value}
-            onChange={e => onChange(e)}
-          /> */}
       <StyledButton id="enter" disabled={!value || error.boolean}>
         <p> Press Enter </p>
       </StyledButton>

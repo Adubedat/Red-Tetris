@@ -1,35 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "../common/Button";
 import {
   StyledContainer,
   StyledUserGroup,
   StyledTitle,
   StyledItemLeft,
   StyledItemCenter,
-  StyledItemRight
+  StyledItemRight,
+  StyledButton
 } from "./styles";
 
-let HeaderSub = ({ player, room, onBackHome }) => {
-  const { name: roomName } = room;
-  const { name: playerName } = player;
+let HeaderSub = ({ roomName, onBackHome }) => {
   return (
     <StyledContainer id="header">
       <StyledItemLeft id="left-item">
-        {roomName ? <Button onClick={onBackHome}>Back Home</Button> : ""}
+        {roomName ? <StyledButton onClick={onBackHome}>Home</StyledButton> : ""}
       </StyledItemLeft>
       <StyledItemCenter id="center-item">
         <StyledTitle id="title" data-text="Tetris Orange">
           Tetris Orange
         </StyledTitle>
       </StyledItemCenter>
-      <StyledItemRight id="right-item">
-        {/* {playerName && (
-          <StyledUserGroup>
-            <p> {playerName}</p>
-          </StyledUserGroup>
-        )} */}
-      </StyledItemRight>
+      <StyledItemRight id="right-item"></StyledItemRight>
     </StyledContainer>
   );
 };

@@ -5,8 +5,8 @@ import { disconnectPlayer } from "../../actions/player";
 
 const mapStateToProps = state => {
   return {
-    player: state.player,
-    room: state.room
+    playerName: state.player.name,
+    roomName: state.room.name
   };
 };
 
