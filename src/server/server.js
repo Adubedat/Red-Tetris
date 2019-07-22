@@ -1,10 +1,13 @@
-import express from "express";
-import { initListeners } from "./listeners/index.js";
-import http from "http";
-import socketIO from "socket.io";
-import params from "../../params";
+const express = require("express");
+const { initListeners } = require("./listeners/index.js");
+const http = require("http");
+const socketIO = require("socket.io");
+const params = require("../../params");
 
-const { port } = params.server;
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = params.server.port;
+}
 
 const app = express();
 
