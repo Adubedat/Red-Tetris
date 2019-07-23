@@ -11,6 +11,8 @@ if (port == null || port == "") {
 
 const app = express();
 
+app.use(express.static(__dirname + "/public"));
+
 const server = http.createServer(app);
 
 const io = socketIO(server, { pingInterval: 60000 });
