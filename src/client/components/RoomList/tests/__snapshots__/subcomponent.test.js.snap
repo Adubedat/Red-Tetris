@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RoomListSub /> should render without crashing 1`] = `
+<div
+  class="sc-bdVaJa mWeMt"
+  id="room-list"
+>
+  <h2>
+    Rooms :
+  </h2>
+  <div
+    class="sc-bwzfXH hQcXqj"
+    id="list"
+  >
+    <div
+      class="sc-ifAKCX FSPBW"
+      id="subheader"
+    >
+      <div
+        class="sc-EHOje kgNXRr"
+      >
+        <p
+          id="header"
+        >
+          Name
+        </p>
+      </div>
+      <div
+        class="sc-EHOje qZCVm"
+      >
+        <p
+          id="header"
+        >
+          Mode
+        </p>
+      </div>
+      <div
+        class="sc-EHOje qZCVm"
+      >
+        <p
+          id="header"
+        >
+          Players
+        </p>
+      </div>
+      <div
+        class="sc-EHOje qZCVm"
+      >
+        <p
+          id="header"
+        >
+          Started
+        </p>
+      </div>
+    </div>
+    <div
+      class="sc-htpNat eHEvwL"
+      id="list-item"
+    >
+      <div
+        class="sc-bxivhb bKDjvz"
+      >
+        <p
+          id="content"
+        >
+          Room1
+        </p>
+      </div>
+      <div
+        class="sc-bxivhb iuOKpD"
+      >
+        <p
+          id="content"
+        >
+          BattleRoyal
+        </p>
+      </div>
+      <div
+        class="sc-bxivhb iuOKpD"
+      >
+        <p
+          id="content"
+        >
+          2/10
+        </p>
+      </div>
+      <div
+        class="sc-bxivhb iuOKpD"
+      >
+        <p
+          id="content"
+        >
+          Yes
+        </p>
+      </div>
+    </div>
+    <div
+      class="sc-htpNat eHEvwL"
+      id="list-item"
+    >
+      <div
+        class="sc-bxivhb bKDjvz"
+      >
+        <p
+          id="content"
+        >
+          Room2
+        </p>
+      </div>
+      <div
+        class="sc-bxivhb iuOKpD"
+      >
+        <p
+          id="content"
+        >
+          BattleRoyal
+        </p>
+      </div>
+      <div
+        class="sc-bxivhb iuOKpD"
+      >
+        <p
+          id="content"
+        >
+          3/10
+        </p>
+      </div>
+      <div
+        class="sc-bxivhb iuOKpD"
+      >
+        <p
+          id="content"
+        >
+          No
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -51,7 +51,7 @@ const RoomListSub = ({ rooms, playerName }) => {
               </p>
             </StyledListItemContent>
             <StyledListItemContent flex={1}>
-              <p id="content">{room.isStarted ? "Started" : ""}</p>
+              <p id="content">{room.isStarted ? "Yes" : "No"}</p>
             </StyledListItemContent>
           </StyledListItem>
         ))}
