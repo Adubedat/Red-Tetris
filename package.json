@@ -30,7 +30,7 @@
   },
   "scripts": {
     "client-dev": "webpack-dev-server --open --mode development",
-    "serv-dev": "nodemon --exec babel-node src/server/server.js",
+    "serv-dev": "nodemon --exec babel-node index.js",
     "build": "webpack --mode production",
     "test": "jest",
     "test:watch": "jest --watch",

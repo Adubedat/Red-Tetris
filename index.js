@@ -2,8 +2,8 @@ const express = require("express");
 const http = require("http");
 const path = require("path");
 const socketIO = require("socket.io");
-const { initListeners } = require("./listeners/index.js");
-const params = require("../../params");
+const { initListeners } = require("./src/server/listeners/index.js");
+const params = require("./params");
 
 let port = process.env.PORT;
 if (port == null || port == "") {
@@ -12,7 +12,12 @@ if (port == null || port == "") {
 
 const app = express();
 
-app.use(express.static(path.join(__dirname + "../../../public")));
+app.use(express.static("public"));
+app.use("/build", express.static("build"));
+
+app.get("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
 
 const server = http.createServer(app);
 
