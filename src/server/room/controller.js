@@ -61,7 +61,6 @@ export const leaveRoom = (socket, io) => {
     player.room = null;
     player.clean();
     emitSpectres(room, io);
-    // updatePlayers(room, io);
     socket.leave(room.name);
     socket.join(LOBBY_ROOM);
     updateRoom(room, io);
@@ -94,6 +93,7 @@ export const startGame = (room, io) => {
   room.interval = setInterval(() => handleInterval(room, io), 1000);
   updateRoom(room, io);
 };
+
 export const emitSpectres = (room, io) => {
   const players = room.players;
   players.forEach(player => {
