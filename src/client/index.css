@@ -8,16 +8,17 @@
 
 * {
   box-sizing: border-box;
+  font-family: "ArcadeClassic";
 }
 
 html {
-  /* margin: 0; */
   height: 100%;
   color: white;
-  font-family: "ArcadeClassic";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: radial-gradient(#375f64, #143039);
+  background-color: white;
+  /* background: radial-gradient(#375f64, #143039); */
+  background: radial-gradient(#ff8a00, #dc141b);
 }
 body {
   margin: 0px;

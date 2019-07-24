@@ -1,11 +1,15 @@
+const host = "0.0.0.0";
+
+const port = "5000";
+
+const localHost = "http://" + host + ":" + port;
+
+const herokuHost = "https://tetris-orange.herokuapp.com/";
+
 const params = {
-  server: {
-    host: "0.0.0.0",
-    port: 5000,
-    get url() {
-      return "http://" + this.host + ":" + this.port;
-    }
-  }
+  API_URL: process.env.NODE_ENV === "production" ? herokuHost : localHost,
+  host,
+  port
 };
 
 module.exports = params;

@@ -5,6 +5,6 @@ export const StyledMainContainer = styled.div`
   padding: 20px;
   margin: 5px;
   background-color: rgba(0, 0, 0, 0.3);
-  border: 5px solid white;
+  // border: 5px solid white;
   border-radius: 2px;
 `;

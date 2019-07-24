@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import {
   StyledForm,
-  StyledRegisterGroup,
-  StyledTextField,
+  StyledInputContainer,
+  StyledLabel,
+  StyledInput,
   StyledButton
 } from "./styles";
 import inputError from "../../errors/inputError";
@@ -29,8 +30,10 @@ const CreateRoomSub = ({ playerName }) => {
 
   return (
     <StyledForm id="form" onSubmit={e => handleSubmit(e)}>
-      <StyledRegisterGroup id="register">
-        <StyledTextField
+      <StyledLabel htmlFor="name">Create Room</StyledLabel>
+      <StyledInputContainer id="input-container">
+        <StyledInput
+          type="text"
           id="name"
           error={error.boolean}
           helperText={error.message}
@@ -40,10 +43,10 @@ const CreateRoomSub = ({ playerName }) => {
           value={roomName}
           onChange={e => handleChange(e)}
         />
-        <StyledButton id="enter" disabled={!roomName || error.boolean}>
-          <p> Press Enter </p>
-        </StyledButton>
-      </StyledRegisterGroup>
+      </StyledInputContainer>
+      <StyledButton id="enter" disabled={!roomName || error.boolean}>
+        <p> Press Enter </p>
+      </StyledButton>
     </StyledForm>
   );
 };

@@ -4,7 +4,7 @@ import { StyledMainContainer } from "./styles";
 
 const LadderSub = () => {
   return (
-    <StyledMainContainer>
+    <StyledMainContainer id="ladder">
       <h2>Top scores :</h2>
     </StyledMainContainer>
   );

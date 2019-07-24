@@ -1,19 +1,31 @@
 import styled from "styled-components";
 
 export const StyledContainer = styled.div`
+  flex: 1;
   display: flex;
-  flex-direction: column;
-  border: 5px solid black;
-  border-right: 0px;
-  padding: 10px;
-  margin-right: 0px;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  margin: 5px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 2px 60px 2px 2px;
 `;
 
 export const StyledButton = styled.button`
-  border-radius: 3px;
-  padding: 0.5rem 0;
-  margin: 0.5rem 1rem;
-  background: transparent;
+  background: none;
+  font-size: 2.5vh;
   color: white;
-  border: 2px solid white;
+  padding: 0.5vh;
+  border: 0px;
+  outline: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  &:enabled {
+    opacity: 1;
+  }
+`;
+
+export const StyledRoomName = styled.h2`
+  align-self: flex-start;
 `;

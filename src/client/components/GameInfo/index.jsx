@@ -11,7 +11,7 @@ const actionCreators = { startGame };
 
 const GameInfo = connect(
   mapStateToProps,
-  actionCreators
+  null
 )(GameInfoSub);
 
 export default GameInfo;

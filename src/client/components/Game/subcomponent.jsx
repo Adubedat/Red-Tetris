@@ -1,19 +1,26 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Board from "../Board";
 import GameInfo from "../GameInfo";
-import { StyledGameContainer, StyledBoardsContainer } from "./styles";
+import { StyledContainer, StyledLeftItem, StyledRightItem } from "./styles";
 import Spectres from "../Spectres";
+import Chat from "../Chat";
+import NextPieces from "../NextPieces";
 
-const GameSub = () => {
+const GameSub = (isStarted, isHost, inGame) => {
   return (
-    <StyledGameContainer>
-      <GameInfo />
-      <StyledBoardsContainer>
-        <Board />
+    <StyledContainer id="game">
+      <StyledLeftItem id="left-item">
+        {(isStarted && inGame ? <Spectres /> : null) ||
+          (isStarted && !inGame ? "" : "")}
         <Spectres />
-      </StyledBoardsContainer>
-    </StyledGameContainer>
+        <Board />
+        <NextPieces />
+      </StyledLeftItem>
+      <StyledRightItem id="right-item">
+        <GameInfo />
+        <Chat />
+      </StyledRightItem>
+    </StyledContainer>
   );
 };
 

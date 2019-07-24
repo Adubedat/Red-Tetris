@@ -121,6 +121,7 @@ class Player {
       name: this._name,
       id: this._id,
       isHost: this._room && this._room.hostId === this._id,
+      inGame: this._inGame,
       board: this.renderBoard() || this._heap
     };
   }
