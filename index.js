@@ -8,7 +8,7 @@ const { initListeners } = require("./src/server/listeners/index.js");
 const params = require("./params");
 
 let port = process.env.PORT;
-if (port == null || port == "") {
+if (port === null || port === "") {
   port = params.server.port;
 }
 
@@ -23,21 +23,21 @@ app.get("*", function(req, res) {
 
 const httpsServer = https.createServer(
   {
-    key: fs.readFileSync("server.key"),
-    cert: fs.readFileSync("server.cert")
+    key: fs.readFileSync("key.pem"),
+    cert: fs.readFileSync("cert.pem")
   },
   app
 );
-const httpServer = http.createServer(app);
+// const httpServer = http.createServer(app);
 
-const io = socketIO(httpServer, { pingInterval: 60000 });
+const io = socketIO(httpsServer, { pingInterval: 60000 });
 
 initListeners(io);
 
-httpServer.listen(port, () => {
-  console.log(`Listening on port ${port}`);
-});
+// httpServer.listen(port, () => {
+//   console.log(`Listening on port ${port}`);
+// });
 
-httpsServer.listen(443, () => {
-  console.log("Listening https on port 443");
+httpsServer.listen(port, () => {
+  console.log(`Listening on port ${port}`);
 });
