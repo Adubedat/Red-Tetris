@@ -1,19 +1,25 @@
-import { connectPlayer, disconnectPlayer, updatePlayer } from "../controller";
 import Game from "../../game/class";
-import socket from "../../../client/services/socket-api";
-// const io = require("socket.io-client");
+import { updatePlayer } from "../controller";
+import { initListeners } from "../../listeners";
+import {
+  NEW_PLAYER,
+  DISCONNECT_PLAYER,
+  UPDATE_PLAYER
+} from "../../../constants/actionTypes";
+const io = require("socket.io-client");
 const http = require("http");
 const ioBack = require("socket.io");
 
-// let socket;
+let socket;
 let httpServer;
-// let httpServerAddr;
+let httpServerAddr;
 let ioServer;
 
 beforeAll(done => {
-  httpServer = http.createServer().listen();
-  //   httpServerAddr = httpServer.listen().address();
+  httpServer = http.createServer();
+  httpServerAddr = httpServer.listen().address();
   ioServer = ioBack(httpServer);
+  initListeners(ioServer);
   done();
 });
 
@@ -24,10 +30,15 @@ afterAll(done => {
 });
 
 beforeEach(done => {
-  // Setup
-  if (socket.disconnected) {
-    socket.connect();
-  }
+  socket = io.connect(
+    "http://[" + httpServerAddr.address + "]:" + httpServerAddr.port,
+    {
+      "reconnection delay": 0,
+      "reopen delay": 0,
+      "force new connection": true,
+      transports: ["websocket"]
+    }
+  );
   socket.on("connect", () => {
     done();
   });
@@ -45,19 +56,41 @@ describe("Test player controller functions", () => {
   test("connectPlayer function with an unvalid name should return an error", () => {
     const callback = jest.fn(response => {
       expect(response.status).toBe("error");
+      expect(Game.players.length).toBe(0);
     });
-    connectPlayer("Player1unvalid", callback, socket);
-    expect(Game.players.length).toBe(0);
+    socket.emit(NEW_PLAYER, "Player1unvalid", callback);
   });
-  test("connectPlayer with a valid name should create a player and do nothing when the player already exists ", () => {
+  test("connectPlayer with a valid name should create a player and do nothing when the player already exists ", done => {
     const callback = jest.fn(response => {
       expect(response.status).toBe("success");
     });
-    connectPlayer("Player1", callback, socket);
-    expect(Game.players.length).toBe(1);
-    expect(Game.players[0].id).toBe(socket.id);
-    connectPlayer("Player1", callback, socket);
-    expect(Game.players.length).toBe(1);
-    expect(Game.players[0].id).toBe(socket.id);
+    socket.emit(NEW_PLAYER, "Player1", callback);
+    socket.emit(NEW_PLAYER, "Player1", callback);
+    setTimeout(() => {
+      expect(Game.players.length).toBe(1);
+      expect(Game.players[0].id).toBe(socket.id);
+      done();
+    }, 50);
+  });
+  test("disconnectPlayer should remove player from game and from the socket room LOBBY_ROOM", done => {
+    const callback = jest.fn(() => {});
+    socket.emit(NEW_PLAYER, "Player1", callback);
+    socket.emit(DISCONNECT_PLAYER);
+    setTimeout(() => {
+      expect(Game.players.length).toBe(0);
+      done();
+    }, 50);
+  });
+  test("updatePlayer should emit an UPDATE_PLAYER event", done => {
+    const callback = jest.fn(() => {});
+    socket.emit(NEW_PLAYER, "Player1", callback);
+    socket.on(UPDATE_PLAYER, data => {
+      expect(data).toBeDefined();
+      done();
+    });
+    setTimeout(() => {
+      const player = Game.players[0];
+      updatePlayer(player, ioServer);
+    }, 50);
   });
 });

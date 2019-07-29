@@ -23,7 +23,7 @@
   "scripts": {
     "client-dev": "webpack-dev-server --open --mode development",
     "serv-dev": "nodemon --exec babel-node src/server/server.js",
-    "test": "jest",
+    "test": "jest --silent",
     "test:watch": "jest --watch",
     "eslint": "eslint src",
     "coverage": "jest --collectCoverageFrom=src/* --coverage src"
