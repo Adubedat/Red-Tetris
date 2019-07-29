@@ -60,10 +60,9 @@ export const leaveRoom = (socket, io) => {
     }
     player.room = null;
     player.clean();
-    emitSpectres(room, io);
-    // updatePlayers(room, io);
     socket.leave(room.name);
     socket.join(LOBBY_ROOM);
+    emitSpectres(room, io);
     io.in(room.name).emit(UPDATE_ROOM, {
       room: room.toObject()
     });
