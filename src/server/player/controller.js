@@ -19,7 +19,6 @@ export const connectPlayer = (playerName, callback, socket) => {
       const playerInfo = player.toObject();
       callback({ status: "success", playerInfo });
       console.log("[UPDATED] after connectPlayer", Game);
-      return player;
     }
   }
 };

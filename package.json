@@ -25,7 +25,8 @@
     "serv-dev": "nodemon --exec babel-node src/server/server.js",
     "test": "jest",
     "test:watch": "jest --watch",
-    "eslint": "eslint src"
+    "eslint": "eslint src",
+    "coverage": "jest --collectCoverageFrom=src/* --coverage src"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -2,9 +2,28 @@ import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
 import { leaveRoom, updateRoom, updateRooms } from "../room";
 import { UPDATE_ROOM, UPDATE_ROOMS } from "../../../constants/actionTypes";
+import socket from "../../services/socket-api";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
+
+beforeEach(done => {
+  // Setup
+  if (socket.disconnected) {
+    socket.connect();
+  }
+  socket.on("connect", () => {
+    done();
+  });
+});
+
+afterEach(done => {
+  //   Cleanup;
+  if (socket.connected) {
+    socket.disconnect();
+  }
+  done();
+});
 
 describe("room actions", () => {
   test("leaveRoom clean room and hash", done => {

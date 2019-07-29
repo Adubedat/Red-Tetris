@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Game class tests createRoomsArray method 1`] = `
+Array [
+  Object {
+    "name": "Room1",
+    "playersCount": 0,
+  },
+  Object {
+    "name": "Room2",
+    "playersCount": 0,
+  },
+  Object {
+    "name": "Room3",
+    "playersCount": 0,
+  },
+]
+`;
