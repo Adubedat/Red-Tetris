@@ -6,7 +6,9 @@ import {
   KEY_PRESSED,
   UPDATE_BOARD,
   START_GAME,
-  UPDATE_SPECTRES
+  UPDATE_SPECTRES,
+  ADD_CHAT_MESSAGE,
+  NEW_CHAT_MESSAGE
 } from "../../constants/constants";
 
 const checkHash = () => {
@@ -52,4 +54,15 @@ export const updateBoard = board => ({
 export const updateSpectres = spectres => ({
   type: UPDATE_SPECTRES,
   spectres
+});
+
+export const newChatMessage = message => {
+  return () => {
+    socket.emit(NEW_CHAT_MESSAGE, message);
+  };
+};
+
+export const addChatMessage = message => ({
+  type: ADD_CHAT_MESSAGE,
+  message
 });

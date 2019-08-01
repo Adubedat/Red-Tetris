@@ -16,7 +16,8 @@ const initialState = {
   player: {},
   spectres: [],
   room: {},
-  rooms: []
+  rooms: [],
+  chatMessages: []
 };
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -24,6 +24,9 @@ export const CONNECTION = "connection";
 
 export const UPDATE_SPECTRES = "UPDATE_SPECTRES";
 
+export const ADD_CHAT_MESSAGE = "ADD_CHAT_MESSAGE";
+export const NEW_CHAT_MESSAGE = "NEW_CHAT_MESSAGE";
+
 export const DISCONNECT = "disconnect";
 
 export const KEY_PRESSED = "KEY_PRESSED";

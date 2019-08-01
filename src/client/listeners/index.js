@@ -3,11 +3,17 @@ import {
   UPDATE_ROOMS,
   UPDATE_ROOM,
   UPDATE_PLAYER,
-  UPDATE_SPECTRES
+  UPDATE_SPECTRES,
+  ADD_CHAT_MESSAGE
 } from "../../constants/constants";
 import { updateRooms, updateRoom } from "../actions/room";
 import { updatePlayer } from "../actions/player";
-import { handleHash, handleKeyPress, updateSpectres } from "../actions/actions";
+import {
+  handleHash,
+  handleKeyPress,
+  updateSpectres,
+  addChatMessage
+} from "../actions/actions";
 
 export const initListeners = dispatch => {
   socket.on(UPDATE_ROOMS, data => subscribeUpdateRooms(data, dispatch));
@@ -18,6 +24,7 @@ export const initListeners = dispatch => {
 
   socket.on(UPDATE_SPECTRES, data => subscribeUpdateSpectres(data, dispatch));
 
+  socket.on(ADD_CHAT_MESSAGE, data => subscribeAddChatMessage(data, dispatch));
   window.onhashchange = () => handleHash(dispatch);
   document.onkeydown = e => handleKeyPress(e);
 };
@@ -40,4 +47,9 @@ const subscribeUpdatePlayers = (data, dispatch) => {
 const subscribeUpdateSpectres = (data, dispatch) => {
   const { spectres } = data;
   dispatch(updateSpectres(spectres));
+};
+
+const subscribeAddChatMessage = (data, dispatch) => {
+  const { message } = data;
+  dispatch(addChatMessage(message));
 };

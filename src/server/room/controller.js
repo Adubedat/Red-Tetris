@@ -29,10 +29,7 @@ export const joinRoom = (roomName, callback, socket, io) => {
         player.room = room;
         socket.leave(LOBBY_ROOM);
         socket.join(room.name);
-        io.in(room.name).emit(UPDATE_ROOM, {
-          room: room.toObject()
-        });
-        io.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsArray() });
+        updateRoom(room, io);
         updatePlayer(player, io);
         emitSpectres(room, io);
       } else {
