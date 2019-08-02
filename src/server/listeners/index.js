@@ -21,11 +21,10 @@ import {
 export const initListeners = io => {
   io.on(CONNECTION, socket => {
     initClientState(socket);
-    socket.join(LOBBY_ROOM);
     // console.log("[JOIN] socket room : ", io.sockets.adapter.rooms);
     socket.on(NEW_PLAYER, (data, callback) => {
       console.log("[EVENT] ", NEW_PLAYER);
-      connectPlayer(data, callback, socket);
+      connectPlayer(data, callback, socket, io);
     });
     socket.on(JOIN_ROOM, (data, callback) => {
       console.log("[EVENT] ", JOIN_ROOM);

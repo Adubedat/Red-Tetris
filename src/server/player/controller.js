@@ -2,9 +2,14 @@ import Game from "../game/class";
 import Player from "./class";
 import { leaveRoom } from "../room/controller";
 import { isAlphaNumeric } from "../../utils/utils";
-import { LOBBY_ROOM, UPDATE_PLAYER } from "../../constants/constants";
+import {
+  LOBBY_ROOM,
+  UPDATE_PLAYER,
+  UPDATE_PLAYERS_LIST,
+  ADD_CHAT_MESSAGE
+} from "../../constants/constants";
 
-export const connectPlayer = (playerName, callback, socket) => {
+export const connectPlayer = (playerName, callback, socket, io) => {
   console.log("[CALL] connectPlayer");
   if (!isAlphaNumeric(playerName) || playerName.length > 12) {
     callback({
@@ -15,8 +20,21 @@ export const connectPlayer = (playerName, callback, socket) => {
     const player = Game.findPlayer(socket.id);
     if (!player) {
       const player = Game.addPlayer(new Player(playerName, socket.id));
-      const playerInfo = player.toObject();
-      callback({ status: "success", playerInfo });
+      socket.join(LOBBY_ROOM);
+      updatePlayer(player, io);
+      io.to(LOBBY_ROOM).emit(ADD_CHAT_MESSAGE, {
+        message: {
+          type: "notification",
+          text: player.name + " joined the room."
+        }
+      });
+      io.to(LOBBY_ROOM).emit(UPDATE_PLAYERS_LIST, {
+        players: Game.players
+          .filter(player => player.room === null)
+          .map(player => player.name)
+      });
+      // const playerInfo = player.toObject();
+      // callback({ status: "success", playerInfo });
       console.log("[UPDATED] after connectPlayer", Game);
       return player;
     }
