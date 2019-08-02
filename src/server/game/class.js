@@ -8,6 +8,10 @@ class Game {
     return this._rooms;
   }
 
+  get players() {
+    return this._players;
+  }
+
   addRoom(room) {
     this._rooms.push(room);
   }

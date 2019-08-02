@@ -13,7 +13,7 @@ import {
 } from "./styles";
 import PropTypes from "prop-types";
 
-const ChatSub = ({ chatMessages, onSubmit }) => {
+const ChatSub = ({ chatMessages, players, onSubmit }) => {
   const [message, setMessage] = useState("");
 
   const handleChange = e => {
@@ -45,11 +45,9 @@ const ChatSub = ({ chatMessages, onSubmit }) => {
             <p>Players</p>
           </StyledTitleContainer>
           <StyledPlayerListContainer>
-            <StyledText>player1</StyledText>
-            <StyledText>player1</StyledText>
-            <StyledText>player1</StyledText>
-            <StyledText>playerplayer</StyledText>
-            <StyledText>player1</StyledText>
+            {players.map((player, index) => (
+              <StyledText key={index}>{player}</StyledText>
+            ))}
           </StyledPlayerListContainer>
         </StyledLeftContainer>
         <StyledRightContainer>
@@ -62,6 +60,12 @@ const ChatSub = ({ chatMessages, onSubmit }) => {
                 return (
                   <StyledText key={index}>
                     <font>{message.author}:</font> {message.text}
+                  </StyledText>
+                );
+              } else {
+                return (
+                  <StyledText key={index}>
+                    <font>{message.text}</font>
                   </StyledText>
                 );
               }

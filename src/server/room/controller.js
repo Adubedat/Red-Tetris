@@ -5,7 +5,9 @@ import {
   LOBBY_ROOM,
   UPDATE_ROOM,
   UPDATE_ROOMS,
-  UPDATE_SPECTRES
+  UPDATE_SPECTRES,
+  ADD_CHAT_MESSAGE,
+  UPDATE_PLAYERS_LIST
 } from "../../constants/constants";
 import { updatePlayer } from "../player/controller";
 
@@ -27,11 +29,7 @@ export const joinRoom = (roomName, callback, socket, io) => {
       if (room && !room.isFull()) {
         room.addPlayer(player);
         player.room = room;
-        socket.leave(LOBBY_ROOM);
-        socket.join(room.name);
-        updateRoom(room, io);
-        updatePlayer(player, io);
-        emitSpectres(room, io);
+        changeRoom(LOBBY_ROOM, room.name, room, player, io, socket);
       } else {
         callback({ status: "error", message: "Room is full" });
       }
@@ -56,14 +54,32 @@ export const leaveRoom = (socket, io) => {
       Game.removeRoom(room.name);
     }
     player.room = null;
-    player.clean();
-    emitSpectres(room, io);
-    // updatePlayers(room, io);
-    socket.leave(room.name);
-    socket.join(LOBBY_ROOM);
-    updateRoom(room, io);
+    changeRoom(room.name, LOBBY_ROOM, room, player, io, socket);
     console.log("[UPDATED] after leaveRoom", Game);
   }
+};
+
+const changeRoom = (srcName, destName, room, player, io, socket) => {
+  player.clean();
+  socket.leave(srcName);
+  socket.join(destName);
+  updateRoom(room, io);
+  updatePlayer(player, io);
+  emitSpectres(room, io);
+  io.to(srcName).emit(ADD_CHAT_MESSAGE, {
+    message: { type: "notification", text: player.name + " left the room." }
+  });
+  io.to(destName).emit(ADD_CHAT_MESSAGE, {
+    message: { type: "notification", text: player.name + " joined the room." }
+  });
+  io.to(room.name).emit(UPDATE_PLAYERS_LIST, {
+    players: room.players.map(player => player.name)
+  });
+  io.to(LOBBY_ROOM).emit(UPDATE_PLAYERS_LIST, {
+    players: Game.players
+      .filter(player => player.room === null)
+      .map(player => player.name)
+  });
 };
 
 const handleInterval = (room, io) => {
@@ -83,7 +99,6 @@ export const startGame = (room, io) => {
   room.initSpectres();
   emitSpectres(room, io);
   room.players.forEach(player => {
-    player.clean();
     player.newPiece();
     player.inGame = true;
     updatePlayer(player, io);

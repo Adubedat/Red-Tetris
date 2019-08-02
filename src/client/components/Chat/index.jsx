@@ -4,7 +4,8 @@ import { newChatMessage } from "../../actions/actions";
 
 const mapStateToProps = state => {
   return {
-    chatMessages: state.chatMessages
+    chatMessages: state.chatMessages,
+    players: state.players
   };
 };
 

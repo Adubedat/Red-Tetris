@@ -65,6 +65,7 @@ class Player {
 
   clean() {
     this._inGame = false;
+    this._indexPieces = 1;
     this._piece = new Piece();
     this._heap = Array(20)
       .fill("")

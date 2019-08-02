@@ -4,7 +4,8 @@ import {
   UPDATE_SPECTRES,
   UPDATE_ROOMS,
   UPDATE_ROOM,
-  ADD_CHAT_MESSAGE
+  ADD_CHAT_MESSAGE,
+  UPDATE_PLAYERS_LIST
 } from "../../constants/constants";
 
 const player = (state = {}, action) => {
@@ -53,12 +54,22 @@ const chatMessages = (state = [], action) => {
   }
 };
 
+const players = (state = [], action) => {
+  switch (action.type) {
+    case UPDATE_PLAYERS_LIST:
+      return action.players;
+    default:
+      return state;
+  }
+};
+
 const rootReducer = combineReducers({
   player,
   spectres,
   rooms,
   room,
-  chatMessages
+  chatMessages,
+  players
 });
 
 export default rootReducer;
