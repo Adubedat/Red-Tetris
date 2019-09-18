@@ -12,6 +12,7 @@ class Player {
     this._piece = new Piece();
     this._indexPieces = 1;
     this._inGame = false;
+    this._isHost = false;
   }
 
   get name() {
@@ -46,6 +47,12 @@ class Player {
   }
   set inGame(inGame) {
     this._inGame = inGame;
+  }
+  get isHost() {
+    return this._isHost;
+  }
+  set isHost(isHost) {
+    this._isHost = isHost;
   }
 
   newPiece() {
@@ -123,7 +130,7 @@ class Player {
     return {
       name: this._name,
       id: this._id,
-      isHost: this._room && this._room.hostId === this._id,
+      isHost: this._isHost,
       inGame: this._inGame,
       board: this.renderBoard() || this._heap
     };

@@ -21,7 +21,8 @@ export const joinRoom = (roomName, callback, socket, io) => {
     if (player && !player.room) {
       let room = Game.findRoom(roomName);
       if (!room) {
-        room = new Room(roomName, player.id);
+        room = new Room(roomName);
+        player.isHost = true;
         Game.addRoom(room);
       }
       if (room && !room.isFull()) {
@@ -51,8 +52,9 @@ export const leaveRoom = (socket, io) => {
     const room = player.room;
     if (room.playersCount > 1) {
       room.removePlayer(player.id);
-      if (player.id === room.hostId) {
-        room.updateHostId();
+      if (player.isHost) {
+        player.isHost = false;
+        room.updateHost();
       }
     } else {
       room.clean();
