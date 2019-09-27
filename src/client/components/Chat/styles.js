@@ -28,6 +28,8 @@ export const StyledRightContainer = styled.div`
   flex: 4;
   display: flex;
   flex-direction: column;
+  height: 0;
+  min-height: 100%;
 `;
 
 export const StyledTitleContainer = styled.div`
@@ -43,7 +45,8 @@ export const StyledMessagesContainer = styled.div`
   padding: 5px;
   flex-wrap: wrap;
   overflow-y: auto;
-  min-height: 0;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const StyledForm = styled.form`
@@ -59,13 +62,12 @@ export const StyledPlayerListContainer = styled.div`
   padding: 5px;
   border-bottom: 5px;
 `;
+
 export const StyledText = styled.p`
   font-family: Verdana;
   font-size: 1.5vh;
   min-width: 100%;
   width: 0;
-  min-height: 4%;
-  height: 0;
   & font {
     font-family: Verdana;
     font-weight: 600;

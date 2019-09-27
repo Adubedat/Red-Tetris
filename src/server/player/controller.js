@@ -33,8 +33,6 @@ export const connectPlayer = (playerName, callback, socket, io) => {
           .filter(player => player.room === null)
           .map(player => player.name)
       });
-      // const playerInfo = player.toObject();
-      // callback({ status: "success", playerInfo });
       console.log("[UPDATED] after connectPlayer", Game);
       return player;
     }
