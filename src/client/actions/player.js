@@ -10,7 +10,7 @@ export const connectPlayer = playerName => {
   return dispatch => {
     socket.emit(NEW_PLAYER, playerName, response => {
       if (response.status === "success") {
-        dispatch(updatePlayer(response.playerInfo));
+        dispatch(updatePlayer(response.playerData));
       }
     });
   };
