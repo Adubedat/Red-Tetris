@@ -1,9 +1,8 @@
 import { MAX_PLAYER } from "../../constants/constants";
 
 class Room {
-  constructor(name, hostId) {
+  constructor(name) {
     this._name = name;
-    this._hostId = hostId;
     this._players = [];
     this._playersCount = 0;
     this._stillInGameCounter = 0;
@@ -17,9 +16,7 @@ class Room {
   get name() {
     return this._name;
   }
-  get hostId() {
-    return this._hostId;
-  }
+
   get players() {
     return this._players;
   }
@@ -59,15 +56,18 @@ class Room {
 
   clean() {
     if (this._interval) clearInterval(this._interval);
+    this._players.forEach(player => player.clean());
   }
+
   addPlayer(player) {
     this._playersCount++;
     this._players.push(player);
   }
 
-  updateHostId() {
-    this._hostId = this._players[0].id;
+  updateHost() {
+    this._players[0].isHost = true;
   }
+
   removePlayer(playerId) {
     this._playersCount--;
     this._players = this._players.filter(player => player.id !== playerId);
@@ -88,12 +88,9 @@ class Room {
     for (let i = 0; i < 10; i++) {
       this._pieces.push(Math.floor(Math.random() * 7));
     }
-    console.log("EXTEND PIECES");
-    console.log(this._pieces);
   }
-
   endGame() {
-    if (this._interval) clearInterval(this._interval);
+    this.clean();
     this._isStarted = false;
   }
 
@@ -129,7 +126,6 @@ class Room {
   toObject() {
     return {
       name: this._name,
-      hostId: this._hostId,
       playersCount: this._playersCount,
       isStarted: this._isStarted
     };

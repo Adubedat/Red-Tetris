@@ -55,10 +55,11 @@ class Piece {
   }
 
   initNewPiece(index, heap) {
-    this._shape = [...pieces[index].shape.map(row => [...row])];
-    this._pos = { ...pieces[index].pos };
-    this._shadowPos = { ...pieces[index].pos };
-    this._color = pieces[index].color;
+    const piece = pieces[index];
+    this._shape = [...piece.shape.map(row => [...row])];
+    this._pos = { ...piece.pos };
+    this._shadowPos = { ...piece.pos };
+    this._color = piece.color;
     while (this._pos.y <= 0) {
       if (!this.isPosAvailable(this._pos, this._shape, heap)) {
         this.pos.y -= 1;

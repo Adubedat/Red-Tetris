@@ -12,6 +12,7 @@ class Player {
     this._piece = new Piece();
     this._indexPieces = 1;
     this._inGame = false;
+    this._isHost = false;
   }
 
   get name() {
@@ -47,6 +48,12 @@ class Player {
   set inGame(inGame) {
     this._inGame = inGame;
   }
+  get isHost() {
+    return this._isHost;
+  }
+  set isHost(isHost) {
+    this._isHost = isHost;
+  }
 
   newPiece() {
     const { pieces } = this._room;
@@ -54,7 +61,10 @@ class Player {
       this._inGame = false;
       this._room.stillInGameCounter -= 1;
       this.updateHeap();
-      if (this._room.stillInGameCounter === 0) {
+      if (
+        this._room.playersCount === 1 ||
+        this._room.stillInGameCounter === 1
+      ) {
         this._room.endGame();
       }
     } else {
@@ -121,7 +131,7 @@ class Player {
     return {
       name: this._name,
       id: this._id,
-      isHost: this._room && this._room.hostId === this._id,
+      isHost: this._isHost,
       inGame: this._inGame,
       board: this.renderBoard() || this._heap
     };

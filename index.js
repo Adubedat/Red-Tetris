@@ -12,6 +12,10 @@ if ((port === null || port === "", port === undefined)) {
 
 const app = express();
 
+/*
+ A comment is needed for the piece of code below 
+*/
+
 app.use(express.static("public"));
 app.use("/build", express.static("build"));
 

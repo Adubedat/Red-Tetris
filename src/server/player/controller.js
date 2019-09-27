@@ -9,14 +9,13 @@ import {
   ADD_CHAT_MESSAGE
 } from "../../constants/constants";
 
+const playerNameValidation = playerName => {
+  return isAlphaNumeric(playerName) && playerName.length <= 12;
+};
+
 export const connectPlayer = (playerName, callback, socket, io) => {
   console.log("[CALL] connectPlayer");
-  if (!isAlphaNumeric(playerName) || playerName.length > 12) {
-    callback({
-      status: "error",
-      message: "Player name must be 1 to 12 alphanumeric characters long"
-    });
-  } else {
+  if (playerNameValidation) {
     const player = Game.findPlayer(socket.id);
     if (!player) {
       const player = Game.addPlayer(new Player(playerName, socket.id));
@@ -33,8 +32,9 @@ export const connectPlayer = (playerName, callback, socket, io) => {
           .filter(player => player.room === null)
           .map(player => player.name)
       });
+      const playerData = player.toObject();
+      callback({ status: "success", playerData });
       console.log("[UPDATED] after connectPlayer", Game);
-      return player;
     }
   }
 };
