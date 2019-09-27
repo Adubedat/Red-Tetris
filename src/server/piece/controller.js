@@ -1,7 +1,7 @@
 import Game from "../game/class";
 import { startGame, emitSpectres } from "../room/controller";
 import { enumKeys, KEY_PRESSED } from "../../constants/constants";
-import { updatePlayer } from "../player/controller";
+import { updatePlayerClientSide } from "../player/controller";
 
 export const onKeyPressed = (code, socket, io) => {
   const player = Game.findPlayer(socket.id);
@@ -29,7 +29,7 @@ export const onKeyPressed = (code, socket, io) => {
       default:
         break;
     }
-    updatePlayer(player, io);
+    updatePlayerClientSide(player, io);
   } else if (player.isHost && code === enumKeys.ENTER) {
     startGame(player.room, io);
   }

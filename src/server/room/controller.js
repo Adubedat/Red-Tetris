@@ -9,7 +9,7 @@ import {
   ADD_CHAT_MESSAGE,
   UPDATE_PLAYERS_LIST
 } from "../../constants/constants";
-import { updatePlayer } from "../player/controller";
+import { updatePlayerClientSide } from "../player/controller";
 
 const roomNameValidation = roomName => {
   return isAlphaNumeric(roomName) && roomName.length <= 12;
@@ -17,7 +17,7 @@ const roomNameValidation = roomName => {
 
 export const joinRoom = (roomName, callback, socket, io) => {
   console.log("[CALL] joinRoom");
-  if (roomNameValidation) {
+  if (roomNameValidation(roomName)) {
     const player = Game.findPlayer(socket.id);
     if (player && !player.room) {
       let room = Game.findRoom(roomName);
@@ -64,7 +64,7 @@ const changeRoom = (srcName, destName, room, player, io, socket) => {
   socket.leave(srcName);
   socket.join(destName);
   updateRoom(room, io);
-  updatePlayer(player, io);
+  updatePlayerClientSide(player, io);
   emitSpectres(room, io);
   io.to(srcName).emit(ADD_CHAT_MESSAGE, {
     message: { type: "notification", text: player.name + " left the room." }
@@ -88,7 +88,7 @@ const handleInterval = (room, io) => {
       player.updateHeap();
       emitSpectres(player.room, io);
     }
-    updatePlayer(player, io);
+    updatePlayerClientSide(player, io);
   });
 };
 
@@ -101,7 +101,7 @@ export const startGame = (room, io) => {
   room.players.forEach(player => {
     player.newPiece();
     player.inGame = true;
-    updatePlayer(player, io);
+    updatePlayerClientSide(player, io);
   });
   room.interval = setInterval(() => handleInterval(room, io), 1000);
   updateRoom(room, io);

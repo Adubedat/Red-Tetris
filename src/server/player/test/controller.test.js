@@ -1,5 +1,5 @@
 import Game from "../../game/class";
-import { updatePlayer } from "../controller";
+import { updatePlayerClientSide } from "../controller";
 import { initListeners } from "../../listeners";
 import {
   NEW_PLAYER,
@@ -81,7 +81,7 @@ describe("Test player controller functions", () => {
       done();
     }, 50);
   });
-  test("updatePlayer should emit an UPDATE_PLAYER event", done => {
+  test("updatePlayerClientSide should emit an UPDATE_PLAYER event", done => {
     const callback = jest.fn(() => {});
     socket.emit(NEW_PLAYER, "Player1", callback);
     socket.on(UPDATE_PLAYER, data => {
@@ -90,7 +90,7 @@ describe("Test player controller functions", () => {
     });
     setTimeout(() => {
       const player = Game.players[0];
-      updatePlayer(player, ioServer);
+      updatePlayerClientSide(player, ioServer);
     }, 50);
   });
 });
