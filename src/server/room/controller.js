@@ -11,14 +11,13 @@ import {
 } from "../../constants/constants";
 import { updatePlayer } from "../player/controller";
 
+const roomNameValidation = roomName => {
+  return isAlphaNumeric(roomName) && roomName.length <= 12;
+};
+
 export const joinRoom = (roomName, callback, socket, io) => {
   console.log("[CALL] joinRoom");
-  if (!isAlphaNumeric(roomName) || roomName.length > 12) {
-    callback({
-      status: "error",
-      message: "Room name must be 1 to 12 alphanumeric characters long"
-    });
-  } else {
+  if (roomNameValidation) {
     const player = Game.findPlayer(socket.id);
     if (player && !player.room) {
       let room = Game.findRoom(roomName);
@@ -36,7 +35,6 @@ export const joinRoom = (roomName, callback, socket, io) => {
       }
       console.log("[UPDATED] after joinRoom", Game);
     }
-    callback({ status: "error", message: "Socket problem" });
   }
 };
 

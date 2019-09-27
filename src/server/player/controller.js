@@ -13,6 +13,8 @@ const playerNameValidation = playerName => {
   return isAlphaNumeric(playerName) && playerName.length <= 12;
 };
 
+//TODO : divide function
+
 export const connectPlayer = (playerName, callback, socket, io) => {
   console.log("[CALL] connectPlayer");
   if (playerNameValidation) {
@@ -46,6 +48,8 @@ export const disconnectPlayer = (socket, io) => {
   socket.leave(LOBBY_ROOM);
   console.log("[UPDATED] after disconnectPlayer", Game);
 };
+
+//TODO : change funct name
 
 export const updatePlayer = (player, io) => {
   io.in(player.id).emit(UPDATE_PLAYER, {

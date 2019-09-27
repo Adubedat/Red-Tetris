@@ -50,7 +50,7 @@ export const SPACE = "Space";
 export const ENTER = "Enter";
 
 export const UPDATE_BOARD = "UPDATE_BOARD";
-export const MAX_PLAYER = 10;
+export const MAX_PLAYER = 5;
 
 export const LOBBY_ROOM = "LOBBY_ROOM";
 
