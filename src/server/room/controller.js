@@ -107,6 +107,18 @@ export const startGame = (room, io) => {
   updateRoom(room, io);
 };
 
+export const newChatMessage = (message, socket, io) => {
+  const player = Game.findPlayer(socket.id);
+  if (!player) return;
+  io.in(player.room || LOBBY_ROOM).emit(ADD_CHAT_MESSAGE, {
+    message: {
+      type: "message",
+      author: player.name,
+      text: message
+    }
+  });
+};
+
 export const emitSpectres = (room, io) => {
   const players = room.players;
   players.forEach(player => {

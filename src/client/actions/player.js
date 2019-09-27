@@ -8,9 +8,9 @@ import {
 import { updateRoom } from "./room";
 
 export const connectPlayer = playerName => {
-  // return dispatch => {
-  socket.emit(NEW_PLAYER, playerName);
-  // };
+  return () => {
+    socket.emit(NEW_PLAYER, playerName);
+  };
 };
 
 export const disconnectPlayer = () => {
