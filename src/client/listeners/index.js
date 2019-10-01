@@ -9,12 +9,9 @@ import {
 } from "../../constants/constants";
 import { updateRooms, updateRoom } from "../actions/room";
 import { updatePlayer, updatePlayersList } from "../actions/player";
-import {
-  handleHash,
-  handleKeyPress,
-  updateSpectres,
-  addChatMessage
-} from "../actions/actions";
+import { handleHash } from "../actions/hash";
+import { addChatMessage } from "../actions/chat";
+import { handleKeyPress, updateSpectres } from "../actions/game";
 
 export const initListeners = dispatch => {
   socket.on(UPDATE_ROOMS, data => subscribeUpdateRooms(data, dispatch));

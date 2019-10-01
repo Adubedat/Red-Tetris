@@ -49,7 +49,6 @@ export const ARROW_UP = "ArrowUp";
 export const SPACE = "Space";
 export const ENTER = "Enter";
 
-export const UPDATE_BOARD = "UPDATE_BOARD";
 export const MAX_PLAYER = 10;
 
 export const LOBBY_ROOM = "LOBBY_ROOM";

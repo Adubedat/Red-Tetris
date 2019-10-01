@@ -1,15 +1,6 @@
 import { connectPlayer } from "./player";
 import { joinRoom } from "./room";
 import { toast } from "react-toastify";
-import socket from "../services/socket-api";
-import {
-  KEY_PRESSED,
-  UPDATE_BOARD,
-  START_GAME,
-  UPDATE_SPECTRES,
-  ADD_CHAT_MESSAGE,
-  NEW_CHAT_MESSAGE
-} from "../../constants/constants";
 
 /*
 
@@ -43,34 +34,3 @@ export const handleHash = dispatch => {
   dispatch(connectPlayer(data.playerName));
   dispatch(joinRoom(data.roomName));
 };
-
-export const handleKeyPress = e => {
-  socket.emit(KEY_PRESSED, { code: e.code });
-};
-
-export const startGame = () => {
-  return () => {
-    socket.emit(START_GAME);
-  };
-};
-
-export const updateBoard = board => ({
-  type: UPDATE_BOARD,
-  board
-});
-
-export const updateSpectres = spectres => ({
-  type: UPDATE_SPECTRES,
-  spectres
-});
-
-export const newChatMessage = message => {
-  return () => {
-    socket.emit(NEW_CHAT_MESSAGE, message);
-  };
-};
-
-export const addChatMessage = message => ({
-  type: ADD_CHAT_MESSAGE,
-  message
-});

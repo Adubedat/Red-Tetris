@@ -6,7 +6,7 @@ import thunkMiddleware from "redux-thunk";
 import rootReducer from "./reducers";
 import "./index.css";
 import App from "./components/App";
-import { handleHash } from "./actions/actions";
+import { handleHash } from "./actions/hash";
 import { initListeners } from "./listeners";
 import { toast } from "react-toastify";
 

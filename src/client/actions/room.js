@@ -11,6 +11,13 @@ export const updateRoom = room => ({
   room
 });
 
+/*
+
+dispatch must be present to pass the action in the middleware
+response is used serverside
+
+*/
+
 export const joinRoom = roomName => {
   return dispatch => {
     socket.emit(JOIN_ROOM, roomName, response => {});

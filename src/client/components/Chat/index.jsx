@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import ChatSub from "./subcomponent";
-import { newChatMessage } from "../../actions/actions";
+import { newChatMessage } from "../../actions/chat";
 
 const mapStateToProps = state => {
   return {
