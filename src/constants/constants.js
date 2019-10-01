@@ -43,7 +43,7 @@ export const enumKeys = {
   ENTER: "Enter"
 };
 
-export const MAX_PLAYER = 10;
+export const MAX_PLAYER = 5;
 
 export const LOBBY_ROOM = "LOBBY_ROOM";
 
