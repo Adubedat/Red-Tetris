@@ -4,16 +4,18 @@ import BoardSub from "../Board/subcomponent";
 import { StyledContainer } from "./styles";
 
 const SpectreSub = ({ spectres }) => {
-  // if (!spectres.length) return null;
   return (
     <StyledContainer>
       {spectres.map((spectre, index) => (
-        <BoardSub
-          key={index}
-          board={spectre.board}
-          playerName={spectre.playerName}
-          isSpectre={true}
-        />
+        <div>
+          <BoardSub
+            key={index}
+            board={spectre.board}
+            playerName={spectre.playerName}
+            isSpectre={true}
+          />
+          <p style={{ textAlign: "center" }}>{spectre.playerName}</p>
+        </div>
       ))}
     </StyledContainer>
   );

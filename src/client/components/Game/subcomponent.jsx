@@ -10,9 +10,7 @@ const GameSub = (isStarted, inGame) => {
   return (
     <StyledContainer id="game">
       <StyledLeftItem id="left-item">
-        {(isStarted && inGame ? <Spectres /> : null) ||
-          (isStarted && !inGame ? "" : "")}
-        <Spectres />
+        {isStarted && inGame ? <Spectres /> : null}
         <Board />
         <NextPieces />
       </StyledLeftItem>
