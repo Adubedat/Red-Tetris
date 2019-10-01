@@ -11,6 +11,7 @@ import {
   StyledInput,
   StyledText
 } from "./styles";
+import { handleKeyPress } from "../../actions/game";
 import PropTypes from "prop-types";
 
 const ChatSub = ({ chatMessages, players, onSubmit }) => {
@@ -26,6 +27,14 @@ const ChatSub = ({ chatMessages, players, onSubmit }) => {
     e.preventDefault();
     onSubmit(message);
     setMessage("");
+  };
+
+  const disableKeyPressListener = () => {
+    document.onkeydown = null;
+  };
+
+  const enableKeyPressListener = () => {
+    document.onkeydown = e => handleKeyPress(e);
   };
 
   const messagesEndRef = useRef(null);
@@ -81,6 +90,8 @@ const ChatSub = ({ chatMessages, players, onSubmit }) => {
               placeholder="Write a message ..."
               value={message}
               onChange={e => handleChange(e)}
+              onFocus={() => disableKeyPressListener()}
+              onBlur={() => enableKeyPressListener()}
             />
           </StyledForm>
         </StyledRightContainer>

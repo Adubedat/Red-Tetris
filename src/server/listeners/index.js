@@ -60,7 +60,8 @@ export const initListeners = io => {
 const emitChatMessage = (message, socket, io) => {
   const player = Game.findPlayer(socket.id);
   if (!player) return;
-  io.in(player.room.name || LOBBY_ROOM).emit(ADD_CHAT_MESSAGE, {
+  const destinationRoom = player.room ? player.room.name : LOBBY_ROOM;
+  io.in(destinationRoom).emit(ADD_CHAT_MESSAGE, {
     message: {
       type: "message",
       author: player.name,
