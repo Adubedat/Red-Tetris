@@ -32,7 +32,6 @@ export const NEW_CHAT_MESSAGE = "NEW_CHAT_MESSAGE";
 export const DISCONNECT = "disconnect";
 
 export const KEY_PRESSED = "KEY_PRESSED";
-export const START_GAME = "START_GAME";
 
 export const enumKeys = {
   ARROW_LEFT: "ArrowLeft",

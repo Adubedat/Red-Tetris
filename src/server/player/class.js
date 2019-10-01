@@ -61,12 +61,6 @@ class Player {
       this._inGame = false;
       this._room.stillInGameCounter -= 1;
       this.updateHeap();
-      if (
-        this._room.playersCount === 1 ||
-        this._room.stillInGameCounter === 1
-      ) {
-        this._room.endGame();
-      }
     } else {
       this._indexPieces += 1;
       if (this._indexPieces >= pieces.length - 1) this._room.extendPiecesList();

@@ -10,7 +10,6 @@ class Room {
     this._isStarted = false;
     this._pieces = [];
     this._spectres = [];
-    this.extendPiecesList();
   }
 
   get name() {
@@ -57,6 +56,8 @@ class Room {
   clean() {
     if (this._interval) clearInterval(this._interval);
     this._players.forEach(player => player.clean());
+    this._pieces = [];
+    this._isStarted = false;
   }
 
   addPlayer(player) {
@@ -91,7 +92,7 @@ class Room {
   }
   endGame() {
     this.clean();
-    this._isStarted = false;
+    console.log("GAME OVER");
   }
 
   fillHeap(heap) {

@@ -9,7 +9,6 @@ import {
   DISCONNECT_PLAYER,
   NEW_PLAYER,
   JOIN_ROOM,
-  START_GAME,
   DISCONNECT,
   LOG_LINE,
   KEY_PRESSED,
@@ -42,7 +41,6 @@ export const initListeners = io => {
       console.log("[EVENT] ", LEAVE_ROOM);
       leaveRoom(socket, io);
     });
-    socket.on(START_GAME, () => startGame(socket, io));
     socket.on(KEY_PRESSED, data => {
       console.log("[EVENT] ", KEY_PRESSED);
       onKeyPressed(data.code, socket, io);

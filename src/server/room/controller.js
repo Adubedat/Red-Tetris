@@ -51,7 +51,11 @@ export const leaveRoom = (socket, io) => {
         player.isHost = false;
         room.updateHost();
       }
+      if (player.inGame) {
+        room.stillInGameCounter -= 1;
+      }
     } else {
+      player.isHost = false;
       room.clean();
       Game.removeRoom(room.name);
     }
@@ -85,6 +89,11 @@ const changeRoom = (srcName, destName, room, player, io, socket) => {
 };
 
 const handleInterval = (room, io) => {
+  if (room.playersCount === 1 || room.stillInGameCounter === 1) {
+    room.endGame();
+    console.log("cc c moa");
+    updateRoom(room, io);
+  }
   room.players.forEach(player => {
     if (player.inGame && !player.piece.moveDown(player.heap)) {
       player.updateHeap();
@@ -96,6 +105,7 @@ const handleInterval = (room, io) => {
 
 export const startGame = (room, io) => {
   if (room.isStarted) return;
+  room.extendPiecesList();
   room.isStarted = true;
   room.stillInGameCounter = room.players.length;
   room.initSpectres();
