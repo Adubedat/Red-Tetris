@@ -6,7 +6,7 @@ import Spectres from "../Spectres";
 import Chat from "../Chat";
 import NextPieces from "../NextPieces";
 
-const GameSub = (isStarted, isHost, inGame) => {
+const GameSub = (isStarted, inGame) => {
   return (
     <StyledContainer id="game">
       <StyledLeftItem id="left-item">

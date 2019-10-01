@@ -39,29 +39,38 @@ export const StyledInput = styled.input`
 `;
 
 export const StyledButton = styled.button`
+  height: 2vh;
   background: none;
-  padding: 0.5vh;
   border: 0px;
   outline: none;
   opacity: 0;
-  transition: opacity 0.2s;
   &:enabled {
     opacity: 1;
+  }
+  &:disabled {
+    heigth: 0px;
   }
 `;
 
 export const StyledTextField = withStyles({
   root: {
     "&": {
-      margin: 0
+      marginTop: 0,
+      marginRight: 10
     },
     "& label.Mui-focused": {
       color: "white"
+    },
+    "$ .MuiFormHelperText-contained p": {
+      height: "2vh"
     },
     "& label": {
       color: "white"
     },
     "& input": {
+      color: "white"
+    },
+    "& Mui-error": {
       color: "white"
     },
     "& .MuiOutlinedInput-root": {
@@ -72,6 +81,9 @@ export const StyledTextField = withStyles({
         borderColor: "white"
       },
       "&.Mui-focused fieldset": {
+        borderColor: "white"
+      },
+      "&.Mui-error fieldset": {
         borderColor: "white"
       }
     }

@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import {
   StyledContainer,
-  StyledUserGroup,
   StyledTitle,
   StyledItemLeft,
   StyledItemCenter,
@@ -27,7 +26,6 @@ let HeaderSub = ({ roomName, onBackHome }) => {
 };
 
 HeaderSub.propTypes = {
-  // roomName: PropTypes.object.isRequired,
   onBackHome: PropTypes.func.isRequired
 };
 

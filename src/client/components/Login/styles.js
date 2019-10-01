@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Input from "../../components/common/Input";
+import Input from "../common/Input";
 import { withStyles } from "@material-ui/core/styles";
 
 export const StyledContainer = styled.div`
@@ -28,9 +28,6 @@ export const StyledTextField = withStyles({
     "&": {
       width: 320
     },
-    "& .mdc-text-field-helper-line": {
-      color: "red"
-    },
     "& label.Mui-focused": {
       color: "white"
     },
@@ -38,6 +35,9 @@ export const StyledTextField = withStyles({
       color: "white"
     },
     "& input": {
+      color: "white"
+    },
+    "& .Mui-error": {
       color: "white"
     },
     "& .MuiOutlinedInput-root": {
@@ -49,43 +49,10 @@ export const StyledTextField = withStyles({
       },
       "&.Mui-focused fieldset": {
         borderColor: "white"
+      },
+      "&.Mui-error fieldset": {
+        borderColor: "white"
       }
     }
   }
 })(Input);
-
-// export const StyledHorizontalText = styled.div`
-//   & {
-//     width: 100%;
-//     text-align: center;
-//     background-color: #ffffff;
-//     position: relative;
-//     color: #ababab;
-//     font-size: 14px;
-//     z-index: 1;
-//     overflow: hidden;
-//     margin-top: 40px;
-//     margin-bottom: 40px;
-//   }
-//   &:after {
-//     margin-left: 2%;
-//     width: 50%;
-//     top: 51%;
-//     overflow: hidden;
-//     height: 1px;
-//     background-color: #d0d0d0;
-//     content: "\a0";
-//     position: absolute;
-//   }
-//   &:before {
-//     margin-left: -52%;
-//     text-align: right;
-//     width: 50%;
-//     top: 51%;
-//     overflow: hidden;
-//     height: 1px;
-//     background-color: #d0d0d0;
-//     content: "\a0";
-//     position: absolute;
-//   }
-// `;

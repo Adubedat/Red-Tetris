@@ -1,11 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  StyledContainer,
-  StyledRow,
-  StyledAspectRatio,
-  StyledAspectRatioContainer
-} from "./styles";
+import { StyledContainer, StyledRow } from "./styles";
 import Cell from "../Cell";
 
 const BoardSub = ({ board, playerName = "", isSpectre = false }) => {

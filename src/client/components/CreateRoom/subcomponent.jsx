@@ -5,7 +5,8 @@ import {
   StyledInputContainer,
   StyledLabel,
   StyledInput,
-  StyledButton
+  StyledButton,
+  StyledTextField
 } from "./styles";
 import inputError from "../../errors/inputError";
 
@@ -31,19 +32,15 @@ const CreateRoomSub = ({ playerName }) => {
   return (
     <StyledForm id="form" onSubmit={e => handleSubmit(e)}>
       <StyledLabel htmlFor="name">Create Room</StyledLabel>
-      <StyledInputContainer id="input-container">
-        <StyledInput
-          type="text"
-          id="name"
-          error={error.boolean}
-          helperText={error.message}
-          spellCheck="false"
-          autoComplete="off"
-          label="Insert room name"
-          value={roomName}
-          onChange={e => handleChange(e)}
-        />
-      </StyledInputContainer>
+      <StyledTextField
+        id="name"
+        error={error.boolean}
+        helperText={error.message}
+        spellCheck="false"
+        autoComplete="off"
+        value={roomName}
+        onChange={e => handleChange(e)}
+      />
       <StyledButton id="enter" disabled={!roomName || error.boolean}>
         <p> Press Enter </p>
       </StyledButton>

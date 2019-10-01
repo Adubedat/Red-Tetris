@@ -11,6 +11,14 @@ import {
   NEW_CHAT_MESSAGE
 } from "../../constants/constants";
 
+/*
+
+handle hash errors and extract playerName and roomName from it
+
+*/
+
+// TODO : divide actions in different files
+
 const checkHash = () => {
   const hash = window.location.hash.substr(1);
   if (!hash.trim()) return;

@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { StyledContainer, StyledButton, StyledRoomName } from "./styles";
 
+//TODO : MUST CHANGE THE START GAME BUTTON
+
 const GameInfoSub = ({ room, isHost }) => {
   const { playersCount, name: roomName, isStarted } = room;
 

@@ -13,11 +13,7 @@ export const updateRoom = room => ({
 
 export const joinRoom = roomName => {
   return dispatch => {
-    socket.emit(JOIN_ROOM, roomName, response => {
-      if (response.status === "success") {
-        // dispatch(updateRoom(response.room));
-      }
-    });
+    socket.emit(JOIN_ROOM, roomName, response => {});
   };
 };
 
