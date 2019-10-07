@@ -71,6 +71,12 @@ class Piece {
     return true;
   }
 
+  initNextPiece(index) {
+    const piece = pieces[index];
+    this._shape = [...piece.shape.map(row => [...row])];
+    this._color = piece.color;
+  }
+
   printToBoard(pos, shape, board, color) {
     const { x, y } = pos;
     for (let i = 0; i < shape.length; i++) {
@@ -149,6 +155,13 @@ class Piece {
     if (this.isPosAvailable(newPos, this._shape, heap)) {
       this._pos.x += 1;
     }
+  }
+
+  toObject() {
+    return {
+      shape: this._shape,
+      color: this._color
+    };
   }
 }
 

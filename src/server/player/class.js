@@ -10,6 +10,7 @@ class Player {
       .fill("")
       .map(() => Array(10).fill(""));
     this._piece = new Piece();
+    this._nextPiece = new Piece();
     this._indexPieces = 1;
     this._inGame = false;
     this._isHost = false;
@@ -65,12 +66,14 @@ class Player {
       this._indexPieces += 1;
       if (this._indexPieces >= pieces.length - 1) this._room.extendPiecesList();
     }
+    this._nextPiece.initNextPiece(pieces[this._indexPieces]);
   }
 
   clean() {
     this._inGame = false;
     this._indexPieces = 1;
     this._piece = new Piece();
+    this._nextPiece = new Piece();
     this._heap = Array(20)
       .fill("")
       .map(() => Array(10).fill(""));
@@ -127,6 +130,7 @@ class Player {
       id: this._id,
       isHost: this._isHost,
       inGame: this._inGame,
+      nextPiece: this._nextPiece.toObject(),
       board: this.renderBoard() || this._heap
     };
   }

@@ -1,15 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyledContainer } from "./styles";
+import { StyledContainer, StyledRow, StyledCell } from "./styles";
 
-const NextPieces = () => {
+const NextPieces = ({ nextPiece }) => {
   return (
     <StyledContainer id="next-pieces">
-      <h2>Next :</h2>
+      <p style={{ fontSize: "3vh", marginBottom: "30px" }}>NEXT:</p>
+      {nextPiece.shape
+        ? nextPiece.shape.map((row, i) => (
+            <StyledRow id="row" key={i}>
+              {row.map((cell, i) => (
+                <StyledCell key={i} cell={cell} color={nextPiece.color} />
+              ))}
+            </StyledRow>
+          ))
+        : null}
     </StyledContainer>
   );
 };
 
-NextPieces.propTypes = {};
+NextPieces.propTypes = {
+  nextPiece: PropTypes.object.isRequired
+};
 
 export default NextPieces;

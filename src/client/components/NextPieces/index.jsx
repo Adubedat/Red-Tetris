@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
 import NextPiecesSub from "./subcomponent";
 
-const mapStateToProps = state => {
-  return {};
-};
+const mapStateToProps = state => ({
+  nextPiece: state.player.nextPiece
+});
 
 const NextPieces = connect(
   mapStateToProps,
