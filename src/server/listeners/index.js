@@ -1,11 +1,8 @@
 import { initClientState } from "../game/controller";
 import { connectPlayer, disconnectPlayer } from "../player/controller";
-import {
-  joinRoom,
-  leaveRoom,
-  startGame,
-  newChatMessage
-} from "../room/controller";
+import { joinRoom, leaveRoom } from "../room/controller";
+import { newChatMessage } from "../chat/controller";
+import { startGame } from "../game/controller";
 import { onKeyPressed } from "../piece/controller";
 import {
   LEAVE_ROOM,

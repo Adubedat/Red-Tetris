@@ -14,7 +14,7 @@ export const updateRoom = room => ({
 export const joinRoom = roomName => {
   return dispatch => {
     socket.emit(JOIN_ROOM, roomName, response => {
-      if (response.status === "success") {
+      if (response.status === "error") {
         // dispatch(updateRoom(response.room));
       }
     });
