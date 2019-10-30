@@ -1,7 +1,10 @@
 import Game from "./class";
 import { UPDATE_ROOMS } from "../../constants/constants";
 import { updatePlayerClientSide } from "../player/controller";
-import { updateRoomClientSide, emitSpectres } from "../room/controller";
+import {
+  updateRoomClientSide,
+  updateSpectresClientSide
+} from "../room/controller";
 
 export const initClientState = socket => {
   console.log("[EVENT] CONNECTION : send data to client (updating the state)");
@@ -12,7 +15,7 @@ const handleInterval = (room, io) => {
   room.players.forEach(player => {
     if (player.inGame && !player.piece.moveDown(player.heap)) {
       player.updateHeap();
-      emitSpectres(player.room, io);
+      updateSpectresClientSide(player.room, io);
     }
     updatePlayerClientSide(player, io);
   });

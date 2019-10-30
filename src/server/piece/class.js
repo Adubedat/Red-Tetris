@@ -109,13 +109,22 @@ class Piece {
     this._shadowPos = newPos;
   }
 
+  /*
+   ** Rotate
+   */
+
   rotate(heap) {
     let newShape = [];
-    for (let i = 0; i < this._shape[0].length; i++) {
-      let row = this._shape.map(e => e[i]).reverse();
+    const { _shape: shape, _pos: pos } = this;
+    const blocksInShape = shape.length;
+    for (let i = 0; i < blocksInShape; i++) {
+      let row = shape.map(e => e[i]).reverse();
       newShape.push(row);
     }
-    if (this.isPosAvailable(this._pos, newShape, heap)) {
+    // if (isOutOfBoard(newShape, pos)) {
+    //   replaceInside(shape);
+    // }
+    if (this.isPosAvailable(pos, newShape, heap)) {
       this._shape = newShape;
     }
   }
