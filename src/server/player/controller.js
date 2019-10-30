@@ -18,7 +18,7 @@ const joinLobby = (player, socket, io) => {
   io.to(LOBBY_ROOM).emit(ADD_CHAT_MESSAGE, {
     message: {
       type: "notification",
-      text: player.name + " joined the room."
+      text: player.name + " joined Lobby."
     }
   });
   io.to(LOBBY_ROOM).emit(UPDATE_PLAYERS_LIST, {

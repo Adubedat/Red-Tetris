@@ -1,5 +1,6 @@
 import Game from "../game/class";
-import { startGame, emitSpectres } from "../room/controller";
+import { updateSpectresClientSide } from "../room/controller";
+import { startGame } from "../game/controller";
 import { enumKeys, KEY_PRESSED } from "../../constants/constants";
 import { updatePlayerClientSide } from "../player/controller";
 
@@ -7,7 +8,7 @@ export const onKeyPressed = (code, socket, io) => {
   const player = Game.findPlayer(socket.id);
   if (!Object.values(enumKeys).includes(code) || !(player && player.room))
     return;
-  console.log("[EVENT] ", KEY_PRESSED, code);
+  // console.log("[EVENT] ", KEY_PRESSED, code);
   if (player.inGame) {
     const { heap } = player;
     switch (code) {
@@ -38,12 +39,12 @@ export const onKeyPressed = (code, socket, io) => {
 const handleSpace = (player, io) => {
   player.piece.hardDrop();
   player.updateHeap();
-  emitSpectres(player.room, io);
+  updateSpectresClientSide(player.room, io);
 };
 
 const handleArrowDown = (player, heap, io) => {
   if (!player.piece.moveDown(heap)) {
     player.updateHeap();
-    emitSpectres(player.room, io);
+    updateSpectresClientSide(player.room, io);
   }
 };
