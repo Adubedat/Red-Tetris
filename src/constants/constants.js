@@ -51,6 +51,8 @@ export const ENTER = "Enter";
 
 export const UPDATE_BOARD = "UPDATE_BOARD";
 export const MAX_PLAYER = 5;
+export const BOARD_HEIGHT = 20;
+export const BOARD_WIDTH = 10;
 
 export const LOBBY_ROOM = "LOBBY_ROOM";
 
