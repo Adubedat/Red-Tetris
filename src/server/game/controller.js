@@ -27,8 +27,10 @@ const handleInterval = (room, io) => {
 
 export const startGame = (room, io) => {
   if (room.isStarted) return;
+  room.clean();
   room.extendPiecesList();
   room.isStarted = true;
+  room.isGameOver = false;
   room.stillInGameCounter = room.players.length;
   room.initSpectres();
   updateSpectresClientSide(room, io);

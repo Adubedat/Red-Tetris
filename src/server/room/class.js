@@ -8,6 +8,7 @@ class Room {
     this._stillInGameCounter = 0;
     this._interval = null;
     this._isStarted = false;
+    this._isGameOver = false;
     this._pieces = [];
     this._spectres = [];
   }
@@ -53,6 +54,13 @@ class Room {
     this.__stillInGameCounter = stillInGameCounter;
   }
 
+  get isGameOver() {
+    return this._isGameOver;
+  }
+  set isGameOver(isGameOver) {
+    this._isGameOver = isGameOver;
+  }
+
   clean() {
     if (this._interval) clearInterval(this._interval);
     this._players.forEach(player => player.clean());
@@ -92,8 +100,9 @@ class Room {
   }
 
   endGame() {
-    this.clean();
-    console.log("GAME OVER");
+    if (this._interval) clearInterval(this._interval);
+    this._isGameOver = true;
+    this._isStarted = false;
   }
 
   fillHeap(heap) {
@@ -129,7 +138,8 @@ class Room {
     return {
       name: this._name,
       playersCount: this._playersCount,
-      isStarted: this._isStarted
+      isStarted: this._isStarted,
+      isGameOver: this.isGameOver
     };
   }
 }
