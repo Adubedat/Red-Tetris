@@ -1,7 +1,8 @@
-import Game from "../game/class";
 import { initClientState } from "../game/controller";
 import { connectPlayer, disconnectPlayer } from "../player/controller";
-import { joinRoom, leaveRoom, startGame } from "../room/controller";
+import { joinRoom, leaveRoom } from "../room/controller";
+import { newChatMessage } from "../chat/controller";
+import { startGame } from "../game/controller";
 import { onKeyPressed } from "../piece/controller";
 import {
   LEAVE_ROOM,
@@ -13,8 +14,7 @@ import {
   LOG_LINE,
   KEY_PRESSED,
   LOBBY_ROOM,
-  NEW_CHAT_MESSAGE,
-  ADD_CHAT_MESSAGE
+  NEW_CHAT_MESSAGE
 } from "../../constants/constants";
 
 /*
@@ -25,9 +25,9 @@ export const initListeners = io => {
   io.on(CONNECTION, socket => {
     initClientState(socket);
     socket.join(LOBBY_ROOM);
-    socket.on(NEW_PLAYER, (data, callback) => {
+    socket.on(NEW_PLAYER, data => {
       console.log("[EVENT] ", NEW_PLAYER);
-      connectPlayer(data, callback, socket, io);
+      connectPlayer(data, socket, io);
     });
     socket.on(JOIN_ROOM, (data, callback) => {
       console.log("[EVENT] ", JOIN_ROOM);
@@ -42,28 +42,14 @@ export const initListeners = io => {
       leaveRoom(socket, io);
     });
     socket.on(KEY_PRESSED, data => {
-      console.log("[EVENT] ", KEY_PRESSED);
       onKeyPressed(data.code, socket, io);
     });
     socket.on(NEW_CHAT_MESSAGE, message => {
-      emitChatMessage(message, socket, io);
+      newChatMessage(message, socket, io);
     });
     socket.on(DISCONNECT, reason => {
       console.log(LOG_LINE, "[EVENT] DISCONNECT :", reason);
       disconnectPlayer(socket, io);
     });
-  });
-};
-
-const emitChatMessage = (message, socket, io) => {
-  const player = Game.findPlayer(socket.id);
-  if (!player) return;
-  const destinationRoom = player.room ? player.room.name : LOBBY_ROOM;
-  io.in(destinationRoom).emit(ADD_CHAT_MESSAGE, {
-    message: {
-      type: "message",
-      author: player.name,
-      text: message
-    }
   });
 };

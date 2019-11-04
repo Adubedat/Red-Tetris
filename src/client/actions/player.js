@@ -8,12 +8,8 @@ import {
 import { updateRoom } from "./room";
 
 export const connectPlayer = playerName => {
-  return dispatch => {
-    socket.emit(NEW_PLAYER, playerName, response => {
-      if (response.status === "success") {
-        dispatch(updatePlayer(response.playerData));
-      }
-    });
+  return () => {
+    socket.emit(NEW_PLAYER, playerName);
   };
 };
 

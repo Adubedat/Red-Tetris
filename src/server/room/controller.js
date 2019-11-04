@@ -1,43 +1,85 @@
 import Game from "../game/class";
 import Room from "./class";
 import { isAlphaNumeric } from "../../utils/utils";
+import { updatePlayerClientSide } from "../player/controller";
+import { updateChatClientSide, updatePlayersList } from "../chat/controller";
 import {
   LOBBY_ROOM,
   UPDATE_ROOM,
   UPDATE_ROOMS,
-  UPDATE_SPECTRES,
-  ADD_CHAT_MESSAGE,
-  UPDATE_PLAYERS_LIST
+  UPDATE_SPECTRES
 } from "../../constants/constants";
-import { updatePlayer } from "../player/controller";
+
+const roomNameValidation = roomName => {
+  return isAlphaNumeric(roomName) && roomName.length <= 12;
+};
+
+const createNewRoom = (roomName, player) => {
+  const room = new Room(roomName);
+  player.isHost = true;
+  Game.addRoom(room);
+  return room;
+};
+
+const addPlayerToRoom = (player, room) => {
+  room.addPlayer(player);
+  player.room = room;
+};
+
+export const updateSpectresClientSide = (room, io) => {
+  const players = room.players;
+  players.forEach(player => {
+    let spectres = room.spectres.map(s => ({ ...s }));
+    spectres = spectres.filter(spectre => spectre.playerId !== player.id);
+    spectres.forEach(spectre => delete spectre.playerId);
+    io.in(player.id).emit(UPDATE_SPECTRES, { spectres });
+  });
+};
+
+export const updateRoomClientSide = (room, io) => {
+  updateSpectresClientSide(room, io);
+  io.in(room.name).emit(UPDATE_ROOM, {
+    room: room.toObject()
+  });
+  io.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsArray() });
+};
+
+const transferPlayerToRoom = (room, player, io, socket) => {
+  socket.leave(LOBBY_ROOM);
+  socket.join(room.name);
+  player.clean();
+  updatePlayerClientSide(player, io);
+  updateRoomClientSide(room, io);
+  updateChatClientSide(LOBBY_ROOM, room.name, player.name, io);
+  updatePlayersList(room, io);
+};
 
 export const joinRoom = (roomName, callback, socket, io) => {
   console.log("[CALL] joinRoom");
-  if (!isAlphaNumeric(roomName) || roomName.length > 12) {
-    callback({
-      status: "error",
-      message: "Room name must be 1 to 12 alphanumeric characters long"
-    });
-  } else {
+  if (roomNameValidation(roomName)) {
     const player = Game.findPlayer(socket.id);
     if (player && !player.room) {
       let room = Game.findRoom(roomName);
-      if (!room) {
-        room = new Room(roomName);
-        player.isHost = true;
-        Game.addRoom(room);
-      }
-      if (room && !room.isFull()) {
-        room.addPlayer(player);
-        player.room = room;
-        changeRoom(LOBBY_ROOM, room.name, room, player, io, socket);
+      if (!room) room = createNewRoom(roomName, player);
+      if (!room.isFull()) {
+        addPlayerToRoom(player, room);
+        transferPlayerToRoom(room, player, io, socket);
       } else {
         callback({ status: "error", message: "Room is full" });
       }
       console.log("[UPDATED] after joinRoom", Game);
     }
-    callback({ status: "error", message: "Socket problem" });
   }
+};
+
+const transferPlayerToLobby = (room, player, io, socket) => {
+  socket.leave(room.name);
+  socket.join(LOBBY_ROOM);
+  player.clean();
+  updatePlayerClientSide(player, io);
+  updateRoomClientSide(room, io);
+  updateChatClientSide(room.name, LOBBY_ROOM, player.name, io);
+  updatePlayersList(room, io);
 };
 
 export const leaveRoom = (socket, io) => {
@@ -60,78 +102,7 @@ export const leaveRoom = (socket, io) => {
       Game.removeRoom(room.name);
     }
     player.room = null;
-    changeRoom(room.name, LOBBY_ROOM, room, player, io, socket);
+    transferPlayerToLobby(room, player, io, socket);
     console.log("[UPDATED] after leaveRoom", Game);
   }
-};
-
-const changeRoom = (srcName, destName, room, player, io, socket) => {
-  player.clean();
-  socket.leave(srcName);
-  socket.join(destName);
-  updateRoom(room, io);
-  updatePlayer(player, io);
-  emitSpectres(room, io);
-  io.to(srcName).emit(ADD_CHAT_MESSAGE, {
-    message: { type: "notification", text: player.name + " left the room." }
-  });
-  io.to(destName).emit(ADD_CHAT_MESSAGE, {
-    message: { type: "notification", text: player.name + " joined the room." }
-  });
-  io.to(room.name).emit(UPDATE_PLAYERS_LIST, {
-    players: room.players.map(player => player.name)
-  });
-  io.to(LOBBY_ROOM).emit(UPDATE_PLAYERS_LIST, {
-    players: Game.players
-      .filter(player => player.room === null)
-      .map(player => player.name)
-  });
-};
-
-const handleInterval = (room, io) => {
-  if (room.playersCount === 1 || room.stillInGameCounter === 1) {
-    room.endGame();
-    console.log("cc c moa");
-    updateRoom(room, io);
-  }
-  room.players.forEach(player => {
-    if (player.inGame && !player.piece.moveDown(player.heap)) {
-      player.updateHeap();
-      emitSpectres(player.room, io);
-    }
-    updatePlayer(player, io);
-  });
-};
-
-export const startGame = (room, io) => {
-  if (room.isStarted) return;
-  room.extendPiecesList();
-  room.isStarted = true;
-  room.stillInGameCounter = room.players.length;
-  room.initSpectres();
-  emitSpectres(room, io);
-  room.players.forEach(player => {
-    player.newPiece();
-    player.inGame = true;
-    updatePlayer(player, io);
-  });
-  room.interval = setInterval(() => handleInterval(room, io), 1000);
-  updateRoom(room, io);
-};
-
-export const emitSpectres = (room, io) => {
-  const players = room.players;
-  players.forEach(player => {
-    let spectres = room.spectres.map(s => ({ ...s }));
-    spectres = spectres.filter(spectre => spectre.playerId !== player.id);
-    spectres.forEach(spectre => delete spectre.playerId);
-    io.in(player.id).emit(UPDATE_SPECTRES, { spectres });
-  });
-};
-
-export const updateRoom = (room, io) => {
-  io.in(room.name).emit(UPDATE_ROOM, {
-    room: room.toObject()
-  });
-  io.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsArray() });
 };

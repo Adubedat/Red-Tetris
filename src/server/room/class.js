@@ -90,6 +90,7 @@ class Room {
       this._pieces.push(Math.floor(Math.random() * 7));
     }
   }
+
   endGame() {
     this.clean();
     console.log("GAME OVER");

@@ -87,7 +87,7 @@ class Player {
     let newBoard = this._heap.map(row => {
       return [...row];
     });
-    newBoard = piece.printToBoard(shadowPos, shape, newBoard, color + "40"); //Add alpha to color for shadow
+    newBoard = piece.printToBoard(shadowPos, shape, newBoard, color + "30"); //Add alpha to color for shadow
     newBoard = piece.printToBoard(pos, shape, newBoard, color);
     return newBoard;
   }

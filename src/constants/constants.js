@@ -18,9 +18,13 @@ export const HANDLE_HASH = "HANDLE_HASH";
 
 export const UPDATE_ROOMS = "UPDATE_ROOMS";
 
+export const UPDATE_BOARD = "UPDATE_BOARD";
+
 export const DELETE_PLAYER = "DELETE_PLAYER";
 
 export const SHOW_TOAST = "SHOW_TOAST";
+
+export const LOBBY_ROOM = "LOBBY_ROOM";
 
 export const CONNECTION = "connection";
 
@@ -43,8 +47,8 @@ export const enumKeys = {
 };
 
 export const MAX_PLAYER = 5;
-
-export const LOBBY_ROOM = "LOBBY_ROOM";
+export const BOARD_HEIGHT = 20;
+export const BOARD_WIDTH = 10;
 
 export const LOG_LINE =
   "\n_________________________________________________________________________________________________________\n\n";

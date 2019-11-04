@@ -1,41 +1,42 @@
 /* eslint-disable */
+import { BOARD_HEIGHT, BOARD_WIDTH } from "../../constants/constants";
 
 const pieces = [
   {
-    shape: [[0, 0, 1, 0], [0, 0, 1, 0], [0, 0, 1, 0], [0, 0, 1, 0]],
-    pos: { x: 3, y: -4 },
-    color: "#143cdc",
+    shape: [[1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]],
+    pos: { x: 3, y: -3 },
+    color: "#143cdc"
   },
   {
     shape: [[1, 1, 0], [0, 1, 0], [0, 1, 0]],
     pos: { x: 4, y: -3 },
-    color: "#14d4dc",
+    color: "#14d4dc"
   },
   {
     shape: [[0, 1, 1], [0, 1, 0], [0, 1, 0]],
     pos: { x: 4, y: -3 },
-    color: "#dc143c",
+    color: "#dc143c"
   },
   {
     shape: [[0, 1, 0], [0, 1, 1], [0, 1, 0]],
     pos: { x: 4, y: -3 },
-    color: "#ff8b00",
+    color: "#ff8b00"
   },
   {
     shape: [[1, 0, 0], [1, 1, 0], [0, 1, 0]],
     pos: { x: 4, y: -3 },
-    color: "#3cdc14",
+    color: "#3cdc14"
   },
   {
     shape: [[0, 0, 1], [0, 1, 1], [0, 1, 0]],
     pos: { x: 4, y: -3 },
-    color: "#b600ff",
+    color: "#b600ff"
   },
   {
     shape: [[1, 1], [1, 1]],
     pos: { x: 4, y: -2 },
-    color: "#fff400",
-  },
+    color: "#fff400"
+  }
 ];
 
 /* eslint-enable */
@@ -55,6 +56,7 @@ class Piece {
   }
 
   initNewPiece(index, heap) {
+    console.log(index);
     const piece = pieces[index];
     this._shape = [...piece.shape.map(row => [...row])];
     this._pos = { ...piece.pos };
@@ -98,7 +100,10 @@ class Piece {
         if (shape[i][j]) {
           let Y = i + y;
           let X = j + x;
-          if (Y >= 0 && (Y >= 20 || X < 0 || X >= 10 || heap[Y][X]))
+          if (
+            Y >= 0 &&
+            (Y >= BOARD_HEIGHT || X < 0 || X >= BOARD_WIDTH || heap[Y][X])
+          )
             return false;
         }
       }
@@ -115,15 +120,47 @@ class Piece {
     this._shadowPos = newPos;
   }
 
-  rotate(heap) {
+  /*
+   ** Rotate
+   */
+
+  rotationMatrice(shape) {
     let newShape = [];
-    for (let i = 0; i < this._shape[0].length; i++) {
-      let row = this._shape.map(e => e[i]).reverse();
+    const blocksInShape = shape.length;
+    for (let i = 0; i < blocksInShape; i++) {
+      let row = shape.map(e => e[i]).reverse();
       newShape.push(row);
     }
-    if (this.isPosAvailable(this._pos, newShape, heap)) {
-      this._shape = newShape;
+    return newShape;
+  }
+
+  findNewPosAfterRotation(shape, pos, heap) {
+    let newPos = { ...pos };
+    let i = 0;
+    while (i < 2) {
+      newPos.x++;
+      if (this.isPosAvailable(newPos, shape, heap)) return newPos;
+      i++;
     }
+    newPos = { ...pos };
+    i = 0;
+    while (i < 2) {
+      newPos.x--;
+      if (this.isPosAvailable(newPos, shape, heap)) return newPos;
+      i++;
+    }
+    return null;
+  }
+
+  rotate(heap) {
+    const { _shape: shape, _pos: pos } = this;
+    const newShape = this.rotationMatrice(shape);
+    if (!this.isPosAvailable(pos, newShape, heap)) {
+      const newPos = this.findNewPosAfterRotation(newShape, pos, heap);
+      if (newPos) this._pos = newPos;
+      else return;
+    }
+    this._shape = newShape;
   }
 
   hardDrop() {
