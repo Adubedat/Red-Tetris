@@ -1,11 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyledContainer, StyledRow } from "./styles";
+import {
+  StyledContainer,
+  StyledRow,
+  StyledGameOverContainer,
+  StyledGameOverText
+} from "./styles";
 import Cell from "../Cell";
 
-const BoardSub = ({ board, playerName = "", isSpectre = false }) => {
+const BoardSub = ({ board, isGameOver, isSpectre = false }) => {
   return (
     <StyledContainer id="board" isSpectre={isSpectre}>
+      {!isSpectre && isGameOver && (
+        <StyledGameOverContainer id="gameover-overlay">
+          <StyledGameOverText>game over</StyledGameOverText>
+        </StyledGameOverContainer>
+      )}
       {board.map((row, i) => (
         <StyledRow id="row" key={i}>
           {row.map((cell, i) => (

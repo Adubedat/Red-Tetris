@@ -4,7 +4,6 @@ import GameSub from "./subcomponent";
 const mapStateToProps = state => {
   return {
     isStarted: state.room.isStarted,
-    isGameOver: state.room.isGameOver,
     inGame: state.player.inGame
   };
 };
