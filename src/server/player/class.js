@@ -14,6 +14,7 @@ class Player {
     this._indexPieces = 1;
     this._inGame = false;
     this._isHost = false;
+    this._hasLost = false;
   }
 
   get name() {
@@ -56,10 +57,18 @@ class Player {
     this._isHost = isHost;
   }
 
+  newGame() {
+    this.newPiece();
+    this._inGame = true;
+    this._hasLost = false;
+  }
+
   newPiece() {
     const { pieces } = this._room;
     if (!this._piece.initNewPiece(pieces[this._indexPieces], this._heap)) {
+      console.log("PLOP");
       this._inGame = false;
+      this._hasLost = true;
       this._room.stillInGameCounter -= 1;
       this.updateHeap();
     } else {
@@ -130,6 +139,7 @@ class Player {
       id: this._id,
       isHost: this._isHost,
       inGame: this._inGame,
+      hasLost: this._hasLost,
       nextPiece: this._nextPiece.toObject(),
       board: this.renderBoard() || this._heap
     };

@@ -1,7 +1,10 @@
 import Game from "../game/class";
 import Room from "./class";
 import { isAlphaNumeric } from "../../utils/utils";
-import { updatePlayerClientSide } from "../player/controller";
+import {
+  updatePlayerClientSide,
+  updatePlayersClientSide
+} from "../player/controller";
 import { updateChatClientSide, updatePlayersList } from "../chat/controller";
 import {
   LOBBY_ROOM,
@@ -38,6 +41,7 @@ export const updateSpectresClientSide = (room, io) => {
 
 export const updateRoomClientSide = (room, io) => {
   updateSpectresClientSide(room, io);
+  updatePlayersClientSide(room.players, io);
   io.in(room.name).emit(UPDATE_ROOM, {
     room: room.toObject()
   });

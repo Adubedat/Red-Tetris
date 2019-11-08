@@ -28,12 +28,6 @@ const joinLobby = (player, socket, io) => {
   });
 };
 
-export const updatePlayerClientSide = (player, io) => {
-  io.in(player.id).emit(UPDATE_PLAYER, {
-    player: player.toObject()
-  });
-};
-
 export const connectPlayer = (playerName, socket, io) => {
   console.log("[CALL] connectPlayer");
   if (playerNameValidation(playerName)) {
@@ -53,4 +47,14 @@ export const disconnectPlayer = (socket, io) => {
   Game.removePlayer(socket.id);
   socket.leave(LOBBY_ROOM);
   console.log("[UPDATED] after disconnectPlayer", Game);
+};
+
+export const updatePlayerClientSide = (player, io) => {
+  io.in(player.id).emit(UPDATE_PLAYER, {
+    player: player.toObject()
+  });
+};
+
+export const updatePlayersClientSide = (players, io) => {
+  players.forEach(player => updatePlayerClientSide(player, io));
 };

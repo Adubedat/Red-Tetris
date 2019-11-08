@@ -23,7 +23,6 @@ const ChatSub = ({ chatMessages, players, onSubmit }) => {
   };
 
   const handleSubmit = e => {
-    console.log("submit chat message");
     e.preventDefault();
     onSubmit(message);
     setMessage("");
@@ -40,7 +39,6 @@ const ChatSub = ({ chatMessages, players, onSubmit }) => {
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
-    console.log("scroll");
     messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
   };
 

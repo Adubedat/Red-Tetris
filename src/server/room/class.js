@@ -47,11 +47,11 @@ class Room {
   set spectres(spectres) {
     this._spectres = spectres;
   }
-  get _stillInGameCounter() {
-    return this.__stillInGameCounter;
+  get stillInGameCounter() {
+    return this._stillInGameCounter;
   }
-  set _stillInGameCounter(stillInGameCounter) {
-    this.__stillInGameCounter = stillInGameCounter;
+  set stillInGameCounter(stillInGameCounter) {
+    this._stillInGameCounter = stillInGameCounter;
   }
 
   get isGameOver() {
@@ -99,6 +99,16 @@ class Room {
     }
   }
 
+  newGame() {
+    this.clean();
+    this.extendPiecesList();
+    this._isStarted = true;
+    this._isGameOver = false;
+    this._stillInGameCounter = this._players.length;
+    this._players.forEach(player => player.newGame());
+    this.initSpectres();
+  }
+
   endGame() {
     if (this._interval) clearInterval(this._interval);
     this._isGameOver = true;
@@ -139,7 +149,7 @@ class Room {
       name: this._name,
       playersCount: this._playersCount,
       isStarted: this._isStarted,
-      isGameOver: this.isGameOver
+      isGameOver: this._isGameOver
     };
   }
 }

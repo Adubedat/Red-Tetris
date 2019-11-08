@@ -1,5 +1,8 @@
 import Game from "../game/class";
-import { updateSpectresClientSide } from "../room/controller";
+import {
+  updateSpectresClientSide,
+  updateRoomClientSide
+} from "../room/controller";
 import { startGame } from "../game/controller";
 import { enumKeys, KEY_PRESSED } from "../../constants/constants";
 import { updatePlayerClientSide } from "../player/controller";
