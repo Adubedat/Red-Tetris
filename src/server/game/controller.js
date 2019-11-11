@@ -13,6 +13,7 @@ const handleInterval = (room, io) => {
   } else {
     room.players.forEach(player => {
       if (!player.piece.moveDown(player.heap)) {
+        if (player.piece.isOverTheHeap()) player.gameOver();
         player.updateHeap();
       }
     });
