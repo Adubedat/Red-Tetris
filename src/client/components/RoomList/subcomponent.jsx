@@ -8,7 +8,7 @@ import {
   StyledListSubHeader,
   StyledListSubHeaderColumn
 } from "./styles";
-import { MAX_PLAYER } from "../../../constants/constants";
+import { MAX_PLAYER_BATTLEROYAL } from "../../../constants/constants";
 
 const RoomListSub = ({ rooms, playerName }) => {
   const handleClick = roomName => {
@@ -47,7 +47,7 @@ const RoomListSub = ({ rooms, playerName }) => {
             </StyledListItemContent>
             <StyledListItemContent flex={1}>
               <p id="content">
-                {room.playersCount}/{MAX_PLAYER}
+                {room.playersCount}/{MAX_PLAYER_BATTLEROYAL}
               </p>
             </StyledListItemContent>
             <StyledListItemContent flex={1}>

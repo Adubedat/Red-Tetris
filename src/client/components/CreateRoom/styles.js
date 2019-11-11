@@ -4,37 +4,24 @@ import { withStyles } from "@material-ui/core/styles";
 
 export const StyledForm = styled.form`
   align-self: center;
-  width: 50%;
+  width: 70%;
   display: flex;
   padding: 1vh;
-  // border: 3px solid white;
   border-radius: 4px;
-  flex-flow: column;
   justify-content: center;
+  align-items: center;
   background: rgb(0, 0, 0, 0.2);
+`;
+
+export const StyledRoomNameContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `;
 
 export const StyledLabel = styled.label`
   padding: 0.5vh;
   font-size: 2vh;
-  color: white;
-`;
-
-export const StyledInputContainer = styled.div`
-  border-radius: 5px;
-  border: 2px solid white;
-`;
-
-export const StyledInput = styled.input`
-  height: 4vh;
-  padding: 0.5vh;
-  padding-left: 1vh;
-  font-family: ArcadeClassic;
-  border: 0px;
-  font-size: 2vh;
-  width: 100%;
-  background: none;
-  outline: none;
   color: white;
 `;
 
@@ -52,7 +39,7 @@ export const StyledButton = styled.button`
   }
 `;
 
-export const StyledTextField = withStyles({
+export const StyledInput = withStyles({
   root: {
     "&": {
       marginTop: 0,
