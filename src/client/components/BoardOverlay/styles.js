@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 export const StyledContainer = styled.div`
   align-self: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   border: 3px solid white;
   border-radius: 5px;

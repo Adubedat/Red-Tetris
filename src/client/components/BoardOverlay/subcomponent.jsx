@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyledContainer, StyledGameOverText } from "./styles";
+import Controls from "../Controls";
 
 const BoardOverlaySub = ({ isGameOver, hasLost, isStarted }) => {
   return (
@@ -9,7 +10,7 @@ const BoardOverlaySub = ({ isGameOver, hasLost, isStarted }) => {
       {isGameOver && !hasLost && (
         <StyledGameOverText>YOU WIN</StyledGameOverText>
       )}
-      {!isStarted && <StyledGameOverText>COMMANDS</StyledGameOverText>}
+      {!isStarted && <Controls />}
     </StyledContainer>
   );
 };
