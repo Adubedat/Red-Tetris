@@ -1,8 +1,7 @@
 import { initClientState } from "../game/controller";
 import { connectPlayer, disconnectPlayer } from "../player/controller";
-import { joinRoom, leaveRoom } from "../room/controller";
+import { joinRoom, leaveRoom, updateGameMode } from "../room/controller";
 import { newChatMessage } from "../chat/controller";
-import { startGame } from "../game/controller";
 import { onKeyPressed } from "../piece/controller";
 import {
   LEAVE_ROOM,
@@ -14,7 +13,8 @@ import {
   LOG_LINE,
   KEY_PRESSED,
   LOBBY_ROOM,
-  NEW_CHAT_MESSAGE
+  NEW_CHAT_MESSAGE,
+  UPDATE_GAME_MODE
 } from "../../constants/constants";
 
 /*
@@ -46,6 +46,9 @@ export const initListeners = io => {
     });
     socket.on(NEW_CHAT_MESSAGE, message => {
       newChatMessage(message, socket, io);
+    });
+    socket.on(UPDATE_GAME_MODE, mode => {
+      updateGameMode(mode, socket, io);
     });
     socket.on(DISCONNECT, reason => {
       console.log(LOG_LINE, "[EVENT] DISCONNECT :", reason);

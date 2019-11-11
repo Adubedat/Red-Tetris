@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import {
   StyledContainer,
-  StyledButton,
   StyledLabel,
   StyledMenuItem,
   StyledRowContainer,
@@ -12,22 +11,13 @@ import {
 import Select from "../common/select";
 import { SOLO, BATTLEROYAL } from "../../../constants/constants";
 
-const GameInfoSub = ({ room, isHost }) => {
-  const { playersCount, isStarted } = room;
+const GameInfoSub = ({ room, isHost, onChangeGameMode }) => {
+  const { playersCount } = room;
   const [mode, setMode] = React.useState(SOLO);
 
   const handleModeChange = e => {
     setMode(e.target.value);
-  };
-
-  const displayButton = () => {
-    if (isHost && !isStarted) {
-      return <StyledButton>Press Enter to start</StyledButton>;
-    } else if (!isHost && !isStarted) {
-      return <StyledButton>Waiting for host to start</StyledButton>;
-    } else {
-      return <div id="empty"></div>;
-    }
+    onChangeGameMode(e.target.value);
   };
 
   const displayModeDescription = () => {
@@ -72,7 +62,6 @@ const GameInfoSub = ({ room, isHost }) => {
       <p>
         [{playersCount}/{mode === 1 ? 1 : 5} Players]
       </p>
-      {displayButton()}
     </StyledContainer>
   );
 };

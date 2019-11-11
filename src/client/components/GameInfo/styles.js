@@ -21,20 +21,6 @@ export const StyledRowContainer = styled.div`
   padding: 10px;
 `;
 
-export const StyledButton = styled.button`
-  background: none;
-  font-size: 2.5vh;
-  color: white;
-  padding: 0.5vh;
-  border: 0px;
-  outline: none;
-  opacity: 0;
-  transition: opacity 0.2s;
-  &:enabled {
-    opacity: 1;
-  }
-`;
-
 export const StyledLabel = styled.label`
   font-size: 2vh;
   padding: 0.5vh;

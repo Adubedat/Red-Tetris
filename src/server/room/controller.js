@@ -29,6 +29,14 @@ const addPlayerToRoom = (player, room) => {
   player.room = room;
 };
 
+export const updateGameMode = (mode, socket) => {
+  const player = Game.findPlayer(socket.id);
+  if (player && player.room) {
+    player.room.mode = mode;
+    console.log(player.room.mode);
+  }
+};
+
 export const updateSpectresClientSide = (room, io) => {
   const players = room.players;
   players.forEach(player => {

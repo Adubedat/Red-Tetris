@@ -1,4 +1,4 @@
-import { MAX_PLAYER_BATTLEROYAL } from "../../constants/constants";
+import { MAX_PLAYER_BATTLEROYAL, SOLO } from "../../constants/constants";
 
 class Room {
   constructor(name) {
@@ -11,12 +11,12 @@ class Room {
     this._isGameOver = false;
     this._pieces = [];
     this._spectres = [];
+    this._mode = SOLO;
   }
 
   get name() {
     return this._name;
   }
-
   get players() {
     return this._players;
   }
@@ -53,12 +53,17 @@ class Room {
   set stillInGameCounter(stillInGameCounter) {
     this._stillInGameCounter = stillInGameCounter;
   }
-
   get isGameOver() {
     return this._isGameOver;
   }
   set isGameOver(isGameOver) {
     this._isGameOver = isGameOver;
+  }
+  get mode() {
+    return this._mode;
+  }
+  set mode(mode) {
+    this._mode = mode;
   }
 
   clean() {
