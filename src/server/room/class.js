@@ -1,4 +1,4 @@
-import { MAX_PLAYER } from "../../constants/constants";
+import { MAX_PLAYER_BATTLEROYAL } from "../../constants/constants";
 
 class Room {
   constructor(name) {
@@ -90,7 +90,7 @@ class Room {
   }
 
   isFull() {
-    return this._playersCount >= MAX_PLAYER;
+    return this._playersCount >= MAX_PLAYER_BATTLEROYAL;
   }
 
   extendPiecesList() {
