@@ -1,15 +1,14 @@
 import { connect } from "react-redux";
-import BoardSub from "./subcomponent";
+import BoardOverlaySub from "./subcomponent";
 
 const mapStateToProps = state => ({
-  board: state.player.board,
-  hasLost: state.player.hasLost,
-  isGameOver: state.room.isGameOver
+  isGameOver: state.room.isGameOver,
+  hasLost: state.player.hasLost
 });
 
 const Board = connect(
   mapStateToProps,
   null
-)(BoardSub);
+)(BoardOverlaySub);
 
 export default Board;

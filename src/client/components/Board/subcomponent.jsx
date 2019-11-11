@@ -1,21 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  StyledContainer,
-  StyledRow,
-  StyledGameOverContainer,
-  StyledGameOverText
-} from "./styles";
+import { StyledContainer, StyledRow } from "./styles";
+import BoardOverlay from "../BoardOverlay";
 import Cell from "../Cell";
 
-const BoardSub = ({ board, isGameOver, isSpectre = false }) => {
+const BoardSub = ({ board, hasLost, isGameOver, isSpectre = false }) => {
   return (
     <StyledContainer id="board" isSpectre={isSpectre}>
-      {!isSpectre && isGameOver && (
-        <StyledGameOverContainer id="gameover-overlay">
-          <StyledGameOverText>game over</StyledGameOverText>
-        </StyledGameOverContainer>
-      )}
       {board.map((row, i) => (
         <StyledRow id="row" key={i}>
           {row.map((cell, i) => (
@@ -23,6 +14,7 @@ const BoardSub = ({ board, isGameOver, isSpectre = false }) => {
           ))}
         </StyledRow>
       ))}
+      {!isSpectre && (hasLost || isGameOver) && <BoardOverlay />}
     </StyledContainer>
   );
 };

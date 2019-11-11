@@ -10,11 +10,13 @@ export const initClientState = socket => {
 const handleInterval = (room, io) => {
   if (room.playersCount === 1 || room.stillInGameCounter === 1) {
     room.endGame();
-    updateRoomClientSide(room, io);
+  } else {
+    room.players.forEach(player => {
+      if (!player.piece.moveDown(player.heap)) {
+        player.updateHeap();
+      }
+    });
   }
-  room.players.forEach(player => {
-    player.piece.moveDown(player.heap);
-  });
   updateRoomClientSide(room, io);
 };
 

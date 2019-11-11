@@ -63,14 +63,17 @@ class Player {
     this._hasLost = false;
   }
 
+  gameOver() {
+    this._inGame = false;
+    this._hasLost = true;
+    this._room.stillInGameCounter -= 1;
+    this.updateHeap();
+  }
+
   newPiece() {
     const { pieces } = this._room;
     if (!this._piece.initNewPiece(pieces[this._indexPieces], this._heap)) {
-      console.log("PLOP");
-      this._inGame = false;
-      this._hasLost = true;
-      this._room.stillInGameCounter -= 1;
-      this.updateHeap();
+      this.gameOver();
     } else {
       this._indexPieces += 1;
       if (this._indexPieces >= pieces.length - 1) this._room.extendPiecesList();
