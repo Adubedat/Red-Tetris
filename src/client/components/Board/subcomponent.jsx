@@ -4,7 +4,13 @@ import { StyledContainer, StyledRow } from "./styles";
 import BoardOverlay from "../BoardOverlay";
 import Cell from "../Cell";
 
-const BoardSub = ({ board, hasLost, isGameOver, isSpectre = false }) => {
+const BoardSub = ({
+  board,
+  hasLost,
+  isGameOver,
+  isStarted,
+  isSpectre = false
+}) => {
   return (
     <StyledContainer id="board" isSpectre={isSpectre}>
       {board.map((row, i) => (
@@ -14,13 +20,16 @@ const BoardSub = ({ board, hasLost, isGameOver, isSpectre = false }) => {
           ))}
         </StyledRow>
       ))}
-      {!isSpectre && (hasLost || isGameOver) && <BoardOverlay />}
+      {!isSpectre && (hasLost || isGameOver || !isStarted) && <BoardOverlay />}
     </StyledContainer>
   );
 };
 
 BoardSub.propTypes = {
   board: PropTypes.array.isRequired,
+  hasLost: PropTypes.bool,
+  isGameOver: PropTypes.bool,
+  isStarted: PropTypes.bool,
   isSpectre: PropTypes.bool
 };
 
