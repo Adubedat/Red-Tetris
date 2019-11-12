@@ -16,7 +16,10 @@ import {
 
 const RoomListSub = ({ rooms, playerName }) => {
   const handleClick = roomName => {
-    window.location.hash = roomName + "[" + playerName + "]";
+    window.location.hash = "";
+    setTimeout(() => {
+      window.location.hash = roomName + "[" + playerName + "]";
+    }, 20);
   };
   return (
     <StyledContainer id="room-list">

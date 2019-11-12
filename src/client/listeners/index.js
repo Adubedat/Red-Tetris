@@ -5,13 +5,15 @@ import {
   UPDATE_PLAYER,
   UPDATE_SPECTRES,
   ADD_CHAT_MESSAGE,
-  UPDATE_PLAYERS_LIST
+  UPDATE_PLAYERS_LIST,
+  DISPLAY_TOAST
 } from "../../constants/constants";
 import { updateRooms, updateRoom } from "../actions/room";
 import { updatePlayer, updatePlayersList } from "../actions/player";
 import { handleHash } from "../actions/hash";
 import { addChatMessage } from "../actions/chat";
 import { handleKeyPress, updateSpectres } from "../actions/game";
+import { toast } from "react-toastify";
 
 export const initListeners = dispatch => {
   socket.on(UPDATE_ROOMS, data => subscribeUpdateRooms(data, dispatch));
@@ -27,6 +29,8 @@ export const initListeners = dispatch => {
   socket.on(UPDATE_PLAYERS_LIST, data =>
     subscribeUpdatePlayersList(data, dispatch)
   );
+
+  socket.on(DISPLAY_TOAST, data => displayToast(data));
 
   window.onhashchange = () => handleHash(dispatch);
   document.onkeydown = e => handleKeyPress(e);
@@ -60,4 +64,14 @@ const subscribeAddChatMessage = (data, dispatch) => {
 const subscribeUpdatePlayersList = (data, dispatch) => {
   const { players } = data;
   dispatch(updatePlayersList(players));
+};
+
+const displayToast = data => {
+  switch (data.type) {
+    case "error":
+      toast.error(data.message, { position: toast.POSITION.TOP_RIGHT });
+      break;
+    default:
+      toast(data.message, { position: toast.POSITION.TOP_RIGHT });
+  }
 };

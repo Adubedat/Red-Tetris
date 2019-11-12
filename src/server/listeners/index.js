@@ -29,9 +29,9 @@ export const initListeners = io => {
       console.log("[EVENT] ", NEW_PLAYER);
       connectPlayer(data, socket, io);
     });
-    socket.on(JOIN_ROOM, (data, callback) => {
+    socket.on(JOIN_ROOM, data => {
       console.log("[EVENT] ", JOIN_ROOM);
-      joinRoom(data, callback, socket, io);
+      joinRoom(data, socket, io);
     });
     socket.on(DISCONNECT_PLAYER, () => {
       console.log("[EVENT] ", DISCONNECT_PLAYER);

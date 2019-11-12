@@ -50,7 +50,9 @@ const GameInfoSub = ({ room, isHost, onChangeGameMode }) => {
           onChange={handleModeChange}
           label="Mode"
         >
-          <StyledMenuItem value={SOLO}>Solo</StyledMenuItem>
+          <StyledMenuItem disabled={playersCount > 1} value={SOLO}>
+            Solo
+          </StyledMenuItem>
           <StyledMenuItem value={BATTLEROYAL}>Battleroyal</StyledMenuItem>
         </Select>
         <div

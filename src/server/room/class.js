@@ -1,4 +1,8 @@
-import { MAX_PLAYER_BATTLEROYAL, SOLO } from "../../constants/constants";
+import {
+  MAX_PLAYER_BATTLEROYAL,
+  MAX_PLAYER_SOLO,
+  SOLO
+} from "../../constants/constants";
 
 class Room {
   constructor(name) {
@@ -95,7 +99,9 @@ class Room {
   }
 
   isFull() {
-    return this._playersCount >= MAX_PLAYER_BATTLEROYAL;
+    const maxPlayer =
+      this._mode === SOLO ? MAX_PLAYER_SOLO : MAX_PLAYER_BATTLEROYAL;
+    return this._playersCount >= maxPlayer;
   }
 
   extendPiecesList() {
