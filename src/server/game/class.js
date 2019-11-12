@@ -40,7 +40,9 @@ class Game {
   createPublicRoomsArray() {
     return this._rooms.map(room => ({
       name: room.name,
-      playersCount: room.playersCount
+      playersCount: room.playersCount,
+      mode: room.mode,
+      isStarted: room.isStarted
     }));
   }
 }

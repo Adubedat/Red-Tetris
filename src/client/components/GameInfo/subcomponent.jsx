@@ -9,25 +9,29 @@ import {
 } from "./styles";
 
 import Select from "../common/select";
-import { SOLO, BATTLEROYAL } from "../../../constants/constants";
+import {
+  SOLO,
+  BATTLEROYAL,
+  MAX_PLAYER_SOLO,
+  MAX_PLAYER_BATTLEROYAL
+} from "../../../constants/constants";
 
 const GameInfoSub = ({ room, isHost, onChangeGameMode }) => {
   const { playersCount } = room;
-  const [mode, setMode] = React.useState(SOLO);
-
+  const maxPlayer =
+    room.mode === SOLO ? MAX_PLAYER_SOLO : MAX_PLAYER_BATTLEROYAL;
   const handleModeChange = e => {
-    setMode(e.target.value);
     onChangeGameMode(e.target.value);
   };
 
   const displayModeDescription = () => {
-    if (mode === SOLO) {
+    if (room.mode === SOLO) {
       return (
         <StyledDescription>
           Single player mode, try to reach the highest score !
         </StyledDescription>
       );
-    } else if (mode === BATTLEROYAL) {
+    } else if (room.mode === BATTLEROYAL) {
       return (
         <StyledDescription>
           Multiplayer mode, be the last one alive to win ! Removing multiple
@@ -40,7 +44,12 @@ const GameInfoSub = ({ room, isHost, onChangeGameMode }) => {
   return (
     <StyledContainer id="game-info">
       <StyledRowContainer>
-        <Select value={mode} onChange={handleModeChange} label="Mode">
+        <Select
+          disabled={!isHost || room.isStarted}
+          value={room.mode}
+          onChange={handleModeChange}
+          label="Mode"
+        >
           <StyledMenuItem value={SOLO}>Solo</StyledMenuItem>
           <StyledMenuItem value={BATTLEROYAL}>Battleroyal</StyledMenuItem>
         </Select>
@@ -58,10 +67,9 @@ const GameInfoSub = ({ room, isHost, onChangeGameMode }) => {
           </div>
         </div>
       </StyledRowContainer>
-
-      <p>
-        [{playersCount}/{mode === 1 ? 1 : 5} Players]
-      </p>
+      <div style={{ fontSize: "2vh" }}>
+        [{playersCount}/{maxPlayer} Players]
+      </div>
     </StyledContainer>
   );
 };

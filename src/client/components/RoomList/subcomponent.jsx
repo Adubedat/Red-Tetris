@@ -8,7 +8,11 @@ import {
   StyledListSubHeader,
   StyledListSubHeaderColumn
 } from "./styles";
-import { MAX_PLAYER_BATTLEROYAL } from "../../../constants/constants";
+import {
+  MAX_PLAYER_BATTLEROYAL,
+  MAX_PLAYER_SOLO,
+  SOLO
+} from "../../../constants/constants";
 
 const RoomListSub = ({ rooms, playerName }) => {
   const handleClick = roomName => {
@@ -30,31 +34,33 @@ const RoomListSub = ({ rooms, playerName }) => {
             <p id="header">Players</p>
           </StyledListSubHeaderColumn>
           <StyledListSubHeaderColumn flex={1}>
-            <p id="header">Started</p>
+            <p id="header">Status</p>
           </StyledListSubHeaderColumn>
         </StyledListSubHeader>
-        {rooms.map((room, index) => (
-          <StyledListItem
-            id="list-item"
-            key={index}
-            onClick={() => handleClick(room.name)}
-          >
-            <StyledListItemContent flex={3}>
-              <p id="content">{room.name}</p>
-            </StyledListItemContent>
-            <StyledListItemContent flex={1}>
-              <p id="content">BattleRoyal</p>
-            </StyledListItemContent>
-            <StyledListItemContent flex={1}>
-              <p id="content">
-                {room.playersCount}/{MAX_PLAYER_BATTLEROYAL}
-              </p>
-            </StyledListItemContent>
-            <StyledListItemContent flex={1}>
-              <p id="content">{room.isStarted ? "Started" : ""}</p>
-            </StyledListItemContent>
-          </StyledListItem>
-        ))}
+        {rooms.map((room, index) => {
+          const maxPlayer =
+            room.mode === SOLO ? MAX_PLAYER_SOLO : MAX_PLAYER_BATTLEROYAL;
+          return (
+            <StyledListItem
+              id="list-item"
+              key={index}
+              onClick={() => handleClick(room.name)}
+            >
+              <StyledListItemContent id="content" flex={3}>
+                {room.name}
+              </StyledListItemContent>
+              <StyledListItemContent id="content" flex={1}>
+                {room.mode}
+              </StyledListItemContent>
+              <StyledListItemContent id="content" flex={1}>
+                {room.playersCount}/{maxPlayer}
+              </StyledListItemContent>
+              <StyledListItemContent id="content" flex={1}>
+                {room.isStarted ? "In game" : "In Menu"}
+              </StyledListItemContent>
+            </StyledListItem>
+          );
+        })}
       </StyledList>
     </StyledContainer>
   );

@@ -154,7 +154,8 @@ class Room {
       name: this._name,
       playersCount: this._playersCount,
       isStarted: this._isStarted,
-      isGameOver: this._isGameOver
+      isGameOver: this._isGameOver,
+      mode: this._mode
     };
   }
 }
