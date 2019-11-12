@@ -1,5 +1,5 @@
 import Piece from "../piece/class";
-import { MALUS } from "../../constants/constants";
+import { MALUS, SOLO, BATTLEROYAL } from "../../constants/constants";
 
 class Player {
   constructor(name = "", id = "") {
@@ -111,7 +111,12 @@ class Player {
         counter += 1;
       }
     });
-    this.sendMalus(counter - 1);
+    if (this._room.mode === BATTLEROYAL) {
+      this.sendMalus(counter - 1);
+    }
+    if (this._room.mode === SOLO) {
+      this._room.updateScore(counter);
+    }
   }
 
   sendMalus(counter) {

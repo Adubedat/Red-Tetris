@@ -1,4 +1,5 @@
 import Game from "./class";
+import Timer from "../timer/class";
 import { UPDATE_ROOMS, SOLO, BATTLEROYAL } from "../../constants/constants";
 import { updateRoomClientSide } from "../room/controller";
 
@@ -42,5 +43,6 @@ export const startGame = (room, io) => {
   if (room.isStarted) return;
   room.newGame();
   updateRoomClientSide(room, io);
-  room.interval = setInterval(() => handleInterval(room, io), 1000);
+  room.timer = new Timer(() => handleInterval(room, io), room.speed);
+  room.timer.start();
 };

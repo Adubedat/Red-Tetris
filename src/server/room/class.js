@@ -10,12 +10,16 @@ class Room {
     this._players = [];
     this._playersCount = 0;
     this._stillInGameCounter = 0;
-    this._interval = null;
+    this._timer = null;
     this._isStarted = false;
     this._isGameOver = false;
     this._pieces = [];
     this._spectres = [];
     this._mode = SOLO;
+    this._score = 0;
+    this._level = 0;
+    this._speed = 1000;
+    this._linesRemovedCounter = 0;
   }
 
   get name() {
@@ -32,12 +36,6 @@ class Room {
   }
   set isStarted(bool) {
     this._isStarted = bool;
-  }
-  get interval() {
-    return this._interval;
-  }
-  set interval(interval) {
-    this._interval = interval;
   }
   get pieces() {
     return this._pieces;
@@ -69,12 +67,40 @@ class Room {
   set mode(mode) {
     this._mode = mode;
   }
+  get timer() {
+    return this._timer;
+  }
+  set timer(timer) {
+    this._timer = timer;
+  }
+  get score() {
+    return this._score;
+  }
+  set score(score) {
+    this._score = score;
+  }
+  get level() {
+    return this._level;
+  }
+  set level(level) {
+    this._level = level;
+  }
+  get speed() {
+    return this._speed;
+  }
+  set speed(speed) {
+    this._speed = speed;
+  }
 
   clean() {
-    if (this._interval) clearInterval(this._interval);
+    if (this._timer) this._timer.stop();
     this._players.forEach(player => player.clean());
     this._pieces = [];
     this._isStarted = false;
+    this._score = 0;
+    this._level = 0;
+    this._speed = 1000;
+    this._linesRemovedCounter = 0;
   }
 
   addPlayer(player) {
@@ -121,7 +147,7 @@ class Room {
   }
 
   endGame() {
-    if (this._interval) clearInterval(this._interval);
+    if (this._timer) this._timer.stop();
     this._isGameOver = true;
     this._isStarted = false;
   }
@@ -155,13 +181,43 @@ class Room {
     });
   }
 
+  updateScore = linesRemovedNbr => {
+    switch (linesRemovedNbr) {
+      case 1:
+        this._score += 40 * (this._level + 1);
+        break;
+      case 2:
+        this._score += 100 * (this._level + 1);
+        break;
+      case 3:
+        this._score += 300 * (this._level + 1);
+        break;
+      case 4:
+        this._score += 1200 * (this._level + 1);
+        break;
+      default:
+        break;
+    }
+    this._linesRemovedCounter += linesRemovedNbr;
+    if (this._linesRemovedCounter >= 5) {
+      this._level += 1;
+      this._linesRemovedCounter -= 5;
+      this._speed = this._speed * (88 / 100);
+      console.log("SPEED: " + this._speed);
+      console.log(this._timer);
+      this._timer.reset(this._speed);
+    }
+  };
+
   toObject() {
     return {
       name: this._name,
       playersCount: this._playersCount,
       isStarted: this._isStarted,
       isGameOver: this._isGameOver,
-      mode: this._mode
+      mode: this._mode,
+      score: this._score,
+      level: this._level
     };
   }
 }

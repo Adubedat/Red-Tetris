@@ -1,5 +1,5 @@
 import Game from "../game/class";
-import { updateSpectresClientSide } from "../room/controller";
+import { updateRoomClientSide } from "../room/controller";
 import { startGame } from "../game/controller";
 import { enumKeys } from "../../constants/constants";
 import { updatePlayerClientSide } from "../player/controller";
@@ -38,12 +38,12 @@ export const onKeyPressed = (code, socket, io) => {
 const handleSpace = (player, io) => {
   player.piece.hardDrop();
   player.updateHeap();
-  updateSpectresClientSide(player.room, io);
+  updateRoomClientSide(player.room, io);
 };
 
 const handleArrowDown = (player, heap, io) => {
   if (!player.piece.moveDown(heap)) {
     player.updateHeap();
-    updateSpectresClientSide(player.room, io);
+    updateRoomClientSide(player.room, io);
   }
 };
