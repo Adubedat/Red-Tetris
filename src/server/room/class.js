@@ -199,12 +199,10 @@ class Room {
         break;
     }
     this._linesRemovedCounter += linesRemovedNbr;
-    if (this._linesRemovedCounter >= 5) {
+    if (this._linesRemovedCounter >= 3) {
       this._level += 1;
-      this._linesRemovedCounter -= 5;
+      this._linesRemovedCounter -= 3;
       this._speed = this._speed * (88 / 100);
-      console.log("SPEED: " + this._speed);
-      console.log(this._timer);
       this._timer.reset(this._speed);
     }
   };
