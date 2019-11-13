@@ -1,6 +1,11 @@
 import Game from "./class";
 import Timer from "../timer/class";
-import { UPDATE_ROOMS, SOLO, BATTLEROYAL } from "../../constants/constants";
+import {
+  UPDATE_ROOMS,
+  SOLO,
+  BATTLEROYAL,
+  DISPLAY_TOAST
+} from "../../constants/constants";
 import { updateRoomClientSide } from "../room/controller";
 
 export const initClientState = socket => {
@@ -39,8 +44,15 @@ const handleInterval = (room, io) => {
   updateRoomClientSide(room, io);
 };
 
-export const startGame = (room, io) => {
+export const startGame = (room, io, socket) => {
   if (room.isStarted) return;
+  if (room.mode === BATTLEROYAL && room.playersCount <= 1) {
+    socket.emit(DISPLAY_TOAST, {
+      type: "error",
+      message: "Not enough players"
+    });
+    return;
+  }
   room.newGame();
   updateRoomClientSide(room, io);
   room.timer = new Timer(() => handleInterval(room, io), room.speed);
