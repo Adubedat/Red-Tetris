@@ -6,8 +6,8 @@ export const StyledContainer = styled.div`
   width: 20vh;
   height: 20vh;
   p {
-    fontsize: 3vh;
-    marginbottom: 30px;
+    font-size: 3vh;
+    margin-bottom: 30px;
     position: relative;
     left: 20px;
   }
