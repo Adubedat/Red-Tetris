@@ -36,8 +36,10 @@ const handleInterval = (room, io) => {
     room.endGame();
   } else {
     room.players.forEach(player => {
-      if (!player.piece.moveDown(player.heap)) {
-        player.updateHeap();
+      if (player.inGame) {
+        if (!player.piece.moveDown(player.heap)) {
+          player.updateHeap();
+        }
       }
     });
   }
