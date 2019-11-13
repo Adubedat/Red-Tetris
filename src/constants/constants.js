@@ -22,13 +22,15 @@ export const UPDATE_BOARD = "UPDATE_BOARD";
 
 export const DELETE_PLAYER = "DELETE_PLAYER";
 
-export const SHOW_TOAST = "SHOW_TOAST";
+export const DISPLAY_TOAST = "DISPLAY_TOAST";
 
 export const LOBBY_ROOM = "LOBBY_ROOM";
 
 export const CONNECTION = "connection";
 
 export const UPDATE_SPECTRES = "UPDATE_SPECTRES";
+
+export const UPDATE_GAME_MODE = "UPDATE_GAME_MODE";
 
 export const ADD_CHAT_MESSAGE = "ADD_CHAT_MESSAGE";
 export const NEW_CHAT_MESSAGE = "NEW_CHAT_MESSAGE";

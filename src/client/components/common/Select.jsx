@@ -19,6 +19,9 @@ const useStyles = makeStyles(theme => ({
       },
       "&.Mui-focused fieldset": {
         borderColor: "white"
+      },
+      "&.Mui-disabled fieldset": {
+        borderColor: "white"
       }
     }
   },

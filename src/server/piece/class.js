@@ -61,15 +61,13 @@ class Piece {
     this._pos = { ...piece.pos };
     this._shadowPos = { ...piece.pos };
     this._color = piece.color;
-    while (this._pos.y <= 0) {
-      if (!this.isPosAvailable(this._pos, this._shape, heap)) {
-        this.pos.y -= 1;
-        return false;
-      }
+    while (
+      this._pos.y <= 0 &&
+      this.isPosAvailable(this._pos, this._shape, heap)
+    ) {
       this._pos.y += 1;
     }
-    this._pos.y = 0;
-    return true;
+    this._pos.y -= 1;
   }
 
   initNextPiece(index) {
@@ -100,14 +98,27 @@ class Piece {
           let Y = i + y;
           let X = j + x;
           if (
-            Y >= 0 &&
-            (Y >= BOARD_HEIGHT || X < 0 || X >= BOARD_WIDTH || heap[Y][X])
+            Y >= BOARD_HEIGHT ||
+            X < 0 ||
+            X >= BOARD_WIDTH ||
+            (Y >= 0 && heap[Y][X])
           )
             return false;
         }
       }
     }
     return true;
+  }
+
+  isOverTheHeap() {
+    for (let i = 0; i < this._shape.length; i++) {
+      for (let j = 0; j < this._shape[i].length; j++) {
+        if (this._shape[i][j] && i + this._pos.y < 0) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   updateShadow(heap) {

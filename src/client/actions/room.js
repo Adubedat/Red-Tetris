@@ -20,7 +20,7 @@ response is used serverside
 
 export const joinRoom = roomName => {
   return dispatch => {
-    socket.emit(JOIN_ROOM, roomName, response => {});
+    socket.emit(JOIN_ROOM, roomName);
   };
 };
 

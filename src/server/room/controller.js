@@ -10,7 +10,9 @@ import {
   LOBBY_ROOM,
   UPDATE_ROOM,
   UPDATE_ROOMS,
-  UPDATE_SPECTRES
+  UPDATE_SPECTRES,
+  SOLO,
+  DISPLAY_TOAST
 } from "../../constants/constants";
 
 const roomNameValidation = roomName => {
@@ -27,6 +29,15 @@ const createNewRoom = (roomName, player) => {
 const addPlayerToRoom = (player, room) => {
   room.addPlayer(player);
   player.room = room;
+};
+
+export const updateGameMode = (mode, socket, io) => {
+  const player = Game.findPlayer(socket.id);
+  if (mode === SOLO && player.room.playersCount > 1) return;
+  if (player && player.room && player.isHost && !player.room.isStarted) {
+    player.room.mode = mode;
+  }
+  updateRoomClientSide(player.room, io);
 };
 
 export const updateSpectresClientSide = (room, io) => {
@@ -58,19 +69,20 @@ const transferPlayerToRoom = (room, player, io, socket) => {
   updatePlayersList(room, io);
 };
 
-export const joinRoom = (roomName, callback, socket, io) => {
+export const joinRoom = (roomName, socket, io) => {
   console.log("[CALL] joinRoom");
   if (roomNameValidation(roomName)) {
     const player = Game.findPlayer(socket.id);
     if (player && !player.room) {
       let room = Game.findRoom(roomName);
       if (!room) room = createNewRoom(roomName, player);
-      if (!room.isFull()) {
-        addPlayerToRoom(player, room);
-        transferPlayerToRoom(room, player, io, socket);
-      } else {
-        callback({ status: "error", message: "Room is full" });
+      if (room.isFull()) {
+        const data = { type: "error", message: "This room is full" };
+        socket.emit(DISPLAY_TOAST, data);
+        return;
       }
+      addPlayerToRoom(player, room);
+      transferPlayerToRoom(room, player, io, socket);
       console.log("[UPDATED] after joinRoom", Game);
     }
   }

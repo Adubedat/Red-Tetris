@@ -6,6 +6,17 @@ export const StyledContainer = styled.div`
   display: flex;
 `;
 
+export const StyledColumnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-basis: 20%;
+  height: 86vh;
+  align-items: center;
+  .value {
+    font-size: 2vh;
+  }
+`;
+
 export const StyledLeftItem = styled.div`
   flex: 2;
   padding: 1vh;
@@ -16,8 +27,14 @@ export const StyledLeftItem = styled.div`
   justify-content: space-around;
   align-items: center;
 `;
+
 export const StyledRightItem = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+`;
+
+export const StyledLabel = styled.div`
+  font-size: 3vh;
+  padding: 1vh;
 `;

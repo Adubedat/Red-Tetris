@@ -1,5 +1,5 @@
 import Piece from "../piece/class";
-import { MALUS } from "../../constants/constants";
+import { MALUS, SOLO, BATTLEROYAL } from "../../constants/constants";
 
 class Player {
   constructor(name = "", id = "") {
@@ -67,16 +67,14 @@ class Player {
     this._inGame = false;
     this._hasLost = true;
     this._room.stillInGameCounter -= 1;
-    this.updateHeap();
   }
 
   newPiece() {
     const { pieces } = this._room;
-    if (!this._piece.initNewPiece(pieces[this._indexPieces], this._heap)) {
-      this.gameOver();
-    } else {
-      this._indexPieces += 1;
-      if (this._indexPieces >= pieces.length - 1) this._room.extendPiecesList();
+    this._piece.initNewPiece(pieces[this._indexPieces], this._heap);
+    this._indexPieces += 1;
+    if (this._indexPieces >= pieces.length - 1) {
+      this._room.extendPiecesList();
     }
     this._nextPiece.initNextPiece(pieces[this._indexPieces]);
   }
@@ -113,7 +111,12 @@ class Player {
         counter += 1;
       }
     });
-    this.sendMalus(counter - 1);
+    if (this._room.mode === BATTLEROYAL) {
+      this.sendMalus(counter - 1);
+    }
+    if (this._room.mode === SOLO) {
+      this._room.updateScore(counter);
+    }
   }
 
   sendMalus(counter) {
@@ -130,6 +133,7 @@ class Player {
   updateHeap() {
     const piece = this._piece;
     const { pos, shape, color } = this._piece;
+    if (piece.isOverTheHeap()) this.gameOver();
     this._heap = piece.printToBoard(pos, shape, this._heap, color);
     this.removeLines();
     this._room.updateSpectre(this._id, this._heap);
