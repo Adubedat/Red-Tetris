@@ -3,40 +3,40 @@ import { BOARD_HEIGHT, BOARD_WIDTH } from "../../constants/constants";
 
 const pieces = [
   {
-    shape: [[1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]],
+    shape: [[0, 0, 0, 0], [1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0]],
     pos: { x: 3, y: -3 },
-    color: "#143cdc",
+    color: "#143cdc"
   },
   {
-    shape: [[1, 1, 0], [0, 1, 0], [0, 1, 0]],
+    shape: [[1, 0, 0], [1, 1, 1], [0, 0, 0]],
     pos: { x: 4, y: -3 },
-    color: "#14d4dc",
+    color: "#14d4dc"
   },
   {
-    shape: [[0, 1, 1], [0, 1, 0], [0, 1, 0]],
+    shape: [[0, 0, 1], [1, 1, 1], [0, 0, 0]],
     pos: { x: 4, y: -3 },
-    color: "#dc143c",
+    color: "#dc143c"
   },
   {
     shape: [[0, 1, 0], [0, 1, 1], [0, 1, 0]],
     pos: { x: 4, y: -3 },
-    color: "#ff8b00",
+    color: "#ff8b00"
   },
   {
-    shape: [[1, 0, 0], [1, 1, 0], [0, 1, 0]],
+    shape: [[0, 1, 1], [1, 1, 0], [0, 0, 0]],
     pos: { x: 4, y: -3 },
-    color: "#3cdc14",
+    color: "#3cdc14"
   },
   {
-    shape: [[0, 0, 1], [0, 1, 1], [0, 1, 0]],
+    shape: [[1, 1, 0], [0, 1, 1], [0, 0, 0]],
     pos: { x: 4, y: -3 },
-    color: "#b600ff",
+    color: "#b600ff"
   },
   {
     shape: [[1, 1], [1, 1]],
     pos: { x: 4, y: -2 },
-    color: "#fff400",
-  },
+    color: "#fff400"
+  }
 ];
 
 /* eslint-enable */
