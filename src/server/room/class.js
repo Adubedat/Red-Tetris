@@ -1,7 +1,8 @@
 import {
-  MAX_PLAYER_BATTLEROYAL,
+  SOLO,
+  BATTLEROYAL,
   MAX_PLAYER_SOLO,
-  SOLO
+  MAX_PLAYER_BATTLEROYAL
 } from "../../constants/constants";
 
 class Room {
@@ -92,6 +93,39 @@ class Room {
     this._speed = speed;
   }
 
+  newGame() {
+    this.clean();
+    this.extendPiecesList();
+    this._isStarted = true;
+    this._isGameOver = false;
+    this._stillInGameCounter = this._players.length;
+    this._players.forEach(player => player.newGame());
+    this.initSpectres();
+  }
+
+  checkEndGame = () => {
+    switch (this.mode) {
+      case SOLO:
+        if (this.playersCount === 0 || this.stillInGameCounter === 0) {
+          this.endGame();
+        }
+        break;
+      case BATTLEROYAL:
+        if (this.playersCount === 1 || this.stillInGameCounter === 1) {
+          this.endGame();
+        }
+        break;
+      default:
+        return;
+    }
+  };
+
+  endGame() {
+    if (this._timer) this._timer.stop();
+    this._isGameOver = true;
+    this._isStarted = false;
+  }
+
   clean() {
     if (this._timer) this._timer.stop();
     this._players.forEach(player => player.clean());
@@ -134,22 +168,6 @@ class Room {
     for (let i = 0; i < 10; i++) {
       this._pieces.push(Math.floor(Math.random() * 7));
     }
-  }
-
-  newGame() {
-    this.clean();
-    this.extendPiecesList();
-    this._isStarted = true;
-    this._isGameOver = false;
-    this._stillInGameCounter = this._players.length;
-    this._players.forEach(player => player.newGame());
-    this.initSpectres();
-  }
-
-  endGame() {
-    if (this._timer) this._timer.stop();
-    this._isGameOver = true;
-    this._isStarted = false;
   }
 
   fillHeap(heap) {

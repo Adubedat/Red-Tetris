@@ -5,14 +5,18 @@ import {
   StyledContainer,
   StyledLeftItem,
   StyledRightItem,
-  StyledColumnContainer,
-  StyledLabel
+  StyledColumnContainer
 } from "./styles";
 import Spectres from "../Spectres";
 import Chat from "../Chat";
 import NextPieces from "../NextPieces";
+import Progression from "../Progression";
+import { SOLO } from "../../../constants/constants";
 
-const GameSub = ({ isStarted, inGame, score, level }) => {
+const GameSub = ({ isStarted, mode }) => {
+  const displayProgression = () => {
+    if (mode === SOLO) return <Progression />;
+  };
   return (
     <StyledContainer id="game">
       <StyledLeftItem id="left-item">
@@ -20,10 +24,7 @@ const GameSub = ({ isStarted, inGame, score, level }) => {
         <Board />
         <StyledColumnContainer>
           <NextPieces />
-          <StyledLabel>Level :</StyledLabel>
-          <div className="value">{level}</div>
-          <StyledLabel>Score :</StyledLabel>
-          <div className="value">{score}</div>
+          {displayProgression()}
         </StyledColumnContainer>
       </StyledLeftItem>
       <StyledRightItem id="right-item">

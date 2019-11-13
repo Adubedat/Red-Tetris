@@ -11,6 +11,9 @@ export const StyledColumnContainer = styled.div`
   flex-direction: column;
   flex-basis: 20%;
   height: 86vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 0px 3px 3px 0px;
+  border: 3px solid white;
   align-items: center;
   .value {
     font-size: 2vh;

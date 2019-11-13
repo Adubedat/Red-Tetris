@@ -1,7 +1,17 @@
 import styled, { css } from "styled-components";
 
 export const StyledContainer = styled.div`
-  padding: 1vh;
+  display: flex;
+  flex-direction: column;
+  width: 20vh;
+  height: 20vh;
+  border-bottom: 3px solid white;
+  p {
+    font-size: 3vh;
+    margin-bottom: 30px;
+    position: relative;
+    left: 20px;
+  }
 `;
 
 export const StyledCell = styled.div`
