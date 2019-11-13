@@ -52,10 +52,10 @@ export const updateSpectresClientSide = (room, io) => {
 
 export const updateRoomClientSide = (room, io) => {
   updateSpectresClientSide(room, io);
-  updatePlayersClientSide(room.players, io);
   io.in(room.name).emit(UPDATE_ROOM, {
     room: room.toObject()
   });
+  updatePlayersClientSide(room.players, io);
   io.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsArray() });
 };
 

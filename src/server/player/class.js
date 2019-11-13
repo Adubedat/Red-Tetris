@@ -67,6 +67,7 @@ class Player {
     this._inGame = false;
     this._hasLost = true;
     this._room.stillInGameCounter -= 1;
+    this._room.checkEndGame();
   }
 
   newPiece() {

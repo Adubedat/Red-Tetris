@@ -9,7 +9,8 @@ export const StyledContainer = styled.div`
   height: 86vh;
   width: 43vh;
   border: 3px solid white;
-  border-radius: 5px;
+  border-radius: 3px 0px 0px 3px;
+
   ${props =>
     props.isSpectre &&
     css`
