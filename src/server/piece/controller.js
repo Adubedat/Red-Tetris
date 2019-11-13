@@ -31,7 +31,7 @@ export const onKeyPressed = (code, socket, io) => {
     }
     updatePlayerClientSide(player, io);
   } else if (player.isHost && code === enumKeys.ENTER) {
-    startGame(player.room, io);
+    startGame(player.room, io, socket);
   }
 };
 

@@ -17,7 +17,8 @@ export const updateChatClientSide = (roomLeft, roomJoined, playerName, io) => {
 export const newChatMessage = (message, socket, io) => {
   const player = Game.findPlayer(socket.id);
   if (!player) return;
-  io.in(player.room || LOBBY_ROOM).emit(ADD_CHAT_MESSAGE, {
+  const destRoom = player.room ? player.room.name : LOBBY_ROOM;
+  io.in(destRoom).emit(ADD_CHAT_MESSAGE, {
     message: {
       type: "message",
       author: player.name,
