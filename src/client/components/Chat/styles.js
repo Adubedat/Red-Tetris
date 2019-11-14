@@ -63,7 +63,7 @@ export const StyledPlayerListContainer = styled.div`
   border-bottom: 5px;
 `;
 
-export const StyledText = styled.p`
+export const StyledText = styled.div`
   font-family: Verdana;
   font-size: 1.5vh;
   min-width: 100%;
