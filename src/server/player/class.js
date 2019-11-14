@@ -60,7 +60,6 @@ class Player {
   newGame() {
     this.newPiece();
     this._inGame = true;
-    this._hasLost = false;
   }
 
   gameOver() {
@@ -82,6 +81,7 @@ class Player {
 
   clean() {
     this._inGame = false;
+    this._hasLost = false;
     this._indexPieces = 1;
     this._piece = new Piece();
     this._nextPiece = new Piece();

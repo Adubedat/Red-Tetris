@@ -14,8 +14,10 @@ export const initClientState = socket => {
 
 const handleInterval = (room, io) => {
   room.players.forEach(player => {
-    if (!player.piece.moveDown(player.heap)) {
-      player.updateHeap();
+    if (player.inGame) {
+      if (!player.piece.moveDown(player.heap)) {
+        player.updateHeap();
+      }
     }
   });
   updateRoomClientSide(room, io);

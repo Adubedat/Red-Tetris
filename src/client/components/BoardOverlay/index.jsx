@@ -4,7 +4,9 @@ import BoardOverlaySub from "./subcomponent";
 const mapStateToProps = state => ({
   isGameOver: state.room.isGameOver,
   hasLost: state.player.hasLost,
-  isStarted: state.room.isStarted
+  isStarted: state.room.isStarted,
+  inGame: state.player.inGame,
+  isHost: state.player.isHost
 });
 
 const Board = connect(
