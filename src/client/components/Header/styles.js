@@ -22,7 +22,9 @@ export const StyledItemCenter = styled.div`
 export const StyledItemRight = styled.div`
   flex: 1;
   display: flex;
-  justify-content: center;
+  font-size: 2vh;
+  justify-content: flex-end;
+  padding-right: 20px;
 `;
 
 export const StyledTitle = styled.h1`

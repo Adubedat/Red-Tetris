@@ -7,10 +7,26 @@ import {
 
 export const updateChatClientSide = (roomLeft, roomJoined, playerName, io) => {
   io.to(roomLeft).emit(ADD_CHAT_MESSAGE, {
-    message: { type: "notification", text: playerName + " left the room." }
+    message: {
+      type: "notification",
+      color: "#ff3366",
+      text:
+        playerName +
+        " left " +
+        (roomLeft === LOBBY_ROOM ? "Lobby" : roomLeft) +
+        "."
+    }
   });
   io.to(roomJoined).emit(ADD_CHAT_MESSAGE, {
-    message: { type: "notification", text: playerName + " joined the room." }
+    message: {
+      type: "notification",
+      color: "#73F054",
+      text:
+        playerName +
+        " joined " +
+        (roomJoined === LOBBY_ROOM ? "Lobby" : roomJoined) +
+        "."
+    }
   });
 };
 

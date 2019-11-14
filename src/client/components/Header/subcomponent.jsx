@@ -9,7 +9,7 @@ import {
   StyledButton
 } from "./styles";
 
-let HeaderSub = ({ roomName, onBackHome }) => {
+let HeaderSub = ({ roomName, playerName, onBackHome }) => {
   return (
     <StyledContainer id="header">
       <StyledItemLeft id="left-item">
@@ -20,7 +20,7 @@ let HeaderSub = ({ roomName, onBackHome }) => {
           Tetris Orange
         </StyledTitle>
       </StyledItemCenter>
-      <StyledItemRight id="right-item"></StyledItemRight>
+      <StyledItemRight id="right-item">{playerName}</StyledItemRight>
     </StyledContainer>
   );
 };

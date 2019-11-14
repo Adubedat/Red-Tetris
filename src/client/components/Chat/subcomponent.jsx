@@ -44,6 +44,23 @@ const ChatSub = ({ chatMessages, players, onSubmit }) => {
 
   useEffect(scrollToBottom, [chatMessages]);
 
+  const displayChatMessages = () =>
+    chatMessages.map((message, index) => {
+      if (message.type === "message") {
+        return (
+          <StyledText key={index}>
+            <font>{message.author}:</font> {message.text}
+          </StyledText>
+        );
+      } else {
+        return (
+          <StyledText key={index}>
+            <font style={{ color: message.color }}>{message.text}</font>
+          </StyledText>
+        );
+      }
+    });
+
   return (
     <StyledMainContainer id="chat">
       <StyledChatContainer>
@@ -62,21 +79,7 @@ const ChatSub = ({ chatMessages, players, onSubmit }) => {
             <p>Messages</p>
           </StyledTitleContainer>
           <StyledMessagesContainer>
-            {chatMessages.map((message, index) => {
-              if (message.type === "message") {
-                return (
-                  <StyledText key={index}>
-                    <font>{message.author}:</font> {message.text}
-                  </StyledText>
-                );
-              } else {
-                return (
-                  <StyledText key={index}>
-                    <font>{message.text}</font>
-                  </StyledText>
-                );
-              }
-            })}
+            {displayChatMessages()}
             <div ref={messagesEndRef} />
           </StyledMessagesContainer>
           <StyledForm onSubmit={e => handleSubmit(e)}>
