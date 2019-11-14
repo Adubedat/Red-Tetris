@@ -5,7 +5,8 @@ import {
   StyledLabel,
   StyledMenuItem,
   StyledRowContainer,
-  StyledDescription
+  StyledDescription,
+  StyledRoomName
 } from "./styles";
 
 import Select from "../common/select";
@@ -43,6 +44,7 @@ const GameInfoSub = ({ room, isHost, onChangeGameMode }) => {
 
   return (
     <StyledContainer id="game-info">
+      <StyledRoomName>{room.name}</StyledRoomName>
       <StyledRowContainer>
         <Select
           disabled={!isHost || room.isStarted}
@@ -55,21 +57,12 @@ const GameInfoSub = ({ room, isHost, onChangeGameMode }) => {
           </StyledMenuItem>
           <StyledMenuItem value={BATTLEROYAL}>Battleroyal</StyledMenuItem>
         </Select>
-        <div
-          style={{
-            display: "flex",
-            flex: 1,
-            flexDirection: "column",
-            alignItems: "flex-end"
-          }}
-        >
+        <div className="description">
           <StyledLabel>Description</StyledLabel>
-          <div style={{ display: "flex", flex: 1, alignItems: "center" }}>
-            {displayModeDescription()}
-          </div>
+          {displayModeDescription()}
         </div>
       </StyledRowContainer>
-      <div style={{ fontSize: "2vh" }}>
+      <div className="player-count">
         [{playersCount}/{maxPlayer} Players]
       </div>
     </StyledContainer>
