@@ -1,13 +1,24 @@
 import React from "react";
-import { StyledContainer, StyledLabel } from "./styles";
+import {
+  StyledContainer,
+  StyledLevelContainer,
+  StyledScoreContainer
+} from "./styles";
 
 const ProgressionSub = ({ score, level }) => {
   return (
     <StyledContainer id="Progression-container">
-      <StyledLabel>Level :</StyledLabel>
-      <div className="value">{level}</div>
-      <StyledLabel>Score :</StyledLabel>
-      <div className="value">{score}</div>
+      <StyledScoreContainer id="Score-container">
+        <div className="score-title">
+          <p>Score</p>
+        </div>
+        <div className="score-value">
+          <span>{score}</span>
+        </div>
+      </StyledScoreContainer>
+      <StyledLevelContainer id="Level-container">
+        <span>Level {level}</span>
+      </StyledLevelContainer>
     </StyledContainer>
   );
 };

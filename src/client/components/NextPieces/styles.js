@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 20vh;
+  width: 100%;
   height: 20vh;
   border-bottom: 3px solid white;
   p {
