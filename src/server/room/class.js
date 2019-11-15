@@ -1,3 +1,5 @@
+import game from "../game/class";
+
 import {
   SOLO,
   BATTLEROYAL,
@@ -108,6 +110,7 @@ class Room {
       case SOLO:
         if (this.playersCount === 0 || this.stillInGameCounter === 0) {
           this.endGame();
+          game.updateHighScores(this._score, this._players[0].name);
         }
         break;
       case BATTLEROYAL:

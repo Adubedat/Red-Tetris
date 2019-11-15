@@ -9,11 +9,11 @@ import { updateChatClientSide, updatePlayersList } from "../chat/controller";
 import {
   LOBBY_ROOM,
   UPDATE_ROOM,
-  UPDATE_ROOMS,
   UPDATE_SPECTRES,
   SOLO,
   DISPLAY_TOAST
 } from "../../constants/constants";
+import { updateGameClientSide } from "../game/controller";
 
 const roomNameValidation = roomName => {
   return isAlphaNumeric(roomName) && roomName.length <= 12;
@@ -56,7 +56,7 @@ export const updateRoomClientSide = (room, io) => {
     room: room.toObject()
   });
   updatePlayersClientSide(room.players, io);
-  io.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsArray() });
+  updateGameClientSide(io);
 };
 
 const transferPlayerToRoom = (room, player, io, socket) => {
