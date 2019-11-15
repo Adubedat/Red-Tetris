@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import {
   UPDATE_PLAYER,
   UPDATE_SPECTRES,
-  UPDATE_ROOMS,
+  UPDATE_GAME,
   UPDATE_ROOM,
   ADD_CHAT_MESSAGE,
   UPDATE_PLAYERS_LIST
@@ -35,10 +35,10 @@ const room = (state = {}, action) => {
   }
 };
 
-const rooms = (state = [], action) => {
+const game = (state = [], action) => {
   switch (action.type) {
-    case UPDATE_ROOMS:
-      return action.rooms;
+    case UPDATE_GAME:
+      return action.game;
     default:
       return state;
   }
@@ -65,7 +65,7 @@ const players = (state = [], action) => {
 const rootReducer = combineReducers({
   player,
   spectres,
-  rooms,
+  game,
   room,
   chatMessages,
   players

@@ -16,9 +16,9 @@ export const UPDATE_PLAYERS_LIST = "UPDATE_PLAYERS_LIST";
 
 export const HANDLE_HASH = "HANDLE_HASH";
 
-export const UPDATE_ROOMS = "UPDATE_ROOMS";
-
 export const UPDATE_BOARD = "UPDATE_BOARD";
+
+export const UPDATE_GAME = "UPDATE_GAME";
 
 export const DELETE_PLAYER = "DELETE_PLAYER";
 

@@ -16,7 +16,7 @@ const initialState = {
   player: {},
   spectres: [],
   room: {},
-  rooms: [],
+  game: {},
   chatMessages: []
 };
 
@@ -27,8 +27,6 @@ const store = createStore(
   initialState,
   composeEnhancers(applyMiddleware(thunkMiddleware))
 );
-
-// store.subscribe(() => console.log("[CURRENT STATE] : ", store.getState()));
 
 handleHash(store.dispatch);
 initListeners(store.dispatch);

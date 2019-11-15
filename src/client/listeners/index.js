@@ -1,6 +1,6 @@
 import socket from "../services/socket-api";
 import {
-  UPDATE_ROOMS,
+  UPDATE_GAME,
   UPDATE_ROOM,
   UPDATE_PLAYER,
   UPDATE_SPECTRES,
@@ -8,7 +8,7 @@ import {
   UPDATE_PLAYERS_LIST,
   DISPLAY_TOAST
 } from "../../constants/constants";
-import { updateRooms, updateRoom } from "../actions/room";
+import { updateGame, updateRoom } from "../actions/room";
 import { updatePlayer, updatePlayersList } from "../actions/player";
 import { handleHash } from "../actions/hash";
 import { addChatMessage } from "../actions/chat";
@@ -16,7 +16,7 @@ import { handleKeyPress, updateSpectres } from "../actions/game";
 import { toast } from "react-toastify";
 
 export const initListeners = dispatch => {
-  socket.on(UPDATE_ROOMS, data => subscribeUpdateRooms(data, dispatch));
+  socket.on(UPDATE_GAME, data => subscribeUpdateGame(data, dispatch));
 
   socket.on(UPDATE_ROOM, data => subscribeUpdateRoom(data, dispatch));
 
@@ -36,9 +36,9 @@ export const initListeners = dispatch => {
   document.onkeydown = e => handleKeyPress(e);
 };
 
-const subscribeUpdateRooms = (data, dispatch) => {
-  const { rooms } = data;
-  dispatch(updateRooms(rooms));
+const subscribeUpdateGame = (data, dispatch) => {
+  const { game } = data;
+  dispatch(updateGame(game));
 };
 
 const subscribeUpdateRoom = (data, dispatch) => {

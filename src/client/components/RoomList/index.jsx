@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import RoomListSub from "./subcomponent";
 
 const mapStateToProps = state => ({
-  rooms: state.rooms,
+  rooms: state.game.rooms,
   playerName: state.player.name
 });
 

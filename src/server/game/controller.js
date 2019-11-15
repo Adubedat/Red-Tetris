@@ -1,7 +1,7 @@
 import Game from "./class";
 import Timer from "../timer/class";
 import {
-  UPDATE_ROOMS,
+  UPDATE_GAME,
   BATTLEROYAL,
   DISPLAY_TOAST
 } from "../../constants/constants";
@@ -9,7 +9,7 @@ import { updateRoomClientSide } from "../room/controller";
 
 export const initClientState = socket => {
   console.log("[EVENT] CONNECTION : send data to client (updating the state)");
-  socket.emit(UPDATE_ROOMS, { rooms: Game.createPublicRoomsArray() });
+  socket.emit(UPDATE_GAME, { game: Game.toObject() });
 };
 
 const handleInterval = (room, io) => {
@@ -36,4 +36,8 @@ export const startGame = (room, io, socket) => {
   updateRoomClientSide(room, io);
   room.timer = new Timer(() => handleInterval(room, io), room.speed);
   room.timer.start();
+};
+
+export const updateGameClientSide = io => {
+  io.emit(UPDATE_GAME, { game: Game.toObject() });
 };
