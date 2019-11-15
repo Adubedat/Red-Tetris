@@ -9,7 +9,7 @@ import {
   StyledRoomName
 } from "./styles";
 
-import Select from "../common/select";
+import Select from "../common/Select";
 import {
   SOLO,
   BATTLEROYAL,
