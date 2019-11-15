@@ -12,7 +12,7 @@ export const StyledContainer = styled.div`
 
 export const StyledForm = styled.form`
   flex-basis: 1 1 auto;
-  width: 400px;
+  width: 440px;
   height: 160px;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 5px;
@@ -26,7 +26,7 @@ export const StyledForm = styled.form`
 export const StyledTextField = withStyles({
   root: {
     "&": {
-      width: 320
+      width: 400
     },
     "& label.Mui-focused": {
       color: "white"
@@ -37,8 +37,9 @@ export const StyledTextField = withStyles({
     "& input": {
       color: "white"
     },
-    "& .Mui-error": {
-      color: "white"
+    "& .MuiFormHelperText-root": {
+      backgroundColor: "white",
+      fontSize: "16px"
     },
     "& .MuiOutlinedInput-root": {
       "& fieldset": {

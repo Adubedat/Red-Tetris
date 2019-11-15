@@ -57,8 +57,9 @@ export const StyledInput = withStyles({
     "& input": {
       color: "white"
     },
-    "& Mui-error": {
-      color: "white"
+    "& .MuiFormHelperText-root": {
+      backgroundColor: "white",
+      fontSize: "1.5vh"
     },
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
