@@ -112,6 +112,7 @@ export const leaveRoom = (socket, io) => {
       if (player.inGame) {
         room.stillInGameCounter -= 1;
       }
+      room.checkEndGame();
     } else {
       player.isHost = false;
       room.clean();
