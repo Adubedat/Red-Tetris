@@ -6,8 +6,5 @@ export const StyledContainer = styled.div`
   display: flex;
   justify-content: space-around;
   align-content: space-around;
-
   flex-wrap: wrap;
-  // flex-basis: 25%;
-  // min-width: 300px;
 `;

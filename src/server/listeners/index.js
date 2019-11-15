@@ -1,6 +1,7 @@
 import { initClientState } from "../game/controller";
 import { connectPlayer, disconnectPlayer } from "../player/controller";
-import { joinRoom, leaveRoom, startGame } from "../room/controller";
+import { joinRoom, leaveRoom, updateGameMode } from "../room/controller";
+import { newChatMessage } from "../chat/controller";
 import { onKeyPressed } from "../piece/controller";
 import {
   LEAVE_ROOM,
@@ -8,25 +9,29 @@ import {
   DISCONNECT_PLAYER,
   NEW_PLAYER,
   JOIN_ROOM,
-  START_GAME,
   DISCONNECT,
-  KEY_PRESSED
+  KEY_PRESSED,
+  LOBBY_ROOM,
+  NEW_CHAT_MESSAGE,
+  UPDATE_GAME_MODE
 } from "../../constants/actionTypes";
-import { LOG_LINE, LOBBY_ROOM } from "../../constants/others";
+
+import { LOG_LINE } from "../../constants/others";
+/*
+ The server listens to every new client connecting and processes all its events.
+*/
 
 export const initListeners = io => {
   io.on(CONNECTION, socket => {
     initClientState(socket);
     socket.join(LOBBY_ROOM);
-    // console.log("[JOIN] socket room : ", io.sockets.adapter.rooms);
-    socket.on(NEW_PLAYER, (data, callback) => {
+    socket.on(NEW_PLAYER, data => {
       console.log("[EVENT] ", NEW_PLAYER);
-      connectPlayer(data, callback, socket);
+      connectPlayer(data, socket, io);
     });
-    socket.on(JOIN_ROOM, (data, callback) => {
+    socket.on(JOIN_ROOM, data => {
       console.log("[EVENT] ", JOIN_ROOM);
-      joinRoom(data, callback, socket, io);
-      // console.log("[JOIN] socket room : ", io.sockets.adapter.rooms);
+      joinRoom(data, socket, io);
     });
     socket.on(DISCONNECT_PLAYER, () => {
       console.log("[EVENT] ", DISCONNECT_PLAYER);
@@ -35,12 +40,15 @@ export const initListeners = io => {
     socket.on(LEAVE_ROOM, () => {
       console.log("[EVENT] ", LEAVE_ROOM);
       leaveRoom(socket, io);
-      // console.log("[JOIN] socket room : ", io.sockets.adapter.rooms);
     });
-    socket.on(START_GAME, () => startGame(socket, io));
     socket.on(KEY_PRESSED, data => {
-      console.log("[EVENT] ", KEY_PRESSED);
       onKeyPressed(data.code, socket, io);
+    });
+    socket.on(NEW_CHAT_MESSAGE, message => {
+      newChatMessage(message, socket, io);
+    });
+    socket.on(UPDATE_GAME_MODE, mode => {
+      updateGameMode(mode, socket, io);
     });
     socket.on(DISCONNECT, reason => {
       console.log(LOG_LINE, "[EVENT] DISCONNECT :", reason);

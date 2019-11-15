@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Input from "../../components/common/Input";
+import Input from "../common/Input";
 import { withStyles } from "@material-ui/core/styles";
 
 export const StyledContainer = styled.div`
@@ -12,7 +12,7 @@ export const StyledContainer = styled.div`
 
 export const StyledForm = styled.form`
   flex-basis: 1 1 auto;
-  width: 400px;
+  width: 440px;
   height: 160px;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 5px;
@@ -26,10 +26,7 @@ export const StyledForm = styled.form`
 export const StyledTextField = withStyles({
   root: {
     "&": {
-      width: 320
-    },
-    "& .mdc-text-field-helper-line": {
-      color: "red"
+      width: 400
     },
     "& label.Mui-focused": {
       color: "white"
@@ -40,6 +37,10 @@ export const StyledTextField = withStyles({
     "& input": {
       color: "white"
     },
+    "& .MuiFormHelperText-root": {
+      backgroundColor: "white",
+      fontSize: "16px"
+    },
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
         borderColor: "white"
@@ -48,6 +49,9 @@ export const StyledTextField = withStyles({
         borderColor: "white"
       },
       "&.Mui-focused fieldset": {
+        borderColor: "white"
+      },
+      "&.Mui-error fieldset": {
         borderColor: "white"
       }
     }

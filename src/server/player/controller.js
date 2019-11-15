@@ -2,22 +2,42 @@ import Game from "../game/class";
 import Player from "./class";
 import { leaveRoom } from "../room/controller";
 import { isAlphaNumeric } from "../../utils/utils";
-import { UPDATE_PLAYER } from "../../constants/actionTypes";
-import { LOBBY_ROOM } from "../../constants/others";
+import {
+  LOBBY_ROOM,
+  UPDATE_PLAYER,
+  UPDATE_PLAYERS_LIST,
+  ADD_CHAT_MESSAGE
+} from "../../constants/actionTypes";
+import { GREEN_CHAT } from "../../constants/colors";
 
-export const connectPlayer = (playerName, callback, socket) => {
+const playerNameValidation = playerName => {
+  return isAlphaNumeric(playerName) && playerName.length <= 12;
+};
+
+const joinLobby = (player, socket, io) => {
+  socket.join(LOBBY_ROOM);
+  io.to(LOBBY_ROOM).emit(ADD_CHAT_MESSAGE, {
+    message: {
+      type: "notification",
+      color: GREEN_CHAT,
+      text: player.name + " joined Lobby."
+    }
+  });
+  io.to(LOBBY_ROOM).emit(UPDATE_PLAYERS_LIST, {
+    players: Game.players
+      .filter(player => player.room === null)
+      .map(player => player.name)
+  });
+};
+
+export const connectPlayer = (playerName, socket, io) => {
   console.log("[CALL] connectPlayer");
-  if (!isAlphaNumeric(playerName) || playerName.length > 12) {
-    callback({
-      status: "error",
-      message: "Player name must be 1 to 12 alphanumeric characters long"
-    });
-  } else {
+  if (playerNameValidation(playerName)) {
     const player = Game.findPlayer(socket.id);
     if (!player) {
       const player = Game.addPlayer(new Player(playerName, socket.id));
-      const playerInfo = player.toObject();
-      callback({ status: "success", playerInfo });
+      joinLobby(player, socket, io);
+      updatePlayerClientSide(player, io);
       console.log("[UPDATED] after connectPlayer", Game);
     }
   }
@@ -31,8 +51,12 @@ export const disconnectPlayer = (socket, io) => {
   console.log("[UPDATED] after disconnectPlayer", Game);
 };
 
-export const updatePlayer = (player, io) => {
+export const updatePlayerClientSide = (player, io) => {
   io.in(player.id).emit(UPDATE_PLAYER, {
     player: player.toObject()
   });
+};
+
+export const updatePlayersClientSide = (players, io) => {
+  players.forEach(player => updatePlayerClientSide(player, io));
 };

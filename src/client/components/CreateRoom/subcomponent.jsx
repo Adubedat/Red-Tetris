@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import {
   StyledForm,
-  StyledInputContainer,
+  StyledRoomNameContainer,
   StyledLabel,
-  StyledInput,
-  StyledButton
+  StyledButton,
+  StyledInput
 } from "./styles";
 import inputError from "../../errors/inputError";
 
@@ -13,12 +13,12 @@ const CreateRoomSub = ({ playerName }) => {
   const [error, setError] = useState({ boolean: null, message: "" });
   const [roomName, setRoomName] = useState("");
 
-  const onSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
     window.location.hash = roomName + "[" + playerName + "]";
   };
 
-  const handleChange = e => {
+  const handleRoomNameChange = e => {
     const value = e.target.value;
     setError(inputError(value));
     setRoomName(value);
@@ -29,34 +29,22 @@ const CreateRoomSub = ({ playerName }) => {
   });
 
   return (
-    <StyledForm id="form" onSubmit={e => onSubmit(e)}>
-      <StyledLabel htmlFor="name">{"Insert room name"}</StyledLabel>
-      <StyledInputContainer id="input-container">
+    <StyledForm id="form" onSubmit={e => handleSubmit(e)}>
+      <StyledRoomNameContainer>
+        <StyledLabel htmlFor="name">Create Room</StyledLabel>
         <StyledInput
-          type="text"
           id="name"
           error={error.boolean}
           helperText={error.message}
           spellCheck="false"
           autoComplete="off"
-          label="Insert room name"
           value={roomName}
-          onChange={e => handleChange(e)}
+          onChange={handleRoomNameChange}
         />
-      </StyledInputContainer>
-      {/* <StyledTextField
-            id="name"
-            error={error.boolean}
-            helperText={error.message}
-            spellCheck="false"
-            autoComplete="off"
-            label={label}
-            value={value}
-            onChange={e => onChange(e)}
-          /> */}
-      <StyledButton id="enter" disabled={!roomName || error.boolean}>
-        <p> Press Enter </p>
-      </StyledButton>
+        <StyledButton id="enter" disabled={!roomName || error.boolean}>
+          <p>Press Enter</p>
+        </StyledButton>
+      </StyledRoomNameContainer>
     </StyledForm>
   );
 };

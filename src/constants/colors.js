@@ -15,3 +15,7 @@ export const PURE_VIOLET = "#b600ff";
 export const PURE_YELLOW = "#fff400";
 
 export const DARK_CYAN = "#375f64";
+
+export const GREEN_CHAT = "#73F054";
+
+export const RED_CHAT = "#ff3366";

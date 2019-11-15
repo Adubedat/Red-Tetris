@@ -1,17 +1,23 @@
 import { connect } from "react-redux";
 import GameInfoSub from "./subcomponent";
-import { startGame } from "../../actions/actions";
+import { updateGameMode } from "../../actions/game";
 
 const mapStateToProps = state => ({
   room: state.room,
   isHost: state.player.isHost
 });
 
-const actionCreators = { startGame };
+const mapDispatchToProps = dispatch => {
+  return {
+    onChangeGameMode: mode => {
+      dispatch(updateGameMode(mode));
+    }
+  };
+};
 
 const GameInfo = connect(
   mapStateToProps,
-  actionCreators
+  mapDispatchToProps
 )(GameInfoSub);
 
 export default GameInfo;

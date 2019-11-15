@@ -1,9 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyledContainer, StyledRow } from "./styles";
+import BoardOverlay from "../BoardOverlay";
 import Cell from "../Cell";
 
-const BoardSub = ({ board, isSpectre = false }) => {
+const BoardSub = ({
+  board,
+  hasLost,
+  isGameOver,
+  isStarted,
+  isSpectre = false
+}) => {
   return (
     <StyledContainer id="board" isSpectre={isSpectre}>
       {board.map((row, i) => (
@@ -13,12 +20,16 @@ const BoardSub = ({ board, isSpectre = false }) => {
           ))}
         </StyledRow>
       ))}
+      {!isSpectre && (hasLost || isGameOver || !isStarted) && <BoardOverlay />}
     </StyledContainer>
   );
 };
 
 BoardSub.propTypes = {
   board: PropTypes.array.isRequired,
+  hasLost: PropTypes.bool,
+  isGameOver: PropTypes.bool,
+  isStarted: PropTypes.bool,
   isSpectre: PropTypes.bool
 };
 

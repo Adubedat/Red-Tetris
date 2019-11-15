@@ -1,5 +1,6 @@
 import Piece from "../piece/class";
 import { MALUS } from "../../constants/colors";
+import { SOLO, BATTLEROYAL } from "../../constants/game";
 
 class Player {
   constructor(name = "", id = "") {
@@ -10,8 +11,11 @@ class Player {
       .fill("")
       .map(() => Array(10).fill(""));
     this._piece = new Piece();
+    this._nextPiece = new Piece();
     this._indexPieces = 1;
     this._inGame = false;
+    this._isHost = false;
+    this._hasLost = false;
   }
 
   get name() {
@@ -47,25 +51,41 @@ class Player {
   set inGame(inGame) {
     this._inGame = inGame;
   }
+  get isHost() {
+    return this._isHost;
+  }
+  set isHost(isHost) {
+    this._isHost = isHost;
+  }
+
+  newGame() {
+    this.newPiece();
+    this._inGame = true;
+  }
+
+  gameOver() {
+    this._inGame = false;
+    this._hasLost = true;
+    this._room.stillInGameCounter -= 1;
+    this._room.checkEndGame();
+  }
 
   newPiece() {
     const { pieces } = this._room;
-    if (!this._piece.initNewPiece(pieces[this._indexPieces], this._heap)) {
-      this._inGame = false;
-      this._room.stillInGameCounter -= 1;
-      this.updateHeap();
-      if (this._room.stillInGameCounter === 0) {
-        this._room.endGame();
-      }
-    } else {
-      this._indexPieces += 1;
-      if (this._indexPieces >= pieces.length - 1) this._room.extendPiecesList();
+    this._piece.initNewPiece(pieces[this._indexPieces], this._heap);
+    this._indexPieces += 1;
+    if (this._indexPieces >= pieces.length - 1) {
+      this._room.extendPiecesList();
     }
+    this._nextPiece.initNextPiece(pieces[this._indexPieces]);
   }
 
   clean() {
     this._inGame = false;
+    this._hasLost = false;
+    this._indexPieces = 1;
     this._piece = new Piece();
+    this._nextPiece = new Piece();
     this._heap = Array(20)
       .fill("")
       .map(() => Array(10).fill(""));
@@ -79,7 +99,7 @@ class Player {
     let newBoard = this._heap.map(row => {
       return [...row];
     });
-    newBoard = piece.printToBoard(shadowPos, shape, newBoard, color + "40"); //Add alpha to color for shadow
+    newBoard = piece.printToBoard(shadowPos, shape, newBoard, color + "30"); //Add alpha to color for shadow
     newBoard = piece.printToBoard(pos, shape, newBoard, color);
     return newBoard;
   }
@@ -93,7 +113,12 @@ class Player {
         counter += 1;
       }
     });
-    this.sendMalus(counter - 1);
+    if (this._room.mode === BATTLEROYAL) {
+      this.sendMalus(counter - 1);
+    }
+    if (this._room.mode === SOLO) {
+      this._room.updateScore(counter);
+    }
   }
 
   sendMalus(counter) {
@@ -110,6 +135,7 @@ class Player {
   updateHeap() {
     const piece = this._piece;
     const { pos, shape, color } = this._piece;
+    if (piece.isOverTheHeap()) this.gameOver();
     this._heap = piece.printToBoard(pos, shape, this._heap, color);
     this.removeLines();
     this._room.updateSpectre(this._id, this._heap);
@@ -120,7 +146,10 @@ class Player {
     return {
       name: this._name,
       id: this._id,
-      isHost: this._room && this._room.hostId === this._id,
+      isHost: this._isHost,
+      inGame: this._inGame,
+      hasLost: this._hasLost,
+      nextPiece: this._nextPiece.toObject(),
       board: this.renderBoard() || this._heap
     };
   }

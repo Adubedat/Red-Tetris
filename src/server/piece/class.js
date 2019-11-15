@@ -9,43 +9,44 @@ import {
 } from "../../constants/colors";
 
 /* eslint-disable */
+import { BOARD_HEIGHT, BOARD_WIDTH } from "../../constants/game";
 
 const pieces = [
   {
-    shape: [[0, 0, 1, 0], [0, 0, 1, 0], [0, 0, 1, 0], [0, 0, 1, 0]],
-    pos: { x: 3, y: -4 },
-    color: VIVID_BLUE,
+    shape: [[0, 0, 0, 0], [1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0]],
+    pos: { x: 3, y: -3 },
+    color: VIVID_BLUE
   },
   {
-    shape: [[1, 1, 0], [0, 1, 0], [0, 1, 0]],
+    shape: [[1, 0, 0], [1, 1, 1], [0, 0, 0]],
     pos: { x: 4, y: -3 },
-    color: CYAN_BLUE,
+    color: CYAN_BLUE
   },
   {
-    shape: [[0, 1, 1], [0, 1, 0], [0, 1, 0]],
+    shape: [[0, 0, 1], [1, 1, 1], [0, 0, 0]],
     pos: { x: 4, y: -3 },
-    color: CRIMSON,
+    color: CRIMSON
   },
   {
-    shape: [[0, 1, 0], [0, 1, 1], [0, 1, 0]],
+    shape: [[0, 1, 0], [1, 1, 1], [0, 0, 0]],
     pos: { x: 4, y: -3 },
-    color: PURE_ORANGE,
+    color: PURE_ORANGE
   },
   {
-    shape: [[1, 0, 0], [1, 1, 0], [0, 1, 0]],
+    shape: [[0, 1, 1], [1, 1, 0], [0, 0, 0]],
     pos: { x: 4, y: -3 },
-    color: LIME_GREEN,
+    color: LIME_GREEN
   },
   {
-    shape: [[0, 0, 1], [0, 1, 1], [0, 1, 0]],
+    shape: [[1, 1, 0], [0, 1, 1], [0, 0, 0]],
     pos: { x: 4, y: -3 },
-    color: PURE_VIOLET,
+    color: PURE_VIOLET
   },
   {
     shape: [[1, 1], [1, 1]],
     pos: { x: 4, y: -2 },
-    color: PURE_YELLOW,
-  },
+    color: PURE_YELLOW
+  }
 ];
 
 /* eslint-enable */
@@ -65,19 +66,24 @@ class Piece {
   }
 
   initNewPiece(index, heap) {
-    this._shape = [...pieces[index].shape.map(row => [...row])];
-    this._pos = { ...pieces[index].pos };
-    this._shadowPos = { ...pieces[index].pos };
-    this._color = pieces[index].color;
-    while (this._pos.y <= 0) {
-      if (!this.isPosAvailable(this._pos, this._shape, heap)) {
-        this.pos.y -= 1;
-        return false;
-      }
+    const piece = pieces[index];
+    this._shape = [...piece.shape.map(row => [...row])];
+    this._pos = { ...piece.pos };
+    this._shadowPos = { ...piece.pos };
+    this._color = piece.color;
+    while (
+      this._pos.y <= 0 &&
+      this.isPosAvailable(this._pos, this._shape, heap)
+    ) {
       this._pos.y += 1;
     }
-    this._pos.y = 0;
-    return true;
+    this._pos.y -= 1;
+  }
+
+  initNextPiece(index) {
+    const piece = pieces[index];
+    this._shape = [...piece.shape.map(row => [...row])];
+    this._color = piece.color;
   }
 
   printToBoard(pos, shape, board, color) {
@@ -101,12 +107,28 @@ class Piece {
         if (shape[i][j]) {
           let Y = i + y;
           let X = j + x;
-          if (Y >= 0 && (Y >= 20 || X < 0 || X >= 10 || heap[Y][X]))
+          if (
+            Y >= BOARD_HEIGHT ||
+            X < 0 ||
+            X >= BOARD_WIDTH ||
+            (Y >= 0 && heap[Y][X])
+          )
             return false;
         }
       }
     }
     return true;
+  }
+
+  isOverTheHeap() {
+    for (let i = 0; i < this._shape.length; i++) {
+      for (let j = 0; j < this._shape[i].length; j++) {
+        if (this._shape[i][j] && i + this._pos.y < 0) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   updateShadow(heap) {
@@ -118,15 +140,47 @@ class Piece {
     this._shadowPos = newPos;
   }
 
-  rotate(heap) {
+  /*
+   ** Rotate
+   */
+
+  rotationMatrice(shape) {
     let newShape = [];
-    for (let i = 0; i < this._shape[0].length; i++) {
-      let row = this._shape.map(e => e[i]).reverse();
+    const blocksInShape = shape.length;
+    for (let i = 0; i < blocksInShape; i++) {
+      let row = shape.map(e => e[i]).reverse();
       newShape.push(row);
     }
-    if (this.isPosAvailable(this._pos, newShape, heap)) {
-      this._shape = newShape;
+    return newShape;
+  }
+
+  findNewPosAfterRotation(shape, pos, heap) {
+    let newPos = { ...pos };
+    let i = 0;
+    while (i < 2) {
+      newPos.x++;
+      if (this.isPosAvailable(newPos, shape, heap)) return newPos;
+      i++;
     }
+    newPos = { ...pos };
+    i = 0;
+    while (i < 2) {
+      newPos.x--;
+      if (this.isPosAvailable(newPos, shape, heap)) return newPos;
+      i++;
+    }
+    return null;
+  }
+
+  rotate(heap) {
+    const { _shape: shape, _pos: pos } = this;
+    const newShape = this.rotationMatrice(shape);
+    if (!this.isPosAvailable(pos, newShape, heap)) {
+      const newPos = this.findNewPosAfterRotation(newShape, pos, heap);
+      if (newPos) this._pos = newPos;
+      else return;
+    }
+    this._shape = newShape;
   }
 
   hardDrop() {
@@ -158,6 +212,13 @@ class Piece {
     if (this.isPosAvailable(newPos, this._shape, heap)) {
       this._pos.x += 1;
     }
+  }
+
+  toObject() {
+    return {
+      shape: this._shape,
+      color: this._color
+    };
   }
 }
 

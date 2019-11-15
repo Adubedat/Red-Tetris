@@ -6,7 +6,7 @@ import thunkMiddleware from "redux-thunk";
 import rootReducer from "./reducers";
 import "./index.css";
 import App from "./components/App";
-import { handleHash } from "./actions/actions";
+import { handleHash } from "./actions/hash";
 import { initListeners } from "./listeners";
 import { toast } from "react-toastify";
 
@@ -16,7 +16,8 @@ const initialState = {
   player: {},
   spectres: [],
   room: {},
-  rooms: []
+  game: {},
+  chatMessages: []
 };
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -26,8 +27,6 @@ const store = createStore(
   initialState,
   composeEnhancers(applyMiddleware(thunkMiddleware))
 );
-
-// store.subscribe(() => console.log("[CURRENT STATE] : ", store.getState()));
 
 handleHash(store.dispatch);
 initListeners(store.dispatch);

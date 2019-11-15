@@ -1,12 +1,12 @@
 import { connectPlayer } from "./player";
 import { joinRoom } from "./room";
 import { toast } from "react-toastify";
-import socket from "../services/socket-api";
-import {
-  KEY_PRESSED,
-  START_GAME,
-  UPDATE_SPECTRES
-} from "../../constants/actionTypes";
+
+/*
+
+handle hash errors and extract playerName and roomName from it
+
+*/
 
 export const checkHash = () => {
   const hash = window.location.hash.substr(1);
@@ -32,18 +32,3 @@ export const handleHash = dispatch => {
   dispatch(connectPlayer(data.playerName));
   dispatch(joinRoom(data.roomName));
 };
-
-export const handleKeyPress = e => {
-  socket.emit(KEY_PRESSED, { code: e.code });
-};
-
-export const startGame = () => {
-  return () => {
-    socket.emit(START_GAME);
-  };
-};
-
-export const updateSpectres = spectres => ({
-  type: UPDATE_SPECTRES,
-  spectres
-});

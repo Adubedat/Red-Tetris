@@ -3,14 +3,20 @@
 exports[`Game class tests createRoomsArray method 1`] = `
 Array [
   Object {
+    "isStarted": false,
+    "mode": "Solo",
     "name": "Room1",
     "playersCount": 0,
   },
   Object {
+    "isStarted": false,
+    "mode": "Solo",
     "name": "Room2",
     "playersCount": 0,
   },
   Object {
+    "isStarted": false,
+    "mode": "Solo",
     "name": "Room3",
     "playersCount": 0,
   },

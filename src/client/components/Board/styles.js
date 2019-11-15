@@ -1,16 +1,16 @@
 import styled, { css } from "styled-components";
 
 export const StyledContainer = styled.div`
+  position: relative;
   align-self: center;
   background-color: rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
-  // min-height: 400px;
-  // min-width: 200px;
   height: 86vh;
   width: 43vh;
   border: 3px solid white;
-  border-radius: 5px;
+  border-radius: 3px 0px 0px 3px;
+
   ${props =>
     props.isSpectre &&
     css`

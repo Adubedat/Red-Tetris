@@ -1,24 +1,32 @@
-import { MAX_PLAYER } from "../../constants/others";
+import game from "../game/class";
+
+import {
+  SOLO,
+  BATTLEROYAL,
+  MAX_PLAYER_SOLO,
+  MAX_PLAYER_BATTLEROYAL
+} from "../../constants/game";
 
 class Room {
-  constructor(name, hostId) {
+  constructor(name) {
     this._name = name;
-    this._hostId = hostId;
     this._players = [];
     this._playersCount = 0;
     this._stillInGameCounter = 0;
-    this._interval = null;
+    this._timer = null;
     this._isStarted = false;
+    this._isGameOver = false;
     this._pieces = [];
     this._spectres = [];
-    this.extendPiecesList();
+    this._mode = SOLO;
+    this._score = 0;
+    this._level = 0;
+    this._speed = 1000;
+    this._linesRemovedCounter = 0;
   }
 
   get name() {
     return this._name;
-  }
-  get hostId() {
-    return this._hostId;
   }
   get players() {
     return this._players;
@@ -32,12 +40,6 @@ class Room {
   set isStarted(bool) {
     this._isStarted = bool;
   }
-  get interval() {
-    return this._interval;
-  }
-  set interval(interval) {
-    this._interval = interval;
-  }
   get pieces() {
     return this._pieces;
   }
@@ -50,24 +52,103 @@ class Room {
   set spectres(spectres) {
     this._spectres = spectres;
   }
-  get _stillInGameCounter() {
-    return this.__stillInGameCounter;
+  get stillInGameCounter() {
+    return this._stillInGameCounter;
   }
-  set _stillInGameCounter(stillInGameCounter) {
-    this.__stillInGameCounter = stillInGameCounter;
+  set stillInGameCounter(stillInGameCounter) {
+    this._stillInGameCounter = stillInGameCounter;
+  }
+  get isGameOver() {
+    return this._isGameOver;
+  }
+  set isGameOver(isGameOver) {
+    this._isGameOver = isGameOver;
+  }
+  get mode() {
+    return this._mode;
+  }
+  set mode(mode) {
+    this._mode = mode;
+  }
+  get timer() {
+    return this._timer;
+  }
+  set timer(timer) {
+    this._timer = timer;
+  }
+  get score() {
+    return this._score;
+  }
+  set score(score) {
+    this._score = score;
+  }
+  get level() {
+    return this._level;
+  }
+  set level(level) {
+    this._level = level;
+  }
+  get speed() {
+    return this._speed;
+  }
+  set speed(speed) {
+    this._speed = speed;
+  }
+
+  newGame() {
+    this.clean();
+    this.extendPiecesList();
+    this._isStarted = true;
+    this._isGameOver = false;
+    this._stillInGameCounter = this._players.length;
+    this._players.forEach(player => player.newGame());
+    this.initSpectres();
+  }
+
+  checkEndGame = () => {
+    switch (this.mode) {
+      case SOLO:
+        if (this.playersCount === 0 || this.stillInGameCounter === 0) {
+          this.endGame();
+          game.updateHighScores(this._score, this._players[0].name);
+        }
+        break;
+      case BATTLEROYAL:
+        if (this.playersCount === 1 || this.stillInGameCounter === 1) {
+          this.endGame();
+        }
+        break;
+      default:
+        return;
+    }
+  };
+
+  endGame() {
+    if (this._timer) this._timer.stop();
+    this._isGameOver = true;
+    this._isStarted = false;
   }
 
   clean() {
-    if (this._interval) clearInterval(this._interval);
+    if (this._timer) this._timer.stop();
+    this._players.forEach(player => player.clean());
+    this._pieces = [];
+    this._isStarted = false;
+    this._score = 0;
+    this._level = 0;
+    this._speed = 1000;
+    this._linesRemovedCounter = 0;
   }
+
   addPlayer(player) {
     this._playersCount++;
     this._players.push(player);
   }
 
-  updateHostId() {
-    this._hostId = this._players[0].id;
+  updateHost() {
+    this._players[0].isHost = true;
   }
+
   removePlayer(playerId) {
     this._playersCount--;
     this._players = this._players.filter(player => player.id !== playerId);
@@ -81,20 +162,15 @@ class Room {
   }
 
   isFull() {
-    return this._playersCount >= MAX_PLAYER;
+    const maxPlayer =
+      this._mode === SOLO ? MAX_PLAYER_SOLO : MAX_PLAYER_BATTLEROYAL;
+    return this._playersCount >= maxPlayer;
   }
 
   extendPiecesList() {
     for (let i = 0; i < 10; i++) {
       this._pieces.push(Math.floor(Math.random() * 7));
     }
-    console.log("EXTEND PIECES");
-    console.log(this._pieces);
-  }
-
-  endGame() {
-    if (this._interval) clearInterval(this._interval);
-    this._isStarted = false;
   }
 
   fillHeap(heap) {
@@ -126,12 +202,41 @@ class Room {
     });
   }
 
+  updateScore = linesRemovedNbr => {
+    switch (linesRemovedNbr) {
+      case 1:
+        this._score += 40 * (this._level + 1);
+        break;
+      case 2:
+        this._score += 100 * (this._level + 1);
+        break;
+      case 3:
+        this._score += 300 * (this._level + 1);
+        break;
+      case 4:
+        this._score += 1200 * (this._level + 1);
+        break;
+      default:
+        break;
+    }
+    this._linesRemovedCounter += linesRemovedNbr;
+    if (this._linesRemovedCounter >= 3) {
+      this._level += 1;
+      this._linesRemovedCounter -= 3;
+      this._speed = this._speed * (88 / 100);
+      this._timer.reset(this._speed);
+    }
+  };
+
   toObject() {
     return {
       name: this._name,
-      hostId: this._hostId,
       playersCount: this._playersCount,
-      isStarted: this._isStarted
+      isStarted: this._isStarted,
+      isGameOver: this._isGameOver,
+      mode: this._mode,
+      score: this._score,
+      level: this._level
     };
   }
 }

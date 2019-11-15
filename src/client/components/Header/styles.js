@@ -1,35 +1,30 @@
 import styled from "styled-components";
-import { PURE_ORANGE, CRIMSON } from "../../../constants/colors";
 
 export const StyledContainer = styled.div`
   margin: 0;
   padding: 0;
-  // margin-top: 10px;
   display: flex;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.3);
   box-shadow: 1px 0px 5px black;
 `;
 
-export const StyledUserGroup = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-`;
-
 export const StyledItemLeft = styled.div`
+  padding-left: 2vh;
   flex: 1;
+  justify-content: center;
 `;
 export const StyledItemCenter = styled.div`
   padding: 10px;
-  flex: 1 375px;
   display: flex;
   justify-content: center;
 `;
 export const StyledItemRight = styled.div`
   flex: 1;
   display: flex;
-  justify-content: center;
+  font-size: 2vh;
+  justify-content: flex-end;
+  padding-right: 20px;
 `;
 
 export const StyledTitle = styled.h1`
@@ -51,4 +46,22 @@ export const StyledTitle = styled.h1`
     top: 0;
     z-index: -1;
   }
+`;
+
+export const StyledButton = styled.button`
+  background: none;
+  color: #ffffff80;
+  padding: 0.5vh;
+  border: 0px;
+  outline: none;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+  background: rgb(255, 255, 255, 0.2);
+  border-radius: 5px;
+
+  &:hover {
+    opacity: 1;
+  }
+  font-size: 3vh;
+  // color: #fffffff;
 `;

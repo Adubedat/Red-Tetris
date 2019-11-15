@@ -2,7 +2,7 @@
 
 exports[`<BoardSub /> Board conditional css when isSpectre is true 1`] = `
 <div
-  class="sc-bdVaJa hsnlHO"
+  class="sc-bdVaJa krbtIQ"
   id="board"
 />
 `;
@@ -72,6 +72,7 @@ exports[`<BoardSub /> Board rendering with a single board 1`] = `
       key="2"
     />
   </styled.div>
+  <Connect(BoardOverlaySub) />
 </styled.div>
 `;
 

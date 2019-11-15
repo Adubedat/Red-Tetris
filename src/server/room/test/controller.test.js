@@ -7,7 +7,7 @@ import {
 import Game from "../../game/class";
 import Player from "../../player/class";
 import Room from "../class";
-import { MAX_PLAYER } from "../../../constants/others";
+import { MAX_PLAYER_BATTLEROYAL } from "../../../constants/game";
 const io = require("socket.io-client");
 const http = require("http");
 const ioBack = require("socket.io");
@@ -113,11 +113,11 @@ describe("room controller", () => {
       const roomName = "ValidName";
       const fakePlayer = new Player("FakePlayer", "FakeID");
       const room = new Room(roomName, fakePlayer.id);
-      for (let i = 0; i < MAX_PLAYER; i++) {
+      for (let i = 0; i < MAX_PLAYER_BATTLEROYAL; i++) {
         room.addPlayer(fakePlayer);
       }
       Game.rooms.push(room);
-      expect(room.players.length).toBe(MAX_PLAYER);
+      expect(room.players.length).toBe(MAX_PLAYER_BATTLEROYAL);
       const callback = jest.fn(response => {
         expect(response.status).toBe("error");
         expect(response.message).toBe("Room is full");

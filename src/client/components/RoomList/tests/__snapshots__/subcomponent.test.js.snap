@@ -49,7 +49,7 @@ exports[`<RoomListSub /> should render without crashing 1`] = `
         <p
           id="header"
         >
-          Started
+          Status
         </p>
       </div>
     </div>
@@ -59,39 +59,25 @@ exports[`<RoomListSub /> should render without crashing 1`] = `
     >
       <div
         class="sc-bxivhb bKDjvz"
+        id="content"
       >
-        <p
-          id="content"
-        >
-          Room1
-        </p>
+        Room1
       </div>
       <div
         class="sc-bxivhb iuOKpD"
+        id="content"
+      />
+      <div
+        class="sc-bxivhb iuOKpD"
+        id="content"
       >
-        <p
-          id="content"
-        >
-          BattleRoyal
-        </p>
+        2/5
       </div>
       <div
         class="sc-bxivhb iuOKpD"
+        id="content"
       >
-        <p
-          id="content"
-        >
-          2/10
-        </p>
-      </div>
-      <div
-        class="sc-bxivhb iuOKpD"
-      >
-        <p
-          id="content"
-        >
-          Yes
-        </p>
+        In game
       </div>
     </div>
     <div
@@ -100,39 +86,25 @@ exports[`<RoomListSub /> should render without crashing 1`] = `
     >
       <div
         class="sc-bxivhb bKDjvz"
+        id="content"
       >
-        <p
-          id="content"
-        >
-          Room2
-        </p>
+        Room2
       </div>
       <div
         class="sc-bxivhb iuOKpD"
+        id="content"
+      />
+      <div
+        class="sc-bxivhb iuOKpD"
+        id="content"
       >
-        <p
-          id="content"
-        >
-          BattleRoyal
-        </p>
+        3/5
       </div>
       <div
         class="sc-bxivhb iuOKpD"
+        id="content"
       >
-        <p
-          id="content"
-        >
-          3/10
-        </p>
-      </div>
-      <div
-        class="sc-bxivhb iuOKpD"
-      >
-        <p
-          id="content"
-        >
-          No
-        </p>
+        In Menu
       </div>
     </div>
   </div>

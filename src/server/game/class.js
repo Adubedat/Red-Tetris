@@ -2,6 +2,13 @@ class Game {
   constructor() {
     this._rooms = [];
     this._players = [];
+    this._highscores = [
+      { score: 0, playerName: "" },
+      { score: 0, playerName: "" },
+      { score: 0, playerName: "" },
+      { score: 0, playerName: "" },
+      { score: 0, playerName: "" }
+    ];
   }
 
   get rooms() {
@@ -37,11 +44,31 @@ class Game {
     return this._players.find(player => player.id === playerId);
   }
 
+  updateHighScores(score, playerName) {
+    const newHighScore = { score, playerName };
+    this._highscores.every((highscore, index) => {
+      if (highscore.score < score) {
+        this._highscores.splice(index, 0, newHighScore);
+        this._highscores.length = 5;
+        return false;
+      } else return true;
+    });
+  }
+
   createPublicRoomsArray() {
     return this._rooms.map(room => ({
       name: room.name,
-      playersCount: room.playersCount
+      playersCount: room.playersCount,
+      mode: room.mode,
+      isStarted: room.isStarted
     }));
+  }
+
+  toObject() {
+    return {
+      rooms: this.createPublicRoomsArray(),
+      highscores: this._highscores
+    };
   }
 }
 

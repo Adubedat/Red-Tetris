@@ -4,6 +4,12 @@ import { setConfig } from "react-hot-loader"; //to remove
 import "react-toastify/dist/ReactToastify.css";
 import AppSub from "./subcomponent";
 
+/*
+
+setConfig must be present for hot-loader to work
+
+*/
+
 setConfig({
   reloadHooks: false
 });

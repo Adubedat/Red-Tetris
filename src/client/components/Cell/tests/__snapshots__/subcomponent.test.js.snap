@@ -2,7 +2,7 @@
 
 exports[`<CellSub /> Cell rendering as spectre, with color and without letter 1`] = `
 <div
-  class="sc-bdVaJa grLvQt"
+  class="sc-bdVaJa mieYS"
   color="#000000"
 >
   <p
@@ -13,7 +13,7 @@ exports[`<CellSub /> Cell rendering as spectre, with color and without letter 1`
 
 exports[`<CellSub /> Cell rendering as spectre, with letter and color 1`] = `
 <div
-  class="sc-bdVaJa grLvQt"
+  class="sc-bdVaJa mieYS"
   color="#000000"
 >
   <p
