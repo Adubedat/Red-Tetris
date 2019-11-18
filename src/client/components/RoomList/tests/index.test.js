@@ -6,10 +6,13 @@ import RoomList from "../index";
 
 const mockStore = configureStore();
 const initialState = {
-  rooms: [
-    { roomName: "Room1", playersCount: 2 },
-    { roomName: "Room2", playersCount: 3 }
-  ],
+  game: {
+    rooms: [
+      { roomName: "Room1", playersCount: 2 },
+      { roomName: "Room2", playersCount: 3 }
+    ],
+    highscores: []
+  },
   player: { name: "Player1" }
 };
 const store = mockStore(initialState);
