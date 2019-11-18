@@ -1,7 +1,7 @@
 import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
-import { leaveRoom, updateRoom, updateRooms } from "../room";
-import { UPDATE_ROOM, UPDATE_ROOMS } from "../../../constants/actionTypes";
+import { leaveRoom, updateRoom, updateGame } from "../room";
+import { UPDATE_ROOM, UPDATE_GAME } from "../../../constants/actionTypes";
 import socket from "../../services/socket-api";
 
 const middlewares = [thunk];
@@ -35,24 +35,27 @@ describe("room actions", () => {
         isStarted: false
       }
     });
+    const expectedActions = [{ type: "UPDATE_ROOM", room: {} }];
     window.location.hash = "#test[bob]";
     store.dispatch(leaveRoom());
     setTimeout(() => {
-      store.getActions().forEach(action => expect(action).toMatchSnapshot());
+      expect(store.getActions()).toEqual(expectedActions);
       expect(window.location.hash).toBe("");
       done();
     }, 50);
   });
-  test("updateRooms create the corresponding action", () => {
-    const rooms = [
-      { name: "Bob", playersCount: 3 },
-      { name: "Jean", playersCount: 1 }
-    ];
-    const expectedAction = {
-      type: UPDATE_ROOMS,
-      rooms
+  test("updateGame create the corresponding action", () => {
+    const game = {
+      rooms: [
+        { name: "Bob", playersCount: 3 },
+        { name: "Jean", playersCount: 1 }
+      ]
     };
-    expect(updateRooms(rooms)).toEqual(expectedAction);
+    const expectedAction = {
+      type: UPDATE_GAME,
+      game
+    };
+    expect(updateGame(game)).toEqual(expectedAction);
   });
   test("updateRoom create the corresponding action", () => {
     const room = {

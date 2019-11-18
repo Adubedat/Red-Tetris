@@ -1,6 +1,10 @@
-import { checkHash, updateSpectres } from "../actions";
-import { UPDATE_SPECTRES } from "../../../constants/actionTypes";
+import thunk from "redux-thunk";
+import configureMockStore from "redux-mock-store";
+import { checkHash, handleHash } from "../hash";
 import socket from "../../services/socket-api";
+
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
 
 beforeEach(done => {
   // Setup
@@ -36,13 +40,12 @@ describe("actions ", () => {
     expect(result.roomName).toBe("Room");
     expect(result.playerName).toBe("Name");
   });
-  test("updateSpectres create the corresponding action", () => {
-    const spectres = [{ board: [0, 0, 0] }];
-    const expectedAction = {
-      type: UPDATE_SPECTRES,
-      spectres
-    };
-    expect(updateSpectres(spectres)).toEqual(expectedAction);
+  test("handleHash does not crash", done => {
+    const store = mockStore();
+    window.location.hash = "#Room[Name]";
+    handleHash(store.dispatch);
+    setTimeout(() => {
+      done();
+    }, 50);
   });
-  // expect(store.getActions()).toEqual(expectedActions);
 });

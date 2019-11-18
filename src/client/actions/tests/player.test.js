@@ -1,7 +1,16 @@
 import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
-import { connectPlayer, disconnectPlayer, updatePlayer } from "../player";
-import { UPDATE_PLAYER } from "../../../constants/actionTypes";
+import {
+  connectPlayer,
+  disconnectPlayer,
+  updatePlayer,
+  updatePlayersList
+} from "../player";
+import {
+  UPDATE_PLAYER,
+  UPDATE_PLAYERS_LIST,
+  UPDATE_ROOM
+} from "../../../constants/actionTypes";
 import socket from "../../services/socket-api";
 
 const middlewares = [thunk];
@@ -30,30 +39,23 @@ describe("player actions", () => {
     const store = mockStore({
       player: { name: "Bob", id: "ID", isHost: true, board: [0, 0, 0] }
     });
+    const expectedActions = [
+      { type: UPDATE_ROOM, room: {} },
+      { type: UPDATE_PLAYER, player: {} }
+    ];
     window.location.hash = "#test[bob]";
     store.dispatch(disconnectPlayer());
     setTimeout(() => {
-      store.getActions().forEach(action => expect(action).toMatchSnapshot());
+      expect(store.getActions()).toEqual(expectedActions);
       expect(window.location.hash).toBe("");
       done();
     }, 50);
   });
-  test("connectPlayer updates player state with a valid name", done => {
+  test("connectPlayer updates player state", done => {
     const store = mockStore({ player: {} });
     const playerName = "Bob";
     store.dispatch(connectPlayer(playerName));
     setTimeout(() => {
-      const action = store.getActions()[0];
-      delete action.player.id;
-      expect(action).toMatchSnapshot();
-      done();
-    }, 50);
-  });
-  test("connectPlayer does not update player state with an unvalid name", done => {
-    const store = mockStore({ player: {} });
-    store.dispatch(connectPlayer("Bobadkjfhaskjdfghajkhsf"));
-    setTimeout(() => {
-      expect(store.getActions()[0]).toMatchSnapshot();
       done();
     }, 50);
   });
@@ -64,5 +66,13 @@ describe("player actions", () => {
       player
     };
     expect(updatePlayer(player)).toEqual(expectedAction);
+  });
+  test("updatePlayersList create the corresponding action", () => {
+    const players = { name: "Bob", id: "ID", isHost: true, board: [0, 0, 0] };
+    const expectedAction = {
+      type: UPDATE_PLAYERS_LIST,
+      players
+    };
+    expect(updatePlayersList(players)).toEqual(expectedAction);
   });
 });
