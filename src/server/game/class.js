@@ -1,13 +1,29 @@
+import { updateHighScoresInDb } from "../../database";
 class Game {
   constructor() {
     this._rooms = [];
     this._players = [];
     this._highscores = [
-      { score: 0, playerName: "" },
-      { score: 0, playerName: "" },
-      { score: 0, playerName: "" },
-      { score: 0, playerName: "" },
-      { score: 0, playerName: "" }
+      {
+        score: 0,
+        name: ""
+      },
+      {
+        score: 0,
+        name: ""
+      },
+      {
+        score: 0,
+        name: ""
+      },
+      {
+        score: 0,
+        name: ""
+      },
+      {
+        score: 0,
+        name: ""
+      }
     ];
   }
 
@@ -17,6 +33,12 @@ class Game {
 
   get players() {
     return this._players;
+  }
+  get highscores() {
+    return this._highscores;
+  }
+  set highscores(highscores) {
+    this._highscores = highscores;
   }
 
   addRoom(room) {
@@ -50,6 +72,7 @@ class Game {
       if (highscore.score < score) {
         this._highscores.splice(index, 0, newHighScore);
         this._highscores.length = 5;
+        updateHighScoresInDb(this._highscores);
         return false;
       } else return true;
     });

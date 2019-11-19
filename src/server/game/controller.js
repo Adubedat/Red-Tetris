@@ -6,10 +6,12 @@ import {
   DISPLAY_TOAST
 } from "../../constants/constants";
 import { updateRoomClientSide } from "../room/controller";
+import { getHighScoresFromDb } from "../../database";
 
-export const initClientState = socket => {
+export const initClientState = async io => {
   console.log("[EVENT] CONNECTION : send data to client (updating the state)");
-  socket.emit(UPDATE_GAME, { game: Game.toObject() });
+  await getHighScoresFromDb();
+  updateGameClientSide(io);
 };
 
 const handleInterval = (room, io) => {

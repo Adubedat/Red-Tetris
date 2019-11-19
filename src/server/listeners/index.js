@@ -23,7 +23,7 @@ import {
 
 export const initListeners = io => {
   io.on(CONNECTION, socket => {
-    initClientState(socket);
+    initClientState(io);
     socket.join(LOBBY_ROOM);
     socket.on(NEW_PLAYER, data => {
       console.log("[EVENT] ", NEW_PLAYER);
