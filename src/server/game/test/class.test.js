@@ -19,6 +19,11 @@ describe("Game class tests", () => {
     Game.removePlayer(player.id);
     expect(Game.players.length).toBe(0);
   });
+  // test("updateHighScores test", () => {
+  //   const newHighScore = { score: 999000, name: "billy" };
+  //   Game.updateHighScores(newHighScore);
+  //   expect(Game.highscores[0]).toBe(newHighScore);
+  // });
   test("findRoom method test", () => {
     const room1 = new Room("Room1", "hostID1");
     const room2 = new Room("Room2", "hostID2");
