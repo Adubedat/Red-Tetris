@@ -40,6 +40,29 @@
         To begin the development, run `npm start` or `yarn start`.
         To create a production bundle, use `npm run build` or `yarn build`.
       -->
-    <script src="build/bundle.js"></script>
+    <script src="build/bundle.js"></script
+    ><!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-analytics.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyBFlPXvRDTyThKeRiwb3n8BFhgNSZlAT0k",
+        authDomain: "tetris-orange-5a1ea.firebaseapp.com",
+        databaseURL: "https://tetris-orange-5a1ea.firebaseio.com",
+        projectId: "tetris-orange-5a1ea",
+        storageBucket: "tetris-orange-5a1ea.appspot.com",
+        messagingSenderId: "433177591623",
+        appId: "1:433177591623:web:1fc0dba1a1ec2173e31662",
+        measurementId: "G-3GWWTWDJP8"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
   </body>
 </html>
