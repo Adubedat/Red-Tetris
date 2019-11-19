@@ -58,7 +58,7 @@
     "verbose": true,
     "collectCoverage": true,
     "setupFilesAfterEnv": [
-      "<rootDir>/tests/setup/setupEnzyme.js"
+      "<rootDir>/tests/setup/setupTests.js"
     ],
     "testPathIgnorePatterns": [
       "<rootDir>/tests/setup/"
