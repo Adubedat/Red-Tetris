@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Cell from "../Cell";
-import { CRIMSON } from "../../../constants/colors";
+import { CRIMSON, PURE_ORANGE } from "../../../constants/colors";
 
 const StyledButton = styled.button`
   background: none;
@@ -30,9 +30,9 @@ const TetriButton = ({ disabled }) => {
   return (
     <StyledButton disabled={disabled} type="submit">
       <StyledTetriminos>
-        <Cell color="#ff8b00" letter="P"></Cell>
+        <Cell color={PURE_ORANGE} letter="P"></Cell>
         <Cell color={CRIMSON} letter="L"></Cell>
-        <Cell color="#ff8b00" letter="A"></Cell>
+        <Cell color={PURE_ORANGE} letter="A"></Cell>
         <Cell color={CRIMSON} letter="Y"></Cell>
       </StyledTetriminos>
     </StyledButton>
