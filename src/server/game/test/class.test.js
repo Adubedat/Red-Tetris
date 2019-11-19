@@ -1,6 +1,7 @@
 import Game from "../class";
 import Player from "../../player/class";
 import Room from "../../room/class";
+import { updateHighScoresInDb, getHighScoresFromDb } from "../../../database";
 
 describe("Game class tests", () => {
   test("AddRoom, removeRoom methods + room getter tests", () => {
@@ -19,11 +20,16 @@ describe("Game class tests", () => {
     Game.removePlayer(player.id);
     expect(Game.players.length).toBe(0);
   });
-  // test("updateHighScores test", () => {
-  //   const newHighScore = { score: 999000, name: "billy" };
-  //   Game.updateHighScores(newHighScore);
-  //   expect(Game.highscores[0]).toBe(newHighScore);
-  // });
+  test("updateHighScores test", async done => {
+    const savedHighscores = await getHighScoresFromDb();
+    console.log(savedHighscores);
+    done();
+    // const score = 0;
+    // const name = "billy";
+    // Game.updateHighScores(score, name);
+    // expect(Game.highscores).toBe(highscores);
+    // updateHighScoresInDb(savedHighscores);
+  });
   test("findRoom method test", () => {
     const room1 = new Room("Room1", "hostID1");
     const room2 = new Room("Room2", "hostID2");

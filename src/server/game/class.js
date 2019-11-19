@@ -37,6 +37,7 @@ class Game {
   get highscores() {
     return this._highscores;
   }
+
   set highscores(highscores) {
     this._highscores = highscores;
   }
