@@ -14,6 +14,8 @@ export const StyledChatContainer = styled.div`
   flex: 1;
   border: 3px solid white;
   border-radius: 5px;
+  height: 0;
+  min-height: 100%;
 `;
 
 export const StyledLeftContainer = styled.div`
@@ -28,8 +30,6 @@ export const StyledRightContainer = styled.div`
   flex: 4;
   display: flex;
   flex-direction: column;
-  height: 0;
-  min-height: 100%;
 `;
 
 export const StyledTitleContainer = styled.div`
@@ -61,6 +61,9 @@ export const StyledPlayerListContainer = styled.div`
   align-items: center;
   padding: 5px;
   border-bottom: 5px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const StyledText = styled.div`

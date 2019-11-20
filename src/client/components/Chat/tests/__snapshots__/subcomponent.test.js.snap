@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ChatSub /> ChatSub rendering without crashing 1`] = `
+<styled.div
+  id="chat"
+>
+  <styled.div>
+    <styled.div>
+      <styled.div>
+        <p>
+          Players
+        </p>
+      </styled.div>
+      <styled.div>
+        <styled.div
+          key="0"
+        >
+          Player1
+        </styled.div>
+        <styled.div
+          key="1"
+        >
+          Player2
+        </styled.div>
+      </styled.div>
+    </styled.div>
+    <styled.div>
+      <styled.div>
+        <p>
+          Messages
+        </p>
+      </styled.div>
+      <styled.div>
+        <styled.div
+          key="0"
+        >
+          <font>
+            Player1
+            :
+          </font>
+           
+          Hello world
+        </styled.div>
+        <styled.div
+          key="1"
+        >
+          <font
+            style={
+              Object {
+                "color": undefined,
+              }
+            }
+          >
+            Player1 joined Lobby
+          </font>
+        </styled.div>
+        <div />
+      </styled.div>
+      <styled.form
+        onSubmit={[Function]}
+      >
+        <styled.input
+          autoComplete="off"
+          id="chatMessage"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="Write a message ..."
+          spellCheck="false"
+          type="text"
+          value=""
+        />
+      </styled.form>
+    </styled.div>
+  </styled.div>
+</styled.div>
+`;

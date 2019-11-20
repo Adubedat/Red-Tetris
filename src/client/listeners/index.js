@@ -33,7 +33,7 @@ export const initListeners = dispatch => {
   socket.on(DISPLAY_TOAST, data => displayToast(data));
 
   window.onhashchange = () => handleHash(dispatch);
-  document.onkeydown = e => handleKeyPress(e);
+  document.addEventListener("keydown", handleKeyPress);
 };
 
 const subscribeUpdateGame = (data, dispatch) => {

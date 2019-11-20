@@ -29,11 +29,11 @@ const ChatSub = ({ chatMessages, players, onSubmit }) => {
   };
 
   const disableKeyPressListener = () => {
-    document.onkeydown = null;
+    document.removeEventListener("keydown", handleKeyPress);
   };
 
   const enableKeyPressListener = () => {
-    document.onkeydown = e => handleKeyPress(e);
+    document.addEventListener("keydown", handleKeyPress);
   };
 
   const messagesEndRef = useRef(null);
@@ -103,7 +103,8 @@ const ChatSub = ({ chatMessages, players, onSubmit }) => {
 
 ChatSub.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  chatMessages: PropTypes.array.isRequired
+  chatMessages: PropTypes.array.isRequired,
+  players: PropTypes.array.isRequired
 };
 
 export default ChatSub;

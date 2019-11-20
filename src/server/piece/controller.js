@@ -8,7 +8,7 @@ export const onKeyPressed = (code, socket, io) => {
   const player = Game.findPlayer(socket.id);
   if (!Object.values(enumKeys).includes(code) || !(player && player.room))
     return;
-  if (player.inGame) {
+  if (player.room.isStarted && player.inGame) {
     const { heap } = player;
     switch (code) {
       case enumKeys.ARROW_LEFT:

@@ -9,50 +9,50 @@ exports[`<RoomListSub /> should render without crashing 1`] = `
     Rooms :
   </h2>
   <div
-    class="sc-bwzfXH hQcXqj"
-    id="list"
+    class="sc-ifAKCX feFkUc"
+    id="subheader"
   >
     <div
-      class="sc-ifAKCX FSPBW"
-      id="subheader"
+      class="sc-EHOje kgNXRr"
     >
-      <div
-        class="sc-EHOje kgNXRr"
+      <p
+        id="header"
       >
-        <p
-          id="header"
-        >
-          Name
-        </p>
-      </div>
-      <div
-        class="sc-EHOje qZCVm"
-      >
-        <p
-          id="header"
-        >
-          Mode
-        </p>
-      </div>
-      <div
-        class="sc-EHOje qZCVm"
-      >
-        <p
-          id="header"
-        >
-          Players
-        </p>
-      </div>
-      <div
-        class="sc-EHOje qZCVm"
-      >
-        <p
-          id="header"
-        >
-          Status
-        </p>
-      </div>
+        Name
+      </p>
     </div>
+    <div
+      class="sc-EHOje qZCVm"
+    >
+      <p
+        id="header"
+      >
+        Mode
+      </p>
+    </div>
+    <div
+      class="sc-EHOje qZCVm"
+    >
+      <p
+        id="header"
+      >
+        Players
+      </p>
+    </div>
+    <div
+      class="sc-EHOje qZCVm"
+    >
+      <p
+        id="header"
+      >
+        Status
+      </p>
+    </div>
+  </div>
+  <div
+    class="sc-bwzfXH kUfuHL"
+    id="list"
+  >
     <div
       class="sc-htpNat eHEvwL"
       id="list-item"

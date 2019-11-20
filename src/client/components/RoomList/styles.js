@@ -9,8 +9,8 @@ export const StyledContainer = styled.div`
 export const StyledList = styled.div`
   height: 100%;
   border: 3px solid white;
-  border-radius: 5px 5px 5px 40px;
-  // background-color: rgb(255, 255, 255, 0.1);
+  border-radius: 0px 0px 5px 40px;
+  overflow-y: auto;
 `;
 
 export const StyledListItem = styled.div`
@@ -45,11 +45,12 @@ export const StyledListSubHeader = styled.div`
   & #header {
     font-size: 2vh;
   }
-  // background-color: rgb(255, 255, 255, 0.1);
   height: 6%;
   display: flex;
   align-items: center;
-  border-bottom: 3px solid white;
+  border: 3px solid white;
+  border-bottom: 0px;
+  border-radius: 5px 5px 0px 0px;
 `;
 
 export const StyledListSubHeaderColumn = styled.div`
