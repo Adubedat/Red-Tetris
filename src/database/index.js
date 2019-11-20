@@ -3,7 +3,6 @@ import admin from "firebase-admin";
 import Game from "../server/game/class";
 if (process.env.NODE_ENV !== "production") require("dotenv/config");
 
-console.log(process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"));
 admin.initializeApp({
   credential: admin.credential.cert({
     type: process.env.FIREBASE_TYPE,
