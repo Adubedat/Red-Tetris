@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginSub /> BoardOverlaySub rendering when a player has lost 1`] = `
+<styled.div
+  id="overlay"
+>
+  <styled.h1>
+    GAME OVER
+  </styled.h1>
+</styled.div>
+`;
+
+exports[`<LoginSub /> BoardOverlaySub rendering when a player has won (hasLost = false and inGame = true) 1`] = `
+<styled.div
+  id="overlay"
+>
+  <styled.h1>
+    YOU WIN
+  </styled.h1>
+  <Controls />
+  <h2
+    id="start-game"
+  >
+    Wait for host to start
+  </h2>
+</styled.div>
+`;
+
+exports[`<LoginSub /> BoardOverlaySub rendering when in menu and player is host 1`] = `
+<styled.div
+  id="overlay"
+>
+  <Controls />
+  <h2
+    id="start-game"
+  >
+    Press enter to start
+  </h2>
+</styled.div>
+`;
+
+exports[`<LoginSub /> BoardOverlaySub rendering when in menu and player is not host 1`] = `
+<styled.div
+  id="overlay"
+>
+  <Controls />
+  <h2
+    id="start-game"
+  >
+    Wait for host to start
+  </h2>
+</styled.div>
+`;
+
+exports[`<LoginSub /> BoardOverlaySub rendering with a player in game 1`] = `
+<styled.div
+  id="overlay"
+/>
+`;

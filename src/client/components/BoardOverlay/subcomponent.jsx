@@ -16,8 +16,10 @@ const BoardOverlaySub = ({ hasLost, isStarted, inGame, isHost }) => {
   return (
     <StyledContainer id="overlay">
       {hasLost && <StyledGameOverText>GAME OVER</StyledGameOverText>}
-      {inGame && !hasLost && <StyledGameOverText>YOU WIN</StyledGameOverText>}
-      {!isStarted && <Controls isHost={isHost} />}
+      {inGame && !hasLost && !isStarted && (
+        <StyledGameOverText>YOU WIN</StyledGameOverText>
+      )}
+      {!isStarted && <Controls />}
       {displayStartGame()}
     </StyledContainer>
   );

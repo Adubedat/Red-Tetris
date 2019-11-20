@@ -32,10 +32,9 @@ describe("<LoginSub />", () => {
         isHost={false}
       />
     );
-
     expect(toJson(wrapper)).toMatchSnapshot();
   });
-  test("BoardOverlaySub rendering with a player has lost", () => {
+  test("BoardOverlaySub rendering when a player has lost", () => {
     const wrapper = shallow(
       <BoardOverlaySub
         hasLost={true}
@@ -44,7 +43,39 @@ describe("<LoginSub />", () => {
         isHost={false}
       />
     );
-
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
+  test("BoardOverlaySub rendering when in menu and player is host", () => {
+    const wrapper = shallow(
+      <BoardOverlaySub
+        hasLost={false}
+        isStarted={false}
+        inGame={false}
+        isHost={true}
+      />
+    );
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
+  test("BoardOverlaySub rendering when in menu and player is not host", () => {
+    const wrapper = shallow(
+      <BoardOverlaySub
+        hasLost={false}
+        isStarted={false}
+        inGame={false}
+        isHost={false}
+      />
+    );
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
+  test("BoardOverlaySub rendering when a player has won (hasLost = false and inGame = true)", () => {
+    const wrapper = shallow(
+      <BoardOverlaySub
+        hasLost={false}
+        isStarted={false}
+        inGame={true}
+        isHost={false}
+      />
+    );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });
