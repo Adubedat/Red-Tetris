@@ -17,22 +17,27 @@ import {
   MAX_PLAYER_BATTLEROYAL
 } from "../../../constants/game";
 
-const GameInfoSub = ({ room, isHost, onChangeGameMode }) => {
-  const { playersCount } = room;
-  const maxPlayer =
-    room.mode === SOLO ? MAX_PLAYER_SOLO : MAX_PLAYER_BATTLEROYAL;
+const GameInfoSub = ({
+  mode,
+  playersCount,
+  name,
+  isStarted,
+  isHost,
+  onChangeGameMode
+}) => {
+  const maxPlayer = mode === SOLO ? MAX_PLAYER_SOLO : MAX_PLAYER_BATTLEROYAL;
   const handleModeChange = e => {
     onChangeGameMode(e.target.value);
   };
 
   const displayModeDescription = () => {
-    if (room.mode === SOLO) {
+    if (mode === SOLO) {
       return (
         <StyledDescription>
           Single player mode, try to reach the highest score !
         </StyledDescription>
       );
-    } else if (room.mode === BATTLEROYAL) {
+    } else {
       return (
         <StyledDescription>
           Multiplayer mode, be the last one alive to win ! Removing multiple
@@ -44,11 +49,11 @@ const GameInfoSub = ({ room, isHost, onChangeGameMode }) => {
 
   return (
     <StyledContainer id="game-info">
-      <StyledRoomName>{room.name}</StyledRoomName>
+      <StyledRoomName>{name}</StyledRoomName>
       <StyledRowContainer>
         <Select
-          disabled={!isHost || room.isStarted}
-          value={room.mode}
+          disabled={!isHost || isStarted}
+          value={mode}
           onChange={handleModeChange}
           label="Mode"
         >
@@ -70,7 +75,12 @@ const GameInfoSub = ({ room, isHost, onChangeGameMode }) => {
 };
 
 GameInfoSub.propTypes = {
-  room: PropTypes.object.isRequired
+  mode: PropTypes.string.isRequired,
+  playersCount: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  isStarted: PropTypes.bool.isRequired,
+  isHost: PropTypes.bool.isRequired,
+  onChangeGameMode: PropTypes.func.isRequired
 };
 
 export default GameInfoSub;

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GameInfo /> GameInfo rendering with store without crashing 1`] = `
+<ContextProvider
+  value={null}
+>
+  <GameInfoSub
+    isHost={true}
+    isStarted={false}
+    mode="Solo"
+    name="Player1"
+    onChangeGameMode={[Function]}
+    playersCount={1}
+    store={
+      Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      }
+    }
+  />
+</ContextProvider>
+`;

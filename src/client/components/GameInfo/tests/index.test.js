@@ -2,15 +2,22 @@ import React from "react";
 import { shallow } from "enzyme";
 import toJson from "enzyme-to-json";
 import configureStore from "redux-mock-store";
-import Chat from "../index";
+import GameInfo from "../index";
 import socket from "../../../services/socket-api";
 import thunk from "redux-thunk";
+import { SOLO } from "../../../../constants/game";
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 const initialState = {
-  chatMessages: [],
-  players: []
+  room: {
+    mode: SOLO,
+    playersCount: 1,
+    name: "Player1",
+    isStarted: false
+  },
+  player: { isHost: true },
+  onChangeGameMode: jest.fn()
 };
 
 const store = mockStore(initialState);
@@ -33,9 +40,9 @@ afterEach(done => {
   done();
 });
 
-describe("<Chat />", () => {
-  test("Chat rendering with store without crashing", () => {
-    const wrapper = shallow(<Chat store={store} />);
+describe("<GameInfo />", () => {
+  test("GameInfo rendering with store without crashing", () => {
+    const wrapper = shallow(<GameInfo store={store} />);
 
     expect(toJson(wrapper)).toMatchSnapshot();
   });

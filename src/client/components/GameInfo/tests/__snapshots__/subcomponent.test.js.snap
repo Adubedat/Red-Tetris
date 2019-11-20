@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GameInfoSub /> GameInfoSub rendering in battleroyal mode 1`] = `
+<styled.div
+  id="game-info"
+>
+  <styled.div>
+    Player1
+  </styled.div>
+  <styled.div>
+    <SelectMenu
+      disabled={false}
+      label="Mode"
+      onChange={[Function]}
+      value="Battleroyal"
+    >
+      <WithStyles(WithStyles(ForwardRef(MenuItem)))
+        disabled={false}
+        value="Solo"
+      >
+        Solo
+      </WithStyles(WithStyles(ForwardRef(MenuItem)))>
+      <WithStyles(WithStyles(ForwardRef(MenuItem)))
+        value="Battleroyal"
+      >
+        Battleroyal
+      </WithStyles(WithStyles(ForwardRef(MenuItem)))>
+    </SelectMenu>
+    <div
+      className="description"
+    >
+      <styled.label>
+        Description
+      </styled.label>
+      <styled.p>
+        Multiplayer mode, be the last one alive to win ! Removing multiple lines at a time send malus blocks to your opponents.
+      </styled.p>
+    </div>
+  </styled.div>
+  <div
+    className="player-count"
+  >
+    [
+    1
+    /
+    5
+     Players]
+  </div>
+</styled.div>
+`;
+
+exports[`<GameInfoSub /> GameInfoSub rendering in solo mode 1`] = `
+<styled.div
+  id="game-info"
+>
+  <styled.div>
+    Player1
+  </styled.div>
+  <styled.div>
+    <SelectMenu
+      disabled={false}
+      label="Mode"
+      onChange={[Function]}
+      value="Solo"
+    >
+      <WithStyles(WithStyles(ForwardRef(MenuItem)))
+        disabled={false}
+        value="Solo"
+      >
+        Solo
+      </WithStyles(WithStyles(ForwardRef(MenuItem)))>
+      <WithStyles(WithStyles(ForwardRef(MenuItem)))
+        value="Battleroyal"
+      >
+        Battleroyal
+      </WithStyles(WithStyles(ForwardRef(MenuItem)))>
+    </SelectMenu>
+    <div
+      className="description"
+    >
+      <styled.label>
+        Description
+      </styled.label>
+      <styled.p>
+        Single player mode, try to reach the highest score !
+      </styled.p>
+    </div>
+  </styled.div>
+  <div
+    className="player-count"
+  >
+    [
+    1
+    /
+    1
+     Players]
+  </div>
+</styled.div>
+`;
