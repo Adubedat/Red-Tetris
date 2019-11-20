@@ -12,6 +12,10 @@ export const StyledContainer = styled.div`
   top: -3px;
   height: 86vh;
   width: 43vh;
+  h2 {
+    margin-top: 40px;
+    align-self: center;
+  }
 `;
 
 export const StyledGameOverText = styled.h1`

@@ -5,7 +5,6 @@ exports[`<Board /> Board rendering with store without crashing 1`] = `
   board={Array []}
   dispatch={[Function]}
   hasLost={false}
-  isGameOver={false}
   isStarted={false}
   store={
     Object {

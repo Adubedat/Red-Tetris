@@ -12,7 +12,7 @@ const initialState = {
   player: {},
   spectres: [],
   room: {},
-  game: {},
+  game: { rooms: [], highscores: [] },
   chatMessages: [],
   players: []
 };
