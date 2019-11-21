@@ -140,12 +140,19 @@ class Room {
     this._players[0].isHost = true;
   }
 
-  removePlayer(playerId) {
+  removePlayer(player) {
     this._playersCount--;
-    this._players = this._players.filter(player => player.id !== playerId);
+    this._players = this._players.filter(p => p.id !== player.id);
     this._spectres = this._spectres.filter(
-      spectre => spectre.playerId !== playerId
+      spectre => spectre.player.id !== player.id
     );
+    if (player.isHost) {
+      player.isHost = false;
+      this.updateHost();
+    }
+    if (player.inGame) {
+      this.stillInGameCounter -= 1;
+    }
   }
 
   findPlayer(playerId) {

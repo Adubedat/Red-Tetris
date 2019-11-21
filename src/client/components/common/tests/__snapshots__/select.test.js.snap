@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Select /> Select rendering with helperText 1`] = `
+<WithStyles(ForwardRef(FormControl))
+  className="makeStyles-formControl-1"
+>
+  <label
+    className="makeStyles-label-2"
+  />
+  <WithStyles(WithFormControlContext(ForwardRef(Select)))
+    className="makeStyles-select-3"
+    helperText="helperText"
+    input={<ForwardRef(WithStyles) />}
+  />
+  <WithStyles(WithFormControlContext(ForwardRef(FormHelperText)))
+    style={
+      Object {
+        "height": "2vh",
+      }
+    }
+  >
+    helperText
+  </WithStyles(WithFormControlContext(ForwardRef(FormHelperText)))>
+</WithStyles(ForwardRef(FormControl))>
+`;
+
+exports[`<Select /> Select rendering without helperText 1`] = `
+<WithStyles(ForwardRef(FormControl))
+  className="makeStyles-formControl-1"
+>
+  <label
+    className="makeStyles-label-2"
+  />
+  <WithStyles(WithFormControlContext(ForwardRef(Select)))
+    className="makeStyles-select-3"
+    input={<ForwardRef(WithStyles) />}
+  />
+</WithStyles(ForwardRef(FormControl))>
+`;
