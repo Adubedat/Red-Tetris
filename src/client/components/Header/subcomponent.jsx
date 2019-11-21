@@ -26,6 +26,8 @@ let HeaderSub = ({ roomName, playerName, onBackHome }) => {
 };
 
 HeaderSub.propTypes = {
+  roomName: PropTypes.string,
+  playerName: PropTypes.string,
   onBackHome: PropTypes.func.isRequired
 };
 
