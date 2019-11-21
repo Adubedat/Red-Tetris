@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginSub /> ProgressionSub rendering with a player in game 1`] = `
+<styled.div
+  id="Progression-container"
+>
+  <styled.div
+    id="Score-container"
+  >
+    <div
+      className="score-title"
+    >
+      <p>
+        Score
+      </p>
+    </div>
+    <div
+      className="score-value"
+    >
+      <span>
+        45123
+      </span>
+    </div>
+  </styled.div>
+  <styled.div
+    id="Level-container"
+  >
+    <span>
+      Level 
+      12
+    </span>
+  </styled.div>
+</styled.div>
+`;
