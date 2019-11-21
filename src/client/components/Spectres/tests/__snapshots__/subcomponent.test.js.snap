@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginSub /> SpectresSub rendering with no spectres 1`] = `
+<styled.div>
+  <div
+    key="0"
+  >
+    <BoardSub
+      board={
+        Array [
+          0,
+          0,
+          0,
+        ]
+      }
+      isSpectre={true}
+      playerName="Player"
+    />
+    <p
+      style={
+        Object {
+          "textAlign": "center",
+        }
+      }
+    >
+      Player
+    </p>
+  </div>
+</styled.div>
+`;
