@@ -1,0 +1,162 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginSub /> LadderSub rendering 1`] = `
+<div
+  class="sc-bdVaJa cSBjYp"
+  id="ladder"
+>
+  <h2>
+    High Scores
+  </h2>
+  <div
+    class="sc-bwzfXH ikfEIr"
+    id="highscore-list"
+  >
+    <div
+      class="sc-htpNat hukHjT"
+      id="list-item"
+    >
+      <div
+        class="sc-bxivhb hpGinl"
+        id="content"
+      >
+        <div>
+          1.
+        </div>
+      </div>
+      <div
+        class="sc-bxivhb hpGinl"
+        id="content"
+      >
+        <div>
+          10500
+        </div>
+      </div>
+      <div
+        class="sc-bxivhb hpGinl"
+        id="content"
+      >
+        <div>
+          Player
+        </div>
+      </div>
+    </div>
+    <div
+      class="sc-htpNat cyWvph"
+      id="list-item"
+    >
+      <div
+        class="sc-bxivhb hpGinl"
+        id="content"
+      >
+        <div>
+          2.
+        </div>
+      </div>
+      <div
+        class="sc-bxivhb hpGinl"
+        id="content"
+      >
+        <div>
+          10500
+        </div>
+      </div>
+      <div
+        class="sc-bxivhb hpGinl"
+        id="content"
+      >
+        <div>
+          Player
+        </div>
+      </div>
+    </div>
+    <div
+      class="sc-htpNat hukHjT"
+      id="list-item"
+    >
+      <div
+        class="sc-bxivhb hpGinl"
+        id="content"
+      >
+        <div>
+          3.
+        </div>
+      </div>
+      <div
+        class="sc-bxivhb hpGinl"
+        id="content"
+      >
+        <div>
+          10500
+        </div>
+      </div>
+      <div
+        class="sc-bxivhb hpGinl"
+        id="content"
+      >
+        <div>
+          Player
+        </div>
+      </div>
+    </div>
+    <div
+      class="sc-htpNat cyWvph"
+      id="list-item"
+    >
+      <div
+        class="sc-bxivhb hpGinl"
+        id="content"
+      >
+        <div>
+          4.
+        </div>
+      </div>
+      <div
+        class="sc-bxivhb hpGinl"
+        id="content"
+      >
+        <div>
+          10500
+        </div>
+      </div>
+      <div
+        class="sc-bxivhb hpGinl"
+        id="content"
+      >
+        <div>
+          Player
+        </div>
+      </div>
+    </div>
+    <div
+      class="sc-htpNat hukHjT"
+      id="list-item"
+    >
+      <div
+        class="sc-bxivhb hpGinl"
+        id="content"
+      >
+        <div>
+          5.
+        </div>
+      </div>
+      <div
+        class="sc-bxivhb hpGinl"
+        id="content"
+      >
+        <div>
+          10500
+        </div>
+      </div>
+      <div
+        class="sc-bxivhb hpGinl"
+        id="content"
+      >
+        <div>
+          Player
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
