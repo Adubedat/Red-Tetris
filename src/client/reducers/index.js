@@ -35,7 +35,7 @@ const room = (state = {}, action) => {
   }
 };
 
-const game = (state = [], action) => {
+const game = (state = {}, action) => {
   switch (action.type) {
     case UPDATE_GAME:
       return action.game;
