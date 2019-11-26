@@ -5,7 +5,6 @@ import {
   updateGameClientSide
 } from "../controller";
 import Game from "../class";
-import Player from "../../player/class";
 import {
   UPDATE_GAME,
   NEW_PLAYER,

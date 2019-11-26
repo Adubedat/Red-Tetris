@@ -58,7 +58,7 @@ afterEach(done => {
   done();
 });
 
-describe("game controller", () => {
+describe("chat controller", () => {
   describe("updateChatClientSide function", () => {
     test("should emit an ADD_CHAT_MESSAGE event", done => {
       socket.on(ADD_CHAT_MESSAGE, data => {
