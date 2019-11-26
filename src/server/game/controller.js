@@ -6,7 +6,6 @@ import { updateRoomClientSide } from "../room/controller";
 import { getHighScoresFromDb } from "../../database";
 
 export const initClientState = async io => {
-  console.log("[EVENT] CONNECTION : send data to client (updating the state)");
   await getHighScoresFromDb();
   updateGameClientSide(io);
 };

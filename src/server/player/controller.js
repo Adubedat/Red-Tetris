@@ -31,24 +31,20 @@ const joinLobby = (player, socket, io) => {
 };
 
 export const connectPlayer = (playerName, socket, io) => {
-  console.log("[CALL] connectPlayer");
   if (playerNameValidation(playerName)) {
     const player = Game.findPlayer(socket.id);
     if (!player) {
       const player = Game.addPlayer(new Player(playerName, socket.id));
       joinLobby(player, socket, io);
       updatePlayerClientSide(player, io);
-      console.log("[UPDATED] after connectPlayer", Game);
     }
   }
 };
 
 export const disconnectPlayer = (socket, io) => {
-  console.log("[CALL] disconnectPlayer on : ", socket.id);
   leaveRoom(socket, io);
   Game.removePlayer(socket.id);
   socket.leave(LOBBY_ROOM);
-  console.log("[UPDATED] after disconnectPlayer", Game);
 };
 
 export const updatePlayerClientSide = (player, io) => {
