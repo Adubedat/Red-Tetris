@@ -7,12 +7,12 @@ exports[`<Select /> Select rendering with helperText 1`] = `
   <label
     className="makeStyles-label-2"
   />
-  <WithStyles(WithFormControlContext(ForwardRef(Select)))
+  <WithStyles(ForwardRef(Select))
     className="makeStyles-select-3"
     helperText="helperText"
     input={<ForwardRef(WithStyles) />}
   />
-  <WithStyles(WithFormControlContext(ForwardRef(FormHelperText)))
+  <WithStyles(ForwardRef(FormHelperText))
     style={
       Object {
         "height": "2vh",
@@ -20,7 +20,7 @@ exports[`<Select /> Select rendering with helperText 1`] = `
     }
   >
     helperText
-  </WithStyles(WithFormControlContext(ForwardRef(FormHelperText)))>
+  </WithStyles(ForwardRef(FormHelperText))>
 </WithStyles(ForwardRef(FormControl))>
 `;
 
@@ -31,7 +31,7 @@ exports[`<Select /> Select rendering without helperText 1`] = `
   <label
     className="makeStyles-label-2"
   />
-  <WithStyles(WithFormControlContext(ForwardRef(Select)))
+  <WithStyles(ForwardRef(Select))
     className="makeStyles-select-3"
     input={<ForwardRef(WithStyles) />}
   />

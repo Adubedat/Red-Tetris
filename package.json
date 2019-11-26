@@ -42,7 +42,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "eslint": "eslint src",
-    "coverage": "jest --collectCoverageFrom=src/* --coverage src"
+    "coverage": "jest"
   },
   "eslintConfig": {
     "extends": "react-app"

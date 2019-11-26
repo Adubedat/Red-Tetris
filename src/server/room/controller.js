@@ -70,7 +70,6 @@ const transferPlayerToRoom = (room, player, io, socket) => {
 };
 
 export const joinRoom = (roomName, socket, io) => {
-  console.log("[CALL] joinRoom");
   if (roomNameValidation(roomName)) {
     const player = Game.findPlayer(socket.id);
     if (player && !player.room) {
@@ -83,7 +82,6 @@ export const joinRoom = (roomName, socket, io) => {
       }
       addPlayerToRoom(player, room);
       transferPlayerToRoom(room, player, io, socket);
-      console.log("[UPDATED] after joinRoom", Game);
     }
   }
 };
@@ -99,7 +97,6 @@ const transferPlayerToLobby = (room, player, io, socket) => {
 };
 
 export const leaveRoom = (socket, io) => {
-  console.log("[CALL] leaveRoom on : ");
   const player = Game.findPlayer(socket.id);
   if (player && player.room) {
     const room = player.room;
@@ -113,6 +110,5 @@ export const leaveRoom = (socket, io) => {
     }
     player.room = null;
     transferPlayerToLobby(room, player, io, socket);
-    console.log("[UPDATED] after leaveRoom", Game);
   }
 };
