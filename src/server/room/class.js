@@ -144,7 +144,7 @@ class Room {
     this._playersCount--;
     this._players = this._players.filter(p => p.id !== player.id);
     this._spectres = this._spectres.filter(
-      spectre => spectre.player.id !== player.id
+      spectre => spectre.playerId !== player.id
     );
     if (player.isHost) {
       player.isHost = false;
