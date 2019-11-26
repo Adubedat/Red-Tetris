@@ -166,9 +166,14 @@ class Room {
   }
 
   extendPiecesList() {
-    for (let i = 0; i < 10; i++) {
-      this._pieces.push(Math.floor(Math.random() * 7));
+    const tetris_bag = [];
+    while (tetris_bag.length !== 7) {
+      const shape_number = Math.floor(Math.random() * 7);
+      if (tetris_bag.indexOf(shape_number) === -1) {
+        tetris_bag.push(shape_number);
+      }
     }
+    this._pieces = this.pieces.concat(tetris_bag);
   }
 
   fillHeap(heap) {

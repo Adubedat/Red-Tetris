@@ -12,7 +12,7 @@ class Player {
       .map(() => Array(10).fill(""));
     this._piece = new Piece();
     this._nextPiece = new Piece();
-    this._indexPieces = 1;
+    this._indexPieces = 0;
     this._inGame = false;
     this._isHost = false;
     this._hasLost = false;
@@ -83,7 +83,7 @@ class Player {
   clean() {
     this._inGame = false;
     this._hasLost = false;
-    this._indexPieces = 1;
+    this._indexPieces = 0;
     this._piece = new Piece();
     this._nextPiece = new Piece();
     this._heap = Array(20)
