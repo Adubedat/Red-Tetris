@@ -12,8 +12,9 @@ import Chat from "../Chat";
 import NextPieces from "../NextPieces";
 import Progression from "../Progression";
 import { SOLO } from "../../../constants/game";
+import PropTypes from "prop-types";
 
-const GameSub = ({ isStarted, mode }) => {
+const GameSub = ({ mode }) => {
   const displayProgression = () => {
     if (mode === SOLO) return <Progression />;
   };
@@ -35,6 +36,8 @@ const GameSub = ({ isStarted, mode }) => {
   );
 };
 
-GameSub.propTypes = {};
+GameSub.propTypes = {
+  mode: PropTypes.string.isRequired
+};
 
 export default GameSub;

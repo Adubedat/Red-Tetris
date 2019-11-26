@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BoardOverlay /> BoardOverlay rendering with store without crashing 1`] = `
+<ContextProvider
+  value={null}
+>
+  <BoardOverlaySub
+    dispatch={[Function]}
+    hasLost={false}
+    inGame={false}
+    isHost={false}
+    isStarted={false}
+    store={
+      Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      }
+    }
+  />
+</ContextProvider>
+`;

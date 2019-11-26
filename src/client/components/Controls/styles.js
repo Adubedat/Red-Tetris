@@ -1,9 +1,10 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const StyledContainer = styled.div`
   align-self: center;
   display: flex;
   flex-direction: column;
+  width: 70%;
   div {
     display: flex;
     justify-content: space-between;
@@ -17,9 +18,5 @@ export const StyledContainer = styled.div`
     span {
       font-size: 1.5vh;
     }
-  }
-  h2 {
-    margin-top: 40px;
-    align-self: center;
   }
 `;

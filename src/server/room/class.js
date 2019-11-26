@@ -15,7 +15,6 @@ class Room {
     this._stillInGameCounter = 0;
     this._timer = null;
     this._isStarted = false;
-    this._isGameOver = false;
     this._pieces = [];
     this._spectres = [];
     this._mode = SOLO;
@@ -58,12 +57,6 @@ class Room {
   set stillInGameCounter(stillInGameCounter) {
     this._stillInGameCounter = stillInGameCounter;
   }
-  get isGameOver() {
-    return this._isGameOver;
-  }
-  set isGameOver(isGameOver) {
-    this._isGameOver = isGameOver;
-  }
   get mode() {
     return this._mode;
   }
@@ -99,7 +92,6 @@ class Room {
     this.clean();
     this.extendPiecesList();
     this._isStarted = true;
-    this._isGameOver = false;
     this._stillInGameCounter = this._players.length;
     this._players.forEach(player => player.newGame());
     this.initSpectres();
@@ -125,7 +117,6 @@ class Room {
 
   endGame() {
     if (this._timer) this._timer.stop();
-    this._isGameOver = true;
     this._isStarted = false;
   }
 
@@ -149,12 +140,19 @@ class Room {
     this._players[0].isHost = true;
   }
 
-  removePlayer(playerId) {
+  removePlayer(player) {
     this._playersCount--;
-    this._players = this._players.filter(player => player.id !== playerId);
+    this._players = this._players.filter(p => p.id !== player.id);
     this._spectres = this._spectres.filter(
-      spectre => spectre.playerId !== playerId
+      spectre => spectre.player.id !== player.id
     );
+    if (player.isHost) {
+      player.isHost = false;
+      this.updateHost();
+    }
+    if (player.inGame) {
+      this.stillInGameCounter -= 1;
+    }
   }
 
   findPlayer(playerId) {
@@ -168,9 +166,14 @@ class Room {
   }
 
   extendPiecesList() {
-    for (let i = 0; i < 10; i++) {
-      this._pieces.push(Math.floor(Math.random() * 7));
+    const tetris_bag = [];
+    while (tetris_bag.length !== 7) {
+      const shape_number = Math.floor(Math.random() * 7);
+      if (tetris_bag.indexOf(shape_number) === -1) {
+        tetris_bag.push(shape_number);
+      }
     }
+    this._pieces = this.pieces.concat(tetris_bag);
   }
 
   fillHeap(heap) {
@@ -233,7 +236,6 @@ class Room {
       name: this._name,
       playersCount: this._playersCount,
       isStarted: this._isStarted,
-      isGameOver: this._isGameOver,
       mode: this._mode,
       score: this._score,
       level: this._level

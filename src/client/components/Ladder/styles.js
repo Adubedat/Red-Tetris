@@ -39,7 +39,5 @@ export const StyledListItemContent = styled.div`
     font-size: 1.5vh;
     align-self: center;
   }
-  ${css`
-    flex: ${props => props.flex};
-  `};
+  flex: 1;
 `;

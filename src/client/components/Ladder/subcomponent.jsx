@@ -15,13 +15,13 @@ const LadderSub = ({ highscores }) => {
         {highscores.map((highscore, index) => {
           return (
             <StyledListItem id="list-item" key={index} index={index}>
-              <StyledListItemContent id="content" flex={1}>
+              <StyledListItemContent id="content">
                 <div>{index + 1 + "."}</div>
               </StyledListItemContent>
-              <StyledListItemContent id="content" flex={1}>
+              <StyledListItemContent id="content">
                 <div>{highscore.score}</div>
               </StyledListItemContent>
-              <StyledListItemContent id="content" flex={1}>
+              <StyledListItemContent id="content">
                 <div>{highscore.playerName}</div>
               </StyledListItemContent>
             </StyledListItem>
@@ -32,6 +32,8 @@ const LadderSub = ({ highscores }) => {
   );
 };
 
-LadderSub.propTypes = {};
+LadderSub.propTypes = {
+  highscores: PropTypes.array.isRequired
+};
 
 export default LadderSub;

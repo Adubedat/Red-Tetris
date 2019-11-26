@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TetriButton /> TetriButton rendering without crashing 1`] = `
+<styled.button
+  type="submit"
+>
+  <styled.div>
+    <Connect(CellSub)
+      color="#ff8b00"
+      letter="P"
+    />
+    <Connect(CellSub)
+      color="#dc143c"
+      letter="L"
+    />
+    <Connect(CellSub)
+      color="#ff8b00"
+      letter="A"
+    />
+    <Connect(CellSub)
+      color="#dc143c"
+      letter="Y"
+    />
+  </styled.div>
+</styled.button>
+`;

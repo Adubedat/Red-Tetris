@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginSub /> NextPiecesSub rendering with a valid nextPiece 1`] = `
+<div
+  class="sc-bdVaJa bKDtjc"
+  id="next-pieces-container"
+>
+  <p>
+    NEXT:
+  </p>
+  <div
+    id="next-piece"
+  >
+    <div
+      class="sc-htpNat bmqPRd"
+      id="row"
+    >
+      <div
+        class="sc-bwzfXH jIYkEg"
+        color="#143cdc"
+      />
+      <div
+        class="sc-bwzfXH jIYkEg"
+        color="#143cdc"
+      />
+      <div
+        class="sc-bwzfXH jIYkEg"
+        color="#143cdc"
+      />
+      <div
+        class="sc-bwzfXH jIYkEg"
+        color="#143cdc"
+      />
+    </div>
+    <div
+      class="sc-htpNat bmqPRd"
+      id="row"
+    >
+      <div
+        class="sc-bwzfXH eePTJi"
+        color="#143cdc"
+      />
+      <div
+        class="sc-bwzfXH eePTJi"
+        color="#143cdc"
+      />
+      <div
+        class="sc-bwzfXH eePTJi"
+        color="#143cdc"
+      />
+      <div
+        class="sc-bwzfXH eePTJi"
+        color="#143cdc"
+      />
+    </div>
+    <div
+      class="sc-htpNat bmqPRd"
+      id="row"
+    >
+      <div
+        class="sc-bwzfXH jIYkEg"
+        color="#143cdc"
+      />
+      <div
+        class="sc-bwzfXH jIYkEg"
+        color="#143cdc"
+      />
+      <div
+        class="sc-bwzfXH jIYkEg"
+        color="#143cdc"
+      />
+      <div
+        class="sc-bwzfXH jIYkEg"
+        color="#143cdc"
+      />
+    </div>
+    <div
+      class="sc-htpNat bmqPRd"
+      id="row"
+    >
+      <div
+        class="sc-bwzfXH jIYkEg"
+        color="#143cdc"
+      />
+      <div
+        class="sc-bwzfXH jIYkEg"
+        color="#143cdc"
+      />
+      <div
+        class="sc-bwzfXH jIYkEg"
+        color="#143cdc"
+      />
+      <div
+        class="sc-bwzfXH jIYkEg"
+        color="#143cdc"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<LoginSub /> NextPiecesSub rendering without nextPiece 1`] = `
+<div
+  class="sc-bdVaJa bKDtjc"
+  id="next-pieces-container"
+>
+  <p>
+    NEXT:
+  </p>
+  <div
+    id="next-piece"
+  />
+</div>
+`;

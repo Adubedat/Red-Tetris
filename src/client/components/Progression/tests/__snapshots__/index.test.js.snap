@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Progression /> Progression rendering with store without crashing 1`] = `
+<ContextProvider
+  value={null}
+>
+  <ProgressionSub
+    dispatch={[Function]}
+    level={23}
+    score={45230}
+    store={
+      Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      }
+    }
+  />
+</ContextProvider>
+`;

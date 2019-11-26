@@ -1,15 +1,7 @@
 import React from "react";
 import { StyledContainer } from "./styles";
 
-const Controls = ({ isHost }) => {
-  const displayStartGame = () => {
-    if (isHost) {
-      return <h2 id="start-game">Press enter to start</h2>;
-    } else {
-      return <h2 id="start-game">Wait for host to start</h2>;
-    }
-  };
-
+const Controls = () => {
   return (
     <StyledContainer>
       <div id="key-up">
@@ -32,7 +24,6 @@ const Controls = ({ isHost }) => {
         <kbd className="key">space</kbd>
         <span>hard drop</span>
       </div>
-      {displayStartGame()}
     </StyledContainer>
   );
 };

@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GameSub /> GameSub rendering in battleroyal mode 1`] = `
+<styled.div
+  id="game"
+>
+  <styled.div
+    id="left-item"
+  >
+    <Connect(SpectreSub) />
+    <Connect(BoardSub) />
+    <styled.div>
+      <Connect(NextPieces) />
+    </styled.div>
+  </styled.div>
+  <styled.div
+    id="right-item"
+  >
+    <Connect(GameInfoSub) />
+    <Connect(ChatSub) />
+  </styled.div>
+</styled.div>
+`;
+
+exports[`<GameSub /> GameSub rendering in solo mode 1`] = `
+<styled.div
+  id="game"
+>
+  <styled.div
+    id="left-item"
+  >
+    <Connect(SpectreSub) />
+    <Connect(BoardSub) />
+    <styled.div>
+      <Connect(NextPieces) />
+      <Connect(ProgressionSub) />
+    </styled.div>
+  </styled.div>
+  <styled.div
+    id="right-item"
+  >
+    <Connect(GameInfoSub) />
+    <Connect(ChatSub) />
+  </styled.div>
+</styled.div>
+`;

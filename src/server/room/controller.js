@@ -104,14 +104,7 @@ export const leaveRoom = (socket, io) => {
   if (player && player.room) {
     const room = player.room;
     if (room.playersCount > 1) {
-      room.removePlayer(player.id);
-      if (player.isHost) {
-        player.isHost = false;
-        room.updateHost();
-      }
-      if (player.inGame) {
-        room.stillInGameCounter -= 1;
-      }
+      room.removePlayer(player);
       room.checkEndGame();
     } else {
       player.isHost = false;

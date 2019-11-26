@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HeaderSub /> HeaderSub rendering outside of a room 1`] = `
+<styled.div
+  id="header"
+>
+  <styled.div
+    id="left-item"
+  />
+  <styled.div
+    id="center-item"
+  >
+    <styled.h1
+      data-text="Tetris Orange"
+      id="title"
+    >
+      Tetris Orange
+    </styled.h1>
+  </styled.div>
+  <styled.div
+    id="right-item"
+  >
+    Player
+  </styled.div>
+</styled.div>
+`;
+
+exports[`<HeaderSub /> HeaderSub rendering with inside a room 1`] = `
+<styled.div
+  id="header"
+>
+  <styled.div
+    id="left-item"
+  >
+    <styled.button
+      onClick={[MockFunction]}
+    >
+      Home
+    </styled.button>
+  </styled.div>
+  <styled.div
+    id="center-item"
+  >
+    <styled.h1
+      data-text="Tetris Orange"
+      id="title"
+    >
+      Tetris Orange
+    </styled.h1>
+  </styled.div>
+  <styled.div
+    id="right-item"
+  >
+    Player
+  </styled.div>
+</styled.div>
+`;

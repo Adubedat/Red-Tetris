@@ -25,21 +25,21 @@ const RoomListSub = ({ rooms, playerName }) => {
     <StyledContainer id="room-list">
       <h2>Rooms :</h2>
 
+      <StyledListSubHeader id="subheader">
+        <StyledListSubHeaderColumn flex={3}>
+          <p id="header">Name</p>
+        </StyledListSubHeaderColumn>
+        <StyledListSubHeaderColumn flex={1}>
+          <p id="header">Mode</p>
+        </StyledListSubHeaderColumn>
+        <StyledListSubHeaderColumn flex={1}>
+          <p id="header">Players</p>
+        </StyledListSubHeaderColumn>
+        <StyledListSubHeaderColumn flex={1}>
+          <p id="header">Status</p>
+        </StyledListSubHeaderColumn>
+      </StyledListSubHeader>
       <StyledList id="list">
-        <StyledListSubHeader id="subheader">
-          <StyledListSubHeaderColumn flex={3}>
-            <p id="header">Name</p>
-          </StyledListSubHeaderColumn>
-          <StyledListSubHeaderColumn flex={1}>
-            <p id="header">Mode</p>
-          </StyledListSubHeaderColumn>
-          <StyledListSubHeaderColumn flex={1}>
-            <p id="header">Players</p>
-          </StyledListSubHeaderColumn>
-          <StyledListSubHeaderColumn flex={1}>
-            <p id="header">Status</p>
-          </StyledListSubHeaderColumn>
-        </StyledListSubHeader>
         {rooms.map((room, index) => {
           const maxPlayer =
             room.mode === SOLO ? MAX_PLAYER_SOLO : MAX_PLAYER_BATTLEROYAL;

@@ -7,7 +7,7 @@ import Board from "../index";
 const mockStore = configureStore();
 const initialState = {
   player: { board: [], hasLost: false },
-  room: { isGameOver: false, isStarted: false }
+  room: { isStarted: false }
 };
 
 const store = mockStore(initialState);

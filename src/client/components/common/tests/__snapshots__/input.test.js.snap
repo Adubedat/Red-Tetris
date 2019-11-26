@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Input /> Input rendering without crashing 1`] = `
+<WithStyles(ForwardRef(TextField))
+  InputLabelProps={
+    Object {
+      "classes": Object {
+        "root": "makeStyles-label-3",
+      },
+    }
+  }
+  InputProps={
+    Object {
+      "classes": Object {
+        "root": "makeStyles-input-2",
+      },
+    }
+  }
+  className="makeStyles-textField-1"
+  inputRef={null}
+  margin="normal"
+  variant="outlined"
+/>
+`;
