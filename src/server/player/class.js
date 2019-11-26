@@ -122,7 +122,9 @@ class Player {
   }
 
   sendMalus(counter) {
-    const players = this._room.players.filter(player => player.id !== this._id);
+    const players = this._room.players.filter(
+      player => player.id !== this._id && player.inGame
+    );
     players.forEach(player => {
       for (let i = 0; i < counter; i++) {
         player.heap.splice(0, 1);
