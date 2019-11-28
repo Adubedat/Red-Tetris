@@ -58,7 +58,7 @@ We want to find there at least the (ES6) Player, Piece and Game classes.
 
 The client application must be built from the React and Redux libraries.
 
-HTML code must not use "<TABLE />" elements, but must be built exclusively from
+HTML code must not use TABLE elements, but must be built exclusively from
 a layout flexbox.
 
 Prohibition to use:
