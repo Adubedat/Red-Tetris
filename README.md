@@ -1,68 +1,78 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# [Red Tetris](https://tetris-orange.herokuapp.com/#)
 
-## Available Scripts
 
-In the project directory, you can run:
+## Our project preview
+### Lobby
+![alt tag](https://i.ibb.co/xMVHgN2/rooms-list.png "Lobby")
+### In a 'battle royal' game
+![alt tag](https://i.ibb.co/sCb7993/inGame.png "In a 'battle royal' game")
+### Player's board is partly filled with malus lines
+![alt tag](https://i.ibb.co/jkrPGcT/in-Game-with-Malus.png "Player's board is partly filled with malus lines")
+### The following is an excerpt from Red Tetris project's subject, the most advanced web project in 42 school's program.
 
-### `npm start`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Introduction
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Everyone knows the Tetris Game and everyone knows Javascript, it only remains to
+build a Tetris in Javascript.
 
-### `npm test`
+Yes, but ...
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Your Tetris will be multiplayer and online. It will allow you to disturb intergalactic
+parties during your long coding nights (There are still some WIFI issues on some planets).
 
-### `npm run build`
+Your Tetris will use the latest technologies Javascript which are at the heart of a
+great intellectual, industrial and financial battle between Facebook and Google whose
+challenge is to be the master of the world.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Your Tetris will require a lot of brain juice to design the architecture, specify an
+asynchronous network protocol, implemented in functional programming, create an algorithm of pieces’ animation and display everything graphically in HTML!
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Good game, good code ... and do not forget to test and retest !!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Objectives
 
-### `npm run eject`
+The pedagogical objectives are multiple, but the main axis is to introduce the language
+Javascript, to discover its abundant ecosystem and to implement some of the principles,
+techniques and Flagship tools of Full Stack Javascript.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Everyone says they know Javascript, but very few people have a really precise
+knowledge of this multi- faceted language which is at the same time partially functional,
+completely prototype oriented, of a diabolically dynamic type, passionately asynchronous
+and frighteningly efficient.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Through the writing of a network Tetris game, you’ll implement functional principles (which is required), asynchronous client and server (by nature of the language) and
+reagents (by nature of the game and GUI).
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+You will have to write unit tests that will have to be worthy of an industrial chain of
+continuous delivery.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+You will also discover the latest popular tools and libraries the Full Stack Javascript
+like Node.js, React.js and Redux.js.
 
-## Learn More
+## General instructions
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The project must be written totally in Javascript and especially in its es2015 (ES6)
+version.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The client code (browser) must be written without a call to "this" in the purpose
+of pushing you to use functional constructs and not object. You have the choice of the
+functional library (lodash, ramda, ...) to use it or not.
 
-### Code Splitting
+The handling logic of the heap and pieces must be implemented as "pure functions".
+An exception to this rule: "this" can be used to define its own subclasses of "Error".
+On the opposite, the server code must use object-oriented programming (prototype).
+We want to find there at least the (ES6) Player, Piece and Game classes.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+The client application must be built from the React and Redux libraries.
 
-### Analyzing the Bundle Size
+HTML code must not use TABLE elements, but must be built exclusively from
+a layout flexbox.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+Prohibition to use:
+* A DOM manipulation library like jQuery
+* Canvas
+* SVG (Scalable Vector Graphics)
+  
+There is no need to directly manipulate the DOM.
 
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
