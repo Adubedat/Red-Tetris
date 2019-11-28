@@ -1,6 +1,14 @@
-# Red-Tetris
+# [Red Tetris](https://tetris-orange.herokuapp.com/#)
 
-The following is an excerpt from Red Tetris project's subject, the most advanced web project in 42 school's program.
+
+## Our project preview
+### Lobby
+![alt tag](https://i.ibb.co/xMVHgN2/rooms-list.png "Lobby")
+### In a 'battle royal' game
+![alt tag](https://i.ibb.co/sCb7993/inGame.png "In a 'battle royal' game")
+### Player's board is partly filled with malus lines
+![alt tag](https://i.ibb.co/jkrPGcT/in-Game-with-Malus.png "Player's board is partly filled with malus lines")
+### The following is an excerpt from Red Tetris project's subject, the most advanced web project in 42 school's program.
 
 
 ## Introduction
@@ -62,8 +70,9 @@ HTML code must not use TABLE elements, but must be built exclusively from
 a layout flexbox.
 
 Prohibition to use:
-  - A DOM manipulation library like jQuery
-  - Canvas
-  - SVG (Scalable Vector Graphics)
+* A DOM manipulation library like jQuery
+* Canvas
+* SVG (Scalable Vector Graphics)
   
 There is no need to directly manipulate the DOM.
+
