@@ -24,6 +24,12 @@ module.exports = {
             limit: 50000
           }
         }
+      },
+      {
+        test: /\.m?js/,
+        resolve: {
+          fullySpecified: false
+        }
       }
     ]
   },
