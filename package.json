@@ -30,7 +30,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "set-value": "^3.0.2",
-    "socket.io": "^2.2.0",
+    "socket.io": "^2.4.0",
     "styled-components": "^4.3.1",
     "typescript": "^3.9.7",
     "url-loader": "^2.0.0"
