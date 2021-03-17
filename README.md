@@ -11,8 +11,7 @@ Everything is in real time thanks to socket.io.
 
 The code is entirely unit tested with jest.
 
-You can try it out **[here](https://tetris-orange.herokuapp.com/#)**
-
+You can try it out **[here](https://tetris-orange.herokuapp.com/#)**.
 It can take some time to load the app, heroku servers must wake up.
 
 ## Built with
