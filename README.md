@@ -1,7 +1,33 @@
 # [Red Tetris](https://tetris-orange.herokuapp.com/#)
 
+## Short presentation
 
-## Our project preview
+This project in an online multiplayer tetris, where you have to go as fast as possible
+to send malus lines to your opponents. The last one alive wins the game.
+
+There also is a classic solo mode with a leaderboard.
+
+Everything is in real time thanks to socket.io.
+
+The code is entirely unit tested with jest.
+
+You can try it out [here](https://tetris-orange.herokuapp.com/#)
+It can take some time to load the app, heroku servers must wake up.
+
+## Built with
+
+### Front-end
+
+* React.js + Redux
+* Socket.io
+
+### Back-end
+
+* Node.js
+* Socket.io
+* Deployed with heroku
+
+## Project preview
 ### Lobby
 ![alt tag](https://i.ibb.co/xMVHgN2/rooms-list.png "Lobby")
 ### In a 'battle royal' game
